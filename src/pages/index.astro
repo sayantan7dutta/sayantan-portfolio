@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 ---
 
 <Base
@@ -131,14 +133,11 @@ import Base from '../layouts/Base.astro';
     <!-- 02 Ericsson — Designer to Design Leader -->
     <article class="project-item project-item-alt reveal">
       <div class="p-img-col">
-        <div class="p-img">
-          <!--
-            TO ADD PROJECT IMAGE:
-            <img src="/images/work/ericsson-thumb.jpg" alt="Ericsson API vertical" class="p-img-actual" loading="lazy" />
-          -->
-          <div class="p-img-ph">
-            <span>API Console — Ericsson vertical<br />(16:10 · blur 15–20px in Figma)</span>
-          </div>
+        <div class="p-img nda-frame">
+          <!-- Real Ericsson API Console screenshot — CSS-blurred for NDA.
+               To publish unblurred (if cleared), remove the `nda-blur` class. -->
+          <Image src={ericssonThumb} alt="Ericsson API Console" class="p-img-actual nda-blur" loading="lazy" />
+          <span class="nda-note">Blurred · Ericsson NDA</span>
         </div>
       </div>
       <div class="p-info">
