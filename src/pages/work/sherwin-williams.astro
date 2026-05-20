@@ -1,0 +1,265 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import CaseStudyHero from '../../components/CaseStudyHero.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import StatCards from '../../components/StatCards.astro';
+import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
+import FileArchitecture from '../../components/FileArchitecture.astro';
+
+const products = [
+  { name: 'ColorSnap Visualizer', desc: 'Web and mobile colour tool for homeowners' },
+  { name: 'Color Expert App', desc: 'AI-powered paint recommendation tool' },
+  { name: 'PRO+ App', desc: 'Contractor toolkit for professional painters' },
+  { name: 'Paint Stores e-commerce', desc: 'Main consumer shopping platform' },
+  { name: 'Contractor & dealer portals', desc: 'B2B account management tools' },
+  { name: 'Specification & coatings tools', desc: 'Internal — Performance Coatings Group' },
+];
+
+const approach = [
+  {
+    title: 'Interview both sides',
+    body: 'Separate sessions with researchers and designers to surface real friction without cross-contamination or bias. As someone who had worked both sides, I knew the questions to ask — and I spoke to more than one person in each group so no single perspective skewed the findings.',
+  },
+  {
+    title: 'Map the pain, not just the symptoms',
+    body: 'The duplication and rework were symptoms. The real problem was inaccessible structure and no shared language between disciplines. Naming that distinction changed what we chose to fix.',
+  },
+  {
+    title: 'Pressure-test with the Design Ops Manager',
+    body: 'Brought findings back to the manager, challenged assumptions, and agreed on what to prioritise — research infrastructure first, then the designer side. Sequencing the work mattered as much as the work itself.',
+  },
+  {
+    title: 'Fix iteratively, get feedback fast',
+    body: 'Each improvement was tested with the team immediately. If it did not land, it was revised. The 30–40% efficiency gain came from accumulated small wins, each validated before moving on.',
+  },
+];
+
+const handoff = [
+  { title: 'Research conducted', body: 'Interviews, usability tests, and surveys — the raw material, run by the research team.' },
+  { title: 'Synthesis &amp; insight deck', body: 'Findings written up in the standardised insight format, linked to source files.' },
+  { title: 'Handoff session', body: 'The researcher walks designers through the findings directly — not a document tossed over a wall.' },
+  { title: 'Design takes over', body: 'Insights are referenced in Figma annotations, so the rationale travels with the design.' },
+  { title: 'Design critique', body: 'A structured crit checks design decisions back against the research that informed them.' },
+];
+
+const stats = [
+  { num: '30–40%', label: 'Reduction in rework and duplicated effort — the team’s own estimate' },
+  { num: '3 → 1', label: 'File versions to manage — duplicates collapsed to a single source of truth' },
+  { num: '20+', label: 'Researchers and designers working from one shared system' },
+];
+---
+
+<CaseStudy
+  title="Building Design Operations at Scale — Sherwin-Williams · Sayantan Dutta"
+  description="Design operations for Sherwin-Williams — rebuilding shared infrastructure, research templates, and the research-to-design handoff for a 20+ person team across six digital products."
+>
+  <CaseStudyHero
+    title="Building <em>Design Operations</em> at Scale"
+    lead="Design operations for one of America's largest paint brands — rebuilding the shared infrastructure a 20-plus-person research and design team relied on, across six digital products."
+    tags={['Design Operations', 'Enterprise', 'Sherwin-Williams · 2024']}
+    meta={[
+      { key: 'Role', val: 'Design Operations Lead' },
+      { key: 'Client', val: 'Sherwin-Williams (via TCS)' },
+      { key: 'Industry', val: 'Retail / Consumer Products' },
+      { key: 'Timeline', val: 'Dec 2023 – Aug 2024' },
+    ]}
+    heroPlaceholder="File architecture"
+  >
+    <FileArchitecture slot="hero-image" hero={true} />
+  </CaseStudyHero>
+
+  <div class="cs-body">
+    <div class="container">
+
+      <div class="cs-note reveal">
+        <span class="cs-note-mark">NDA</span>
+        <p>All client work is under NDA. The file-architecture and process diagrams here are reconstructed from memory — the structure and the thinking are accurate; specific file names and content are illustrative.</p>
+      </div>
+
+      <!-- Context -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Context</span>
+        <h2 class="cs-heading reveal">One of America's largest paint brands — and a complex digital portfolio</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Sherwin-Williams runs one of the largest digital portfolios in the paint industry — consumer colour tools, contractor apps, e-commerce, and internal coatings systems. The research and design team supporting all of it had grown faster than its infrastructure.
+        </p>
+
+        <div class="cs-figs reveal">
+          <div>
+            <div class="cs-fig-num">5–7</div>
+            <div class="cs-fig-lbl">UX researchers</div>
+          </div>
+          <div>
+            <div class="cs-fig-num">10–15</div>
+            <div class="cs-fig-lbl">Product designers</div>
+          </div>
+          <div>
+            <div class="cs-fig-num">6+</div>
+            <div class="cs-fig-lbl">Digital products supported</div>
+          </div>
+        </div>
+
+        <p class="t-body reveal" style="margin-bottom:.5rem;">Products the team supported:</p>
+        <div class="cs-grid-4">
+          {products.map((p, i) => (
+            <div class="reveal" style={`transition-delay:${(i % 2) * 0.08}s`}>
+              <h3>{p.name}</h3>
+              <p class="t-body">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Problem -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">The problem</span>
+        <h2 class="cs-heading reveal">A team of 20+ with almost no shared infrastructure</h2>
+
+        <div class="cs-grid-4">
+          <div class="reveal">
+            <h3>Files existed, but nobody could find them</h3>
+            <p class="t-body">Research and design assets lived in personal OneDrive folders and scattered Teams channels. Folders existed, but were inconsistent, unlabelled, and constantly duplicated.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>Duplication was the default</h3>
+            <p class="t-body">Designers and researchers regularly redid work that already existed, discovering afterwards that the asset was there all along. The rework was the symptom — the broken structure was the cause.</p>
+          </div>
+          <div class="reveal">
+            <h3>Decks were made and abandoned</h3>
+            <p class="t-body">Research presentations had no consistent format and no connected home. Once delivered to a stakeholder, they disappeared into personal folders and were never referenced again.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>Research rarely reached design</h3>
+            <p class="t-body">There was no handoff process. Insights sat in researcher files. Designers started work without access to what had already been learned.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Approach -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Approach</span>
+        <h2 class="cs-heading reveal">Before changing anything, understand the real pain points</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          I interviewed researchers and designers separately before proposing any solution. The order mattered — diagnosis first, then structure, then iteration with the team in the loop.
+        </p>
+        <ProcessSteps steps={approach} />
+      </div>
+
+      <!-- What I built — file architecture -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">What I built · File architecture</span>
+        <h2 class="cs-heading reveal">From scattered to structured</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The first fix was the one everything else depended on: a single, navigable file architecture in Teams and OneDrive. Numbered folders, consistent naming, a read-only archive for legacy work, and cross-linked documents so a file could be found from more than one path.
+        </p>
+        <FileArchitecture />
+      </div>
+
+      <!-- What I built — research templates -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">What I built · Research templates</span>
+        <h2 class="cs-heading reveal">Standardised templates across three formats</h2>
+
+        <div class="cs-grid-3">
+          <div class="cs-card reveal">
+            <h3>Interview Guide</h3>
+            <ul class="cs-list">
+              <li>Standardised opening and consent framing</li>
+              <li>Modular question blocks by research goal</li>
+              <li>Probe suggestions for each section</li>
+              <li>Consistent time allocation per block</li>
+              <li>Debrief and follow-up prompts</li>
+            </ul>
+          </div>
+          <div class="cs-card reveal" style="transition-delay:.08s;">
+            <h3>Insight Deck</h3>
+            <ul class="cs-list">
+              <li>SW-branded slide template</li>
+              <li>Executive summary on slide 1</li>
+              <li>One insight per slide, evidence-backed</li>
+              <li>Severity and frequency scoring</li>
+              <li>Recommended next actions at close</li>
+            </ul>
+          </div>
+          <div class="cs-card reveal" style="transition-delay:.16s;">
+            <h3>Stakeholder Presentation</h3>
+            <ul class="cs-list">
+              <li>3-slide maximum for leadership reviews</li>
+              <li>Business impact framing first</li>
+              <li>Data visualised, not listed</li>
+              <li>A clear ask or decision required</li>
+              <li>Appendix for anyone wanting detail</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cs-note reveal">
+          <span class="cs-note-mark">Before</span>
+          <p>Each researcher had their own format. Senior stakeholders received decks of 30+ slides with no summary, no structure, and no clear ask.</p>
+        </div>
+      </div>
+
+      <!-- What I built — handoff -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">What I built · The handoff</span>
+        <h2 class="cs-heading reveal">Connecting research to design</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The most valuable infrastructure was not a folder or a template — it was a process. A five-step handoff that made research insights part of the design workflow rather than a parallel activity.
+        </p>
+        <ProcessSteps steps={handoff} />
+
+        <div class="cs-note reveal">
+          <span class="cs-note-mark">Before</span>
+          <p>Research findings were delivered to stakeholders and then effectively lost. Designers had no consistent access to what had been learned — they started from scratch, sometimes contradicting decisions research had already informed.</p>
+        </div>
+      </div>
+
+      <!-- Impact -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Impact</span>
+        <h2 class="cs-heading reveal">The team noticed the difference immediately</h2>
+        <StatCards stats={stats} />
+        <p class="t-body reveal" style="margin-top:2rem;max-width:62ch;">
+          Each improvement was validated with the team before moving to the next. The feedback was immediate and specific — people could see what changed and why it mattered.
+        </p>
+      </div>
+
+      <!-- Reflection -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Reflection</span>
+        <h2 class="cs-heading reveal">What I finished, what remained, and what I learned</h2>
+
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <div class="reveal">
+            <p class="cs-card-lbl" style="color:var(--accent);">Completed</p>
+            <ul class="cs-list is-done">
+              <li>Full file architecture rebuilt in Teams and OneDrive</li>
+              <li>Research templates standardised — interview, insight, stakeholder</li>
+              <li>Researcher-to-designer handoff process established</li>
+              <li>Design critique framework introduced</li>
+              <li>Cross-linking of documents for easy navigation</li>
+              <li>Research infrastructure working consistently across the team</li>
+            </ul>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <p class="cs-card-lbl" style="color:var(--text-3);">In pipeline · next phase</p>
+            <ul class="cs-list">
+              <li>Designer-side file infrastructure — Figma library governance</li>
+              <li>Component ownership and version-control process</li>
+              <li>Cross-product design consistency review</li>
+              <li>Onboarding documentation for new team members</li>
+            </ul>
+          </div>
+        </div>
+
+        <blockquote class="cs-insight reveal" style="margin-top:2rem;">
+          <p>Design ops problems are rarely about tools or templates. They are about trust and habit. The file architecture was broken partly because nobody had taken responsibility for it — creating structure also meant creating ownership, and that required as much facilitation as it did design.</p>
+          <cite>— What this engagement taught me</cite>
+        </blockquote>
+      </div>
+
+    </div>
+  </div>
+
+  <MoreCaseStudies current="sherwin-williams" />
+</CaseStudy>

@@ -1,0 +1,113 @@
+---
+/**
+ * Before / after file-tree visual for the Sherwin-Williams design-ops case study.
+ * `hero` mode fills a CaseStudyHero image frame with a trimmed version;
+ * default mode renders the full detailed comparison for the body.
+ */
+interface Props {
+  hero?: boolean;
+}
+const { hero = false } = Astro.props;
+
+const beforeFull = [
+  'Sarah_Research_FINAL',
+  'Sarah_Research_FINAL_v2',
+  'James_Insights_March',
+  'Team Files (old)',
+  'Team Files BACKUP',
+  'ColorSnap_designs',
+  'ColorSnap_designs_NEW',
+  'Misc',
+  'Deck — no date, no owner',
+  'Interview Guide copy',
+  'Interview Guide REVISED',
+];
+
+const afterFull = [
+  { folder: '00_Templates', tag: 'linked' },
+  { file: 'Interview Guide v1.0' },
+  { file: 'Insight Deck Template' },
+  { folder: '01_Research', tag: 'by product' },
+  { file: 'ColorSnap / PRO+ / Portals' },
+  { folder: '02_Synthesis', tag: 'by quarter' },
+  { file: 'Q1 2024 Findings' },
+  { folder: '03_Stakeholder Decks' },
+  { file: 'YYYY-MM_Product_Topic' },
+  { folder: '04_Archive', tag: 'read-only' },
+  { file: 'Pre-2024 files preserved' },
+];
+
+const before = hero ? beforeFull.slice(0, 6) : beforeFull;
+const after = hero ? afterFull.filter((l) => 'folder' in l) : afterFull;
+---
+
+<div class={`file-arch${hero ? ' is-hero' : ''}`}>
+  <div class="file-arch-col">
+    <span class="cs-ba-head">Before</span>
+    <div class="filetree">
+      {before.map((name) => (
+        <span class="ft-line ft-folder">▸ {name}</span>
+      ))}
+    </div>
+  </div>
+  <div class="file-arch-col is-after">
+    <span class="cs-ba-head">After</span>
+    <div class="filetree">
+      {after.map((line) => (
+        'folder' in line ? (
+          <span class="ft-line ft-folder">▸ {line.folder}{line.tag && <span class="ft-tag">  [{line.tag}]</span>}</span>
+        ) : (
+          <span class="ft-line ft-file">  └ {line.file}</span>
+        )
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .file-arch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .file-arch.is-hero {
+    margin-top: 0;
+    height: 100%;
+    gap: 0;
+  }
+  .file-arch-col {
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.75rem;
+  }
+  .file-arch.is-hero .file-arch-col {
+    border: none;
+    border-radius: 0;
+    padding: 1.5rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .file-arch.is-hero .file-arch-col:first-child {
+    border-right: 1px solid var(--border);
+  }
+  .file-arch-col.is-after {
+    border-color: rgba(201,169,110,.35);
+    background: var(--accent-bg);
+  }
+  .file-arch.is-hero .file-arch-col.is-after {
+    border: none;
+    border-left: 1px solid rgba(201,169,110,.35);
+  }
+  :global([data-theme="light"]) .file-arch-col.is-after {
+    border-color: rgba(154,110,42,.35);
+  }
+  .file-arch-col.is-after .cs-ba-head { color: var(--accent); }
+  .file-arch.is-hero .filetree { font-size: .66rem; line-height: 2; }
+  @media (max-width: 768px) {
+    .file-arch { grid-template-columns: 1fr; gap: 1.25rem; }
+    .file-arch.is-hero { grid-template-columns: 1fr 1fr; }
+    .file-arch.is-hero .filetree { font-size: .54rem; }
+  }
+</style>
