@@ -1,0 +1,39 @@
+---
+---
+
+<div class="lb-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-close" id="lb-close" aria-label="Close">Close ✕</button>
+  <img id="lb-img" src="" alt="" />
+</div>
+
+<script>
+  function initLightbox() {
+    const overlay = document.getElementById('lightbox') as HTMLElement | null;
+    const img = document.getElementById('lb-img') as HTMLImageElement | null;
+    const closeBtn = document.getElementById('lb-close');
+    if (!overlay || !img) return;
+
+    function open(src: string, alt: string) {
+      img!.src = src;
+      img!.alt = alt;
+      overlay!.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay!.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    closeBtn?.addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+    document.querySelectorAll<HTMLImageElement>('img[data-lightbox]').forEach(el => {
+      el.style.cursor = 'zoom-in';
+      el.addEventListener('click', () => open(el.src, el.alt));
+    });
+  }
+
+  initLightbox();
+  document.addEventListener('astro:page-load', initLightbox);
+</script>

@@ -1,0 +1,55 @@
+---
+import ImagePH from './ImagePH.astro';
+
+interface MetaItem {
+  key: string;
+  val: string;
+}
+
+interface Props {
+  title: string;
+  lead: string;
+  tags: string[];
+  speculativeTag?: string;     // optional accent-coloured tag, shown first
+  meta: MetaItem[];
+  heroPlaceholder: string;     // placeholder caption text
+  heroInstructions?: string;
+}
+
+const { title, lead, tags, speculativeTag, meta, heroPlaceholder, heroInstructions } = Astro.props;
+---
+
+<section class="cs-hero">
+  <div class="container">
+    <a href="/#work" class="cs-back"><span aria-hidden="true">←</span> All work</a>
+    <div class="cs-hero-grid">
+      <div>
+        <div class="cs-tags">
+          {speculativeTag && <span class="t-tag t-tag-speculative">{speculativeTag}</span>}
+          {tags.map((t) => <span class="t-tag">{t}</span>)}
+        </div>
+        <h1 class="cs-title reveal" set:html={title} />
+        <p class="t-lead reveal" style="margin-top:1.25rem;transition-delay:.1s;">{lead}</p>
+        <div class="cs-meta reveal" style="transition-delay:.18s;">
+          {meta.map((m) => (
+            <div class="cs-meta-item">
+              <span class="t-meta-key">{m.key}</span>
+              <span class="t-meta-val">{m.val}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="cs-hero-img reveal" style="transition-delay:.12s;">
+        <!--
+          TO ADD THE HERO IMAGE:
+          Pass an image into the "hero-image" slot from the page, e.g.
+          <Image slot="hero-image" src={heroImg} alt="..." class="cs-hero-img-el" />
+          Tip: apply a 15–20px gaussian blur in Figma, add annotation callouts, export as PNG.
+        -->
+        <slot name="hero-image">
+          <ImagePH label={heroPlaceholder} instructions={heroInstructions} fill={true} icon="▣" />
+        </slot>
+      </div>
+    </div>
+  </div>
+</section>

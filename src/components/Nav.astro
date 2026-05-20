@@ -1,0 +1,16 @@
+---
+interface Props {
+  activeNav?: 'work' | 'about';
+}
+const { activeNav } = Astro.props;
+---
+
+<nav class="nav" transition:persist>
+  <a href="/" class="nav-name">Sayantan Dutta</a>
+  <div class="nav-links">
+    <a href="/" class="nav-link" aria-current={activeNav === 'work' ? 'page' : undefined}>Work</a>
+    <a href="/about" class="nav-link" aria-current={activeNav === 'about' ? 'page' : undefined}>About</a>
+    <a href="/resume.pdf" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">◑</button>
+  </div>
+</nav>

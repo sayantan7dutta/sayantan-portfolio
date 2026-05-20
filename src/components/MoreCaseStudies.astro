@@ -1,0 +1,31 @@
+---
+import { otherCaseStudies } from '../data/caseStudies';
+
+interface Props {
+  current: string; // slug of the current case study
+}
+
+const { current } = Astro.props;
+const others = otherCaseStudies(current);
+---
+
+<section class="more-cs">
+  <div class="container">
+    <span class="t-label">More case studies</span>
+    <div class="more-cs-grid">
+      {others.map((cs) => (
+        <a href={`/work/${cs.slug}`} class="more-card reveal">
+          <div class="more-card-thumb">
+            {/* TO ADD A THUMBNAIL: replace this span with
+                <img src={`/images/work/${cs.slug}-thumb.jpg`} alt={cs.shortTitle} loading="lazy" /> */}
+            <span class="more-card-thumb-ph">{cs.slug} thumbnail</span>
+          </div>
+          <div class="more-card-info">
+            <p class="more-ctx">{cs.context}</p>
+            <p class="more-title">{cs.shortTitle}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

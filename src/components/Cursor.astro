@@ -1,0 +1,39 @@
+---
+---
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script>
+  function initCursor() {
+    const cursor = document.getElementById('cursor') as HTMLElement | null;
+    if (!cursor) return;
+
+    let mouseX = -100, mouseY = -100;
+    let curX = -100, curY = -100;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }, { passive: true });
+
+    function raf() {
+      curX += (mouseX - curX) * 0.18;
+      curY += (mouseY - curY) * 0.18;
+      cursor!.style.left = curX + 'px';
+      cursor!.style.top  = curY + 'px';
+      requestAnimationFrame(raf);
+    }
+    raf();
+
+    const hoverTargets = 'a, button, [role="button"], label[for]';
+    function attachHover() {
+      document.querySelectorAll<HTMLElement>(hoverTargets).forEach(el => {
+        el.addEventListener('mouseenter', () => cursor!.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => cursor!.classList.remove('hovering'));
+      });
+    }
+    attachHover();
+    document.addEventListener('astro:page-load', attachHover);
+  }
+  initCursor();
+</script>

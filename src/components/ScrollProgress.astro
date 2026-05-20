@@ -1,0 +1,21 @@
+---
+---
+
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+<script>
+  function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress') as HTMLElement | null;
+    if (!bar) return;
+    function update() {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = total > 0 ? scrolled / total : 0;
+      bar!.style.setProperty('--progress', String(progress));
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+  initScrollProgress();
+  document.addEventListener('astro:page-load', initScrollProgress);
+</script>

@@ -1,0 +1,21 @@
+---
+interface Stat {
+  num: string;
+  label: string;
+}
+
+interface Props {
+  stats: Stat[];
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="cs-three">
+  {stats.map((stat, i) => (
+    <div class="stat-card reveal" style={`transition-delay:${i * 0.1}s`}>
+      <div class="stat-num">{stat.num}</div>
+      <div class="stat-lbl">{stat.label}</div>
+    </div>
+  ))}
+</div>
