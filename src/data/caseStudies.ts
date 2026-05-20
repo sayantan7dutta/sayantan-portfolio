@@ -24,9 +24,15 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'api-lifecycle',
-    title: 'End-to-End API Lifecycle Platform for a B2B SaaS Offering',
-    shortTitle: 'End-to-End API Lifecycle Platform',
-    context: 'Enterprise · Ericsson · 2021–2024',
+    title: 'From Designer to Design Leader',
+    shortTitle: 'From Designer to Design Leader',
+    context: 'Design Systems · Ericsson · 2020–2023',
+  },
+  {
+    slug: 'sherwin-williams',
+    title: 'Building Design Operations at Scale',
+    shortTitle: 'Building Design Operations at Scale',
+    context: 'Design Ops · Sherwin-Williams · 2024',
   },
   {
     slug: 'kinvault',
@@ -43,6 +49,13 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export function otherCaseStudies(currentSlug: string): CaseStudy[] {
-  return caseStudies.filter((cs) => cs.slug !== currentSlug);
+/**
+ * Returns the case studies to feature in the "More case studies" grid —
+ * the `limit` entries that follow the current one in order, wrapping around.
+ */
+export function otherCaseStudies(currentSlug: string, limit = 3): CaseStudy[] {
+  const idx = caseStudies.findIndex((cs) => cs.slug === currentSlug);
+  if (idx === -1) return caseStudies.slice(0, limit);
+  const rotated = [...caseStudies.slice(idx + 1), ...caseStudies.slice(0, idx)];
+  return rotated.slice(0, limit);
 }

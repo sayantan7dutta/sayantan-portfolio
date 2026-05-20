@@ -114,8 +114,9 @@ and export as PNG before importing.
 
 ### The Ericsson screenshots (NDA blur)
 
-The API Lifecycle case study (`src/pages/work/api-lifecycle.astro`) already wires in
-four real Ericsson API Console screenshots from `src/assets/work/api-lifecycle/`.
+The Ericsson case study — "From Designer to Design Leader"
+(`src/pages/work/api-lifecycle.astro`) — already wires in four real Ericsson API
+Console screenshots from `src/assets/work/api-lifecycle/`.
 They are **CSS-blurred by default** via the `nda-blur` class, so the layout is real
 but the detail is obscured.
 
