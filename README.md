@@ -112,24 +112,18 @@ Each placeholder has an HTML comment right above it showing the exact code to pa
 **Prep tip:** for blurred client screenshots, apply a 15–20px gaussian blur in Figma
 and export as PNG before importing.
 
-### The Ericsson screenshots (NDA blur)
+### The Ericsson screenshots
 
 The Ericsson case study — "From Designer to Design Leader"
-(`src/pages/work/api-lifecycle.astro`) — already wires in four real Ericsson API
-Console screenshots from `src/assets/work/api-lifecycle/`.
-They are **CSS-blurred by default** via the `nda-blur` class, so the layout is real
-but the detail is obscured.
+(`src/pages/work/api-lifecycle.astro`) — wires in four real Ericsson API Console
+screenshots from `src/assets/work/api-lifecycle/`, shown unblurred. The same hero
+shot is used as the homepage thumbnail for project 02.
 
-Before publishing, choose one:
-
-- **Keep them blurred** — do nothing; they ship blurred.
-- **Publish unblurred** — only if cleared for public use: remove the `nda-blur`
-  class from the `<Image>` tags (and the `nda-frame` wrapper / `nda-note` caption).
-- **Use proper blurred exports** — replace the files in `src/assets/work/api-lifecycle/`
-  with versions you blurred in Figma, then remove the `nda-blur` class.
-
-> CSS blur is a visual treatment only — the original pixels are still in the file.
-> For a true NDA-safe site, replace the source files with genuinely blurred exports.
+If you ever need to obscure them again, an `nda-blur` CSS utility is still defined
+in `global.css` — add the `nda-blur` class to any `<Image>` tag to apply a 13px
+blur. Note that CSS blur is cosmetic only: the original pixels remain in the file.
+For a genuinely NDA-safe site, replace the source files in
+`src/assets/work/api-lifecycle/` with versions you blurred in Figma first.
 
 ### Client logos
 

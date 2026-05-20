@@ -52,15 +52,15 @@ const stats = [
     ]}
     heroPlaceholder="API Console screenshot"
   >
-    <Image slot="hero-image" src={heroImg} alt="Ericsson API Console — welcome screen" class="cs-hero-img-el nda-blur" loading="eager" />
+    <Image slot="hero-image" src={heroImg} alt="Ericsson API Console — welcome screen" class="cs-hero-img-el" loading="eager" />
   </CaseStudyHero>
 
   <div class="cs-body">
     <div class="container">
 
       <div class="cs-note reveal">
-        <span class="cs-note-mark">NDA</span>
-        <p>All client work shown here is under NDA. Interface visuals are blurred or reconstructed from memory — the focus is the thinking, the system, and the leadership, not the pixels.</p>
+        <span class="cs-note-mark">Note</span>
+        <p>This is enterprise client work for Ericsson, shown for portfolio review. The focus throughout is the system, the process, and the leadership — not just the screens.</p>
       </div>
 
       <!-- Context -->
@@ -160,10 +160,7 @@ const stats = [
         </p>
 
         <figure class="cs-figure reveal" style="margin-top:2rem;">
-          <div class="nda-frame">
-            <Image src={dashboardImg} alt="API Console — request tracking dashboard" class="nda-blur" loading="lazy" />
-            <span class="nda-note">Blurred · Ericsson NDA</span>
-          </div>
+          <Image src={dashboardImg} alt="API Console — request tracking dashboard" data-lightbox loading="lazy" />
           <figcaption class="cs-figure-cap">API Console — the most component-dense surface in the vertical, and the proving ground for the system</figcaption>
         </figure>
       </div>
@@ -231,17 +228,11 @@ const stats = [
 
         <div class="cs-two" style="margin-top:2rem;">
           <figure class="cs-figure reveal" style="margin:0;">
-            <div class="nda-frame">
-              <Image src={designDetailsImg} alt="API Console — multi-step design definition workflow" class="nda-blur" loading="lazy" />
-              <span class="nda-note">Blurred · Ericsson NDA</span>
-            </div>
+            <Image src={designDetailsImg} alt="API Console — multi-step design definition workflow" data-lightbox loading="lazy" />
             <figcaption class="cs-figure-cap">Guided multi-step workflows — the kind of scope negotiated release by release</figcaption>
           </figure>
           <figure class="cs-figure reveal" style="margin:0;transition-delay:.1s;">
-            <div class="nda-frame">
-              <Image src={collaboratorImg} alt="API Console — collaborator and access management" class="nda-blur" loading="lazy" />
-              <span class="nda-note">Blurred · Ericsson NDA</span>
-            </div>
+            <Image src={collaboratorImg} alt="API Console — collaborator and access management" data-lightbox loading="lazy" />
             <figcaption class="cs-figure-cap">Access and governance surfaces — shared patterns reused across all three products</figcaption>
           </figure>
         </div>
