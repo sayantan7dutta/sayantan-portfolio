@@ -1,0 +1,204 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import CaseStudyHero from '../../components/CaseStudyHero.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import StatCards from '../../components/StatCards.astro';
+import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
+import ImagePH from '../../components/ImagePH.astro';
+import Lightbox from '../../components/Lightbox.astro';
+
+const processSteps = [
+  {
+    title: 'Domain research &amp; stakeholder interviews',
+    body: 'Conducted in-depth interviews with safety professionals to understand the HAZOP study lifecycle — from node identification to action item tracking. Key finding: safety engineers spent the majority of study time on data entry and format compliance, not on the actual safety analysis work. The tool was supposed to support the thinking, not replace it.',
+  },
+  {
+    title: 'Service blueprint — mapping the full system',
+    body: 'Mapped the human and digital layers of a HAZOP study: the facilitator, the scribe, the engineers, and the compliance officer. Understanding the service, not just the UI, was critical — the platform needed to support handoffs between people, not just individual task completion. This blueprint directly shaped the information architecture.',
+  },
+  {
+    title: 'Information architecture &amp; user flows',
+    body: 'Designed the navigation structure around the HAZOP lifecycle — Identify, Assess, Mitigate, Report — so users always knew where they were and what came next. Progressive disclosure was used throughout: experienced engineers could go deep, but new users were never overwhelmed on first entry.',
+  },
+  {
+    title: 'Design system for compliance environments',
+    body: 'Established a design system covering components, states, content patterns, and accessibility standards — building a foundation for future feature expansion without reintroducing inconsistency. Visual language was deliberately calm and purposeful: in a compliance-driven environment, trust comes from predictability, not delight.',
+  },
+  {
+    title: 'Prototype, test, iterate',
+    body: 'Built high-fidelity prototypes and validated with safety professionals. Primary usability insight: users needed to understand system status at every step during complex multi-node studies. Refined progress indicators, state labels, and confirmation patterns based on testing feedback.',
+  },
+];
+
+const stats = [
+  { num: '50%', label: 'Decrease in time spent on manual data entry' },
+  { num: '40%', label: 'Reduction in reporting errors compared to spreadsheets' },
+  { num: '35%', label: 'Faster overall completion of hazard studies' },
+];
+---
+
+<CaseStudy
+  title="HAZOP Edge — UX Strategy for Industrial Safety"
+  description="UX strategy for HAZOP Edge — a B2B SaaS platform that simplifies hazard and operability studies for safety professionals. From domain research to MVP delivery."
+>
+  <CaseStudyHero
+    title="UX Strategy for a B2B SaaS Platform in Industrial Safety"
+    lead="Shaped the UX for HAZOP Edge — a next-gen platform that simplifies hazard and operability studies within industrial environments. From domain research to MVP delivery."
+    tags={['B2B SaaS', 'Industrial Safety', 'UK · 2025']}
+    meta={[
+      { key: 'Role', val: 'Lead UX Designer' },
+      { key: 'Company', val: 'Soter Safety Consulting' },
+      { key: 'Industry', val: 'Industrial Safety / SaaS' },
+      { key: 'Timeline', val: 'Jul – Aug 2025' },
+    ]}
+    heroPlaceholder="HAZOP Edge dashboard — hero screenshot"
+    heroInstructions="Blur 15–20px gaussian in Figma · add annotation callouts · export as PNG"
+  />
+
+  <div class="cs-body">
+    <div class="container">
+
+      <!-- Problem / Solution -->
+      <div class="cs-section">
+        <div class="cs-two">
+          <div class="reveal">
+            <span class="cs-section-lbl">Problem</span>
+            <h2 class="cs-subheading">Complexity was the workflow, not a bug in it</h2>
+            <p class="t-body" style="margin-top:1rem;">
+              Industrial hazard and operability (HAZOP) studies rely on highly complex, technical workflows. Safety professionals — process engineers, safety managers, risk analysts — needed a streamlined system to manage these rigorous, compliance-driven processes without feeling overwhelmed by convoluted interfaces.
+            </p>
+            <p class="t-body" style="margin-top:.75rem;">
+              Existing tools were built by engineers, for engineers — dense, unintuitive, and poorly suited to the cross-functional collaboration that HAZOP studies require. Teams were relying on spreadsheets, Word documents, and email chains to track safety assessments that could determine whether a refinery was safe to operate.
+            </p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <span class="cs-section-lbl">Solution</span>
+            <h2 class="cs-subheading">UX strategy from domain research through MVP delivery</h2>
+            <p class="t-body" style="margin-top:1rem;">
+              I drove the end-to-end UX strategy — translating dense technical requirements into intuitive, accessible user experiences. By establishing a scalable design system and a navigation structure anchored to the HAZOP lifecycle, the MVP established immediate trust with safety professionals who had never experienced a purpose-built digital tool.
+            </p>
+            <p class="t-body" style="margin-top:.75rem;">
+              The platform reduced manual data entry, standardised compliance reporting, and laid a foundation that the engineering team could build on without reintroducing inconsistency.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design Process -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Design process</span>
+        <h2 class="cs-heading reveal">How I approached a domain I'd never worked in before</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Industrial safety was entirely new territory. The first three weeks were almost entirely research — understanding the domain before touching any design tool.
+        </p>
+
+        <ProcessSteps steps={processSteps} />
+
+        <!-- Service blueprint placeholder -->
+        <div class="reveal" style="margin-top:2rem;">
+          <p class="t-body" style="margin-bottom:.75rem;">Service blueprint — human and digital layers of a HAZOP study</p>
+          <!--
+            TO ADD THE SERVICE BLUEPRINT:
+            Draw it in Miro using generic labels (Facilitator / Scribe / Engineer / Platform / Compliance Output),
+            export as PNG, then replace the diagram-ph div below with:
+            <figure class="cs-figure"><img src="/images/work/hazop/service-blueprint.png" alt="HAZOP service blueprint" data-lightbox loading="lazy" /></figure>
+          -->
+          <div class="diagram-ph">
+            <p class="diagram-ph-lbl">
+              Add your service blueprint here<br />
+              Draw in Miro · generic labels · export as PNG
+            </p>
+          </div>
+        </div>
+
+        <!-- Research insight -->
+        <blockquote class="cs-insight reveal">
+          <p>"Safety engineers were spending over half of study time on data entry and report formatting — time that should have been spent on the safety thinking itself."</p>
+          <cite>— Domain research finding · Soter Safety Consulting · 2025</cite>
+        </blockquote>
+      </div>
+
+      <!-- UX Strategy & Design Decisions -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">UX Strategy &amp; Design Decisions</span>
+        <h2 class="cs-heading reveal">Designing for <em>trust</em> in a compliance-driven environment</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The core design principle was cognitive load reduction — not simplification for its own sake, but removing unnecessary friction so users could focus on the safety thinking, not the tooling.
+        </p>
+
+        <div class="cs-figure reveal" style="margin-top:2rem;">
+          <ImagePH
+            label="HAZOP Edge scenario summary screen"
+            instructions="Gaussian blur 15–20px · add annotation callouts in Figma"
+            aspect="16/7"
+          />
+        </div>
+
+        <div class="cs-grid-4">
+          <div class="reveal">
+            <h3>Lifecycle-anchored navigation</h3>
+            <p class="t-body">Navigation and page structure mapped directly to the safety assessment lifecycle: identify risks → evaluate operability → track mitigations → generate compliance reports. Users always knew their next step without asking a colleague.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>Scannable layouts for data-heavy views</h3>
+            <p class="t-body">Risk matrices and technical safety logs used scannable, grid-based layouts with meaningful defaults and progressive disclosure. Seasoned engineers could go deep; first-time users weren't overwhelmed.</p>
+          </div>
+          <div class="reveal">
+            <h3>Consistent visual language</h3>
+            <p class="t-body">A deliberately calm, purposeful visual system — in compliance environments, trust comes from predictability. Status indicators, state colours, and confirmation patterns were applied consistently across every screen.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>Scalable design system</h3>
+            <p class="t-body">Built a component library covering states, patterns, and accessibility — so the engineering team could ship new features without reintroducing visual inconsistency or breaking the trust model.</p>
+          </div>
+        </div>
+
+        <div class="cs-figure reveal" style="margin-top:2rem;">
+          <ImagePH
+            label="UI screens — Risk Matrix, Analytics Dashboard, Welcome screen"
+            instructions="Arrange as a 3-up composition · blur 15–20px · annotate key decisions"
+            aspect="16/7"
+          />
+        </div>
+      </div>
+
+      <!-- Business Impact -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Business impact</span>
+        <h2 class="cs-heading reveal">From spreadsheets to a trusted safety platform</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The strategic UX approach successfully transitioned enterprise users from fragmented manual spreadsheets to a centralised B2B SaaS platform. By replacing error-prone data entry with intuitive, guided workflows, the MVP established immediate trust with safety professionals.
+        </p>
+        <StatCards stats={stats} />
+      </div>
+
+      <!-- Learnings -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Learnings &amp; Reflections</span>
+        <h2 class="cs-heading reveal">What this project taught me</h2>
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <div class="reveal">
+            <p class="t-body">
+              Working in industrial safety forced me to confront the limits of pattern-matching. Most UX patterns I'd built up over four years of enterprise work were partially applicable at best — safety professionals have a very specific mental model shaped by regulatory frameworks and risk-aversion that consumer-influenced design patterns actively undermine.
+            </p>
+            <p class="t-body" style="margin-top:.75rem;">
+              The domain research phase — which I almost compressed due to timeline pressure — turned out to be the most valuable work I did. The service blueprint session with stakeholders surfaced requirements that no amount of user story refinement would have uncovered.
+            </p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <p class="t-body">
+              If I were to revisit this project, I'd push harder for at least one round of usability testing with actual safety engineers in context — testing with a screen recording rather than in a facilitated session. The tasks in HAZOP studies are long-form and sequential; lab-style testing sessions are poorly suited to validating that kind of flow.
+            </p>
+            <p class="t-body" style="margin-top:.75rem;">
+              I'd also start with accessibility constraints earlier in the design process. The compliance-driven environment means that accessibility isn't a nice-to-have — it's a legal requirement — and retrofitting it later created unnecessary rework.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <MoreCaseStudies current="hazop" />
+  <Lightbox />
+</CaseStudy>

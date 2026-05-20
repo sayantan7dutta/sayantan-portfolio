@@ -1,0 +1,192 @@
+---
+import { Image } from 'astro:assets';
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import CaseStudyHero from '../../components/CaseStudyHero.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import StatCards from '../../components/StatCards.astro';
+import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
+import ImagePH from '../../components/ImagePH.astro';
+import Lightbox from '../../components/Lightbox.astro';
+
+import heroImg from '../../assets/work/api-lifecycle/hero.png';
+import dashboardImg from '../../assets/work/api-lifecycle/dashboard.png';
+import collaboratorImg from '../../assets/work/api-lifecycle/collaborator.png';
+import designDetailsImg from '../../assets/work/api-lifecycle/design-details.png';
+
+const processSteps = [
+  {
+    title: 'Heuristic evaluation of the existing portal',
+    body: 'Conducted a structured heuristic evaluation of the MVP portal. Key findings: (1) No visible system status during multi-step API key generation — users couldn\'t tell if a 10-second delay was processing or an error. (2) Inconsistent labelling of "environments" vs "workspaces" across the portal created confusion about scope. (3) Error messages were technical, developer-facing strings rather than actionable guidance for non-developer enterprise buyers.',
+  },
+  {
+    title: 'Workflow mapping — two distinct user types',
+    body: 'Mapped distinct workflows for enterprise buyers (who manage access and governance) and developers (who consume APIs and need observability). These groups had fundamentally different mental models and task priorities — the navigation system needed to serve both without forcing either to wade through the other\'s concerns.',
+  },
+  {
+    title: 'Design system construction',
+    body: 'Built a component library from scratch — covering button states, data table patterns, form validation, status indicators, and empty states. The goal was that any engineer on the team could implement a new feature without creating new components or breaking visual consistency. Components were documented with usage guidelines, not just visual specs.',
+  },
+  {
+    title: 'Usability testing across release cycles',
+    body: 'Ran moderated usability tests at the end of each major release cycle — testing both enterprise buyers and developers. Used findings to prioritise the next sprint\'s UX debt alongside new feature development. Advocated for a fixed allocation of sprint capacity for UX improvements, which the product owner eventually adopted.',
+  },
+];
+
+const stats = [
+  { num: '30%', label: 'Increase in onboarding completion rate' },
+  { num: '22%', label: 'Reduction in support tickets related to access and credentials' },
+  { num: '18%', label: 'Increase in active developer engagement (weekly portal usage)' },
+];
+---
+
+<CaseStudy
+  title="API Lifecycle Platform — Sayantan Dutta"
+  description="End-to-end UX for an enterprise API lifecycle platform at Ericsson — building a design team and system that made complex portal workflows easier for clients and developers."
+>
+  <CaseStudyHero
+    title="End-to-End API Lifecycle Platform for a B2B SaaS Offering"
+    lead="Led end-to-end UX design from MVP to advanced releases — building a design team and system that made complex portal workflows easier for enterprise clients and developers."
+    tags={['Enterprise Platform', 'Ericsson', '2021 – 2024']}
+    meta={[
+      { key: 'Role', val: 'Lead UX Designer' },
+      { key: 'Client', val: 'Ericsson (via TCS)' },
+      { key: 'Industry', val: 'Telecommunications / SaaS' },
+      { key: 'Timeline', val: '8–12 weeks per release' },
+    ]}
+    heroPlaceholder="API Console screenshot"
+  >
+    <Image slot="hero-image" src={heroImg} alt="Ericsson API Console — welcome screen" class="cs-hero-img-el nda-blur" loading="eager" />
+  </CaseStudyHero>
+
+  <div class="cs-body">
+    <div class="container">
+
+      <!-- Problem / Solution -->
+      <div class="cs-section">
+        <div class="cs-two">
+          <div class="reveal">
+            <span class="cs-section-lbl">Problem</span>
+            <h2 class="cs-subheading">Enterprise complexity with no coherent system behind it</h2>
+            <p class="t-body" style="margin-top:1rem;">Enterprise customers needed to manage the full API lifecycle across multiple teams, environments, and permission levels. But the early experience made common tasks feel heavy and error-prone. Users struggled to understand where to start, how to request access, and how to track changes across versions and environments.</p>
+            <p class="t-body" style="margin-top:.75rem;">Internal teams also lacked consistent UI patterns — leading to fragmented experiences across onboarding, key management, and usage monitoring. These gaps slowed adoption and increased support requests at the most critical integration moments.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <span class="cs-section-lbl">Solution</span>
+            <h2 class="cs-subheading">A cohesive system built around the developer's mental model</h2>
+            <p class="t-body" style="margin-top:1rem;">Designed a portal experience that guided users from discovery to production operations — with clear navigation, consistent patterns, and workflow-focused screens for access, credentials, environments, and observability. A design system unified components and interaction models across releases, so new features felt familiar and predictable.</p>
+            <p class="t-body" style="margin-top:.75rem;">Ran research and usability testing throughout the lifecycle, then prioritised iterative improvements based on product analytics and customer feedback. The platform evolved from an MVP to a mature, scalable product that supported enterprise governance while staying approachable for developers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design Process -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Design process</span>
+        <h2 class="cs-heading reveal">From heuristic audit to scalable design system</h2>
+
+        <ProcessSteps steps={processSteps} />
+
+        <!-- Design system placeholder -->
+        <div class="reveal" style="margin-top:2rem;">
+          <p class="t-body" style="margin-bottom:.75rem;">Design system — component overview</p>
+          <!--
+            TO ADD THE DESIGN SYSTEM GRID:
+            This is entirely new work — no NDA risk. Create a component grid in Figma
+            (colour tokens, button states, card component, form elements), export as PNG,
+            then replace the ImagePH below with an <Image> import.
+          -->
+          <ImagePH
+            label="Design system component grid"
+            instructions="Figma: colour tokens, button states, card component, form elements — entirely new work, no NDA risk"
+            aspect="16/7"
+          />
+        </div>
+
+        <blockquote class="cs-insight reveal">
+          <p>"Developers trusted the platform when they could predict what would happen next. Every interaction pattern we standardised was one fewer mental model they had to maintain."</p>
+          <cite>— Design principle, API Lifecycle project · TCS / Ericsson</cite>
+        </blockquote>
+      </div>
+
+      <!-- Design Decisions -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Design System &amp; Interaction Design</span>
+        <h2 class="cs-heading reveal">Building for scale, not just the current sprint</h2>
+
+        <figure class="cs-figure reveal" style="margin-top:2rem;">
+          <div class="nda-frame">
+            <Image src={dashboardImg} alt="API Console dashboard — request tracking and lifecycle view" class="nda-blur" loading="lazy" />
+            <span class="nda-note">Blurred · Ericsson NDA</span>
+          </div>
+          <figcaption class="cs-figure-cap">API Console dashboard — request tracking across the lifecycle</figcaption>
+        </figure>
+
+        <div class="cs-grid-4">
+          <div class="reveal">
+            <h3>Lifecycle-anchored navigation</h3>
+            <p class="t-body">Navigation mapped to the API lifecycle — Discover, Request Access, Validate in Sandbox, Monitor in Production. Users always knew where they were and what came next.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>Progressive disclosure for power users</h3>
+            <p class="t-body">Data-heavy areas like usage monitoring and API repository used scannable layouts with meaningful defaults — power users could go deep without overwhelming first-time buyers.</p>
+          </div>
+          <div class="reveal">
+            <h3>Consistent interaction model across releases</h3>
+            <p class="t-body">Every new feature used the same component library and interaction patterns — so the product felt familiar even as it grew. New capabilities didn't reset the user's mental model.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>Handoff-ready documentation</h3>
+            <p class="t-body">Components shipped with usage guidelines, edge cases, and accessibility annotations — not just visual specs. This cut developer questions during implementation by reducing ambiguity upstream.</p>
+          </div>
+        </div>
+
+        <div class="cs-two" style="margin-top:2rem;">
+          <figure class="cs-figure reveal" style="margin:0;">
+            <div class="nda-frame">
+              <Image src={collaboratorImg} alt="API Console — collaborator management screen" class="nda-blur" loading="lazy" />
+              <span class="nda-note">Blurred · Ericsson NDA</span>
+            </div>
+            <figcaption class="cs-figure-cap">Collaborator management — access and governance for enterprise buyers</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.1s;">
+            <div class="nda-frame">
+              <Image src={designDetailsImg} alt="API Console — high-level design details workflow" class="nda-blur" loading="lazy" />
+              <span class="nda-note">Blurred · Ericsson NDA</span>
+            </div>
+            <figcaption class="cs-figure-cap">High-level design workflow — guided, multi-step API definition</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Impact -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Business impact</span>
+        <h2 class="cs-heading reveal">Adoption improved, support costs dropped</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The redesigned platform improved how quickly enterprise customers could move from evaluation to working integrations — reducing friction in the sales-to-implementation handoff. More consistent workflows and clearer system feedback lowered confusion during access and credential setup.
+        </p>
+        <StatCards stats={stats} />
+      </div>
+
+      <!-- Learnings -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Learnings &amp; Reflections</span>
+        <h2 class="cs-heading reveal">What this project taught me</h2>
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <div class="reveal">
+            <p class="t-body">This was the first project where I truly understood the difference between designing a product and designing a system. Early on, I was solving individual screen problems — fixing the onboarding flow, improving the API key UI. It took a few release cycles before I recognised that the real leverage was in establishing patterns that the whole team could build from, not polishing individual screens.</p>
+            <p class="t-body" style="margin-top:.75rem;">The transition from individual contributor to leading the design team mid-project also taught me that design leadership is mostly communication, not design. The biggest improvements came from getting engineers and product owners to understand why consistency mattered — not from fixing visual details myself.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <p class="t-body">If I could revisit one thing: I'd push for dedicated UX researcher time earlier in the project lifecycle. We ran usability testing, but it was always against designs that were already close to done — meaning we were validating more than discovering. Earlier, rougher testing would have surfaced the two-user-type problem (enterprise buyers vs. developers) much sooner.</p>
+            <p class="t-body" style="margin-top:.75rem;">This project is where I developed most of my thinking around design operations — the idea that a designer's job at scale is to make good design the default, not the exception.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <MoreCaseStudies current="api-lifecycle" />
+  <Lightbox />
+</CaseStudy>

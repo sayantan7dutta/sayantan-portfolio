@@ -1,0 +1,119 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import CaseStudyHero from '../../components/CaseStudyHero.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import StatCards from '../../components/StatCards.astro';
+import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
+import ImagePH from '../../components/ImagePH.astro';
+import Lightbox from '../../components/Lightbox.astro';
+
+const processSteps = [
+  {
+    title: 'Stakeholder audit — understanding the agency\'s positioning',
+    body: 'Conducted a content audit of the existing Squarespace site alongside stakeholder interviews with Pensaar\'s founders. Key finding: the existing site led with services before establishing credibility — potential enterprise clients needed to understand the agency\'s design philosophy before they\'d trust a list of services. The site\'s information architecture was backwards.',
+  },
+  {
+    title: 'Navigation redesign — ideology first, services second',
+    body: 'Restructured the navigation to lead with the agency\'s design thinking ideology, then move to how they apply it (case studies), then what they offer (services). This mirrors how enterprise buyers actually evaluate consulting agencies — they want to understand your thinking before they consider your pricing.',
+  },
+  {
+    title: 'Responsive design system',
+    body: 'Built a flexible, fully responsive design system that could support rich, in-depth case study storytelling across all devices — without cluttering the interface. Special attention to content-heavy pages: scannable layouts, elegant typography, and purposeful white space that kept dense case study content readable on mobile.',
+  },
+  {
+    title: 'Visual identity upgrade',
+    body: 'Elevated the visual language to match the premium positioning Pensaar was targeting — modern typography, a tighter colour system, and a consistent use of space that reinforced credibility for enterprise clients evaluating the agency for large-scale projects.',
+  },
+];
+
+const stats = [
+  { num: '25%', label: 'Increase in lead conversion rate' },
+  { num: '65%', label: 'Boost in mobile engagement' },
+  { num: '40%', label: 'Increase in average session duration' },
+];
+---
+
+<CaseStudy
+  title="Pensaar Design — Elevating a Design Agency's Web Presence"
+  description="Redesigned and migrated Pensaar Design's website from Squarespace to a custom, responsive platform that authentically communicates their human-centred design philosophy."
+>
+  <CaseStudyHero
+    title="Elevating the Digital Presence of a Design Thinking Agency"
+    lead="Redesigned Pensaar Design's website — migrating from a restrictive Squarespace template to a custom, fully responsive platform that authentically communicates their human-centred design philosophy."
+    tags={['Web Redesign', 'Design Consulting', 'UK · 2024']}
+    meta={[
+      { key: 'Role', val: 'Interaction Designer' },
+      { key: 'Client', val: 'Pensaar Design (via SparkSoft)' },
+      { key: 'Industry', val: 'Design Consulting' },
+      { key: 'Timeline', val: '6 weeks' },
+    ]}
+    heroPlaceholder="Pensaar Design website — homepage screenshot"
+    heroInstructions="Desktop screenshot of the redesigned site · export at 16:10"
+  />
+
+  <div class="cs-body">
+    <div class="container">
+
+      <!-- Problem / Solution -->
+      <div class="cs-section">
+        <div class="cs-two">
+          <div class="reveal">
+            <span class="cs-section-lbl">Problem</span>
+            <h2 class="cs-subheading">The platform was undermining the agency it was meant to represent</h2>
+            <p class="t-body" style="margin-top:1rem;">Pensaar Design's existing Squarespace website constrained their ability to showcase UX expertise. The template-driven platform limited how they displayed complex case studies, featured an outdated visual identity, and made it difficult for potential enterprise clients to navigate their services or understand their design philosophy.</p>
+            <p class="t-body" style="margin-top:.75rem;">The core tension: an agency selling human-centred design was using a tool that prioritised the template's constraints over the agency's communication needs.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <span class="cs-section-lbl">Solution</span>
+            <h2 class="cs-subheading">A platform built to showcase the work, not just describe it</h2>
+            <p class="t-body" style="margin-top:1rem;">Redesigned and migrated to a custom, fully responsive platform. The new site introduced a modern premium aesthetic, streamlined navigation anchored to a clear discovery journey, and dedicated in-depth sections for case studies and methodology. The result was a digital presence that functioned as a live proof of the agency's own UX capability.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design Process -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Information Architecture &amp; Visual Design</span>
+        <h2 class="cs-heading reveal">Designing the <em>discovery journey</em> for a consulting client</h2>
+
+        <ProcessSteps steps={processSteps} />
+
+        <div class="cs-figure reveal" style="margin-top:2rem;">
+          <ImagePH
+            label="Pensaar Design website screens — Homepage, Case Study page, Services"
+            instructions="3-up desktop mockup composition · export from Figma"
+            aspect="16/7"
+          />
+        </div>
+      </div>
+
+      <!-- Impact -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Business impact</span>
+        <h2 class="cs-heading reveal">A platform that works as hard as the agency does</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The custom redesign significantly elevated the agency's market positioning. By clearly articulating their core design philosophy and providing seamless access to detailed case studies, the new platform built immediate trust with prospective enterprise clients.
+        </p>
+        <StatCards stats={stats} />
+      </div>
+
+      <!-- Learnings -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Learnings &amp; Reflections</span>
+        <h2 class="cs-heading reveal">What this project taught me</h2>
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <div class="reveal">
+            <p class="t-body">This project was a useful reminder that information architecture decisions are often more impactful than visual design decisions. The biggest improvement to the site came from restructuring the navigation — not from the visual redesign. Enterprise buyers approach agency evaluation in a specific sequence: who are you → what do you believe → what have you done → what do you offer. The previous site inverted that order.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <p class="t-body">Six weeks is a compressed timeline for a full redesign including migration. I'd push for at least one round of user testing with prospective clients before launch in future projects of this type — we validated with stakeholders and not with actual buyers, which is a gap. The conversion rate improvement suggests the architecture change worked, but we don't know what we may have left on the table.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <MoreCaseStudies current="pensaar" />
+  <Lightbox />
+</CaseStudy>

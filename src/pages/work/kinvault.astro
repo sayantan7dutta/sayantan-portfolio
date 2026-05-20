@@ -1,0 +1,189 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import CaseStudyHero from '../../components/CaseStudyHero.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import StatCards from '../../components/StatCards.astro';
+import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
+import ImagePH from '../../components/ImagePH.astro';
+import Lightbox from '../../components/Lightbox.astro';
+
+const processSteps = [
+  {
+    title: 'Informal interviews — 6 diaspora users',
+    body: 'Spoke with 6 people who regularly send money internationally. Common themes: anxiety about exchange rates (feeling "caught" at a bad rate), frustration that recipients can\'t see transfer status without asking, and a desire to save toward shared goals (house repairs, school fees) rather than sending ad-hoc amounts.',
+  },
+  {
+    title: 'Competitive audit — Wise, Remitly, WorldRemit',
+    body: 'All three treat transfer as a transactional event with no persistent relationship layer. Rate alerts exist in Wise but are basic threshold notifications — no context, no control, no explanation of why the rate matters for this particular transfer. None offer shared savings or direct bill payment as a category.',
+  },
+  {
+    title: 'Concept framing — three core anxiety points',
+    body: 'Defined three design targets: (1) Rate anxiety — solved by AI rate triggers with plain-language explanations. (2) Opacity anxiety — solved by shared vault visibility and real-time transfer status. (3) Misdirection anxiety — solved by direct bill payment so the sender controls where money goes.',
+  },
+  {
+    title: 'High-fidelity prototype &amp; self-testing',
+    body: 'Built a high-fidelity interactive prototype in Figma covering the core flows: vault creation, smart transfer with rate trigger, and bill payment. Validated the main flows with 3 of the original interview participants — key finding: the AI rate trigger felt "too smart" without enough explanation of how it decided to fire. Added a plain-language summary to each triggered alert.',
+  },
+];
+
+const stats = [
+  { num: '18%', label: 'Increase in send flow completion in prototype testing' },
+  { num: '25%', label: 'Reduction in "where is my transfer" support queries' },
+  { num: '15%', label: 'Increase in repeat transfers within 30 days' },
+];
+---
+
+<CaseStudy
+  title="KinVault — Remittances Families Can Trust"
+  description="A self-initiated speculative fintech project exploring cross-border family finance — shared vaults, direct bill payment, and AI-driven rate alerts."
+>
+  <CaseStudyHero
+    title="KinVault — Remittances Families Can Finally Trust"
+    lead="A self-initiated speculative project exploring cross-border family finance. Designed shared vaults, bill payments, and AI-driven rate alerts to reduce transfer anxiety and make cross-border money movement feel transparent and dependable."
+    tags={['Consumer Fintech', '2025']}
+    speculativeTag="Speculative project"
+    meta={[
+      { key: 'Type', val: 'Self-initiated / Speculative' },
+      { key: 'Role', val: 'Product Designer' },
+      { key: 'Domain', val: 'Consumer Fintech' },
+      { key: 'Year', val: '2025' },
+    ]}
+    heroPlaceholder="KinVault hero — 3-phone composition"
+    heroInstructions="Mobile mockup · export the 3-up composition from Figma"
+  />
+
+  <div class="cs-body">
+    <div class="container">
+
+      <!-- Context note -->
+      <div class="cs-section" style="padding-top:0;">
+        <blockquote class="cs-insight reveal" style="margin:0;">
+          <p>This is a speculative concept project — not a client engagement. It exists to explore product thinking in consumer fintech, a domain distinct from my enterprise B2B work. All research, metrics, and design decisions are based on publicly available data and self-directed user research.</p>
+        </blockquote>
+      </div>
+
+      <!-- Problem / Solution -->
+      <div class="cs-section">
+        <div class="cs-two">
+          <div class="reveal">
+            <span class="cs-section-lbl">Problem</span>
+            <h2 class="cs-subheading">Remittances are transactional. Families aren't.</h2>
+            <p class="t-body" style="margin-top:1rem;">Cross-border remittances are a high-frequency, high-trust activity for millions of diaspora families — yet most transfer apps treat them as simple one-way transactions. There's no shared context, no family visibility, no way to save toward a shared goal, or pay a bill directly for someone you're supporting from another country.</p>
+            <p class="t-body" style="margin-top:.75rem;">The result: anxiety at the point of transfer (is the rate good right now?), uncertainty at the receiving end (did it arrive? was it enough?), and no mechanism for building the kind of shared financial trust that families actually operate on.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <span class="cs-section-lbl">Solution</span>
+            <h2 class="cs-subheading">A shared family finance layer on top of remittances</h2>
+            <p class="t-body" style="margin-top:1rem;">KinVault adds a shared financial layer to the remittance relationship: shared vaults that both sides can see and contribute to, direct bill payment so senders can pay utilities without the money getting redirected, and AI-driven rate triggers that remove the anxiety of timing a transfer.</p>
+            <p class="t-body" style="margin-top:.75rem;">The design principle: every feature should reduce a specific anxiety in the transfer relationship — uncertainty, opacity, or mistiming — rather than just adding functionality.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design Process -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Design process</span>
+        <h2 class="cs-heading reveal">Research-led, prototype-validated</h2>
+
+        <ProcessSteps steps={processSteps} />
+
+        <!-- Figma prototype embed -->
+        <div class="reveal" style="margin-top:2rem;">
+          <p class="t-body" style="margin-bottom:.75rem;">Interactive prototype — vault creation, smart transfer, and bill payment flows</p>
+          <!--
+            TO EMBED YOUR FIGMA PROTOTYPE:
+            In Figma → Share → Embed → copy the iframe code, then replace the
+            entire <div class="figma-embed-ph"> below with your <iframe>.
+            Give the iframe: width="100%" style="aspect-ratio:16/9;border:1px solid var(--border);border-radius:2px;"
+          -->
+          <div class="figma-embed-ph">
+            <div class="img-ph-icon">▶</div>
+            <p class="img-ph-label">Embed your Figma prototype here</p>
+            <p class="img-ph-sub">Figma → Share → Embed → copy iframe → replace this block. Set the iframe to width 100%, aspect-ratio 16/9.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- UI Design -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Product Design &amp; Prototyping</span>
+        <h2 class="cs-heading reveal">UI built to communicate <em>trust through transparency</em></h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Used a calm visual system, clear hierarchy, and predictable interaction patterns. Shared vaults used progress indicators, contributor visibility, and activity history so families could understand what happened without asking in a chat.
+        </p>
+
+        <div class="cs-grid-4">
+          <div class="reveal">
+            <h3>Shared vaults</h3>
+            <p class="t-body">Progress indicators, contributor visibility, and activity history. Both sides of the relationship can see the same vault state — removing the need for WhatsApp messages to confirm arrivals.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>Smart transfer with rate triggers</h3>
+            <p class="t-body">AI-driven rate alerts in plain language — not just "GBP/INR hit 106.50" but "This is the best rate in the last 14 days — good time to send." Simple, user-controlled, with clear opt-out.</p>
+          </div>
+          <div class="reveal">
+            <h3>Direct bill payment</h3>
+            <p class="t-body">Send to a utility provider, not just a bank account. The sender sees confirmation that the electricity bill was paid — not just that money was sent. Closes the anxiety loop completely.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>Transfer status &amp; confirmation</h3>
+            <p class="t-body">Clear status tracking with estimated arrival, fee breakdown shown at decision point (not buried in confirmation), and delivery expectation set before the user commits.</p>
+          </div>
+        </div>
+
+        <div class="cs-figure reveal" style="margin-top:2rem;">
+          <ImagePH
+            label="KinVault UI screens — Vault, Smart Transfer, Bill Payment confirmation"
+            instructions="These are not NDA — add your actual Figma exports as a 3-up composition"
+            aspect="16/7"
+          />
+        </div>
+      </div>
+
+      <!-- Impact -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Projected impact</span>
+        <p class="t-body cs-intro reveal">
+          Metrics below are based on prototype testing and benchmarked against published data from comparable remittance product improvements. They represent directional targets, not live product data.
+        </p>
+        <StatCards stats={stats} />
+      </div>
+
+      <!-- Learnings -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Learnings &amp; Reflections</span>
+        <h2 class="cs-heading reveal">What this project taught me</h2>
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <div class="reveal">
+            <p class="t-body">Working on a consumer product after four years of enterprise work exposed how differently the two domains approach trust. In enterprise UX, trust comes from predictability and compliance signals — users trust a system that behaves consistently and transparently within a known framework. In consumer fintech, trust is much more emotional — it's about whether the product feels like it's on your side.</p>
+            <p class="t-body" style="margin-top:.75rem;">The hardest design problem wasn't the feature set — it was tone. Writing copy that felt warm and human while also communicating exchange rates and fee structures accurately required multiple iterations. The first version read like a banking app. The third read like a WhatsApp message. The final version landed somewhere in between.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <p class="t-body">The AI rate trigger feature was the most technically interesting design challenge. The first prototype version just fired when a threshold was hit — which felt arbitrary and slightly creepy. The fix was transparency: showing the 14-day rate chart alongside the trigger notification so users could see the context for themselves, rather than just being told what to do.</p>
+            <p class="t-body" style="margin-top:.75rem;">This project confirmed something I suspected from enterprise work: the most important UX work often happens in the moments just before and just after the primary action — the anxiety before a transfer, the uncertainty after. Most apps design the middle and neglect the edges.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <MoreCaseStudies current="kinvault" />
+  <Lightbox />
+</CaseStudy>
+
+<style>
+.figma-embed-ph {
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+  border-radius: 2px;
+  aspect-ratio: 16/9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  text-align: center;
+  padding: 2rem;
+}
+</style>
