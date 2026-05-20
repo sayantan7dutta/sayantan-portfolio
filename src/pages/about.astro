@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="About — Sayantan Dutta"
+  description="UX & Service Designer working where complexity meets clarity. 5 years across enterprise SaaS, industrial safety, and API platforms."
+  activeNav="about"
+>
+
+<div class="about-wrap">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Photo column -->
+      <div>
+        <div class="about-photo reveal">
+          <!--
+            TO ADD YOUR PHOTO:
+            Replace the div.about-photo-ph with:
+            <img src="/images/sayantan.jpg" alt="Sayantan Dutta" class="about-photo-img" />
+            Use a 4:5 portrait ratio.
+          -->
+          <div class="about-photo-ph">
+            <span>Add your photo here<br />(4:5 ratio)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content column -->
+      <div>
+        <span class="t-label">About</span>
+        <p class="about-intro reveal" style="transition-delay:.1s;">
+          I'm a UX and Service Designer who works best where <em>complexity meets clarity</em> — turning systems that are genuinely difficult into experiences that feel obvious.
+        </p>
+
+        <div class="about-block reveal">
+          <p class="about-block-lbl">Background</p>
+          <p class="t-body">
+            My path into UX started with a Bachelor's in Communication Design, where I realised design wasn't about making things beautiful — it was about making decisions visible. That instinct led me to Tata Consultancy Services, where I spent four years designing across enterprise SaaS, manufacturing technology, and API platforms for clients including Ericsson, McAfee, and Sherwin-Williams.
+          </p>
+          <p class="t-body" style="margin-top:.75rem;">
+            Working at that scale — with complex stakeholder structures, tight compliance requirements, and global user bases — taught me that good UX is as much about operational rigour as it is about craft. I moved to the UK in 2024 to pursue an MA in Design Management at Southampton University, which sharpened my thinking around design strategy and systems-level leadership.
+          </p>
+          <p class="t-body" style="margin-top:.75rem;">
+            Most recently, I led UX strategy for HAZOP Edge at Soter Safety Consulting — a platform for industrial hazard and operability studies. My most technically demanding project, and the one I'm most proud of.
+          </p>
+        </div>
+
+        <div class="about-block reveal">
+          <p class="about-block-lbl">What I do</p>
+          <p class="t-body">
+            I specialise in enterprise and B2B UX — the kinds of platforms where workflows are high-stakes, users are domain experts, and ambiguity is expensive. I bridge design operations and hands-on craft: I can build a design system and lead scrum ceremonies in the same week.
+          </p>
+          <p class="t-body" style="margin-top:.75rem;">
+            I prioritise clarity, accessibility, and measurable outcomes over aesthetic novelty. I've collaborated with product owners, engineers, safety professionals, and enterprise clients across Europe, the US, and the UK.
+          </p>
+        </div>
+
+        <div class="about-block reveal">
+          <p class="about-block-lbl">Currently</p>
+          <p class="t-body">
+            Based in the UK. MA in Design Management from the University of Southampton, graduated September 2025. Actively looking for Lead UX, Senior UX, or Design Operations roles in product-led companies.
+          </p>
+        </div>
+
+        <div class="about-block reveal">
+          <p class="about-block-lbl">Tools &amp; Skills</p>
+          <p class="t-body">
+            Figma, Adobe Creative Suite, Miro, ServiceNow, Microsoft 365. UX research, usability testing, heuristic evaluation, design systems, service blueprinting, information architecture, agile / scrum.
+          </p>
+        </div>
+
+        <div class="about-block reveal">
+          <p class="about-block-lbl">Outside of work</p>
+          <p class="t-body">
+            Badminton, football, Ultimate Frisbee. Learning German (slowly). Always looking for a good flat white.
+          </p>
+        </div>
+
+        <div class="about-cta reveal">
+          <a href="mailto:sayantan7dutta@gmail.com" class="btn btn-primary">
+            Get in touch <span class="arrow">→</span>
+          </a>
+          <a href="https://linkedin.com/in/sayantan-dutta-968033105/" target="_blank" rel="noopener" class="btn">LinkedIn ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</Base>
+
+<style>
+.about-wrap {
+  padding-top: calc(var(--nav-h) + clamp(3rem, 8vw, 5rem));
+  padding-bottom: clamp(4rem, 10vw, 7rem);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.about-photo {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+}
+.about-photo-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter .4s;
+}
+.about-photo:hover .about-photo-img { filter: grayscale(0%); }
+.about-photo-ph {
+  width: 100%; height: 100%;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-photo-ph span {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  padding: 2rem;
+  line-height: 1.8;
+}
+.about-intro {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-1);
+  margin: 1.5rem 0 2.5rem;
+}
+.about-intro em { font-style: italic; color: var(--accent); }
+.about-block {
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--border);
+}
+.about-block:last-of-type { border-bottom: 1px solid var(--border); }
+.about-block-lbl {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: .875rem;
+}
+.about-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-photo { max-width: 280px; position: static; }
+}
+</style>

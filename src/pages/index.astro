@@ -1,17 +1,588 @@
 ---
-
+import Base from '../layouts/Base.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title="Sayantan Dutta — UX Designer"
+  description="Senior UX & Service Designer specialising in complex enterprise systems — from industrial safety platforms to API infrastructure."
+  activeNav="work"
+>
+
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg-lines" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Text column -->
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="t-label">Senior UX &amp; Service Designer</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-line hero-line-1">Turning complex</span>
+          <span class="hero-line hero-line-2"><em>enterprise systems</em></span>
+          <span class="hero-line hero-line-3">into interfaces</span>
+          <span class="hero-line hero-line-4">that build trust.</span>
+        </h1>
+
+        <p class="t-lead hero-lead">
+          5 years across industrial safety platforms, B2B SaaS, and public sector — specialising in the workflows that matter when getting it wrong isn't an option.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#work" class="btn btn-primary">View work <span class="arrow">→</span></a>
+          <a href="/about" class="btn">About me</a>
+        </div>
+
+        <div class="hero-scroll">
+          <span class="hero-scroll-line" aria-hidden="true"></span>
+          Scroll to explore
+        </div>
+      </div>
+
+      <!-- Photo column -->
+      <div class="hero-photo-wrap">
+        <!--
+          TO ADD YOUR PHOTO:
+          Replace the placeholder below with:
+          <img src="/images/sayantan.jpg" alt="Sayantan Dutta" class="hero-photo-img" />
+          Use a 4:5 portrait ratio, minimum 800px wide.
+        -->
+        <div class="hero-photo">
+          <div class="hero-photo-ph">
+            <span>Add your photo here<br />(4:5 ratio · e.g. 800×1000px)</span>
+          </div>
+          <div class="hero-photo-cap">Southampton, UK · Open to work</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ CLIENTS ═══════════════════════════════ -->
+<div class="clients-bar">
+  <div class="container">
+    <div class="clients-inner">
+      <span class="clients-lbl">Selected clients</span>
+      <div class="clients-list">
+        <!--
+          TO ADD CLIENT LOGOS:
+          Replace each <span> with:
+          <img src="/images/clients/ericsson.png" alt="Ericsson" class="client-logo" />
+          Logos should be white/light SVG or PNG, ~100px wide.
+        -->
+        <span class="client-name">Ericsson</span>
+        <span class="client-sep" aria-hidden="true">·</span>
+        <span class="client-name">McAfee</span>
+        <span class="client-sep" aria-hidden="true">·</span>
+        <span class="client-name">Sherwin-Williams</span>
+        <span class="client-sep" aria-hidden="true">·</span>
+        <span class="client-name">Soter Safety</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ WORK ════════════════════════════════ -->
+<section class="work-section" id="work">
+  <div class="container">
+
+    <div class="work-hdr reveal">
+      <span class="t-label">Featured work</span>
+      <span class="t-label">2021 – 2025</span>
+    </div>
+
+    <!-- 01 HAZOP -->
+    <article class="project-item reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <!--
+            TO ADD PROJECT IMAGE:
+            Replace the div.p-img-ph with:
+            <img src="/images/work/hazop-thumb.jpg" alt="HAZOP Edge platform" class="p-img-actual" loading="lazy" />
+            Use 16:10 ratio. Add data-lightbox attribute for click-to-expand.
+          -->
+          <div class="p-img-ph">
+            <span>HAZOP Edge dashboard<br />(16:10 · blur 15–20px in Figma)</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">01</span>
+            <span class="t-tag">B2B SaaS · UK · 2025</span>
+          </div>
+          <h2 class="p-title">UX Strategy for a B2B SaaS Platform in Industrial Safety</h2>
+          <p class="p-desc">Shaped the UX for HAZOP Edge — a next-gen platform that simplifies hazard and operability studies for safety professionals. From domain research to MVP delivery.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">Soter Safety Consulting · Lead UX</span>
+          <a href="/work/hazop" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 API Lifecycle -->
+    <article class="project-item project-item-alt reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <!--
+            TO ADD PROJECT IMAGE:
+            <img src="/images/work/api-lifecycle/api-thumb.jpg" alt="API Lifecycle Platform" class="p-img-actual" loading="lazy" />
+          -->
+          <div class="p-img-ph">
+            <span>API Console overview<br />(16:10 · blur 15–20px in Figma)</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">02</span>
+            <span class="t-tag">Enterprise · 2021 – 2024</span>
+          </div>
+          <h2 class="p-title">End-to-End API Lifecycle Platform for a B2B SaaS Offering</h2>
+          <p class="p-desc">Led end-to-end UX from MVP to advanced releases — building a design team and system that made complex portal workflows easier for enterprise clients and developers.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">TCS · Ericsson · Lead UX Designer</span>
+          <a href="/work/api-lifecycle" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 KinVault -->
+    <article class="project-item reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <div class="p-img-ph">
+            <span>KinVault mobile screens<br />(16:10 · export from Figma)</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">03</span>
+            <span class="t-tag t-tag-speculative">Speculative · Fintech · 2025</span>
+          </div>
+          <h2 class="p-title">KinVault — Remittances Families Can Finally Trust</h2>
+          <p class="p-desc">A self-initiated speculative project exploring cross-border family finance. Designed shared vaults, bill payments, and AI-driven rate alerts to reduce transfer anxiety.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">Self-initiated · Product Design</span>
+          <a href="/work/kinvault" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 Pensaar -->
+    <article class="project-item project-item-alt reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <div class="p-img-ph">
+            <span>Pensaar Design website<br />(16:10 · desktop screenshot)</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">04</span>
+            <span class="t-tag">Web Redesign · UK · 2024</span>
+          </div>
+          <h2 class="p-title">Elevating the Digital Presence of a Design Thinking Agency</h2>
+          <p class="p-desc">Redesigned Pensaar Design's website — migrating from Squarespace to a custom, responsive platform that authentically reflects their human-centred philosophy.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">SparkSoft · Interaction Design · 6 weeks</span>
+          <a href="/work/pensaar" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ CONTACT ════════════════════════════ -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="reveal">
+        <span class="t-label" style="display:block;margin-bottom:1rem;">Get in touch</span>
+        <a href="mailto:sayantan7dutta@gmail.com" class="contact-email">sayantan7dutta@gmail.com</a>
+      </div>
+      <div class="reveal" style="transition-delay:.1s;">
+        <a href="https://linkedin.com/in/sayantan-dutta-968033105/" target="_blank" rel="noopener" class="btn">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Base>
+
+<style>
+/* ─── Hero ─── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+  padding-top: calc(var(--nav-h) + 2rem);
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-lines {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+.hero-bg-lines span {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+  opacity: .5;
+}
+.hero-bg-lines span:nth-child(1) { left: 25%; }
+.hero-bg-lines span:nth-child(2) { left: 50%; }
+.hero-bg-lines span:nth-child(3) { left: 75%; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: end;
+}
+
+/* Hero text stagger */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1.5rem;
+  animation: fadeUp .6s var(--ease-out) .1s both;
+}
+.hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  max-width: 56px;
+  height: 1px;
+  background: var(--text-3);
+  transform-origin: left;
+  animation: drawLine .5s var(--ease-out) .4s both;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.01em;
+  display: flex;
+  flex-direction: column;
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-line { display: block; }
+.hero-line-1 { animation: fadeUp .6s var(--ease-out) .2s both; }
+.hero-line-2 { animation: fadeUp .6s var(--ease-out) .32s both; }
+.hero-line-3 { animation: fadeUp .6s var(--ease-out) .44s both; }
+.hero-line-4 { animation: fadeUp .6s var(--ease-out) .56s both; }
+
+.hero-lead {
+  margin-top: 1.5rem;
+  animation: fadeUp .6s var(--ease-out) .65s both;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  align-items: center;
+  animation: fadeUp .6s var(--ease-out) .75s both;
+}
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-top: 1.5rem;
+  animation: fadeUp .6s var(--ease-out) .85s both;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 24px;
+  background: var(--text-3);
+  display: block;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+/* Hero photo */
+.hero-photo-wrap {
+  animation: fadeUp .6s var(--ease-out) .3s both;
+}
+.hero-photo {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: relative;
+  transition: border-color .3s;
+}
+.hero-photo:hover { border-color: var(--text-3); }
+.hero-photo-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter .4s, transform .6s var(--ease);
+}
+.hero-photo:hover .hero-photo-img { filter: grayscale(0%); transform: scale(1.02); }
+.hero-photo-ph {
+  width: 100%; height: 100%;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-photo-ph span {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  padding: 2rem;
+  line-height: 1.8;
+}
+.hero-photo-cap {
+  position: absolute;
+  bottom: .75rem;
+  left: .75rem;
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: rgba(8,8,8,.75);
+  padding: .2rem .5rem;
+  border-radius: 1px;
+}
+:global([data-theme="light"]) .hero-photo-cap {
+  background: rgba(245,240,232,.9);
+  color: var(--text-2);
+}
+
+/* ─── Clients ─── */
+.clients-bar {
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.clients-inner {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.clients-lbl {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.clients-lbl::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--text-3);
+  vertical-align: middle;
+  margin-left: .5rem;
+}
+.clients-list {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.client-name {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  transition: color .2s;
+}
+.client-name:hover { color: var(--text-2); }
+.client-sep {
+  color: var(--border);
+  font-size: .8rem;
+}
+
+/* ─── Work section ─── */
+.work-section { padding: clamp(4rem, 10vw, 7rem) 0; }
+.work-hdr {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Project item */
+.project-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background .25s;
+}
+.project-item:hover { background: var(--surface); }
+.project-item-alt .p-img-col { order: 2; }
+.project-item-alt .p-info { order: 1; }
+
+.p-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--surface-2);
+  position: relative;
+}
+.p-img-actual {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .6s var(--ease);
+}
+.project-item:hover .p-img-actual { transform: scale(1.04); }
+.p-img-ph {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+.p-img-ph span {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  padding: 0 2rem;
+  line-height: 1.7;
+}
+.p-info {
+  padding: clamp(2rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.p-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.p-num {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  color: var(--text-3);
+  letter-spacing: .1em;
+}
+.p-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-1);
+  margin-top: 1rem;
+}
+.p-desc {
+  font-size: .85rem;
+  color: var(--text-2);
+  line-height: 1.75;
+  max-width: 44ch;
+  margin-top: 1rem;
+}
+.p-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.p-context {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.p-link {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  transition: color .2s, gap .2s;
+}
+.p-link:hover { color: var(--accent); gap: .7rem; }
+
+/* ─── Contact ─── */
+.contact-section {
+  padding: clamp(4rem, 10vw, 7rem) 0;
+  border-top: 1px solid var(--border);
+}
+.contact-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.contact-email {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 4vw, 2.8rem);
+  font-weight: 500;
+  color: var(--text-1);
+  transition: color .2s;
+}
+.contact-email:hover { color: var(--accent); }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-photo-wrap { order: -1; }
+  .hero-photo { max-width: 280px; }
+  .project-item,
+  .project-item-alt { grid-template-columns: 1fr; }
+  .project-item-alt .p-img-col,
+  .project-item-alt .p-info { order: unset; }
+  .contact-inner { flex-direction: column; align-items: flex-start; }
+  .clients-inner { gap: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .hero-eyebrow::after, .hero-line,
+  .hero-lead, .hero-cta, .hero-scroll, .hero-photo-wrap {
+    animation: none !important;
+  }
+  .hero-scroll-line { animation: none !important; }
+}
+</style>
