@@ -699,6 +699,9 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 1.2rem;
 }
 .more-card-info { padding: 1rem 1.25rem 1.25rem; }
 .more-ctx {

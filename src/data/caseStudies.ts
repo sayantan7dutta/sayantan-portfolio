@@ -7,12 +7,18 @@
  *  3. The homepage project list and the "More case studies" grid update from here.
  */
 
+import type { ImageMetadata } from 'astro';
+import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
+import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
+import pensaarThumb from '../assets/work/pensaar/hero.jpg';
+
 export interface CaseStudy {
   slug: string;
   title: string;       // full title (hero)
   shortTitle: string;  // condensed title (cards)
   context: string;     // short label, emmi-wu style: "B2B SaaS · UK · 2025"
   speculative?: boolean;
+  thumb?: ImageMetadata; // optional thumbnail for the "More case studies" grid
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -21,12 +27,14 @@ export const caseStudies: CaseStudy[] = [
     title: 'UX Strategy for a B2B SaaS Platform in Industrial Safety',
     shortTitle: 'UX Strategy for an Industrial Safety Platform',
     context: 'B2B SaaS · UK · 2025',
+    thumb: hazopThumb,
   },
   {
     slug: 'api-lifecycle',
     title: 'From Designer to Design Leader',
     shortTitle: 'From Designer to Design Leader',
     context: 'Design Systems · Ericsson · 2020–2023',
+    thumb: ericssonThumb,
   },
   {
     slug: 'sherwin-williams',
@@ -46,6 +54,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Elevating the Digital Presence of a Design Thinking Agency',
     shortTitle: 'Elevating a Design Thinking Agency',
     context: 'Web Redesign · Consulting · 2024',
+    thumb: pensaarThumb,
   },
 ];
 

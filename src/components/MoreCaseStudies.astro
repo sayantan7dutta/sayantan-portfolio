@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { otherCaseStudies } from '../data/caseStudies';
 
 interface Props {
@@ -16,9 +17,11 @@ const others = otherCaseStudies(current);
       {others.map((cs) => (
         <a href={`/work/${cs.slug}`} class="more-card reveal">
           <div class="more-card-thumb">
-            {/* TO ADD A THUMBNAIL: replace this span with
-                <img src={`/images/work/${cs.slug}-thumb.jpg`} alt={cs.shortTitle} loading="lazy" /> */}
-            <span class="more-card-thumb-ph">{cs.slug} thumbnail</span>
+            {cs.thumb ? (
+              <Image src={cs.thumb} alt={cs.shortTitle} loading="lazy" />
+            ) : (
+              <span class="more-card-thumb-ph">{cs.shortTitle}</span>
+            )}
           </div>
           <div class="more-card-info">
             <p class="more-ctx">{cs.context}</p>
