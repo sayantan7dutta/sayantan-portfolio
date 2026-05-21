@@ -1,0 +1,33 @@
+---
+/**
+ * KinVault 3-phone composition — used in the case study hero and the
+ * homepage project card. Fills a 16:10 frame; the tall phones are clipped
+ * by the parent's overflow.
+ */
+import { Image } from 'astro:assets';
+import dashboard from '../assets/work/kinvault/dashboard.jpg';
+import smartTransfer from '../assets/work/kinvault/smart-transfer.jpg';
+import billPay from '../assets/work/kinvault/bill-pay.jpg';
+---
+
+<div class="kv-trio">
+  <Image src={dashboard} alt="KinVault dashboard" class="phone" loading="eager" />
+  <Image src={smartTransfer} alt="KinVault smart transfer" class="phone" loading="eager" />
+  <Image src={billPay} alt="KinVault bill payment" class="phone" loading="eager" />
+</div>
+
+<style>
+  .kv-trio {
+    height: 100%;
+    display: flex;
+    gap: 1.1rem;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1.6rem 1.1rem 0;
+    background: var(--surface-2);
+  }
+  .kv-trio .phone { width: 30%; }
+  @media (max-width: 768px) {
+    .kv-trio { gap: .6rem; padding: 1rem .7rem 0; }
+  }
+</style>

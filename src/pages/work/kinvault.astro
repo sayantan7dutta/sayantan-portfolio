@@ -1,11 +1,26 @@
 ---
+import { Image } from 'astro:assets';
 import CaseStudy from '../../layouts/CaseStudy.astro';
 import CaseStudyHero from '../../components/CaseStudyHero.astro';
 import ProcessSteps from '../../components/ProcessSteps.astro';
 import StatCards from '../../components/StatCards.astro';
 import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
-import ImagePH from '../../components/ImagePH.astro';
+import KvPhoneTrio from '../../components/KvPhoneTrio.astro';
 import Lightbox from '../../components/Lightbox.astro';
+
+import dashboardImg from '../../assets/work/kinvault/dashboard.jpg';
+import smartTransferImg from '../../assets/work/kinvault/smart-transfer.jpg';
+import reviewImg from '../../assets/work/kinvault/review.jpg';
+import statusImg from '../../assets/work/kinvault/transfer-status.jpg';
+import vaultImg from '../../assets/work/kinvault/vault.jpg';
+import billPayImg from '../../assets/work/kinvault/bill-pay.jpg';
+
+const flowSteps = [
+  { img: dashboardImg, label: 'Family dashboard' },
+  { img: smartTransferImg, label: 'Smart transfer' },
+  { img: reviewImg, label: 'Review &amp; rate lock' },
+  { img: statusImg, label: 'Transfer status' },
+];
 
 const processSteps = [
   {
@@ -48,9 +63,10 @@ const stats = [
       { key: 'Domain', val: 'Consumer Fintech' },
       { key: 'Year', val: '2025' },
     ]}
-    heroPlaceholder="KinVault hero — 3-phone composition"
-    heroInstructions="Mobile mockup · export the 3-up composition from Figma"
-  />
+    heroPlaceholder="KinVault hero"
+  >
+    <KvPhoneTrio slot="hero-image" />
+  </CaseStudyHero>
 
   <div class="cs-body">
     <div class="container">
@@ -132,19 +148,19 @@ const stats = [
           </div>
         </div>
 
-        <!-- Figma prototype embed -->
-        <div class="reveal" style="margin-top:2rem;">
-          <p class="t-body" style="margin-bottom:.75rem;">Interactive prototype — vault creation, smart transfer, and bill payment flows</p>
-          <!--
-            TO EMBED YOUR FIGMA PROTOTYPE:
-            In Figma → Share → Embed → copy the iframe code, then replace the
-            entire <div class="figma-embed-ph"> below with your <iframe>.
-            Give the iframe: width="100%" style="aspect-ratio:16/9;border:1px solid var(--border);border-radius:2px;"
-          -->
-          <div class="figma-embed-ph">
-            <div class="img-ph-icon">▶</div>
-            <p class="img-ph-label">Embed your Figma prototype here</p>
-            <p class="img-ph-sub">Figma → Share → Embed → copy iframe → replace this block. Set the iframe to width 100%, aspect-ratio 16/9.</p>
+        <!-- Prototype flow -->
+        <div class="reveal" style="margin-top:2.5rem;">
+          <p class="t-body" style="margin-bottom:1rem;">The high-fidelity prototype — the core send-money journey, from the family dashboard to a tracked transfer:</p>
+          <div class="kv-flow">
+            {flowSteps.map((step, i) => (
+              <div class="kv-flow-step">
+                <div class="kv-flow-head">
+                  <span class="kv-flow-num">0{i + 1}</span>
+                  <span class="kv-flow-label" set:html={step.label} />
+                </div>
+                <Image src={step.img} alt={step.label.replace('&amp;', 'and')} class="phone" data-lightbox loading="lazy" />
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -176,12 +192,19 @@ const stats = [
           </div>
         </div>
 
-        <div class="cs-figure reveal" style="margin-top:2rem;">
-          <ImagePH
-            label="KinVault UI screens — Vault, Smart Transfer, Bill Payment confirmation"
-            instructions="These are not NDA — add your actual Figma exports as a 3-up composition"
-            aspect="16/7"
-          />
+        <div class="cs-grid-3" style="margin-top:2.5rem;">
+          <figure class="cs-figure reveal" style="margin:0;">
+            <Image src={vaultImg} alt="KinVault — shared vault allocation" class="phone" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Shared vault — funds allocated to named family goals</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.08s;">
+            <Image src={billPayImg} alt="KinVault — pay a bill abroad" class="phone" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Bill Pay Abroad — pay a utility directly, not a bank account</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.16s;">
+            <Image src={statusImg} alt="KinVault — transfer status tracking" class="phone" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Transfer status — every step visible, both ends of the transfer</figcaption>
+          </figure>
         </div>
       </div>
 
@@ -218,18 +241,32 @@ const stats = [
 </CaseStudy>
 
 <style>
-.figma-embed-ph {
-  background: var(--surface-2);
-  border: 1px dashed var(--border);
-  border-radius: 2px;
-  aspect-ratio: 16/9;
+/* Prototype flow — phone screens across the send-money journey */
+.kv-flow {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .75rem;
-  text-align: center;
-  padding: 2rem;
+  align-items: flex-start;
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: .6rem;
+}
+.kv-flow-step { flex: 1 0 0; min-width: 190px; }
+.kv-flow-head {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  margin-bottom: .7rem;
+}
+.kv-flow-num {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .1em;
+  color: var(--accent);
+}
+.kv-flow-label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-1);
 }
 
 /* Anxiety → solution map */

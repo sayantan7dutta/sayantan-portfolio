@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
+import KvPhoneTrio from '../components/KvPhoneTrio.astro';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
 import pensaarThumb from '../assets/work/pensaar/hero.jpg';
@@ -182,9 +183,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
     <article class="project-item project-item-alt reveal">
       <div class="p-img-col">
         <div class="p-img">
-          <div class="p-img-ph">
-            <span>KinVault mobile screens<br />(16:10 · export from Figma)</span>
-          </div>
+          <KvPhoneTrio />
         </div>
       </div>
       <div class="p-info">

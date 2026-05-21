@@ -797,6 +797,16 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
   height: auto;
 }
 
+/* ─── Phone frame for mobile UI screens ─── */
+.phone {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
 /* ═══════════════════ DECK-DERIVED CASE STUDY BLOCKS ═══════════════════ */
 
 /* 3-column card grid — product overviews, BA-bridge, research templates */
