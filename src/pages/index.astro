@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
+import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 ---
 
 <Base
@@ -206,19 +207,17 @@ import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
     <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
-          <div class="p-img-ph">
-            <span>Pensaar Design website<br />(16:10 · desktop screenshot)</span>
-          </div>
+          <Image src={pensaarThumb} alt="Pensaar Design website" class="p-img-actual" loading="lazy" />
         </div>
       </div>
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
             <span class="p-num">05</span>
-            <span class="t-tag">Web Redesign · UK · 2024</span>
+            <span class="t-tag">Web Redesign · CMS · 2024</span>
           </div>
           <h2 class="p-title">Elevating the Digital Presence of a Design Thinking Agency</h2>
-          <p class="p-desc">Redesigned Pensaar Design's website — migrating from Squarespace to a custom, responsive platform that authentically reflects their human-centred philosophy.</p>
+          <p class="p-desc">Redesigned Pensaar Design's website and rebuilt it in Wix — migrating off a restrictive Squarespace template, with an information architecture that matches how the agency wants to be understood.</p>
         </div>
         <div class="p-footer">
           <span class="p-context">SparkSoft · Interaction Design · 6 weeks</span>

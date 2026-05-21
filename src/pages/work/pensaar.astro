@@ -1,11 +1,17 @@
 ---
+import { Image } from 'astro:assets';
 import CaseStudy from '../../layouts/CaseStudy.astro';
 import CaseStudyHero from '../../components/CaseStudyHero.astro';
 import ProcessSteps from '../../components/ProcessSteps.astro';
 import StatCards from '../../components/StatCards.astro';
 import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
-import ImagePH from '../../components/ImagePH.astro';
+import BrowserFrame from '../../components/BrowserFrame.astro';
 import Lightbox from '../../components/Lightbox.astro';
+
+import heroImg from '../../assets/work/pensaar/hero.jpg';
+import workImg from '../../assets/work/pensaar/work.jpg';
+import servicesImg from '../../assets/work/pensaar/services.jpg';
+import aboutImg from '../../assets/work/pensaar/about.jpg';
 
 const processSteps = [
   {
@@ -24,6 +30,10 @@ const processSteps = [
     title: 'Visual identity upgrade',
     body: 'Elevated the visual language to match the premium positioning Pensaar was targeting — modern typography, a tighter colour system, and a consistent use of space that reinforced credibility for enterprise clients evaluating the agency for large-scale projects.',
   },
+  {
+    title: 'Rebuilding the site in Wix — design delivered, not just specced',
+    body: 'Rather than hand a design file to a separate developer, I rebuilt the site directly in Wix — every page, the global navigation, the responsive breakpoints, and the content structure. Working hands-on in the CMS meant design decisions survived contact with the platform\'s constraints intact, and the agency was left with a site their own team could maintain and update without needing a developer.',
+  },
 ];
 
 const stats = [
@@ -35,21 +45,22 @@ const stats = [
 
 <CaseStudy
   title="Pensaar Design — Elevating a Design Agency's Web Presence"
-  description="Redesigned and migrated Pensaar Design's website from Squarespace to a custom, responsive platform that authentically communicates their human-centred design philosophy."
+  description="Redesigned and rebuilt Pensaar Design's website — migrating off a restrictive Squarespace template and reconstructing it in Wix, with an information architecture that matches how the agency wants to be understood."
 >
   <CaseStudyHero
     title="Elevating the Digital Presence of a Design Thinking Agency"
-    lead="Redesigned Pensaar Design's website — migrating from a restrictive Squarespace template to a custom, fully responsive platform that authentically communicates their human-centred design philosophy."
-    tags={['Web Redesign', 'Design Consulting', 'UK · 2024']}
+    lead="Redesigned and rebuilt Pensaar Design's website — migrating off a restrictive Squarespace template and reconstructing it in Wix, with an information architecture that finally matched how the agency wanted to be understood."
+    tags={['Web Redesign', 'CMS Migration', 'Consulting · 2024']}
     meta={[
       { key: 'Role', val: 'Interaction Designer' },
       { key: 'Client', val: 'Pensaar Design (via SparkSoft)' },
-      { key: 'Industry', val: 'Design Consulting' },
+      { key: 'Platform', val: 'Squarespace → Wix' },
       { key: 'Timeline', val: '6 weeks' },
     ]}
-    heroPlaceholder="Pensaar Design website — homepage screenshot"
-    heroInstructions="Desktop screenshot of the redesigned site · export at 16:10"
-  />
+    heroPlaceholder="Pensaar Design website"
+  >
+    <Image slot="hero-image" src={heroImg} alt="Pensaar Design — redesigned website homepage" class="cs-hero-img-el" loading="eager" />
+  </CaseStudyHero>
 
   <div class="cs-body">
     <div class="container">
@@ -65,8 +76,9 @@ const stats = [
           </div>
           <div class="reveal" style="transition-delay:.1s;">
             <span class="cs-section-lbl">Solution</span>
-            <h2 class="cs-subheading">A platform built to showcase the work, not just describe it</h2>
-            <p class="t-body" style="margin-top:1rem;">Redesigned and migrated to a custom, fully responsive platform. The new site introduced a modern premium aesthetic, streamlined navigation anchored to a clear discovery journey, and dedicated in-depth sections for case studies and methodology. The result was a digital presence that functioned as a live proof of the agency's own UX capability.</p>
+            <h2 class="cs-subheading">A site built to showcase the work, not just describe it</h2>
+            <p class="t-body" style="margin-top:1rem;">Redesigned the site and rebuilt it in Wix — hand-constructing every page, the navigation, and the responsive behaviour within the platform. The new site introduced a modern premium aesthetic, a navigation anchored to a clear discovery journey, and dedicated in-depth sections for case studies and methodology.</p>
+            <p class="t-body" style="margin-top:.75rem;">Delivering inside the CMS — rather than handing off a design file — meant the agency was left with a site their own team could run and update without a developer.</p>
           </div>
         </div>
       </div>
@@ -107,12 +119,25 @@ const stats = [
           </div>
         </div>
 
-        <div class="cs-figure reveal" style="margin-top:2.5rem;">
-          <ImagePH
-            label="Pensaar Design website screens — Homepage, Case Study page, Services"
-            instructions="3-up desktop mockup composition · export from Figma"
-            aspect="16/7"
-          />
+        <div class="cs-grid-3" style="margin-top:2.5rem;">
+          <figure class="cs-figure reveal" style="margin:0;">
+            <BrowserFrame label="Work · By industry">
+              <Image src={workImg} alt="Pensaar Design — work page organised by industry" data-lightbox loading="lazy" />
+            </BrowserFrame>
+            <figcaption class="cs-figure-cap">Work — case studies, surfaced before the service list</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.08s;">
+            <BrowserFrame label="Services">
+              <Image src={servicesImg} alt="Pensaar Design — services page" data-lightbox loading="lazy" />
+            </BrowserFrame>
+            <figcaption class="cs-figure-cap">Services — what they offer, once the thinking is established</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.16s;">
+            <BrowserFrame label="About Us">
+              <Image src={aboutImg} alt="Pensaar Design — about page" data-lightbox loading="lazy" />
+            </BrowserFrame>
+            <figcaption class="cs-figure-cap">About — the agency's philosophy, leading the discovery journey</figcaption>
+          </figure>
         </div>
       </div>
 
