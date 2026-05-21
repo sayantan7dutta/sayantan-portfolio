@@ -87,6 +87,51 @@ const stats = [
 
         <ProcessSteps steps={processSteps} />
 
+        <!-- Anxiety → solution map -->
+        <div class="reveal" style="margin-top:2.5rem;">
+          <p class="t-body" style="margin-bottom:1rem;max-width:62ch;">
+            The concept resolved to one rule — every feature had to neutralise a specific anxiety in the transfer relationship, not just add functionality:
+          </p>
+          <div class="anxiety-map">
+            <div class="anx-col">
+              <div class="anx-top">
+                <span class="anx-tag">Anxiety 01 · Timing</span>
+                <p class="anx-felt">"Am I sending at a bad rate right now?"</p>
+              </div>
+              <span class="anx-arrow" aria-hidden="true">↓</span>
+              <div class="anx-bot">
+                <span class="anx-fix-lbl">Neutralised by</span>
+                <p class="anx-fix">AI rate triggers</p>
+                <p class="anx-desc">Plain-language alerts — "best rate in 14 days" — shown with the rate chart, so the user decides, not the algorithm.</p>
+              </div>
+            </div>
+            <div class="anx-col">
+              <div class="anx-top">
+                <span class="anx-tag">Anxiety 02 · Opacity</span>
+                <p class="anx-felt">"Did it arrive? Was it enough?"</p>
+              </div>
+              <span class="anx-arrow" aria-hidden="true">↓</span>
+              <div class="anx-bot">
+                <span class="anx-fix-lbl">Neutralised by</span>
+                <p class="anx-fix">Shared vaults</p>
+                <p class="anx-desc">Both sides see the same balance, contributors, and live transfer status — no message needed to confirm an arrival.</p>
+              </div>
+            </div>
+            <div class="anx-col">
+              <div class="anx-top">
+                <span class="anx-tag">Anxiety 03 · Misdirection</span>
+                <p class="anx-felt">"Will the money reach the actual bill?"</p>
+              </div>
+              <span class="anx-arrow" aria-hidden="true">↓</span>
+              <div class="anx-bot">
+                <span class="anx-fix-lbl">Neutralised by</span>
+                <p class="anx-fix">Direct bill payment</p>
+                <p class="anx-desc">Pay the utility directly. The sender sees the bill cleared — not just that money was sent.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Figma prototype embed -->
         <div class="reveal" style="margin-top:2rem;">
           <p class="t-body" style="margin-bottom:.75rem;">Interactive prototype — vault creation, smart transfer, and bill payment flows</p>
@@ -185,5 +230,73 @@ const stats = [
   gap: .75rem;
   text-align: center;
   padding: 2rem;
+}
+
+/* Anxiety → solution map */
+.anxiety-map {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.anx-col {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.anx-top { padding: 1.5rem 1.4rem 1.6rem; }
+.anx-tag {
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.anx-felt {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-1);
+  margin-top: .6rem;
+}
+.anx-arrow {
+  text-align: center;
+  color: var(--accent);
+  font-size: .9rem;
+  line-height: 0;
+  margin: -.45rem 0;
+  position: relative;
+  z-index: 1;
+}
+.anx-bot {
+  padding: 1.5rem 1.4rem;
+  background: var(--accent-bg);
+  border-top: 1px solid var(--border);
+  flex: 1;
+}
+.anx-fix-lbl {
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.anx-fix {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin: .35rem 0 .5rem;
+}
+.anx-desc {
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+@media (max-width: 768px) {
+  .anxiety-map { grid-template-columns: 1fr; gap: 1rem; }
 }
 </style>
