@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
+import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
 ---
 
 <Base
@@ -103,15 +104,7 @@ import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
     <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
-          <!--
-            TO ADD PROJECT IMAGE:
-            Replace the div.p-img-ph with:
-            <img src="/images/work/hazop-thumb.jpg" alt="HAZOP Edge platform" class="p-img-actual" loading="lazy" />
-            Use 16:10 ratio. Add data-lightbox attribute for click-to-expand.
-          -->
-          <div class="p-img-ph">
-            <span>HAZOP Edge dashboard<br />(16:10 · blur 15–20px in Figma)</span>
-          </div>
+          <Image src={hazopThumb} alt="HAZOP Edge platform" class="p-img-actual" loading="lazy" />
         </div>
       </div>
       <div class="p-info">

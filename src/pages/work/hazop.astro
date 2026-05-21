@@ -1,11 +1,18 @@
 ---
+import { Image } from 'astro:assets';
 import CaseStudy from '../../layouts/CaseStudy.astro';
 import CaseStudyHero from '../../components/CaseStudyHero.astro';
 import ProcessSteps from '../../components/ProcessSteps.astro';
 import StatCards from '../../components/StatCards.astro';
 import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
-import ImagePH from '../../components/ImagePH.astro';
+import ServiceBlueprint from '../../components/ServiceBlueprint.astro';
+import BrowserFrame from '../../components/BrowserFrame.astro';
 import Lightbox from '../../components/Lightbox.astro';
+
+import analyticsImg from '../../assets/work/hazop/analytics-dashboard.jpg';
+import scenarioImg from '../../assets/work/hazop/scenario-summary.jpg';
+import riskMatrixImg from '../../assets/work/hazop/risk-matrix.jpg';
+import sitesImg from '../../assets/work/hazop/sites-dashboard.jpg';
 
 const processSteps = [
   {
@@ -51,9 +58,10 @@ const stats = [
       { key: 'Industry', val: 'Industrial Safety / SaaS' },
       { key: 'Timeline', val: 'Jul – Aug 2025' },
     ]}
-    heroPlaceholder="HAZOP Edge dashboard — hero screenshot"
-    heroInstructions="Blur 15–20px gaussian in Figma · add annotation callouts · export as PNG"
-  />
+    heroPlaceholder="HAZOP Edge dashboard"
+  >
+    <Image slot="hero-image" src={analyticsImg} alt="HAZOP Edge — analytics dashboard" class="cs-hero-img-el" loading="eager" />
+  </CaseStudyHero>
 
   <div class="cs-body">
     <div class="container">
@@ -94,21 +102,9 @@ const stats = [
 
         <ProcessSteps steps={processSteps} />
 
-        <!-- Service blueprint placeholder -->
+        <!-- Service blueprint -->
         <div class="reveal" style="margin-top:2rem;">
-          <p class="t-body" style="margin-bottom:.75rem;">Service blueprint — human and digital layers of a HAZOP study</p>
-          <!--
-            TO ADD THE SERVICE BLUEPRINT:
-            Draw it in Miro using generic labels (Facilitator / Scribe / Engineer / Platform / Compliance Output),
-            export as PNG, then replace the diagram-ph div below with:
-            <figure class="cs-figure"><img src="/images/work/hazop/service-blueprint.png" alt="HAZOP service blueprint" data-lightbox loading="lazy" /></figure>
-          -->
-          <div class="diagram-ph">
-            <p class="diagram-ph-lbl">
-              Add your service blueprint here<br />
-              Draw in Miro · generic labels · export as PNG
-            </p>
-          </div>
+          <ServiceBlueprint />
         </div>
 
         <!-- Research insight -->
@@ -126,13 +122,12 @@ const stats = [
           The core design principle was cognitive load reduction — not simplification for its own sake, but removing unnecessary friction so users could focus on the safety thinking, not the tooling.
         </p>
 
-        <div class="cs-figure reveal" style="margin-top:2rem;">
-          <ImagePH
-            label="HAZOP Edge scenario summary screen"
-            instructions="Gaussian blur 15–20px · add annotation callouts in Figma"
-            aspect="16/7"
-          />
-        </div>
+        <figure class="cs-figure reveal" style="margin-top:2rem;">
+          <BrowserFrame label="Scenario Summary">
+            <Image src={scenarioImg} alt="HAZOP Edge — scenario summary table with risk assessment and actions" data-lightbox loading="lazy" />
+          </BrowserFrame>
+          <figcaption class="cs-figure-cap">Scenario Summary — every deviation, its risk rating, and its tracked action in one scannable table</figcaption>
+        </figure>
 
         <div class="cs-grid-4">
           <div class="reveal">
@@ -153,12 +148,19 @@ const stats = [
           </div>
         </div>
 
-        <div class="cs-figure reveal" style="margin-top:2rem;">
-          <ImagePH
-            label="UI screens — Risk Matrix, Analytics Dashboard, Welcome screen"
-            instructions="Arrange as a 3-up composition · blur 15–20px · annotate key decisions"
-            aspect="16/7"
-          />
+        <div class="cs-two" style="margin-top:2rem;">
+          <figure class="cs-figure reveal" style="margin:0;">
+            <BrowserFrame label="Risk Matrix · Data Entry">
+              <Image src={riskMatrixImg} alt="HAZOP Edge — risk matrix data entry screen" data-lightbox loading="lazy" />
+            </BrowserFrame>
+            <figcaption class="cs-figure-cap">Risk Matrix — severity and probability captured on a guided grid, not a spreadsheet</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.1s;">
+            <BrowserFrame label="Sites Overview">
+              <Image src={sitesImg} alt="HAZOP Edge — sites overview dashboard" data-lightbox loading="lazy" />
+            </BrowserFrame>
+            <figcaption class="cs-figure-cap">Sites overview — the entry point, organised around how safety teams actually work</figcaption>
+          </figure>
         </div>
       </div>
 
