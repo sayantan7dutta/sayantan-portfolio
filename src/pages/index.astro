@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import KvPhoneTrio from '../components/KvPhoneTrio.astro';
+import FileArchitecture from '../components/FileArchitecture.astro';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
 import pensaarThumb from '../assets/work/pensaar/hero.jpg';
@@ -154,13 +155,9 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
     <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
-          <!--
-            This card describes a design-ops engagement with no UI screens.
-            The case study page renders the file-architecture as a built visual.
-          -->
-          <div class="p-img-ph">
-            <span>Design operations<br />before / after file architecture</span>
-          </div>
+          {/* Design-ops engagement with no UI screens — the built
+              file-architecture visual stands in for a screenshot. */}
+          <FileArchitecture hero={true} />
         </div>
       </div>
       <div class="p-info">
