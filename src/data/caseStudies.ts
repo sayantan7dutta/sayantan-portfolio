@@ -44,9 +44,9 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'kinvault',
-    title: 'KinVault — Remittances Families Can Finally Trust',
-    shortTitle: 'KinVault — Remittances Families Can Trust',
-    context: 'Speculative · Fintech · 2025',
+    title: 'KinVault Heritage — the Digital Vault-Atelier',
+    shortTitle: 'KinVault Heritage — a Digital Vault-Atelier',
+    context: 'Concept · Premium Fintech · 2025',
     speculative: true,
   },
   {
