@@ -12,13 +12,13 @@ const products = [
   { name: 'PRO+ App', desc: 'Contractor toolkit for professional painters' },
   { name: 'Paint Stores e-commerce', desc: 'Main consumer shopping platform' },
   { name: 'Contractor & dealer portals', desc: 'B2B account management tools' },
-  { name: 'Specification & coatings tools', desc: 'Internal — Performance Coatings Group' },
+  { name: 'Specification & coatings tools', desc: 'Internal, for the Performance Coatings Group' },
 ];
 
 const approach = [
   {
     title: 'Interview both sides',
-    body: 'Separate sessions with researchers and designers to surface real friction without cross-contamination or bias. As someone who had worked both sides, I knew the questions to ask — and I spoke to more than one person in each group so no single perspective skewed the findings.',
+    body: 'Separate sessions with researchers and designers to surface real friction without cross-contamination or bias. As someone who had worked both sides, I knew the questions to ask, and I made sure to speak to more than one person in each group so no single perspective skewed the findings.',
   },
   {
     title: 'Map the pain, not just the symptoms',
@@ -26,7 +26,7 @@ const approach = [
   },
   {
     title: 'Pressure-test with the Design Ops Manager',
-    body: 'Brought findings back to the manager, challenged assumptions, and agreed on what to prioritise — research infrastructure first, then the designer side. Sequencing the work mattered as much as the work itself.',
+    body: 'Brought findings back to the manager, challenged assumptions, and agreed on what to prioritise: research infrastructure first, then the designer side. Sequencing the work mattered as much as the work itself.',
   },
   {
     title: 'Fix iteratively, get feedback fast',
@@ -35,27 +35,27 @@ const approach = [
 ];
 
 const handoff = [
-  { title: 'Research conducted', body: 'Interviews, usability tests, and surveys — the raw material, run by the research team.' },
+  { title: 'Research conducted', body: 'Interviews, usability tests, and surveys. The raw material, run by the research team.' },
   { title: 'Synthesis &amp; insight deck', body: 'Findings written up in the standardised insight format, linked to source files.' },
-  { title: 'Handoff session', body: 'The researcher walks designers through the findings directly — not a document tossed over a wall.' },
+  { title: 'Handoff session', body: 'The researcher walks designers through the findings directly, not a document tossed over a wall.' },
   { title: 'Design takes over', body: 'Insights are referenced in Figma annotations, so the rationale travels with the design.' },
   { title: 'Design critique', body: 'A structured crit checks design decisions back against the research that informed them.' },
 ];
 
 const stats = [
-  { num: '30–40%', label: 'Reduction in rework and duplicated effort — the team’s own estimate' },
-  { num: '3 → 1', label: 'File versions to manage — duplicates collapsed to a single source of truth' },
+  { num: '30–40%', label: "Reduction in rework and duplicated effort, the team's own estimate" },
+  { num: '3 → 1', label: 'File versions to manage, collapsed from duplicates to a single source of truth' },
   { num: '20+', label: 'Researchers and designers working from one shared system' },
 ];
 ---
 
 <CaseStudy
-  title="Building Design Operations at Scale — Sherwin-Williams · Sayantan Dutta"
-  description="Design operations for Sherwin-Williams — rebuilding shared infrastructure, research templates, and the research-to-design handoff for a 20+ person team across six digital products."
+  title="Building Design Operations at Scale · Sherwin-Williams · Sayantan Dutta"
+  description="Design operations for Sherwin-Williams: rebuilding shared infrastructure, research templates, and the research-to-design handoff for a team of more than 20 across six digital products."
 >
   <CaseStudyHero
     title="Building <em>Design Operations</em> at Scale"
-    lead="Design operations for one of America's largest paint brands — rebuilding the shared infrastructure a 20-plus-person research and design team relied on, across six digital products."
+    lead="Design operations for one of America's largest paint brands. I rebuilt the shared infrastructure that a research and design team of more than 20 relied on, across six digital products."
     tags={['Design Operations', 'Enterprise', 'Sherwin-Williams · 2024']}
     meta={[
       { key: 'Role', val: 'Design Operations Lead' },
@@ -73,15 +73,15 @@ const stats = [
 
       <div class="cs-note reveal">
         <span class="cs-note-mark">NDA</span>
-        <p>All client work is under NDA. The file-architecture and process diagrams here are reconstructed from memory — the structure and the thinking are accurate; specific file names and content are illustrative.</p>
+        <p>All client work is under NDA. The file-architecture and process diagrams here are reconstructed from memory. The structure and the thinking are accurate; specific file names and content are illustrative.</p>
       </div>
 
       <!-- Context -->
       <div class="cs-section">
         <span class="cs-section-lbl">Context</span>
-        <h2 class="cs-heading reveal">One of America's largest paint brands — and a complex digital portfolio</h2>
+        <h2 class="cs-heading reveal">One of America's largest paint brands, and a complex digital portfolio</h2>
         <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
-          Sherwin-Williams runs one of the largest digital portfolios in the paint industry — consumer colour tools, contractor apps, e-commerce, and internal coatings systems. The research and design team supporting all of it had grown faster than its infrastructure.
+          Sherwin-Williams runs one of the largest digital portfolios in the paint industry: consumer colour tools, contractor apps, e-commerce, and internal coatings systems. The research and design team supporting all of it had grown faster than its infrastructure.
         </p>
 
         <div class="cs-figs reveal">
@@ -122,7 +122,7 @@ const stats = [
           </div>
           <div class="reveal" style="transition-delay:.1s;">
             <h3>Duplication was the default</h3>
-            <p class="t-body">Designers and researchers regularly redid work that already existed, discovering afterwards that the asset was there all along. The rework was the symptom — the broken structure was the cause.</p>
+            <p class="t-body">Designers and researchers regularly redid work that already existed, only to find out afterwards that the asset was there all along. The rework was the symptom. The broken structure was the cause.</p>
           </div>
           <div class="reveal">
             <h3>Decks were made and abandoned</h3>
@@ -140,12 +140,12 @@ const stats = [
         <span class="cs-section-lbl">Approach</span>
         <h2 class="cs-heading reveal">Before changing anything, understand the real pain points</h2>
         <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
-          I interviewed researchers and designers separately before proposing any solution. The order mattered — diagnosis first, then structure, then iteration with the team in the loop.
+          I interviewed researchers and designers separately before proposing any solution. The order mattered: diagnosis first, then structure, then iteration with the team in the loop.
         </p>
         <ProcessSteps steps={approach} />
       </div>
 
-      <!-- What I built — file architecture -->
+      <!-- What I built: file architecture -->
       <div class="cs-section">
         <span class="cs-section-lbl">What I built · File architecture</span>
         <h2 class="cs-heading reveal">From scattered to structured</h2>
@@ -155,7 +155,7 @@ const stats = [
         <FileArchitecture />
       </div>
 
-      <!-- What I built — research templates -->
+      <!-- What I built: research templates -->
       <div class="cs-section">
         <span class="cs-section-lbl">What I built · Research templates</span>
         <h2 class="cs-heading reveal">Standardised templates across three formats</h2>
@@ -199,18 +199,18 @@ const stats = [
         </div>
       </div>
 
-      <!-- What I built — handoff -->
+      <!-- What I built: handoff -->
       <div class="cs-section">
         <span class="cs-section-lbl">What I built · The handoff</span>
         <h2 class="cs-heading reveal">Connecting research to design</h2>
         <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
-          The most valuable infrastructure was not a folder or a template — it was a process. A five-step handoff that made research insights part of the design workflow rather than a parallel activity.
+          The most valuable infrastructure was not a folder or a template. It was a process: a five-step handoff that made research insights part of the design workflow rather than a parallel activity.
         </p>
         <ProcessSteps steps={handoff} />
 
         <div class="cs-note reveal">
           <span class="cs-note-mark">Before</span>
-          <p>Research findings were delivered to stakeholders and then effectively lost. Designers had no consistent access to what had been learned — they started from scratch, sometimes contradicting decisions research had already informed.</p>
+          <p>Research findings were delivered to stakeholders and then effectively lost. Designers had no consistent access to what had been learned, so they started from scratch, sometimes contradicting decisions research had already informed.</p>
         </div>
       </div>
 
@@ -220,7 +220,7 @@ const stats = [
         <h2 class="cs-heading reveal">The team noticed the difference immediately</h2>
         <StatCards stats={stats} />
         <p class="t-body reveal" style="margin-top:2rem;max-width:62ch;">
-          Each improvement was validated with the team before moving to the next. The feedback was immediate and specific — people could see what changed and why it mattered.
+          Each improvement was validated with the team before moving to the next. The feedback was immediate and specific, because people could see what changed and why it mattered.
         </p>
       </div>
 
@@ -234,7 +234,7 @@ const stats = [
             <p class="cs-card-lbl" style="color:var(--accent);">Completed</p>
             <ul class="cs-list is-done">
               <li>Full file architecture rebuilt in Teams and OneDrive</li>
-              <li>Research templates standardised — interview, insight, stakeholder</li>
+              <li>Research templates standardised: interview, insight, stakeholder</li>
               <li>Researcher-to-designer handoff process established</li>
               <li>Design critique framework introduced</li>
               <li>Cross-linking of documents for easy navigation</li>
@@ -244,7 +244,7 @@ const stats = [
           <div class="reveal" style="transition-delay:.1s;">
             <p class="cs-card-lbl" style="color:var(--text-3);">In pipeline · next phase</p>
             <ul class="cs-list">
-              <li>Designer-side file infrastructure — Figma library governance</li>
+              <li>Designer-side file infrastructure: Figma library governance</li>
               <li>Component ownership and version-control process</li>
               <li>Cross-product design consistency review</li>
               <li>Onboarding documentation for new team members</li>
@@ -253,8 +253,8 @@ const stats = [
         </div>
 
         <blockquote class="cs-insight reveal" style="margin-top:2rem;">
-          <p>Design ops problems are rarely about tools or templates. They are about trust and habit. The file architecture was broken partly because nobody had taken responsibility for it — creating structure also meant creating ownership, and that required as much facilitation as it did design.</p>
-          <cite>— What this engagement taught me</cite>
+          <p>Design ops problems are rarely about tools or templates. They are about trust and habit. The file architecture was broken partly because nobody had taken responsibility for it, and creating structure also meant creating ownership. That took as much facilitation as it did design.</p>
+          <cite>What this engagement taught me</cite>
         </blockquote>
       </div>
 
