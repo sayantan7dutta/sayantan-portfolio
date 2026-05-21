@@ -197,4 +197,9 @@ const stats = [
   max-width: 64ch;
 }
 :global([data-theme="light"]) .ia-chip.is-active { border-color: rgba(154,110,42,.4); }
+@media (max-width: 540px) {
+  .ia-sep { display: none; }
+  .ia-chips { gap: .5rem; }
+  .ia-chip { flex: 1 1 100%; text-align: center; }
+}
 </style>
