@@ -1,0 +1,175 @@
+---
+/**
+ * Service blueprint for the HAZOP Edge case study — human and digital layers
+ * mapped across the HAZOP study lifecycle. Built in code, not an image.
+ */
+const stages = ['Identify', 'Assess', 'Mitigate', 'Report'];
+
+const layers = [
+  {
+    name: 'Facilitator & Scribe',
+    role: 'Frontstage',
+    cells: [
+      'Lead the node walkthrough, capture deviations',
+      'Guide the risk-scoring discussion',
+      'Record agreed safeguards and actions',
+      'Review and sign off the completed study',
+    ],
+  },
+  {
+    name: 'Process Engineers',
+    role: 'Frontstage',
+    cells: [
+      'Surface failure modes from domain knowledge',
+      'Judge severity and likelihood per scenario',
+      'Propose technical mitigations',
+      'Verify every action has a clear owner',
+    ],
+  },
+  {
+    name: 'HAZOP Edge',
+    role: 'Digital layer',
+    cells: [
+      'Structured node and guideword entry',
+      'Risk matrix with live severity / probability scoring',
+      'Action tracker with owners and status',
+      'One-click, standardised compliance export',
+    ],
+  },
+  {
+    name: 'Compliance Output',
+    role: 'Backstage',
+    cells: [
+      'Audit trail begins',
+      'Scores logged against safety standards',
+      'Action register kept current',
+      'Regulator-ready report, every time',
+    ],
+  },
+];
+---
+
+<figure class="blueprint">
+  <div class="bp-scroll">
+    <div class="bp-grid">
+      <div class="bp-corner"><span>HAZOP lifecycle →</span></div>
+      {stages.map((s, i) => (
+        <div class="bp-stage">
+          <span class="bp-stage-num">0{i + 1}</span>
+          {s}
+        </div>
+      ))}
+
+      {layers.map((layer, li) => (
+        <>
+          {li === 2 && (
+            <div class="bp-visibility">Line of visibility — above, what people do · below, what the platform does</div>
+          )}
+          <div class="bp-layer">
+            <span class="bp-layer-name">{layer.name}</span>
+            <span class="bp-layer-role">{layer.role}</span>
+          </div>
+          {layer.cells.map((c) => (
+            <div class={`bp-cell${li >= 2 ? ' is-digital' : ''}`}>{c}</div>
+          ))}
+        </>
+      ))}
+    </div>
+  </div>
+  <figcaption class="bp-caption">Service blueprint — the human and digital layers of a single HAZOP study</figcaption>
+</figure>
+
+<style>
+  .blueprint { margin: 1.5rem 0 0; }
+  .bp-scroll { overflow-x: auto; padding-bottom: .5rem; }
+  .bp-grid {
+    display: grid;
+    grid-template-columns: 200px repeat(4, minmax(150px, 1fr));
+    gap: 6px;
+    min-width: 720px;
+  }
+  .bp-corner {
+    display: flex;
+    align-items: flex-end;
+    padding: .6rem;
+  }
+  .bp-corner span {
+    font-family: var(--font-mono);
+    font-size: .56rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .bp-stage {
+    background: var(--accent-bg);
+    border: 1px solid rgba(201,169,110,.3);
+    border-radius: 2px;
+    padding: .7rem .8rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-1);
+  }
+  .bp-stage-num {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .55rem;
+    letter-spacing: .1em;
+    color: var(--accent);
+    margin-bottom: .15rem;
+  }
+  .bp-layer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .7rem .8rem;
+    border-right: 2px solid var(--border);
+  }
+  .bp-layer-name {
+    font-family: var(--font-display);
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--text-1);
+    line-height: 1.2;
+  }
+  .bp-layer-role {
+    font-family: var(--font-mono);
+    font-size: .54rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-top: .25rem;
+  }
+  .bp-cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: .7rem .8rem;
+    font-size: .76rem;
+    line-height: 1.5;
+    color: var(--text-2);
+  }
+  .bp-cell.is-digital {
+    background: var(--surface-2);
+    color: var(--text-1);
+  }
+  .bp-visibility {
+    grid-column: 1 / -1;
+    border-top: 1px dashed var(--text-3);
+    margin: .35rem 0;
+    padding-top: .55rem;
+    font-family: var(--font-mono);
+    font-size: .56rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .bp-caption {
+    font-family: var(--font-mono);
+    font-size: .58rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-top: .8rem;
+  }
+</style>
