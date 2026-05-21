@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import KvPhoneTrio from '../components/KvPhoneTrio.astro';
 import FileArchitecture from '../components/FileArchitecture.astro';
+import portrait from '../assets/sayantan.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
 import pensaarThumb from '../assets/work/pensaar/hero.jpg';
@@ -52,16 +53,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 
       <!-- Photo column -->
       <div class="hero-photo-wrap">
-        <!--
-          TO ADD YOUR PHOTO:
-          Replace the placeholder below with:
-          <img src="/images/sayantan.jpg" alt="Sayantan Dutta" class="hero-photo-img" />
-          Use a 4:5 portrait ratio, minimum 800px wide.
-        -->
         <div class="hero-photo">
-          <div class="hero-photo-ph">
-            <span>Add your photo here<br />(4:5 ratio · e.g. 800×1000px)</span>
-          </div>
+          <Image src={portrait} alt="Sayantan Dutta" class="hero-photo-img" loading="eager" />
           <div class="hero-photo-cap">Southampton, UK · Open to work</div>
         </div>
       </div>

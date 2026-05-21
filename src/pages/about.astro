@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import portrait from '../assets/sayantan.jpg';
 ---
 
 <Base
@@ -15,15 +17,7 @@ import Base from '../layouts/Base.astro';
       <!-- Photo column -->
       <div>
         <div class="about-photo reveal">
-          <!--
-            TO ADD YOUR PHOTO:
-            Replace the div.about-photo-ph with:
-            <img src="/images/sayantan.jpg" alt="Sayantan Dutta" class="about-photo-img" />
-            Use a 4:5 portrait ratio.
-          -->
-          <div class="about-photo-ph">
-            <span>Add your photo here<br />(4:5 ratio)</span>
-          </div>
+          <Image src={portrait} alt="Sayantan Dutta" class="about-photo-img" loading="eager" />
         </div>
       </div>
 
