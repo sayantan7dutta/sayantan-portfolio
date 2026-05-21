@@ -1,8 +1,8 @@
 ---
 /**
- * Wraps a screenshot in a subtle app-window frame so light product UI reads
- * as a real product on the dark theme. Editorial treatment: a thin monospace
- * label bar instead of cliché traffic-light dots.
+ * Wraps a screenshot in a laptop mockup so desktop product UI reads as a real
+ * product on the dark theme. Editorial treatment: a thin monospace label bar
+ * for the browser chrome, and a minimal laptop base below the screen.
  *
  * Usage:
  *   <BrowserFrame label="Analytics Dashboard">
@@ -15,14 +15,17 @@ interface Props {
 const { label } = Astro.props;
 ---
 
-<div class="browser-frame">
-  <div class="browser-frame-bar">
-    <span class="browser-frame-label">{label}</span>
-    <span class="browser-frame-dots" aria-hidden="true">
-      <span></span><span></span><span></span>
-    </span>
+<div class="laptop">
+  <div class="laptop-screen">
+    <div class="browser-frame-bar">
+      <span class="browser-frame-label">{label}</span>
+      <span class="browser-frame-dots" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </div>
+    <div class="browser-frame-body">
+      <slot />
+    </div>
   </div>
-  <div class="browser-frame-body">
-    <slot />
-  </div>
+  <div class="laptop-base" aria-hidden="true"></div>
 </div>
