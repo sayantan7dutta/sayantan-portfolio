@@ -2,10 +2,9 @@
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import KvPhoneTrio from '../components/KvPhoneTrio.astro';
-import FileArchitecture from '../components/FileArchitecture.astro';
 import portrait from '../assets/sayantan.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
-import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
+import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
 import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 ---
 
@@ -69,18 +68,9 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
     <div class="clients-inner">
       <span class="clients-lbl">Selected clients</span>
       <div class="clients-list">
-        <!--
-          TO ADD CLIENT LOGOS:
-          Replace each <span> with:
-          <img src="/images/clients/ericsson.png" alt="Ericsson" class="client-logo" />
-          Logos should be white/light SVG or PNG, ~100px wide.
-        -->
-        <span class="client-name">Ericsson</span>
-        <span class="client-sep" aria-hidden="true">·</span>
-        <span class="client-name">McAfee</span>
-        <span class="client-sep" aria-hidden="true">·</span>
-        <span class="client-name">Sherwin-Williams</span>
-        <span class="client-sep" aria-hidden="true">·</span>
+        <img src="/images/clients/ericsson.png" alt="Ericsson" class="client-logo" style="height:44px;" />
+        <img src="/images/clients/mcafee.png" alt="McAfee" class="client-logo" style="height:24px;" />
+        <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" class="client-logo" style="height:30px;" />
         <span class="client-name">Soter Safety</span>
       </div>
     </div>
@@ -147,10 +137,13 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
     <!-- 03 Sherwin-Williams — Design Operations -->
     <article class="project-item reveal">
       <div class="p-img-col">
-        <div class="p-img">
-          {/* Design-ops engagement with no UI screens — the built
-              file-architecture visual stands in for a screenshot. */}
-          <FileArchitecture hero={true} />
+        <div class="p-img sw-cover">
+          {/* Design-ops engagement with no UI screens — a headline-impact
+              card stands in for a screenshot. */}
+          <div>
+            <span class="sw-cover-num">30–40%</span>
+            <span class="sw-cover-lbl">less rework across a 20-plus-person research and design team</span>
+          </div>
         </div>
       </div>
       <div class="p-info">
@@ -209,7 +202,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
           <p class="p-desc">Redesigned Pensaar Design's website and rebuilt it in Wix, migrating off a restrictive Squarespace template, with an information architecture that matches how the agency wants to be understood.</p>
         </div>
         <div class="p-footer">
-          <span class="p-context">SparkSoft · Interaction Design · 6 weeks</span>
+          <span class="p-context">Pensaar Design · Interaction Design · 6 weeks</span>
           <a href="/work/pensaar" class="p-link">View case study <span>→</span></a>
         </div>
       </div>
@@ -376,18 +369,29 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   position: absolute;
   bottom: .75rem;
   left: .75rem;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
   font-family: var(--font-mono);
   font-size: .58rem;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--text-3);
-  background: rgba(8,8,8,.75);
-  padding: .2rem .5rem;
-  border-radius: 1px;
+  color: var(--text-1);
+  background: rgba(8,8,8,.9);
+  padding: .35rem .6rem;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+}
+.hero-photo-cap::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 :global([data-theme="light"]) .hero-photo-cap {
-  background: rgba(245,240,232,.9);
-  color: var(--text-2);
+  background: rgba(245,240,232,.95);
+  color: var(--text-1);
 }
 
 /* ─── Clients ─── */
@@ -423,22 +427,26 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 .clients-list {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 2.25rem;
   flex-wrap: wrap;
 }
+.client-logo {
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: .72;
+  transition: opacity .2s;
+}
+.client-logo:hover { opacity: 1; }
+:global([data-theme="light"]) .client-logo { filter: brightness(0); opacity: .62; }
 .client-name {
   font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--text-3);
+  color: var(--text-2);
   transition: color .2s;
 }
-.client-name:hover { color: var(--text-2); }
-.client-sep {
-  color: var(--border);
-  font-size: .8rem;
-}
+.client-name:hover { color: var(--text-1); }
 
 /* ─── Work section ─── */
 .work-section { padding: clamp(4rem, 10vw, 7rem) 0; }
@@ -491,6 +499,33 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   text-align: center;
   padding: 0 2rem;
   line-height: 1.7;
+}
+/* Sherwin-Williams card — headline-impact cover (no UI to screenshot) */
+.sw-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.sw-cover-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7vw, 4.6rem);
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+}
+.sw-cover-lbl {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin-top: 1rem;
+  max-width: 30ch;
+  line-height: 1.65;
 }
 .p-info {
   padding: clamp(2rem, 5vw, 3.5rem);

@@ -8,7 +8,7 @@
  */
 
 import type { ImageMetadata } from 'astro';
-import hazopThumb from '../assets/work/hazop/sites-dashboard.jpg';
+import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 
