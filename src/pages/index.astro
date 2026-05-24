@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import KvPhoneTrio from '../components/KvPhoneTrio.astro';
+import SWOpsHero from '../components/SWOpsHero.astro';
 import portrait from '../assets/sayantan.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
@@ -145,13 +146,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
     <!-- 04 Sherwin-Williams — Design Operations -->
     <article class="project-item project-item-alt reveal">
       <div class="p-img-col">
-        <div class="p-img sw-cover">
-          {/* Design-ops engagement with no UI screens — a headline-impact
-              card stands in for a screenshot. */}
-          <div>
-            <span class="sw-cover-num">30–40%</span>
-            <span class="sw-cover-lbl">less rework across a 20-plus-person research and design team</span>
-          </div>
+        <div class="p-img">
+          <SWOpsHero />
         </div>
       </div>
       <div class="p-info">

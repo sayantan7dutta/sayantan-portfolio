@@ -109,11 +109,12 @@
   /* ── Body ── */
   .sw-body {
     flex: 1;
+    min-height: 0;          /* prevents flex child overflow */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 1.1rem 1.25rem .9rem;
-    min-height: 0;
+    gap: .75rem;
+    overflow: hidden;
   }
 
   /* ── Three pillars ── */
@@ -122,7 +123,8 @@
     grid-template-columns: repeat(3, 1fr);
     gap: .75rem;
     flex: 1;
-    min-height: 0;
+    min-height: 0;          /* critical: lets grid shrink inside flex */
+    overflow: hidden;
   }
   .sw-pillar {
     border: 1px solid rgba(218, 41, 28, .22);
@@ -152,6 +154,11 @@
     line-height: 1.65;
     color: rgba(240, 234, 214, .45);
     flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
   }
   .sw-stat-row {
     display: flex;
