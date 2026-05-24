@@ -55,7 +55,6 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="hero-photo-wrap">
         <div class="hero-photo">
           <Image src={portrait} alt="Sayantan Dutta" class="hero-photo-img" loading="eager" />
-          <div class="hero-photo-cap">Southampton, UK</div>
         </div>
       </div>
 
@@ -389,35 +388,6 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   padding: 2rem;
   line-height: 1.8;
 }
-.hero-photo-cap {
-  position: absolute;
-  bottom: .75rem;
-  left: .75rem;
-  display: flex;
-  align-items: center;
-  gap: .4rem;
-  font-family: var(--font-mono);
-  font-size: .58rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--text-1);
-  background: rgba(8,8,8,.9);
-  padding: .35rem .6rem;
-  border-radius: 2px;
-  border: 1px solid var(--border);
-}
-.hero-photo-cap::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-:global([data-theme="light"]) .hero-photo-cap {
-  background: rgba(245,240,232,.95);
-  color: var(--text-1);
-}
-
 /* ─── Clients ─── */
 .clients-section {
   background: #ece7da;

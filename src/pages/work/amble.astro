@@ -151,15 +151,12 @@ const palette = [
         <div class="amble-partners">
           <figure class="apt reveal">
             <div class="apt-chip"><Image src={roddImg} alt="Rodd Design Studio" loading="lazy" /></div>
-            <figcaption class="apt-name">Rodd Design Studio</figcaption>
           </figure>
           <figure class="apt reveal" style="transition-delay:.08s;">
             <div class="apt-chip"><Image src={wsaImg} alt="Winchester School of Art" loading="lazy" /></div>
-            <figcaption class="apt-name">Winchester School of Art</figcaption>
           </figure>
           <figure class="apt reveal" style="transition-delay:.16s;">
             <div class="apt-chip"><Image src={uosImg} alt="University of Southampton" loading="lazy" /></div>
-            <figcaption class="apt-name">University of Southampton</figcaption>
           </figure>
         </div>
       </div>
@@ -698,7 +695,8 @@ const palette = [
 .amble-partners {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  gap: 1rem;
+  max-width: 540px;
   margin-top: 1.75rem;
 }
 .apt { margin: 0; }
@@ -706,24 +704,17 @@ const palette = [
   background: #fff;
   border-radius: 4px;
   width: 100%;
-  height: 110px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px 22px;
+  padding: 10px 14px;
   box-sizing: border-box;
   border: 1px solid var(--border);
   transition: transform .25s, border-color .25s;
 }
 .apt:hover .apt-chip { transform: translateY(-2px); border-color: var(--accent); }
 .apt-chip img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; }
-.apt-name {
-  margin-top: .85rem;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-1);
-}
 .ldf-banner-top {
   display: flex;
   align-items: center;
@@ -791,6 +782,5 @@ const palette = [
   .ce-arrow { transform: rotate(90deg); margin: -.2rem 0; }
   .amble-quotes { grid-template-columns: 1fr; }
   .ldf-facts { gap: 1.5rem; }
-  .amble-partners { grid-template-columns: 1fr; }
 }
 </style>
