@@ -18,9 +18,6 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 
 <!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-bg-lines" aria-hidden="true">
-    <span></span><span></span><span></span>
-  </div>
   <div class="container">
     <div class="hero-grid">
 
@@ -224,7 +221,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <img src="/images/clients/ericsson.png" alt="Ericsson" style="height:40px;" />
       <img src="/images/clients/mcafee.png" alt="McAfee" style="height:27px;" />
       <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" style="height:33px;" />
-      <span class="clients-text-logo">Soter Safety</span>
+      <span class="clients-wordmark" aria-label="Soter Safety Consulting">Soter <em>Safety</em></span>
     </div>
   </div>
 </section>
@@ -258,23 +255,6 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   position: relative;
   overflow: hidden;
 }
-.hero-bg-lines {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  pointer-events: none;
-}
-.hero-bg-lines span {
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 1px;
-  background: var(--border);
-  opacity: .5;
-}
-.hero-bg-lines span:nth-child(1) { left: 25%; }
-.hero-bg-lines span:nth-child(2) { left: 50%; }
-.hero-bg-lines span:nth-child(3) { left: 75%; }
-
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -419,16 +399,22 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   transition: opacity .2s, transform .2s;
 }
 .clients-row img:hover { opacity: 1; transform: translateY(-2px); }
-.clients-text-logo {
-  font-family: var(--font-mono);
-  font-size: .72rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: #6a5f48;
-  opacity: .8;
+.clients-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: #4a4232;
+  opacity: .85;
+  line-height: 1;
   transition: opacity .2s, transform .2s;
 }
-.clients-text-logo:hover { opacity: 1; transform: translateY(-2px); }
+.clients-wordmark em {
+  font-style: italic;
+  font-weight: 500;
+  color: #6a5f48;
+}
+.clients-wordmark:hover { opacity: 1; transform: translateY(-2px); }
 
 /* ─── Work section ─── */
 .work-section { padding: clamp(4rem, 10vw, 7rem) 0; }
