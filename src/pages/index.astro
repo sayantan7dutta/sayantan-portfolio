@@ -223,13 +223,12 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 <section class="clients-section">
   <div class="container">
     <span class="clients-title">Selected clients</span>
-    <p class="clients-sub">Organisations I've designed for, across enterprise software, manufacturing technology, and financial inclusion.</p>
+    <p class="clients-sub">Organisations I've designed for, across enterprise software, industrial safety, and manufacturing technology.</p>
     <div class="clients-row">
       <img src="/images/clients/ericsson.png" alt="Ericsson" style="height:40px;" />
       <img src="/images/clients/mcafee.png" alt="McAfee" style="height:27px;" />
       <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" style="height:33px;" />
-      <img src="/images/clients/itc.png" alt="ITC" style="height:48px;" />
-      <img src="/images/clients/cgap.png" alt="CGAP" style="height:29px;" />
+      <span class="clients-text-logo">Soter Safety</span>
     </div>
   </div>
 </section>
@@ -424,6 +423,16 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   transition: opacity .2s, transform .2s;
 }
 .clients-row img:hover { opacity: 1; transform: translateY(-2px); }
+.clients-text-logo {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #6a5f48;
+  opacity: .8;
+  transition: opacity .2s, transform .2s;
+}
+.clients-text-logo:hover { opacity: 1; transform: translateY(-2px); }
 
 /* ─── Work section ─── */
 .work-section { padding: clamp(4rem, 10vw, 7rem) 0; }

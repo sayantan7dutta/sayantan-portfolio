@@ -11,6 +11,7 @@ import type { ImageMetadata } from 'astro';
 import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
 import ambleThumb from '../assets/work/amble/hero.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
+import kinvaultThumb from '../assets/work/kinvault/dashboard.jpg';
 import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 
 export interface CaseStudy {
@@ -20,6 +21,8 @@ export interface CaseStudy {
   context: string;     // short label, emmi-wu style: "B2B SaaS · UK · 2025"
   speculative?: boolean;
   thumb?: ImageMetadata; // optional thumbnail for the "More case studies" grid
+  coverStat?: string;    // when no image exists, show a bold stat instead
+  coverLabel?: string;   // supporting label for coverStat
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -50,6 +53,8 @@ export const caseStudies: CaseStudy[] = [
     title: 'Building Design Operations at Scale',
     shortTitle: 'Building Design Operations at Scale',
     context: 'Design Ops · Sherwin-Williams · 2024',
+    coverStat: '30–40%',
+    coverLabel: 'less rework across a 20+ person design team',
   },
   {
     slug: 'kinvault',
@@ -57,6 +62,7 @@ export const caseStudies: CaseStudy[] = [
     shortTitle: 'KinVault Heritage — a Digital Vault-Atelier',
     context: 'Concept · Premium Fintech · 2025',
     speculative: true,
+    thumb: kinvaultThumb,
   },
   {
     slug: 'pensaar',
