@@ -47,6 +47,29 @@ const tools = [
   { name: 'GitHub',  file: 'github.svg'  },
   { name: 'Claude',  file: 'claude.svg'  },
 ];
+
+// Hobby tiles — inline SVGs (no external assets). `icon` is the slug we
+// switch on inside the markup; keep order = display order.
+const hobbies = [
+  { icon: 'badminton', name: 'Badminton' },
+  { icon: 'football',  name: 'Football'  },
+  { icon: 'frisbee',   name: 'Frisbee'   },
+  { icon: 'mocha',     name: 'Mocha'     },
+  { icon: 'mountain',  name: 'Trekking'  },
+  { icon: 'beach',     name: 'Beaches'   },
+  { icon: 'music',     name: 'Music'     },
+  { icon: 'film',      name: 'Films'     },
+];
+
+// "Now" mini-cards. Swap these any time — they're meant to feel current.
+const nowItems = [
+  { cat: 'Watching',  title: 'Anything by Christopher Nolan',  sub: 'Currently revisiting Dunkirk',          icon: 'film'       },
+  { cat: 'Reading',   title: 'The Mom Test',                   sub: 'Rob Fitzpatrick',                       icon: 'book'       },
+  { cat: 'Listening', title: 'Arijit Singh on loop',           sub: '…with the occasional Coldplay detour',  icon: 'headphones' },
+];
+
+// Cities, in order. Last entry gets the "now" treatment.
+const cities = ['Gurgaon', 'Bangalore', 'Winchester', 'Southampton'];
 ---
 
 <Base
@@ -163,9 +186,130 @@ const tools = [
         <!-- Outside of work -->
         <div class="about-block reveal">
           <p class="about-block-lbl">Outside of work</p>
-          <p class="t-body">
-            Badminton, football, Ultimate Frisbee. Learning German (slowly). Always looking for a good mocha — never the flat white.
+
+          <p class="t-body" style="margin:0 0 1.6rem;">
+            A curious person — happiest in the mountains, on a beach, or wandering somewhere new. Learning German (slowly). Always looking for a good mocha — never the flat white.
           </p>
+
+          <!-- Hobby tiles -->
+          <div class="hobby-grid" role="list" aria-label="Hobbies and interests">
+            {hobbies.map((h) => (
+              <div class="hobby-tile" role="listitem">
+                <span class="hobby-icon" aria-hidden="true">
+                  {h.icon === 'badminton' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="5.5" r="2.2" />
+                      <path d="M9.8 6.5 5 21M14.2 6.5 19 21M11 7.5 8 21M13 7.5 16 21M12 7.5V21" />
+                    </svg>
+                  )}
+                  {h.icon === 'football' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <polygon points="12,7.5 15.7,10.2 14.3,14.5 9.7,14.5 8.3,10.2" />
+                      <path d="M12 3v4.5M3.5 9.2 8.3 10.2M20.5 9.2l-4.8 1M6 19.5l3.7-5M18 19.5l-3.7-5" />
+                    </svg>
+                  )}
+                  {h.icon === 'frisbee' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <ellipse cx="12" cy="11" rx="9" ry="3.5" />
+                      <path d="M3 11c0 2 4 3.5 9 3.5s9-1.5 9-3.5" />
+                      <ellipse cx="12" cy="11" rx="4" ry="1.5" opacity=".5" />
+                    </svg>
+                  )}
+                  {h.icon === 'mocha' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                      <line x1="6" y1="2" x2="6" y2="4" />
+                      <line x1="10" y1="2" x2="10" y2="4" />
+                      <line x1="14" y1="2" x2="14" y2="4" />
+                    </svg>
+                  )}
+                  {h.icon === 'mountain' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m8 3 4 8 3-3 6 13H2L8 3z" />
+                      <path d="m10.5 7.7 1.5-1.7" opacity=".4" />
+                    </svg>
+                  )}
+                  {h.icon === 'beach' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 4c-2 0-4 1.4-5 3.5C9 6.8 11 7 12 7s3-.2 5-.5C16 4.4 14 3 12 3" />
+                      <path d="M12 3v6" />
+                      <path d="M9 8.5c-1.5 1.5-2 4.5-1 6.5l4-4" />
+                      <path d="M15 8.5c1.5 1.5 2 4.5 1 6.5l-4-4" />
+                      <path d="M12 9v12" />
+                      <path d="M3 21c2-.7 4-1 6-1 1.5 0 3 .3 3 1 0-.7 1.5-1 3-1 2 0 4 .3 6 1" />
+                    </svg>
+                  )}
+                  {h.icon === 'music' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 18V5l12-2v13" />
+                      <circle cx="6" cy="18" r="3" />
+                      <circle cx="18" cy="16" r="3" />
+                    </svg>
+                  )}
+                  {h.icon === 'film' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="18" height="18" x="3" y="3" rx="2" />
+                      <path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4" />
+                    </svg>
+                  )}
+                </span>
+                <span class="hobby-name">{h.name}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- Now -->
+          <div class="now-stack">
+            <p class="now-stack-lbl">Now</p>
+            <div class="now-row">
+              {nowItems.map((n) => (
+                <div class="now-mini">
+                  <span class="now-mini-icon" aria-hidden="true">
+                    {n.icon === 'film' && (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                        <path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4" />
+                      </svg>
+                    )}
+                    {n.icon === 'book' && (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                      </svg>
+                    )}
+                    {n.icon === 'headphones' && (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H4a1 1 0 0 1-1-1v-6Z" />
+                        <path d="M21 14h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2a1 1 0 0 0 1-1v-6Z" />
+                        <path d="M3 14a9 9 0 0 1 18 0" />
+                      </svg>
+                    )}
+                  </span>
+                  <span class="now-mini-cat">{n.cat}</span>
+                  <span class="now-mini-title">{n.title}</span>
+                  <span class="now-mini-sub">{n.sub}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Lived in -->
+          <div class="path-block">
+            <p class="path-lbl">Lived in</p>
+            <ol class="path" aria-label="Cities I've lived in">
+              {cities.map((c, i) => (
+                <>
+                  <li class={`path-step ${i === cities.length - 1 ? 'is-now' : ''}`}>
+                    <span class="path-dot" aria-hidden="true"></span>
+                    <span class="path-city">{c}</span>
+                  </li>
+                  {i < cities.length - 1 && <span class="path-arrow" aria-hidden="true">→</span>}
+                </>
+              ))}
+            </ol>
+          </div>
         </div>
 
         <div class="about-cta reveal">
@@ -435,6 +579,187 @@ const tools = [
   background: var(--accent-bg);
 }
 
+/* ─── Outside of work: hobbies, now, lived ─── */
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .55rem;
+  margin: 0 0 2.25rem;
+}
+.hobby-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  padding: 1rem .5rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+  color: var(--text-3);
+  transition: border-color .25s, background .25s, color .25s, transform .25s;
+}
+.hobby-icon svg { width: 22px; height: 22px; display: block; }
+.hobby-name {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  transition: color .25s;
+}
+.hobby-tile:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+.hobby-tile:hover .hobby-name { color: var(--text-1); }
+
+.now-stack { margin-bottom: 2.25rem; }
+.now-stack-lbl {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 0 0 .8rem;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.now-stack-lbl::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.now-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .65rem;
+}
+.now-mini {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "icon cat"
+    "icon title"
+    "icon sub";
+  column-gap: .8rem;
+  row-gap: .15rem;
+  align-items: start;
+  padding: .95rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+  transition: border-color .25s, background .25s, transform .25s;
+}
+.now-mini-icon {
+  grid-area: icon;
+  width: 28px; height: 28px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-3);
+  background: var(--surface-2);
+  margin-top: .15rem;
+  transition: color .25s, background .25s;
+}
+.now-mini-icon svg { width: 16px; height: 16px; }
+.now-mini-cat {
+  grid-area: cat;
+  font-family: var(--font-mono);
+  font-size: .55rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.now-mini-title {
+  grid-area: title;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-1);
+  line-height: 1.25;
+  margin-top: .1rem;
+}
+.now-mini-sub {
+  grid-area: sub;
+  font-size: .72rem;
+  color: var(--text-2);
+  line-height: 1.45;
+  margin-top: .2rem;
+}
+.now-mini:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  transform: translateY(-2px);
+}
+.now-mini:hover .now-mini-icon { color: var(--accent); background: var(--surface); }
+
+.path-block { /* container */ }
+.path-lbl {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 0 0 .9rem;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.path-lbl::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.path {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .55rem .65rem;
+}
+.path-step {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .04em;
+  color: var(--text-2);
+  transition: border-color .25s, color .25s, background .25s;
+}
+.path-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--text-3);
+}
+.path-step:hover { border-color: var(--accent); color: var(--text-1); }
+.path-step.is-now {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.path-step.is-now .path-dot {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+.path-arrow {
+  font-family: var(--font-mono);
+  color: var(--text-3);
+  font-size: .8rem;
+}
+
 @media (max-width: 768px) {
   .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .about-photo { max-width: 280px; position: static; }
@@ -449,6 +774,8 @@ const tools = [
   .tl-dot { align-self: start; margin-top: .45rem; }
   .tl-year { margin-bottom: .15rem; }
   .now-meta { grid-template-columns: 1fr; }
-  .tool-grid { grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); }
+  .tool-grid,
+  .hobby-grid { grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); }
+  .now-row { grid-template-columns: 1fr; }
 }
 </style>
