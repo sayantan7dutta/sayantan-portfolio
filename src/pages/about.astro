@@ -64,11 +64,28 @@ const hobbies = [
   { icon: 'film',      name: 'Films'     },
 ];
 
-// "Now" mini-cards. Swap these any time — they're meant to feel current.
+// "Now" mini-cards. Swap these any time, they're meant to feel current.
+// If `link` is set, the whole card becomes a link.
 const nowItems = [
-  { cat: 'Watching',  title: 'Anything by Christopher Nolan',  sub: 'Currently revisiting Dunkirk',          icon: 'film'       },
-  { cat: 'Reading',   title: 'The Mom Test',                   sub: 'Rob Fitzpatrick',                       icon: 'book'       },
-  { cat: 'Listening', title: 'Arijit Singh on loop',           sub: '…with the occasional Coldplay detour',  icon: 'headphones' },
+  {
+    cat: 'Watching',
+    title: 'Daredevil: Born Again, S2',
+    sub: 'Marvel, 2026',
+    icon: 'film',
+  },
+  {
+    cat: 'Podcasts',
+    title: 'Design as Leverage',
+    sub: 'A cameo episode I show up on. Also in rotation: What the UX, Brave UX, Design Life, Blueprint of a Designer, UX Research Club.',
+    link: 'https://open.spotify.com/episode/6ecf3EZgjKQgaDQiaOZdWA',
+    icon: 'mic',
+  },
+  {
+    cat: 'Cheering for',
+    title: 'FC Barcelona, always',
+    sub: 'Ready for the World Cup',
+    icon: 'football',
+  },
 ];
 
 // Cities, in order. Last entry gets the "now" treatment.
@@ -290,34 +307,56 @@ const certs = [
           <div class="now-stack">
             <p class="now-stack-lbl">Now</p>
             <div class="now-row">
-              {nowItems.map((n) => (
-                <div class="now-mini">
-                  <span class="now-mini-icon" aria-hidden="true">
-                    {n.icon === 'film' && (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="18" height="18" x="3" y="3" rx="2" />
-                        <path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4" />
-                      </svg>
-                    )}
-                    {n.icon === 'book' && (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                      </svg>
-                    )}
-                    {n.icon === 'headphones' && (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H4a1 1 0 0 1-1-1v-6Z" />
-                        <path d="M21 14h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2a1 1 0 0 0 1-1v-6Z" />
-                        <path d="M3 14a9 9 0 0 1 18 0" />
-                      </svg>
-                    )}
-                  </span>
-                  <span class="now-mini-cat">{n.cat}</span>
-                  <span class="now-mini-title">{n.title}</span>
-                  <span class="now-mini-sub">{n.sub}</span>
-                </div>
-              ))}
+              {nowItems.map((n) => {
+                const Tag: any = n.link ? 'a' : 'div';
+                const linkProps = n.link ? { href: n.link, target: '_blank', rel: 'noopener' } : {};
+                return (
+                  <Tag class:list={['now-mini', n.link && 'is-link']} {...linkProps}>
+                    <span class="now-mini-icon" aria-hidden="true">
+                      {n.icon === 'film' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                          <rect width="18" height="18" x="3" y="3" rx="2" />
+                          <path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4" />
+                        </svg>
+                      )}
+                      {n.icon === 'mic' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="9" y="2" width="6" height="13" rx="3" />
+                          <path d="M19 11a7 7 0 0 1-14 0" />
+                          <line x1="12" y1="18" x2="12" y2="22" />
+                          <line x1="8" y1="22" x2="16" y2="22" />
+                        </svg>
+                      )}
+                      {n.icon === 'football' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="9" />
+                          <polygon points="12,7.5 15.7,10.2 14.3,14.5 9.7,14.5 8.3,10.2" />
+                          <path d="M12 3v4.5M3.5 9.2 8.3 10.2M20.5 9.2l-4.8 1M6 19.5l3.7-5M18 19.5l-3.7-5" />
+                        </svg>
+                      )}
+                      {n.icon === 'book' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                        </svg>
+                      )}
+                      {n.icon === 'headphones' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H4a1 1 0 0 1-1-1v-6Z" />
+                          <path d="M21 14h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2a1 1 0 0 0 1-1v-6Z" />
+                          <path d="M3 14a9 9 0 0 1 18 0" />
+                        </svg>
+                      )}
+                    </span>
+                    <span class="now-mini-cat">{n.cat}</span>
+                    <span class="now-mini-title">
+                      {n.title}
+                      {n.link && <span class="now-mini-ext" aria-hidden="true"> ↗</span>}
+                    </span>
+                    <span class="now-mini-sub">{n.sub}</span>
+                  </Tag>
+                );
+              })}
             </div>
           </div>
 
@@ -780,6 +819,16 @@ const certs = [
   transform: translateY(-2px);
 }
 .now-mini:hover .now-mini-icon { color: var(--accent); background: var(--surface); }
+a.now-mini { text-decoration: none; color: inherit; }
+.now-mini-ext {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--text-3);
+  transition: color .25s;
+  margin-left: .15rem;
+}
+.now-mini.is-link:hover .now-mini-ext,
+.now-mini.is-link:hover .now-mini-title { color: var(--accent); }
 
 .path-block { /* container */ }
 .path-lbl {
