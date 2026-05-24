@@ -40,9 +40,9 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'api-lifecycle',
-    title: 'From Designer to Design Leader',
-    shortTitle: 'From Designer to Design Leader',
-    context: 'Design Systems · Ericsson · 2020–2023',
+    title: 'Designing a B2B SaaS API Console for Ericsson',
+    shortTitle: 'B2B SaaS API Console · Ericsson',
+    context: 'B2B SaaS · IT · 2020–2023',
     thumb: ericssonThumb,
   },
   {
