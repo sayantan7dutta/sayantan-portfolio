@@ -74,18 +74,21 @@ const nowItems = [
     icon: 'film',
   },
   {
-    cat: 'Podcasts',
-    title: 'Design as Leverage',
-    sub: 'A cameo episode I show up on. Also in rotation: What the UX, Brave UX, Design Life, Blueprint of a Designer, UX Research Club.',
-    link: 'https://open.spotify.com/episode/6ecf3EZgjKQgaDQiaOZdWA',
-    icon: 'mic',
-  },
-  {
     cat: 'Cheering for',
     title: 'FC Barcelona, always',
     sub: 'Ready for the World Cup',
     icon: 'football',
   },
+];
+
+// Podcasts in rotation. `featured: true` highlights the cameo card.
+const podcasts = [
+  { name: 'Design as Leverage', url: 'https://open.spotify.com/episode/6ecf3EZgjKQgaDQiaOZdWA?si=d00511d8929a45bf', featured: true,  badge: 'Cameo' },
+  { name: 'What the UX',        url: 'https://open.spotify.com/show/06zCSfjnln033zHotlqvZq?si=b393798010064a30' },
+  { name: 'Design Life',        url: 'https://open.spotify.com/show/60VdDbOqh5NAqa82JRsZRq?si=ce81b00394a443d8' },
+  { name: 'Blueprint of a Designer', url: 'https://open.spotify.com/show/4bUmQl8pJdDD85QLujojqy?si=542c62dd956c4349' },
+  { name: 'UX Research Club',   url: 'https://open.spotify.com/show/32oJnhH9fSOcFW984CIDfQ?si=1cc3bc0c78df45b3' },
+  { name: 'Brave UX',           url: 'https://open.spotify.com/show/7j2ocni6A00fzgHkj6TtCK?si=2cedcc89d6264434' },
 ];
 
 // Cities, in order. Last entry gets the "now" treatment.
@@ -231,7 +234,7 @@ const certs = [
           <p class="about-block-lbl">Outside of work</p>
 
           <p class="t-body" style="margin:0 0 1.6rem;">
-            A curious person, happiest in the mountains, on a beach, or wandering somewhere new. Learning German (slowly). Always looking for a good mocha, never the flat white.
+            A curious person, happiest in the mountains, on a beach, or wandering somewhere new. Recently started learning the basics of German. Always looking for a good mocha, never the flat white.
           </p>
 
           <!-- Hobby tiles -->
@@ -358,6 +361,30 @@ const certs = [
                 );
               })}
             </div>
+          </div>
+
+          <!-- Podcasts in rotation -->
+          <div class="podcast-block">
+            <p class="podcast-lbl">Podcasts in rotation</p>
+            <ul class="podcast-list">
+              {podcasts.map((p) => (
+                <li>
+                  <a href={p.url} target="_blank" rel="noopener" class:list={['podcast-chip', p.featured && 'is-featured']}>
+                    <span class="podcast-mic" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="2" width="6" height="13" rx="3" />
+                        <path d="M19 11a7 7 0 0 1-14 0" />
+                        <line x1="12" y1="18" x2="12" y2="22" />
+                        <line x1="8" y1="22" x2="16" y2="22" />
+                      </svg>
+                    </span>
+                    <span class="podcast-name">{p.name}</span>
+                    {p.badge && <span class="podcast-badge">{p.badge}</span>}
+                    <span class="podcast-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <!-- Lived in -->
@@ -757,7 +784,7 @@ const certs = [
 }
 .now-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: .65rem;
 }
 .now-mini {
@@ -829,6 +856,85 @@ a.now-mini { text-decoration: none; color: inherit; }
 }
 .now-mini.is-link:hover .now-mini-ext,
 .now-mini.is-link:hover .now-mini-title { color: var(--accent); }
+
+/* ─── Podcasts in rotation ─── */
+.podcast-block { margin-bottom: 2.25rem; }
+.podcast-lbl {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 0 0 .8rem;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.podcast-lbl::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.podcast-list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+.podcast-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .55rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: .78rem;
+  line-height: 1;
+  transition: border-color .2s, color .2s, background .2s, transform .2s;
+}
+.podcast-chip:hover {
+  border-color: var(--accent);
+  color: var(--text-1);
+  background: var(--accent-bg);
+  transform: translateY(-1px);
+}
+.podcast-chip.is-featured {
+  border-color: rgba(154, 110, 42, .35);
+  background: var(--accent-bg);
+  color: var(--text-1);
+}
+.podcast-mic svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  color: var(--text-3);
+  transition: color .2s;
+}
+.podcast-chip:hover .podcast-mic svg,
+.podcast-chip.is-featured .podcast-mic svg { color: var(--accent); }
+.podcast-arrow {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--text-3);
+  transition: color .2s;
+}
+.podcast-chip:hover .podcast-arrow { color: var(--accent); }
+.podcast-badge {
+  font-family: var(--font-mono);
+  font-size: .54rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: .2rem .4rem;
+  border: 1px solid rgba(154, 110, 42, .35);
+  border-radius: 2px;
+  line-height: 1;
+}
 
 .path-block { /* container */ }
 .path-lbl {
