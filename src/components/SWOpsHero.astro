@@ -1,0 +1,218 @@
+---
+/**
+ * Branded hero for the Sherwin-Williams Design Ops case study.
+ * Replaces the generic FileArchitecture hero with a three-pillar
+ * visualization in SW's brand red (#DA291C) and dark charcoal.
+ */
+---
+
+<div class="sw-hero">
+  <div class="sw-band">
+    <span class="sw-band-label">Design Operations · Sherwin-Williams · 2024</span>
+    <div class="sw-band-dots" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="sw-body">
+    <div class="sw-pillars">
+
+      <div class="sw-pillar">
+        <span class="sw-num">01</span>
+        <h4 class="sw-title">File Architecture</h4>
+        <p class="sw-desc">From scattered OneDrive folders to a single navigable structure with numbered folders and read-only archive.</p>
+        <div class="sw-stat-row">
+          <span class="sw-stat">3 <span class="sw-arrow">→</span> 1</span>
+          <span class="sw-stat-lbl">file versions</span>
+        </div>
+      </div>
+
+      <div class="sw-pillar">
+        <span class="sw-num">02</span>
+        <h4 class="sw-title">Research Templates</h4>
+        <p class="sw-desc">Standardised interview guides, insight decks, and stakeholder presentations replacing 5+ individual formats.</p>
+        <div class="sw-stat-row">
+          <span class="sw-stat">×3</span>
+          <span class="sw-stat-lbl">formats standardised</span>
+        </div>
+      </div>
+
+      <div class="sw-pillar">
+        <span class="sw-num">03</span>
+        <h4 class="sw-title">Handoff Process</h4>
+        <p class="sw-desc">A five-step research-to-design flow that made insights part of the design workflow, not a parallel activity.</p>
+        <div class="sw-stat-row">
+          <span class="sw-stat">5</span>
+          <span class="sw-stat-lbl">step process</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sw-foot">
+      <div class="sw-foot-stat">
+        <span class="sw-foot-num">30–40%</span>
+        <span class="sw-foot-lbl">less rework</span>
+      </div>
+      <div class="sw-foot-div" aria-hidden="true"></div>
+      <div class="sw-foot-stat">
+        <span class="sw-foot-num">20+</span>
+        <span class="sw-foot-lbl">team members</span>
+      </div>
+      <div class="sw-foot-div" aria-hidden="true"></div>
+      <div class="sw-foot-stat">
+        <span class="sw-foot-num">6</span>
+        <span class="sw-foot-lbl">digital products</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Outer shell ── */
+  .sw-hero {
+    width: 100%;
+    height: 100%;
+    background: #0e0c0b;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono);
+  }
+
+  /* ── Red brand band ── */
+  .sw-band {
+    background: #DA291C;
+    padding: .55rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .sw-band-label {
+    font-size: .52rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.9);
+  }
+  .sw-band-dots {
+    display: flex;
+    gap: .32rem;
+  }
+  .sw-band-dots span {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.35);
+  }
+
+  /* ── Body ── */
+  .sw-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.1rem 1.25rem .9rem;
+    min-height: 0;
+  }
+
+  /* ── Three pillars ── */
+  .sw-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .75rem;
+    flex: 1;
+    min-height: 0;
+  }
+  .sw-pillar {
+    border: 1px solid rgba(218, 41, 28, .22);
+    border-top: 2px solid #DA291C;
+    border-radius: 2px;
+    padding: .85rem .9rem;
+    display: flex;
+    flex-direction: column;
+    background: rgba(218, 41, 28, .03);
+  }
+  .sw-num {
+    font-size: .5rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #DA291C;
+  }
+  .sw-title {
+    font-family: var(--font-display);
+    font-size: clamp(.75rem, 1.2vw, .95rem);
+    font-weight: 600;
+    color: #f0ead6;
+    margin: .35rem 0 .45rem;
+    line-height: 1.2;
+  }
+  .sw-desc {
+    font-size: clamp(.45rem, .75vw, .56rem);
+    line-height: 1.65;
+    color: rgba(240, 234, 214, .45);
+    flex: 1;
+  }
+  .sw-stat-row {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+    margin-top: .85rem;
+    padding-top: .65rem;
+    border-top: 1px solid rgba(240, 234, 214, .07);
+  }
+  .sw-stat {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 700;
+    color: #DA291C;
+    line-height: 1;
+  }
+  .sw-arrow {
+    font-family: var(--font-mono);
+    font-size: .7em;
+    color: rgba(240, 234, 214, .35);
+    vertical-align: middle;
+  }
+  .sw-stat-lbl {
+    font-size: .48rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(240, 234, 214, .35);
+  }
+
+  /* ── Bottom stats bar ── */
+  .sw-foot {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-top: .75rem;
+    border-top: 1px solid rgba(240, 234, 214, .07);
+    margin-top: .75rem;
+    flex-shrink: 0;
+  }
+  .sw-foot-stat {
+    display: flex;
+    align-items: baseline;
+    gap: .4rem;
+  }
+  .sw-foot-num {
+    font-family: var(--font-display);
+    font-size: clamp(.75rem, 1.3vw, 1rem);
+    font-weight: 600;
+    color: #f0ead6;
+    line-height: 1;
+  }
+  .sw-foot-lbl {
+    font-size: .48rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: rgba(240, 234, 214, .4);
+  }
+  .sw-foot-div {
+    width: 1px;
+    height: 1rem;
+    background: rgba(240, 234, 214, .12);
+    flex-shrink: 0;
+  }
+</style>

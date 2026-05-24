@@ -5,6 +5,7 @@ import ProcessSteps from '../../components/ProcessSteps.astro';
 import StatCards from '../../components/StatCards.astro';
 import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
 import FileArchitecture from '../../components/FileArchitecture.astro';
+import SWOpsHero from '../../components/SWOpsHero.astro';
 
 const products = [
   { name: 'ColorSnap Visualizer', desc: 'Web and mobile colour tool for homeowners' },
@@ -63,9 +64,9 @@ const stats = [
       { key: 'Industry', val: 'Retail / Consumer Products' },
       { key: 'Timeline', val: 'Dec 2023 – Aug 2024' },
     ]}
-    heroPlaceholder="File architecture"
+    heroPlaceholder="Design ops overview"
   >
-    <FileArchitecture slot="hero-image" hero={true} />
+    <SWOpsHero slot="hero-image" />
   </CaseStudyHero>
 
   <div class="cs-body">
