@@ -9,6 +9,7 @@
 
 import type { ImageMetadata } from 'astro';
 import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
+import ambleThumb from '../assets/work/amble/hero.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 
@@ -28,6 +29,14 @@ export const caseStudies: CaseStudy[] = [
     shortTitle: 'UX Strategy for an Industrial Safety Platform',
     context: 'B2B SaaS · UK · 2025',
     thumb: hazopThumb,
+  },
+  {
+    slug: 'amble',
+    title: 'Designing Care for an Ageing Society in 2065',
+    shortTitle: 'Amble — Speculative Service Design',
+    context: 'Speculative Design · Rodd Design · 2025',
+    speculative: true,
+    thumb: ambleThumb,
   },
   {
     slug: 'api-lifecycle',
@@ -53,7 +62,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'pensaar',
     title: 'Elevating the Digital Presence of a Design Thinking Agency',
     shortTitle: 'Elevating a Design Thinking Agency',
-    context: 'Web Redesign · Consulting · 2024',
+    context: 'Web Redesign · Internship · 2020',
     thumb: pensaarThumb,
   },
 ];

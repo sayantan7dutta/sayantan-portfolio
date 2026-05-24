@@ -1,0 +1,738 @@
+---
+import { Image } from 'astro:assets';
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import CaseStudyHero from '../../components/CaseStudyHero.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
+import Lightbox from '../../components/Lightbox.astro';
+
+import heroImg from '../../assets/work/amble/hero.jpg';
+import futureImg from '../../assets/work/amble/future.jpg';
+import bedroomImg from '../../assets/work/amble/bedroom.jpg';
+import familyImg from '../../assets/work/amble/family.jpg';
+import routinesImg from '../../assets/work/amble/routines.jpg';
+import laundryImg from '../../assets/work/amble/laundry.jpg';
+import airFilterImg from '../../assets/work/amble/air-filter.jpg';
+import poster1Img from '../../assets/work/amble/poster-1.jpg';
+import poster2Img from '../../assets/work/amble/poster-2.jpg';
+import logoImg from '../../assets/work/amble/logo.png';
+import ldfImg from '../../assets/work/amble/ldf.png';
+
+const processSteps = [
+  {
+    title: 'A research-through-design method, anchored in 2065',
+    body: 'We adopted a research-through-design methodology, combining speculative design with a literature review and primary research. Setting the concept forty years out was a deliberate device. It moved conversations away from "what gadget would you buy" and towards "what should later life feel like", which is where the useful insight lives.',
+  },
+  {
+    title: 'Focus groups across two generations',
+    body: 'The research used focus groups with two very different cohorts: two groups of younger adults aged 20 to 40 in Winchester, who would actually be the ageing population of 2065, and a gathering of fifteen older adults aged 50 to 80 in Southampton, reached through local churches and community groups. The older-adult session was run as a relaxed afternoon with refreshments and a reminiscence game, not a clinical interview, so people spoke openly about retirement, care, and technology.',
+  },
+  {
+    title: 'Synthesising lived experience against the evidence',
+    body: 'I led the synthesis, triangulating what participants told us against an evidence base spanning environmental psychology, synthetic biology, and inclusive design. Where a focus-group insight and a research finding agreed, we had a firm design principle. Where they diverged, we had a question worth designing into the concept.',
+  },
+  {
+    title: 'From insight to a five-domain system',
+    body: 'The concept resolved into five interconnected domains, from decentralised ambient intelligence to a wearable air-filtering extension. Each domain answered a specific, evidenced need rather than showcasing a technology. The test for every feature was the same: does this support independence, or quietly erode it?',
+  },
+  {
+    title: 'A brand that reads as living, not technical',
+    body: 'Branding was treated as part of the design argument, not decoration. Every choice, the serif wordmark, the earth-toned palette, the voice that speaks as a companion rather than an assistant, was made to convince people that Amble is a living presence and not another device.',
+  },
+  {
+    title: 'Exhibited at the London Design Festival',
+    body: 'The work was selected for the London Design Festival in September 2025, exhibited as part of "Tender Interbeing: The Future of Design with Empathy" at the White City Warehouse. Translating seven months of research into a public exhibition forced a final round of editing: what does a visitor need to understand in ninety seconds?',
+  },
+];
+
+const domains = [
+  {
+    title: 'Core intelligent functions',
+    body: 'Decentralised ambient intelligence. The system self-regulates its own maintenance and adjusts the home environment, with no central controller and no command to issue.',
+  },
+  {
+    title: 'Domestic utility',
+    body: 'Quiet help with everyday tasks: supply monitoring, composting, laundry support, and modular rearrangement of the space as needs change over time.',
+  },
+  {
+    title: 'Emotional & sensory support',
+    body: 'Mood detection met with response: aromatherapy, sound feedback, bioluminescence, and "mood blooming", the plant co-regulating alongside the person.',
+  },
+  {
+    title: 'Personalisation & adaptation',
+    body: 'The system grows with its resident. Its form and rhythm evolve to match an individual lifestyle and routine, rather than imposing one.',
+  },
+  {
+    title: 'Wearable extension',
+    body: 'A portable, air-filtering module that absorbs pollutants and tracks air quality, carrying Amble’s presence beyond the walls of the home.',
+  },
+];
+
+const values = [
+  { name: 'Empathy', body: 'Trust built through warmth and approachability.' },
+  { name: 'Regeneration', body: 'Systems that grow, adapt, and replenish.' },
+  { name: 'Sensory intelligence', body: 'Communicating through light, scent, and sound.' },
+  { name: 'Seamlessness', body: 'Intelligence felt, not noticed.' },
+  { name: 'Decentralisation', body: 'Support distributed gently across the space.' },
+  { name: 'Inclusivity', body: 'Designed for the full range of later-life needs.' },
+];
+
+const palette = [
+  { hex: '#F0EAD2', name: 'Parchment' },
+  { hex: '#FFD1C3', name: 'Pale Dogwood' },
+  { hex: '#B6D366', name: 'Yellow Green' },
+  { hex: '#A98467', name: 'Chamoisee' },
+  { hex: '#654937', name: 'Coffee' },
+];
+---
+
+<CaseStudy
+  title="Amble · Speculative Service Design for an Ageing Society"
+  description="Amble is a speculative bioengineered plant system for the 2065 home. Seven months of foresight research and design, led for Rodd Design Studio and the Winchester School of Art, exhibited at the London Design Festival."
+>
+  <CaseStudyHero
+    title="Amble: <em>designing care</em> for an ageing society in 2065"
+    lead="Amble is a speculative service concept for the year 2065: a living, bioengineered plant system that supports older adults at home through presence rather than instruction. I led a four-person team through seven months of foresight research and design for Rodd Design Studio and the Winchester School of Art, and the work was exhibited at the London Design Festival."
+    tags={['Speculative Design', 'Foresight & Service Design', '2025']}
+    speculativeTag="Speculative / foresight project"
+    meta={[
+      { key: 'Role', val: 'Project Lead' },
+      { key: 'Client', val: 'Rodd Design Studio' },
+      { key: 'Programme', val: 'WSA Global Smart Lab' },
+      { key: 'Timeline', val: '7 months · 2025' },
+    ]}
+    heroPlaceholder="Amble concept"
+  >
+    <Image slot="hero-image" src={heroImg} alt="The Amble plant system woven through a home interior" class="cs-hero-img-el" loading="eager" />
+  </CaseStudyHero>
+
+  <div class="cs-body">
+    <div class="container">
+
+      <!-- Context note -->
+      <div class="cs-section" style="padding-top:0;">
+        <blockquote class="cs-insight reveal" style="margin:0;">
+          <p>A speculative foresight project, not a shipped product. Amble was a live brief from Rodd Design Studio, run through the Global Smart Lab at the Winchester School of Art, University of Southampton. I led a four-person multidisciplinary team across seven months of research and design. The concept is deliberately set in 2065, so the imagery and features here are research-grounded provocations, not a product roadmap. The work was exhibited at the London Design Festival in September 2025.</p>
+        </blockquote>
+      </div>
+
+      <!-- London Design Festival callout -->
+      <div class="cs-section">
+        <div class="ldf-banner reveal">
+          <div class="ldf-logo-chip">
+            <Image src={ldfImg} alt="London Design Festival" loading="lazy" />
+          </div>
+          <div class="ldf-content">
+            <div class="ldf-banner-top">
+              <span class="ldf-tag">Exhibited</span>
+              <span class="ldf-fest">London Design Festival 2025</span>
+            </div>
+            <h2 class="ldf-title">Amble was shown to the public as part of <em>Tender Interbeing: The Future of Design with Empathy</em>.</h2>
+            <p class="ldf-sub">A seven-month research project, selected for one of the world's leading design festivals and exhibited alongside industry.</p>
+            <div class="ldf-facts">
+              <div class="ldf-fact"><span>Dates</span><strong>17–19 September 2025</strong></div>
+              <div class="ldf-fact"><span>Venue</span><strong>White City Warehouse, London W12</strong></div>
+              <div class="ldf-fact"><span>Festival</span><strong>London Design Festival</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem / Brief -->
+      <div class="cs-section">
+        <div class="cs-two">
+          <div class="reveal">
+            <span class="cs-section-lbl">The problem</span>
+            <h2 class="cs-subheading">Technology for ageing is built to monitor, not to care</h2>
+            <p class="t-body" style="margin-top:1rem;">Most technology designed for later life focuses on efficiency and surveillance. It tracks, reminds, and alerts. For the people using it, that often feels intrusive and faintly medical, a constant signal that they are being managed rather than supported.</p>
+            <p class="t-body" style="margin-top:.75rem;">The research literature has been moving the other way for years, towards empathetic, multisensory, human-centred environments. Yet the products on the shelf still treat an ageing person as a system to be optimised.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <span class="cs-section-lbl">The brief</span>
+            <h2 class="cs-subheading">Design how care might feel in 2065, not what it might cost</h2>
+            <p class="t-body" style="margin-top:1rem;">Rodd Design Studio set the team a foresight brief through the Winchester School of Art's Global Smart Lab: explore how an ageing society might live, and be cared for, in 2065.</p>
+            <p class="t-body" style="margin-top:.75rem;">The forty-year horizon was the point. It freed the work from the constraints of today's devices and let us ask what care should feel like before asking what technology could deliver it. We were not designing a product. We were designing a position.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Role -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">My role</span>
+        <h2 class="cs-heading reveal">Leading a multidisciplinary team through ambiguity</h2>
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <div class="reveal">
+            <p class="t-body">I was project lead for a team of four designers and researchers, working to a real client brief over seven months. On a speculative project the hardest thing to hold is the frame. With no product to anchor decisions, a foresight project can drift into either science fiction or a thinly disguised version of the present.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <p class="t-body">My job was to keep the team honest: every imaginative leap had to trace back to a research insight or a piece of evidence. I set the research approach, ran the synthesis, steered two significant changes of direction, and shaped how the final concept was communicated and exhibited.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Concept evolution -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Finding the concept</span>
+        <h2 class="cs-heading reveal">Two ideas we built and set aside</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The plant system was not the first answer. It was the third. The two concepts the team built and abandoned were not wasted work, they were how we found the real brief.
+        </p>
+
+        <div class="concept-evo reveal" style="margin-top:2.25rem;">
+          <div class="ce-step">
+            <span class="ce-tag">Concept 01</span>
+            <h3 class="ce-name">Interactive Brain Gym</h3>
+            <p class="ce-what">Memory preservation and cognitive exercises, designed with dementia in mind, to keep the brain active in later life.</p>
+            <div class="ce-verdict">
+              <span class="ce-verdict-lbl is-cut">Set aside</span>
+              <p>Solving for one condition narrowed the brief to a clinical problem. The research kept pointing somewhere broader: emotional wellbeing, not just memory.</p>
+            </div>
+          </div>
+          <span class="ce-arrow" aria-hidden="true">→</span>
+          <div class="ce-step">
+            <span class="ce-tag">Concept 02</span>
+            <h3 class="ce-name">Home Companion Robot</h3>
+            <p class="ce-what">A device to track, nudge, detect, and assist across the home, a single assistant for everything.</p>
+            <div class="ce-verdict">
+              <span class="ce-verdict-lbl is-cut">Set aside</span>
+              <p>It worked on paper and felt wrong in practice. A robot is another screen, another thing demanding attention, the opposite of the calm the research asked for.</p>
+            </div>
+          </div>
+          <span class="ce-arrow" aria-hidden="true">→</span>
+          <div class="ce-step is-final">
+            <span class="ce-tag">Concept 03</span>
+            <h3 class="ce-name">Amble</h3>
+            <p class="ce-what">A living, bioengineered plant system. Care delivered through presence and ambient cues, not commands.</p>
+            <div class="ce-verdict">
+              <span class="ce-verdict-lbl is-kept">Carried forward</span>
+              <p>A plant is already emotionally legible. It does not demand interaction, it shares the space. That let us design support that is ambient, sensory, and quiet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design process -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Design process</span>
+        <h2 class="cs-heading reveal">Research-through-design, end to end</h2>
+        <ProcessSteps steps={processSteps} />
+      </div>
+
+      <!-- Research findings -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">What the research told us</span>
+        <h2 class="cs-heading reveal">Two generations, one shared need</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          We spoke to the people who will be old in 2065 and the people who are ageing now. They described later life very differently, but they asked design for the same thing: support that does not demand attention.
+        </p>
+
+        <div class="cs-two" style="margin-top:2.25rem;">
+          <div class="reveal">
+            <span class="rf-lbl">Younger adults · aged 20–40</span>
+            <ul class="rf-list">
+              <li>They pictured later life as a time to explore, learn, and travel, not decline, while accepting they would likely face reduced mobility or chronic health conditions.</li>
+              <li>They were openly frustrated with today's assistant technology. Alexa and phone-based AI were described as prompt-based and transactional, passive tools that demand constant input to be useful.</li>
+              <li>They wanted intelligence that is ambient and sensory, that adapts quietly instead of waiting to be asked, and they responded to Amble being a real plant rather than a device.</li>
+            </ul>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <span class="rf-lbl">Older adults · aged 50–80</span>
+            <ul class="rf-list">
+              <li>Many described retirement as involuntary, brought on by illness or burnout, and spoke about the loss of identity and structure that followed.</li>
+              <li>They held tightly to small acts of independence, shopping, gardening, birdwatching, as markers of dignity and a connection to the outside world.</li>
+              <li>Their message to assistive technology was clear: support the routine, never replace it. A system that does everything for you takes something away.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="amble-quotes" style="margin-top:2.5rem;">
+          <blockquote class="aq reveal">
+            <p>"Plants can give emotional support in a way that animals or humans can't."</p>
+            <cite>Focus group · younger adults</cite>
+          </blockquote>
+          <blockquote class="aq reveal" style="transition-delay:.08s;">
+            <p>"I retired through ill health, so I didn't have a choice. It was taken away from me."</p>
+            <cite>Focus group · older adults</cite>
+          </blockquote>
+          <blockquote class="aq reveal" style="transition-delay:.16s;">
+            <p>"I still like to do my own shopping. I want to go. I don't like having a delivery."</p>
+            <cite>Focus group · older adults</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- The concept -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">The concept</span>
+        <h2 class="cs-heading reveal">Amble: a living system with five domains</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Amble is a bioengineered plant system that coexists with the people it supports. It senses, adapts, and responds through light, scent, sound, and growth, rather than screens and notifications. The concept is organised into five interconnected domains.
+        </p>
+
+        <div class="amble-domains reveal" style="margin-top:2.25rem;">
+          {domains.map((d, i) => (
+            <div class="ad">
+              <span class="ad-num">{`0${i + 1}`}</span>
+              <h3 class="ad-title">{d.title}</h3>
+              <p class="ad-body">{d.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Concept in scenes -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">The concept, in scenes</span>
+        <h2 class="cs-heading reveal">Care, woven into the home</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The team visualised Amble through a brand film and a set of concept scenes, hand-drawn growth layered over real domestic spaces. The illustration style was a deliberate choice: warm and sketched, never the cold render of a tech product.
+        </p>
+
+        <figure class="cs-figure reveal" style="margin-top:2rem;">
+          <Image src={futureImg} alt="A 2065 home, where the way we live could look completely different" data-lightbox loading="lazy" />
+          <figcaption class="cs-figure-cap">The premise: by 2065, the way we live at home could look completely different</figcaption>
+        </figure>
+
+        <div class="cs-grid-3" style="margin-top:1.5rem;">
+          <figure class="cs-figure reveal" style="margin:0;">
+            <Image src={bedroomImg} alt="Bioluminescent plant light supporting rest in a bedroom" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Bioluminescence and rhythmic light supporting rest and sleep</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.08s;">
+            <Image src={familyImg} alt="The Amble system adapting to a shared home" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Co-regulation across a shared home, adapting to more than one person</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.16s;">
+            <Image src={routinesImg} alt="The system sensing a change in daily routine" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Sensing a change in routine, and responding to it quietly</figcaption>
+          </figure>
+        </div>
+
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <figure class="cs-figure reveal" style="margin:0;">
+            <Image src={laundryImg} alt="Domestic utility: the system helping with laundry" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Domestic utility: quiet help with the everyday tasks people would rather not think about</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.1s;">
+            <Image src={airFilterImg} alt="The wearable air-filtering extension worn outdoors" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">The wearable extension: clean air and a sense of calm, carried beyond the home</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Branding -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Branding & communication design</span>
+        <h2 class="cs-heading reveal">A brand that feels alive, not engineered</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The brand had one job: convince people that Amble is a living companion, not a gadget. Every decision, from the typeface to the tone of voice, was grounded in research on how older adults read, trust, and feel at ease.
+        </p>
+
+        <div class="amble-logo-panel reveal" style="margin-top:2rem;">
+          <Image src={logoImg} alt="The Amble wordmark" class="amble-logo" loading="lazy" />
+        </div>
+        <p class="cs-figure-cap" style="margin-top:.6rem;">A Playfair Display wordmark, lowercase for approachability. A flower grows from the "a", a leaf sprouts from the "e", marking Amble's dual nature as both biological and intelligent.</p>
+
+        <div class="amble-palette reveal" style="margin-top:2.25rem;">
+          {palette.map((c) => (
+            <div class="ap-sw">
+              <span class="ap-chip" style={`background:${c.hex}`}></span>
+              <div>
+                <strong>{c.name}</strong>
+                <em>{c.hex}</em>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p class="cs-figure-cap" style="margin-top:.6rem;">Muted earth tones, chosen for the calm familiarity and visual ease that research links to older adults' preferences.</p>
+
+        <div class="cs-grid-4" style="margin-top:2.5rem;">
+          <div class="reveal">
+            <h3>Typography with a reason</h3>
+            <p class="t-body">Playfair Display, a modern serif, paired with the geometric sans Poppins. The pairing was evidence-led: studies show older adults read serif type more comfortably at larger sizes, and that typefaces themselves carry personality, in this case sincerity and calm.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <h3>A voice that supports, not instructs</h3>
+            <p class="t-body">Amble's brand voice speaks as a presence, not an assistant. The tone is warm, calm, gentle, and mindful, helpful but never insistent, offering reassurance in moments of uncertainty without ever overwhelming the person it is speaking to.</p>
+          </div>
+        </div>
+
+        <div class="amble-values reveal" style="margin-top:2rem;">
+          {values.map((v) => (
+            <div class="av">
+              <strong>{v.name}</strong>
+              <p>{v.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <blockquote class="cs-insight reveal" style="margin-top:2.25rem;">
+          <p>Let your home grow with you.</p>
+          <cite>Amble · brand tagline</cite>
+        </blockquote>
+      </div>
+
+      <!-- Outcome / LDF -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Outcome</span>
+        <h2 class="cs-heading reveal">From research project to public exhibition</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Being accepted into "Tender Interbeing: The Future of Design with Empathy" meant the project left the studio and met a public audience of designers and industry. Translating seven months of research into an exhibition was a design problem of its own. The two posters below carry the full argument, the concept, the evidence, and the rationale, condensed to what a visitor can absorb in a single pass.
+        </p>
+        <div class="cs-two" style="margin-top:2rem;">
+          <figure class="cs-figure reveal" style="margin:0;">
+            <Image src={poster1Img} alt="Amble exhibition poster, brand and concept overview" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Exhibition poster: the concept and brand overview</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.1s;">
+            <Image src={poster2Img} alt="Amble exhibition poster, product features and evidence" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Exhibition poster: product features and the evidence base</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Reflections -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Reflections</span>
+        <h2 class="cs-heading reveal">What leading a foresight project taught me</h2>
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <div class="reveal">
+            <p class="t-body">The discipline of speculative design is not imagination, it is restraint. The easy version of this brief is a beautiful film about plants in 2065. The useful version traces every idea back to evidence. As project lead, most of my work was holding that line, asking the team, repeatedly, which research insight a given feature actually answered. The concept is bold, but nothing in it is invented for effect.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <p class="t-body">Leading a multidisciplinary team through ambiguity was the real lesson. For seven months there was no screen to review, no flow to test, no obvious sign of progress. Keeping four people aligned and confident without those anchors meant being clear about the questions we were answering, even as the answers kept changing. Two of our concepts were abandoned. Naming that as progress, not failure, was part of the job.</p>
+          </div>
+        </div>
+        <p class="t-body amble-credit reveal" style="transition-delay:.16s;">
+          Team Gen2065: Nysargi Giridhar Karnam, Rhea D'Silva, Smiti Baraskar, and Sayantan Dutta. A Global Smart Lab Live Project at the Winchester School of Art, University of Southampton, with Rodd Design Studio. Supervised by Dr Shan Wang and Dr Angelina Pan, with creative guidance from Ben Davies.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <MoreCaseStudies current="amble" />
+  <Lightbox />
+</CaseStudy>
+
+<style>
+/* Concept evolution: three concepts, two set aside */
+.concept-evo {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: stretch;
+  gap: .9rem;
+}
+.ce-step {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.5rem 1.4rem;
+}
+.ce-step.is-final {
+  border-color: rgba(201,169,110,.4);
+  background: var(--accent-bg);
+}
+:global([data-theme="light"]) .ce-step.is-final { border-color: rgba(154,110,42,.4); }
+.ce-tag {
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.ce-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin: .5rem 0 .6rem;
+}
+.ce-step.is-final .ce-name { color: var(--accent); }
+.ce-what {
+  font-size: .82rem;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+.ce-verdict {
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
+}
+.ce-verdict-lbl {
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: .45rem;
+}
+.ce-verdict-lbl.is-cut { color: var(--text-3); }
+.ce-verdict-lbl.is-kept { color: var(--accent); }
+.ce-verdict p {
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+.ce-arrow {
+  align-self: center;
+  color: var(--text-3);
+  font-size: .9rem;
+}
+
+/* Research-finding columns */
+.rf-lbl {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--border);
+}
+.rf-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+.rf-list li {
+  font-size: .85rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  padding-left: 1rem;
+  position: relative;
+}
+.rf-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .55rem;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Research quotes */
+.amble-quotes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.aq {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.5rem 1.4rem;
+}
+.aq p {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-1);
+}
+.aq cite {
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-style: normal;
+  display: block;
+  margin-top: 1rem;
+}
+
+/* Five domains */
+.amble-domains {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+  gap: 1.1rem;
+}
+.ad {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.4rem 1.3rem;
+  transition: border-color .25s, transform .25s;
+}
+.ad:hover { border-color: var(--accent); transform: translateY(-3px); }
+.ad-num {
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  letter-spacing: .1em;
+  color: var(--accent);
+}
+.ad-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin: .5rem 0 .5rem;
+}
+.ad-body { font-size: .8rem; line-height: 1.65; color: var(--text-2); }
+
+/* Logo panel */
+.amble-logo-panel {
+  background: #654937;
+  border-radius: 3px;
+  padding: clamp(2.5rem, 7vw, 4.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.amble-logo { width: min(340px, 70%); height: auto; }
+
+/* Brand palette */
+.amble-palette {
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+.ap-sw { display: flex; align-items: center; gap: .7rem; }
+.ap-chip {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  display: block;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+.ap-sw strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  color: var(--text-1);
+  font-weight: 500;
+}
+.ap-sw em {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-style: normal;
+  margin-top: .2rem;
+}
+
+/* Brand values */
+.amble-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+  gap: 1rem;
+}
+.av {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.1rem 1.1rem;
+}
+.av strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+.av p {
+  font-size: .76rem;
+  line-height: 1.55;
+  color: var(--text-2);
+  margin-top: .4rem;
+}
+
+.amble-credit {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: .78rem;
+  color: var(--text-3);
+  max-width: 70ch;
+}
+
+/* London Design Festival callout */
+.ldf-banner {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 2.6rem);
+  align-items: flex-start;
+  border: 1px solid rgba(201,169,110,.4);
+  background: var(--accent-bg);
+  border-radius: 3px;
+  padding: clamp(1.75rem, 4vw, 2.6rem);
+}
+:global([data-theme="light"]) .ldf-banner { border-color: rgba(154,110,42,.4); }
+.ldf-logo-chip {
+  flex-shrink: 0;
+  width: clamp(82px, 11vw, 112px);
+  background: #fff;
+  border-radius: 4px;
+  padding: 11px;
+}
+.ldf-logo-chip img { width: 100%; height: auto; display: block; }
+.ldf-content { flex: 1; min-width: 0; }
+.ldf-banner-top {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+.ldf-tag {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(201,169,110,.45);
+  padding: .32rem .65rem;
+  border-radius: 2px;
+}
+.ldf-fest {
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.ldf-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-1);
+  max-width: 30ch;
+}
+.ldf-title em { font-style: italic; color: var(--accent); }
+.ldf-sub {
+  font-size: .85rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin-top: .8rem;
+  max-width: 56ch;
+}
+.ldf-facts {
+  display: flex;
+  gap: 2.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(201,169,110,.28);
+}
+.ldf-fact { display: flex; flex-direction: column; gap: .32rem; }
+.ldf-fact span {
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.ldf-fact strong {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--text-1);
+}
+
+@media (max-width: 820px) {
+  .concept-evo { grid-template-columns: 1fr; }
+  .ce-arrow { transform: rotate(90deg); margin: -.2rem 0; }
+  .amble-quotes { grid-template-columns: 1fr; }
+  .ldf-facts { gap: 1.5rem; }
+}
+</style>

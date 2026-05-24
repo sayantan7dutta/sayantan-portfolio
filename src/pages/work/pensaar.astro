@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import CaseStudy from '../../layouts/CaseStudy.astro';
 import CaseStudyHero from '../../components/CaseStudyHero.astro';
-import ProcessSteps from '../../components/ProcessSteps.astro';
 import StatCards from '../../components/StatCards.astro';
 import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
 import BrowserFrame from '../../components/BrowserFrame.astro';
@@ -12,29 +11,6 @@ import heroImg from '../../assets/work/pensaar/hero.jpg';
 import workImg from '../../assets/work/pensaar/work.jpg';
 import servicesImg from '../../assets/work/pensaar/services.jpg';
 import aboutImg from '../../assets/work/pensaar/about.jpg';
-
-const processSteps = [
-  {
-    title: 'Stakeholder audit: understanding the agency\'s positioning',
-    body: 'I ran a content audit of the existing Squarespace site alongside stakeholder interviews with Pensaar\'s founders. The finding that mattered: the site led with services before it established any credibility. Enterprise clients needed to understand the agency\'s design philosophy before they\'d trust a list of services. The information architecture was backwards.',
-  },
-  {
-    title: 'Navigation redesign: ideology first, services second',
-    body: 'I restructured the navigation to lead with the agency\'s design thinking ideology, then move to how they apply it (case studies), then what they offer (services). This mirrors how enterprise buyers actually evaluate consulting agencies: they want to understand your thinking before they consider your pricing.',
-  },
-  {
-    title: 'A responsive design system',
-    body: 'I built a flexible, fully responsive design system that could carry rich, in-depth case study storytelling across every device without cluttering the interface. Content-heavy pages got particular attention: scannable layouts, elegant typography, and the white space to keep dense case study content readable on mobile.',
-  },
-  {
-    title: 'Visual identity upgrade',
-    body: 'I elevated the visual language to match the premium positioning Pensaar was targeting: modern typography, a tighter colour system, and a consistent use of space that reinforced credibility with enterprise clients sizing up the agency for large projects.',
-  },
-  {
-    title: 'Rebuilding the site in Wix: design delivered, not just specced',
-    body: 'Rather than hand a design file to a separate developer, I rebuilt the site directly in Wix: every page, the global navigation, the responsive breakpoints, the content structure. Building hands-on in the CMS meant the design decisions survived contact with the platform\'s constraints, and the agency was left with a site their own team could maintain and update without needing a developer.',
-  },
-];
 
 const stats = [
   { num: '25%', label: 'Increase in lead conversion rate' },
@@ -50,9 +26,9 @@ const stats = [
   <CaseStudyHero
     title="Elevating the Digital Presence of a Design Thinking Agency"
     lead="I redesigned and rebuilt Pensaar Design's website, moving it off a restrictive Squarespace template and reconstructing it in Wix, with an information architecture that finally matched how the agency wanted to be understood."
-    tags={['Web Redesign', 'CMS Migration', 'Consulting · 2024']}
+    tags={['Web Redesign', 'CMS Migration', 'Internship · 2020']}
     meta={[
-      { key: 'Role', val: 'Interaction Designer' },
+      { key: 'Role', val: 'Service Design Intern' },
       { key: 'Client', val: 'Pensaar Design' },
       { key: 'Platform', val: 'Squarespace → Wix' },
       { key: 'Timeline', val: '6 weeks' },
@@ -64,6 +40,13 @@ const stats = [
 
   <div class="cs-body">
     <div class="container">
+
+      <!-- Context note -->
+      <div class="cs-section" style="padding-top:0;">
+        <blockquote class="cs-insight reveal" style="margin:0;">
+          <p>An early-career project, from before I joined TCS. I interned at Pensaar Design in Bengaluru in 2020 as a service design intern, and this website redesign was part of that work. I've kept it in the portfolio because its core lesson, that the structure of a site shapes trust before the visuals do, still holds up in the enterprise work I do now.</p>
+        </blockquote>
+      </div>
 
       <!-- Problem / Solution -->
       <div class="cs-section">

@@ -5,6 +5,7 @@ import KvPhoneTrio from '../components/KvPhoneTrio.astro';
 import portrait from '../assets/sayantan.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
+import ambleThumb from '../assets/work/amble/hero.jpg';
 import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 ---
 
@@ -54,28 +55,13 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="hero-photo-wrap">
         <div class="hero-photo">
           <Image src={portrait} alt="Sayantan Dutta" class="hero-photo-img" loading="eager" />
-          <div class="hero-photo-cap">Southampton, UK · Open to work</div>
+          <div class="hero-photo-cap">Southampton, UK</div>
         </div>
       </div>
 
     </div>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════ CLIENTS ═══════════════════════════════ -->
-<div class="clients-bar">
-  <div class="container">
-    <div class="clients-inner">
-      <span class="clients-lbl">Selected clients</span>
-      <div class="clients-list">
-        <img src="/images/clients/ericsson.png" alt="Ericsson" class="client-logo" style="height:44px;" />
-        <img src="/images/clients/mcafee.png" alt="McAfee" class="client-logo" style="height:24px;" />
-        <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" class="client-logo" style="height:30px;" />
-        <span class="client-name">Soter Safety</span>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ═══════════════════════════════════ WORK ════════════════════════════════ -->
 <section class="work-section" id="work">
@@ -109,8 +95,31 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 02 Ericsson — Designer to Design Leader -->
+    <!-- 02 Amble — Ageing 2065 -->
     <article class="project-item project-item-alt reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <Image src={ambleThumb} alt="Amble concept for an ageing society in 2065" class="p-img-actual" loading="lazy" />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">02</span>
+            <span class="t-tag t-tag-speculative">Speculative · Foresight Design · 2025</span>
+          </div>
+          <h2 class="p-title">Designing Care for an Ageing Society in 2065</h2>
+          <p class="p-desc">Amble, a speculative bioengineered plant system for the 2065 home. Seven months of foresight research and design for Rodd Design Studio, exhibited at the London Design Festival.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">Rodd Design × WSA · Project Lead</span>
+          <a href="/work/amble" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 Ericsson — Designer to Design Leader -->
+    <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
           <!-- Real Ericsson API Console screenshot.
@@ -121,7 +130,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">02</span>
+            <span class="p-num">03</span>
             <span class="t-tag">Design Systems · 2020 – 2023</span>
           </div>
           <h2 class="p-title">From Designer to Design Leader</h2>
@@ -134,8 +143,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 03 Sherwin-Williams — Design Operations -->
-    <article class="project-item reveal">
+    <!-- 04 Sherwin-Williams — Design Operations -->
+    <article class="project-item project-item-alt reveal">
       <div class="p-img-col">
         <div class="p-img sw-cover">
           {/* Design-ops engagement with no UI screens — a headline-impact
@@ -149,7 +158,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">03</span>
+            <span class="p-num">04</span>
             <span class="t-tag">Design Ops · Sherwin-Williams · 2024</span>
           </div>
           <h2 class="p-title">Building Design Operations at Scale</h2>
@@ -162,8 +171,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 04 KinVault -->
-    <article class="project-item project-item-alt reveal">
+    <!-- 05 KinVault -->
+    <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
           <KvPhoneTrio />
@@ -172,7 +181,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">04</span>
+            <span class="p-num">05</span>
             <span class="t-tag t-tag-speculative">Concept · Premium Fintech · 2025</span>
           </div>
           <h2 class="p-title">KinVault Heritage, a Digital Vault-Atelier</h2>
@@ -185,8 +194,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 05 Pensaar -->
-    <article class="project-item reveal">
+    <!-- 06 Pensaar -->
+    <article class="project-item project-item-alt reveal">
       <div class="p-img-col">
         <div class="p-img">
           <Image src={pensaarThumb} alt="Pensaar Design website" class="p-img-actual" loading="lazy" />
@@ -195,19 +204,34 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">05</span>
-            <span class="t-tag">Web Redesign · CMS · 2024</span>
+            <span class="p-num">06</span>
+            <span class="t-tag">Web Redesign · Internship · 2020</span>
           </div>
           <h2 class="p-title">Elevating the Digital Presence of a Design Thinking Agency</h2>
           <p class="p-desc">Redesigned Pensaar Design's website and rebuilt it in Wix, migrating off a restrictive Squarespace template, with an information architecture that matches how the agency wants to be understood.</p>
         </div>
         <div class="p-footer">
-          <span class="p-context">Pensaar Design · Interaction Design · 6 weeks</span>
+          <span class="p-context">Pensaar Design · Service Design Intern · 2020</span>
           <a href="/work/pensaar" class="p-link">View case study <span>→</span></a>
         </div>
       </div>
     </article>
 
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ CLIENTS ═══════════════════════════════ -->
+<section class="clients-section">
+  <div class="container">
+    <span class="clients-title">Selected clients</span>
+    <p class="clients-sub">Organisations I've designed for, across enterprise software, manufacturing technology, and financial inclusion.</p>
+    <div class="clients-row">
+      <img src="/images/clients/ericsson.png" alt="Ericsson" style="height:40px;" />
+      <img src="/images/clients/mcafee.png" alt="McAfee" style="height:27px;" />
+      <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" style="height:33px;" />
+      <img src="/images/clients/itc.png" alt="ITC" style="height:48px;" />
+      <img src="/images/clients/cgap.png" alt="CGAP" style="height:29px;" />
+    </div>
   </div>
 </section>
 
@@ -395,58 +419,41 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 }
 
 /* ─── Clients ─── */
-.clients-bar {
-  padding: 2rem 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+.clients-section {
+  background: #ece7da;
+  padding: clamp(3rem, 7vw, 4.75rem) 0;
 }
-.clients-inner {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-}
-.clients-lbl {
+.clients-title {
+  display: block;
+  text-align: center;
   font-family: var(--font-mono);
-  font-size: .62rem;
-  letter-spacing: .12em;
+  font-size: .64rem;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--text-3);
-  white-space: nowrap;
-  flex-shrink: 0;
+  color: #6a5f48;
 }
-.clients-lbl::after {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 1px;
-  background: var(--text-3);
-  vertical-align: middle;
-  margin-left: .5rem;
+.clients-sub {
+  text-align: center;
+  font-size: .82rem;
+  line-height: 1.65;
+  color: #5b5240;
+  max-width: 52ch;
+  margin: .85rem auto 0;
 }
-.clients-list {
+.clients-row {
   display: flex;
   align-items: center;
-  gap: 2.25rem;
+  justify-content: center;
   flex-wrap: wrap;
+  gap: clamp(1.75rem, 5vw, 3.5rem);
+  margin-top: 2.5rem;
 }
-.client-logo {
+.clients-row img {
   width: auto;
-  filter: brightness(0) invert(1);
-  opacity: .72;
-  transition: opacity .2s;
+  opacity: .9;
+  transition: opacity .2s, transform .2s;
 }
-.client-logo:hover { opacity: 1; }
-:global([data-theme="light"]) .client-logo { filter: brightness(0); opacity: .62; }
-.client-name {
-  font-family: var(--font-mono);
-  font-size: .72rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--text-2);
-  transition: color .2s;
-}
-.client-name:hover { color: var(--text-1); }
+.clients-row img:hover { opacity: 1; transform: translateY(-2px); }
 
 /* ─── Work section ─── */
 .work-section { padding: clamp(4rem, 10vw, 7rem) 0; }
@@ -618,7 +625,6 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   .project-item-alt .p-img-col,
   .project-item-alt .p-info { order: unset; }
   .contact-inner { flex-direction: column; align-items: flex-start; }
-  .clients-inner { gap: 1.25rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
