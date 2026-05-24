@@ -260,15 +260,6 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
   color: var(--text-3);
   display: block;
 }
-.footer-craft {
-  font-family: var(--font-mono);
-  font-size: .58rem;
-  color: var(--text-3);
-  opacity: .6;
-  display: block;
-  margin-top: .3rem;
-}
-
 /* ─── Scroll progress ─── */
 .scroll-progress {
   position: fixed;

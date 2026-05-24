@@ -2,11 +2,56 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import portrait from '../assets/sayantan-studio.jpg';
+
+// Career timeline — left to right, oldest to newest.
+const timeline = [
+  { year: '2020',       role: 'Service Design Intern',      org: 'Pensaar Design' },
+  { year: '2020 – 23',  role: 'Product Designer → Lead',    org: 'TCS' },
+  { year: '2023 – 24',  role: 'Design Operations Lead',     org: 'TCS' },
+  { year: '2024 – 25',  role: 'MA Design Management',       org: 'Southampton' },
+  { year: '2025',       role: 'Senior Product Designer',    org: 'Soter Safety' },
+  { year: '2026 —',     role: 'Lead Product Designer',      org: 'dAIs Genie · miiGenie' },
+];
+
+// Skill chips, grouped by category (sourced from CV).
+const skillGroups = [
+  {
+    label: 'Product Design',
+    items: ['End-to-end design', 'Discovery & framing', 'Jobs to Be Done', 'User flows', 'Journey mapping', 'Wireframing', 'Hi-fi prototyping', 'Interaction design'],
+  },
+  {
+    label: 'Research & Validation',
+    items: ['User research', 'Usability testing', 'A/B testing', 'Analytics-informed design', 'Insight synthesis', 'Heuristic evaluation'],
+  },
+  {
+    label: 'Systems & Craft',
+    items: ['Design systems', 'Component libraries', 'Responsive & mobile-first', 'Accessibility (WCAG)', 'UX copywriting', 'Design tokens'],
+  },
+  {
+    label: 'Delivery & Collaboration',
+    items: ['Product trio (PM · Eng · Design)', 'Agile / Scrum', 'Roadmap input', 'Stakeholder facilitation', 'Design critiques', 'Async remote'],
+  },
+];
+
+// Tool grid — modern PD stack. SVGs in /public/images/tools/.
+const tools = [
+  { name: 'Figma',   file: 'figma.svg'   },
+  { name: 'FigJam',  file: 'figma.svg'   },
+  { name: 'Miro',    file: 'miro.svg'    },
+  { name: 'Framer',  file: 'framer.svg'  },
+  { name: 'Webflow', file: 'webflow.svg' },
+  { name: 'Notion',  file: 'notion.svg'  },
+  { name: 'Linear',  file: 'linear.svg'  },
+  { name: 'Jira',    file: 'jira.svg'    },
+  { name: 'Loom',    file: 'loom.svg'    },
+  { name: 'GitHub',  file: 'github.svg'  },
+  { name: 'Claude',  file: 'claude.svg'  },
+];
 ---
 
 <Base
   title="About · Sayantan Dutta"
-  description="UX & Service Designer working where complexity meets clarity. 5 years across enterprise SaaS, industrial safety, and API platforms."
+  description="Product Designer working where complexity meets clarity. 5 years across AI companion apps, enterprise SaaS, industrial safety, and API platforms."
   activeNav="about"
 >
 
@@ -15,7 +60,7 @@ import portrait from '../assets/sayantan-studio.jpg';
     <div class="about-grid">
 
       <!-- Photo column -->
-      <div>
+      <div class="about-photo-col">
         <div class="about-photo reveal">
           <Image src={portrait} alt="Sayantan Dutta" class="about-photo-img" loading="eager" />
         </div>
@@ -25,50 +70,101 @@ import portrait from '../assets/sayantan-studio.jpg';
       <div>
         <span class="t-label">About</span>
         <p class="about-intro reveal" style="transition-delay:.1s;">
-          I'm a UX and Service Designer who works best where <em>complexity meets clarity</em>, turning systems that are genuinely difficult into experiences that feel obvious.
+          I'm a Product Designer who works best where <em>complexity meets clarity</em>, turning systems that are genuinely difficult into experiences that feel obvious.
         </p>
 
+        <!-- Background -->
         <div class="about-block reveal">
           <p class="about-block-lbl">Background</p>
           <p class="t-body">
-            Five years in, my work runs from a service design internship in Bengaluru to UX strategy for industrial-safety software in the UK. It began with a Bachelor's in Communication Design and four months at Pensaar Design, doing field research and brand-guideline work for a range of clients. That internship taught me, early on, that design wasn't about making things beautiful. It was about making decisions visible.
+            Five years in, my work runs from a service design internship in Bengaluru to UX strategy for industrial-safety software in the UK. It began with a Bachelor's in Communication Design and four months at <strong>Pensaar Design</strong>, doing field research and brand work for clients including <strong>McAfee</strong>, <strong>CGAP</strong>, and <strong>ITC</strong>. That internship taught me, early on, that design wasn't about making things beautiful. It was about making decisions visible.
           </p>
           <p class="t-body" style="margin-top:.75rem;">
-            That instinct led me to Tata Consultancy Services, where I designed across enterprise SaaS, manufacturing technology, and API platforms for clients including Ericsson, McAfee, and Sherwin-Williams, growing from product designer to design lead. Working at that scale, on platforms with complex stakeholder structures and tight compliance requirements, taught me that good UX is as much about operational rigour as it is about craft.
+            That instinct led me to <strong>Tata Consultancy Services</strong>, where I designed across enterprise SaaS, manufacturing technology, and API platforms for clients including <strong>Ericsson</strong> and <strong>Sherwin-Williams</strong>, growing from product designer to design lead. Working at that scale, on platforms with complex stakeholder structures and tight compliance requirements, taught me that good UX is as much about operational rigour as it is about craft.
           </p>
           <p class="t-body" style="margin-top:.75rem;">
-            I moved to the UK in 2024 for an MA in Design Management at the University of Southampton, which sharpened how I think about design strategy and leading at a systems level. Most recently I led UX strategy for HAZOP Edge at Soter Safety Consulting, a platform for industrial hazard and operability studies, and the project I'm most proud of.
+            I moved to the UK in 2024 for an MA in Design Management at the University of Southampton, which sharpened how I think about design strategy and leading at a systems level. After that I led UX strategy for HAZOP Edge at Soter Safety Consulting — the project I'm most proud of — before moving into my current role.
           </p>
         </div>
 
+        <!-- Career timeline -->
+        <div class="about-block reveal">
+          <p class="about-block-lbl">Career, at a glance</p>
+          <ol class="timeline" aria-label="Career timeline">
+            {timeline.map((t, i) => (
+              <li class={`tl-item ${i === timeline.length - 1 ? 'is-now' : ''}`}>
+                <span class="tl-year">{t.year}</span>
+                <span class="tl-dot" aria-hidden="true"></span>
+                <span class="tl-role">{t.role}</span>
+                <span class="tl-org">{t.org}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <!-- Currently: miiGenie AI work -->
+        <div class="about-block reveal">
+          <p class="about-block-lbl">
+            <span class="now-dot" aria-hidden="true"></span>
+            Currently
+          </p>
+          <div class="now-card">
+            <p class="now-headline">Leading product design for <em>miiGenie</em>, a voice-first AI companion for elderly users.</p>
+            <p class="t-body" style="margin-top:.9rem;">
+              I own the full product design end-to-end — discovery with elderly users and caregivers, conversational flows, onboarding, and the Figma component library powering iOS and Android. I work in a product trio with the PM and engineering lead, and run the design system that keeps the product consistent and accessible as it scales.
+            </p>
+            <ul class="now-meta">
+              <li><span class="now-meta-k">Role</span><span class="now-meta-v">Lead Product Designer</span></li>
+              <li><span class="now-meta-k">Company</span><span class="now-meta-v">dAIs Genie, UK</span></li>
+              <li><span class="now-meta-k">Surface</span><span class="now-meta-v">iOS · Android</span></li>
+              <li><span class="now-meta-k">Focus</span><span class="now-meta-v">Voice-first AI · Design system · Accessibility</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- What I do -->
         <div class="about-block reveal">
           <p class="about-block-lbl">What I do</p>
           <p class="t-body">
-            I specialise in enterprise and B2B UX, the kind of platforms where workflows are high-stakes, the users are domain experts, and ambiguity is expensive. I bridge design operations and hands-on craft: I can build a design system and lead scrum ceremonies in the same week.
+            I specialise in product design where workflows are high-stakes, the users are domain experts, and ambiguity is expensive — from AI companion apps to enterprise B2B SaaS. I bridge design operations and hands-on craft: I can build a design system and lead scrum ceremonies in the same week.
           </p>
           <p class="t-body" style="margin-top:.75rem;">
-            I prioritise clarity, accessibility, and measurable outcomes over aesthetic novelty. I've collaborated with product owners, engineers, safety professionals, and enterprise clients across Europe, the US, and the UK.
+            I prioritise clarity, accessibility, and measurable outcomes over aesthetic novelty. I've collaborated with founders, product owners, engineers, safety professionals, and enterprise clients across Europe, the US, and the UK.
           </p>
         </div>
 
-        <div class="about-block reveal">
-          <p class="about-block-lbl">Currently</p>
-          <p class="t-body">
-            Based in the UK, working across product and UX design, from enterprise B2B SaaS to speculative service design. MA in Design Management from the University of Southampton, graduated September 2025.
-          </p>
-        </div>
-
+        <!-- Tools & Skills -->
         <div class="about-block reveal">
           <p class="about-block-lbl">Tools &amp; Skills</p>
-          <p class="t-body">
-            Figma, Adobe Creative Suite, Miro, ServiceNow, Microsoft 365. UX research, usability testing, heuristic evaluation, design systems, service blueprinting, information architecture, agile / scrum.
-          </p>
+
+          <!-- Tool grid -->
+          <div class="tool-grid" role="list" aria-label="Tools I work with">
+            {tools.map((t) => (
+              <div class="tool-tile" role="listitem">
+                <img src={`/images/tools/${t.file}`} alt="" class="tool-mark" loading="lazy" />
+                <span class="tool-name">{t.name}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- Skill groups -->
+          <div class="skill-stack">
+            {skillGroups.map((g) => (
+              <div class="skill-row">
+                <p class="skill-row-lbl">{g.label}</p>
+                <ul class="skill-chips">
+                  {g.items.map((s) => <li class="skill-chip">{s}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
+        <!-- Outside of work -->
         <div class="about-block reveal">
           <p class="about-block-lbl">Outside of work</p>
           <p class="t-body">
-            Badminton, football, Ultimate Frisbee. Learning German (slowly). Always looking for a good flat white.
+            Badminton, football, Ultimate Frisbee. Learning German (slowly). Always looking for a good mocha — never the flat white.
           </p>
         </div>
 
@@ -95,8 +191,9 @@ import portrait from '../assets/sayantan-studio.jpg';
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
-  align-items: start;
+  align-items: stretch;
 }
+.about-photo-col { height: 100%; }
 .about-photo {
   aspect-ratio: 4/5;
   overflow: hidden;
@@ -111,23 +208,6 @@ import portrait from '../assets/sayantan-studio.jpg';
   transition: filter .4s;
 }
 .about-photo:hover .about-photo-img { filter: grayscale(0%); }
-.about-photo-ph {
-  width: 100%; height: 100%;
-  background: var(--surface-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.about-photo-ph span {
-  font-family: var(--font-mono);
-  font-size: .62rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  text-align: center;
-  padding: 2rem;
-  line-height: 1.8;
-}
 .about-intro {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 3vw, 2.1rem);
@@ -149,6 +229,9 @@ import portrait from '../assets/sayantan-studio.jpg';
   text-transform: uppercase;
   color: var(--text-3);
   margin-bottom: .875rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
 }
 .about-cta {
   margin-top: 2.5rem;
@@ -157,8 +240,215 @@ import portrait from '../assets/sayantan-studio.jpg';
   flex-wrap: wrap;
 }
 
+/* ─── Career timeline ─── */
+.timeline {
+  list-style: none;
+  margin: .5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  position: relative;
+}
+.tl-item {
+  display: grid;
+  grid-template-columns: 8.5rem 1.5rem 1fr;
+  grid-template-areas:
+    "year dot role"
+    "year dot org";
+  column-gap: 0;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-top: 1px dashed var(--border);
+  position: relative;
+}
+.tl-item:first-child { border-top: 0; padding-top: 0; }
+.tl-year {
+  grid-area: year;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  color: var(--text-3);
+  align-self: center;
+}
+.tl-dot {
+  grid-area: dot;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--text-3);
+  align-self: center;
+  justify-self: start;
+  transition: background .25s, transform .25s;
+}
+.tl-role {
+  grid-area: role;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-1);
+  line-height: 1.3;
+}
+.tl-org {
+  grid-area: org;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  color: var(--text-2);
+  margin-top: .15rem;
+}
+.tl-item.is-now .tl-dot {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-bg);
+}
+.tl-item.is-now .tl-role { color: var(--accent); }
+.tl-item:hover .tl-dot { transform: scale(1.4); background: var(--accent); }
+
+/* ─── Currently: miiGenie callout ─── */
+.now-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  box-shadow: 0 0 0 4px var(--accent-bg);
+  animation: now-pulse 2.4s ease-in-out infinite;
+}
+@keyframes now-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px var(--accent-bg); }
+  50%      { box-shadow: 0 0 0 8px transparent; }
+}
+.now-card {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-bg);
+  padding: 1.6rem 1.7rem;
+  border-radius: 2px;
+}
+.now-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-1);
+  margin: 0;
+}
+.now-headline em { font-style: italic; color: var(--accent); }
+.now-meta {
+  list-style: none;
+  margin: 1.2rem 0 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .65rem 1.5rem;
+}
+.now-meta li {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+.now-meta-k {
+  font-family: var(--font-mono);
+  font-size: .55rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.now-meta-v {
+  font-size: .82rem;
+  color: var(--text-1);
+  line-height: 1.4;
+}
+
+/* ─── Tools & Skills ─── */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+  gap: .55rem;
+  margin: .5rem 0 2.25rem;
+}
+.tool-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  padding: 1rem .5rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+  transition: border-color .25s, transform .25s, background .25s;
+}
+.tool-mark {
+  width: 26px; height: 26px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(.55);
+  transition: filter .25s, transform .25s;
+}
+.tool-name {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  transition: color .25s;
+}
+.tool-tile:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  transform: translateY(-2px);
+}
+.tool-tile:hover .tool-mark { filter: grayscale(0%) opacity(1); transform: scale(1.05); }
+.tool-tile:hover .tool-name { color: var(--text-1); }
+
+.skill-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.skill-row-lbl {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 0 0 .65rem;
+}
+.skill-chips {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+.skill-chip {
+  font-size: .76rem;
+  line-height: 1;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: .5rem .7rem;
+  background: var(--surface);
+  transition: border-color .2s, color .2s, background .2s;
+}
+.skill-chip:hover {
+  border-color: var(--accent);
+  color: var(--text-1);
+  background: var(--accent-bg);
+}
+
 @media (max-width: 768px) {
   .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .about-photo { max-width: 280px; position: static; }
+  .tl-item {
+    grid-template-columns: 1.25rem 1fr;
+    grid-template-areas:
+      "dot year"
+      "dot role"
+      "dot org";
+    row-gap: .1rem;
+  }
+  .tl-dot { align-self: start; margin-top: .45rem; }
+  .tl-year { margin-bottom: .15rem; }
+  .now-meta { grid-template-columns: 1fr; }
+  .tool-grid { grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); }
 }
 </style>
