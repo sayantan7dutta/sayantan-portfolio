@@ -3,15 +3,18 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import portrait from '../assets/sayantan-studio.jpg';
 
-// Career timeline, oldest to newest. `client` is optional.
+// Career timeline, oldest to newest.
+// `client` is optional (used for agency / consulting work).
+// `contract` flags UK short-term engagements so the cadence reads correctly.
 const timeline = [
-  { year: '2020',    role: 'Service Design Intern',     org: 'Pensaar Design' },
-  { year: '2020-21', role: 'Product Designer',          org: 'TCS', client: 'Ericsson' },
-  { year: '2021-23', role: 'Lead Product Designer',     org: 'TCS', client: 'Ericsson' },
-  { year: '2023-24', role: 'Design Operations Lead',    org: 'TCS', client: 'Sherwin-Williams' },
-  { year: '2024-25', role: 'MA Design Management',      org: 'University of Southampton' },
-  { year: '2025',    role: 'Senior Product Designer',   org: 'Soter Safety Consulting' },
-  { year: 'Now',     role: 'Lead Product Designer',     org: 'dAIs Genie · miiGenie' },
+  { year: '2020',         role: 'Service Design Intern',     org: 'Pensaar Design' },
+  { year: '2020-21',      role: 'Product Designer',          org: 'TCS', client: 'Ericsson' },
+  { year: '2021-23',      role: 'Lead Product Designer',     org: 'TCS', client: 'Ericsson' },
+  { year: '2023-24',      role: 'Design Operations Lead',    org: 'TCS', client: 'Sherwin-Williams' },
+  { year: '2024-25',      role: 'MA Design Management',      org: 'University of Southampton' },
+  { year: 'Dec 24-Jan 25', role: 'Senior Product Designer',  org: 'SparkSoft Ltd',           contract: true },
+  { year: 'Jul-Aug 25',   role: 'Senior Product Designer',   org: 'Soter Safety Consulting', contract: true },
+  { year: '2026, now',    role: 'Lead Product Designer',     org: 'dAIs Genie · miiGenie',   contract: true },
 ];
 
 // Skill chips, grouped by category (sourced from CV).
@@ -149,7 +152,10 @@ const certs = [
               <li class={`tl-item ${i === timeline.length - 1 ? 'is-now' : ''}`}>
                 <span class="tl-year">{t.year}</span>
                 <span class="tl-dot" aria-hidden="true"></span>
-                <span class="tl-role">{t.role}</span>
+                <span class="tl-role">
+                  {t.role}
+                  {t.contract && <span class="tl-tag">Contract · UK</span>}
+                </span>
                 <span class="tl-org">
                   {t.org}
                   {t.client && <span class="tl-client">, client: {t.client}</span>}
@@ -542,6 +548,23 @@ const certs = [
 .tl-item.is-now .tl-role { color: var(--accent); }
 .tl-item:hover .tl-dot { transform: scale(1.4); background: var(--accent); }
 .tl-client { color: var(--accent); }
+.tl-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: .54rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border: 1px solid var(--border);
+  padding: .18rem .45rem;
+  border-radius: 2px;
+  margin-left: .65rem;
+  vertical-align: middle;
+  line-height: 1;
+  transition: color .25s, border-color .25s;
+}
+.tl-item:hover .tl-tag,
+.tl-item.is-now .tl-tag { color: var(--accent); border-color: rgba(154, 110, 42, .35); }
 
 /* ─── Currently: miiGenie callout ─── */
 .now-dot {
