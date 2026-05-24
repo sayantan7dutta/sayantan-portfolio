@@ -217,13 +217,25 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   <div class="container">
     <span class="clients-title">Selected clients</span>
     <p class="clients-sub">Organisations I've designed for, across enterprise software, industrial safety, manufacturing technology, and financial inclusion.</p>
-    <div class="clients-row">
-      <img src="/images/clients/ericsson.png" alt="Ericsson" style="height:40px;" />
-      <img src="/images/clients/mcafee.png" alt="McAfee" style="height:27px;" />
-      <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" style="height:33px;" />
-      <img src="/images/clients/itc.png" alt="ITC" style="height:48px;" />
-      <img src="/images/clients/soter-safety.jpeg" alt="Soter Safety Consulting" class="clients-soter" />
-      <img src="/images/clients/cgap.png" alt="CGAP" style="height:29px;" />
+    <div class="clients-marquee" aria-label="Selected client logos">
+      <div class="clients-track">
+        <!-- Set A -->
+        <img src="/images/clients/ericsson.png" alt="Ericsson" style="height:40px;" />
+        <img src="/images/clients/mcafee.png" alt="McAfee" style="height:27px;" />
+        <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" style="height:33px;" />
+        <img src="/images/clients/itc.png" alt="ITC" style="height:48px;" />
+        <img src="/images/clients/soter-safety.png" alt="Soter Safety Consulting" class="clients-soter" />
+        <img src="/images/clients/pensaar.png" alt="Pensaar Design" class="clients-pensaar" />
+        <img src="/images/clients/cgap.png" alt="CGAP" style="height:29px;" />
+        <!-- Set B (duplicate, aria-hidden — purely for seamless loop) -->
+        <img src="/images/clients/ericsson.png" alt="" aria-hidden="true" style="height:40px;" />
+        <img src="/images/clients/mcafee.png" alt="" aria-hidden="true" style="height:27px;" />
+        <img src="/images/clients/sherwin-williams.png" alt="" aria-hidden="true" style="height:33px;" />
+        <img src="/images/clients/itc.png" alt="" aria-hidden="true" style="height:48px;" />
+        <img src="/images/clients/soter-safety.png" alt="" aria-hidden="true" class="clients-soter" />
+        <img src="/images/clients/pensaar.png" alt="" aria-hidden="true" class="clients-pensaar" />
+        <img src="/images/clients/cgap.png" alt="" aria-hidden="true" style="height:29px;" />
+      </div>
     </div>
   </div>
 </section>
@@ -387,24 +399,54 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   max-width: 52ch;
   margin: .85rem auto 0;
 }
-.clients-row {
+.clients-marquee {
+  margin-top: 2.5rem;
+  overflow: hidden;
+  position: relative;
+  /* Edge fades use pseudo-elements rather than CSS mask, because mask-image
+     creates an isolation context that breaks mix-blend-mode on child logos. */
+}
+.clients-marquee::before,
+.clients-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: clamp(2.5rem, 7vw, 5rem);
+  pointer-events: none;
+  z-index: 2;
+}
+.clients-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, #ece7da 0%, rgba(236, 231, 218, 0) 100%);
+}
+.clients-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, #ece7da 0%, rgba(236, 231, 218, 0) 100%);
+}
+.clients-track {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: clamp(1.75rem, 5vw, 3.5rem);
-  margin-top: 2.5rem;
+  width: max-content;
+  gap: clamp(2.5rem, 5.5vw, 4.5rem);
+  padding-right: clamp(2.5rem, 5.5vw, 4.5rem); /* keeps loop spacing consistent */
+  animation: clients-scroll 45s linear infinite;
 }
-.clients-row img {
+.clients-marquee:hover .clients-track { animation-play-state: paused; }
+.clients-track img {
   width: auto;
   opacity: .9;
   transition: opacity .2s, transform .2s;
+  flex-shrink: 0;
 }
-.clients-row img:hover { opacity: 1; transform: translateY(-2px); }
-.clients-soter {
-  height: 50px;
-  /* Source JPEG has a white background; multiply blends it into the cream section */
-  mix-blend-mode: multiply;
+.clients-track img:hover { opacity: 1; transform: translateY(-2px); }
+.clients-soter   { height: 38px; }
+.clients-pensaar { height: 50px; }
+@keyframes clients-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clients-track { animation: none; }
 }
 
 /* ─── Work section ─── */
