@@ -3,14 +3,15 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import portrait from '../assets/sayantan-studio.jpg';
 
-// Career timeline — left to right, oldest to newest.
+// Career timeline, oldest to newest. `client` is optional.
 const timeline = [
-  { year: '2020',       role: 'Service Design Intern',      org: 'Pensaar Design' },
-  { year: '2020-23',  role: 'Product Designer → Lead',    org: 'TCS' },
-  { year: '2023-24',  role: 'Design Operations Lead',     org: 'TCS' },
-  { year: '2024-25',  role: 'MA Design Management',       org: 'Southampton' },
-  { year: '2025',       role: 'Senior Product Designer',    org: 'Soter Safety' },
-  { year: 'Now',        role: 'Lead Product Designer',      org: 'dAIs Genie · miiGenie' },
+  { year: '2020',    role: 'Service Design Intern',     org: 'Pensaar Design' },
+  { year: '2020-21', role: 'Product Designer',          org: 'TCS', client: 'Ericsson' },
+  { year: '2021-23', role: 'Lead Product Designer',     org: 'TCS', client: 'Ericsson' },
+  { year: '2023-24', role: 'Design Operations Lead',    org: 'TCS', client: 'Sherwin-Williams' },
+  { year: '2024-25', role: 'MA Design Management',      org: 'University of Southampton' },
+  { year: '2025',    role: 'Senior Product Designer',   org: 'Soter Safety' },
+  { year: 'Now',     role: 'Lead Product Designer',     org: 'dAIs Genie · miiGenie' },
 ];
 
 // Skill chips, grouped by category (sourced from CV).
@@ -83,7 +84,7 @@ const nowItems = [
 
 // Podcasts in rotation. `featured: true` highlights the cameo card.
 const podcasts = [
-  { name: 'Design as Leverage', url: 'https://open.spotify.com/episode/6ecf3EZgjKQgaDQiaOZdWA?si=d00511d8929a45bf', featured: true,  badge: 'Cameo' },
+  { name: 'Design as Leverage', url: 'https://open.spotify.com/episode/6ecf3EZgjKQgaDQiaOZdWA?si=d00511d8929a45bf', featured: true },
   { name: 'What the UX',        url: 'https://open.spotify.com/show/06zCSfjnln033zHotlqvZq?si=b393798010064a30' },
   { name: 'Design Life',        url: 'https://open.spotify.com/show/60VdDbOqh5NAqa82JRsZRq?si=ce81b00394a443d8' },
   { name: 'Blueprint of a Designer', url: 'https://open.spotify.com/show/4bUmQl8pJdDD85QLujojqy?si=542c62dd956c4349' },
@@ -149,7 +150,10 @@ const certs = [
                 <span class="tl-year">{t.year}</span>
                 <span class="tl-dot" aria-hidden="true"></span>
                 <span class="tl-role">{t.role}</span>
-                <span class="tl-org">{t.org}</span>
+                <span class="tl-org">
+                  {t.org}
+                  {t.client && <span class="tl-client">, client: {t.client}</span>}
+                </span>
               </li>
             ))}
           </ol>
@@ -537,6 +541,7 @@ const certs = [
 }
 .tl-item.is-now .tl-role { color: var(--accent); }
 .tl-item:hover .tl-dot { transform: scale(1.4); background: var(--accent); }
+.tl-client { color: var(--accent); }
 
 /* ─── Currently: miiGenie callout ─── */
 .now-dot {
