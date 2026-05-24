@@ -221,7 +221,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <img src="/images/clients/ericsson.png" alt="Ericsson" style="height:40px;" />
       <img src="/images/clients/mcafee.png" alt="McAfee" style="height:27px;" />
       <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" style="height:33px;" />
-      <span class="clients-wordmark" aria-label="Soter Safety Consulting">Soter <em>Safety</em></span>
+      <img src="/images/clients/soter-safety.jpeg" alt="Soter Safety Consulting" class="clients-soter" />
     </div>
   </div>
 </section>
@@ -399,22 +399,11 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
   transition: opacity .2s, transform .2s;
 }
 .clients-row img:hover { opacity: 1; transform: translateY(-2px); }
-.clients-wordmark {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 600;
-  letter-spacing: -.01em;
-  color: #4a4232;
-  opacity: .85;
-  line-height: 1;
-  transition: opacity .2s, transform .2s;
+.clients-soter {
+  height: 50px;
+  /* Source JPEG has a white background; multiply blends it into the cream section */
+  mix-blend-mode: multiply;
 }
-.clients-wordmark em {
-  font-style: italic;
-  font-weight: 500;
-  color: #6a5f48;
-}
-.clients-wordmark:hover { opacity: 1; transform: translateY(-2px); }
 
 /* ─── Work section ─── */
 .work-section { padding: clamp(4rem, 10vw, 7rem) 0; }
