@@ -4,17 +4,17 @@ import Base from '../layouts/Base.astro';
 import portrait from '../assets/sayantan-studio.jpg';
 
 // Career timeline, oldest to newest.
-// `client` is optional (used for agency / consulting work).
-// `contract` flags UK short-term engagements so the cadence reads correctly.
+// `client` is optional (agency / consulting work).
+// `tag` labels the engagement type (Internship, Full-time, Postgrad, Contract · UK).
 const timeline = [
-  { year: '2020',         role: 'Service Design Intern',     org: 'Pensaar Design' },
-  { year: '2020-21',      role: 'Product Designer',          org: 'TCS', client: 'Ericsson' },
-  { year: '2021-23',      role: 'Lead Product Designer',     org: 'TCS', client: 'Ericsson' },
-  { year: '2023-24',      role: 'Design Operations Lead',    org: 'TCS', client: 'Sherwin-Williams' },
-  { year: '2024-25',      role: 'MA Design Management',      org: 'University of Southampton' },
-  { year: 'Dec 24-Jan 25', role: 'Senior Product Designer',  org: 'SparkSoft Ltd',           contract: true },
-  { year: 'Jul-Aug 25',   role: 'Senior Product Designer',   org: 'Soter Safety Consulting', contract: true },
-  { year: '2026, now',    role: 'Lead Product Designer',     org: 'dAIs Genie · miiGenie',   contract: true },
+  { year: '2020',          role: 'Service Design Intern',  org: 'Pensaar Design',           tag: 'Internship' },
+  { year: '2020-21',       role: 'Product Designer',       org: 'TCS', client: 'Ericsson',  tag: 'Full-time' },
+  { year: '2021-23',       role: 'Lead Product Designer',  org: 'TCS', client: 'Ericsson',  tag: 'Full-time' },
+  { year: '2023-24',       role: 'Design Operations Lead', org: 'TCS', client: 'Sherwin-Williams', tag: 'Full-time' },
+  { year: '2024-25',       role: 'MA Design Management',   org: 'University of Southampton', tag: 'Postgrad' },
+  { year: 'Dec 24-Jan 25', role: 'Senior Product Designer', org: 'SparkSoft Ltd',            tag: 'Contract · UK' },
+  { year: 'Jun-Aug 25',    role: 'Senior Product Designer', org: 'Soter Safety Consulting',  tag: 'Contract · UK' },
+  { year: '2026, now',     role: 'Lead Product Designer',   org: 'dAIs Genie · miiGenie',    tag: 'Contract · UK' },
 ];
 
 // Skill chips, grouped by category (sourced from CV).
@@ -154,7 +154,7 @@ const certs = [
                 <span class="tl-dot" aria-hidden="true"></span>
                 <span class="tl-role">
                   {t.role}
-                  {t.contract && <span class="tl-tag">Contract · UK</span>}
+                  {t.tag && <span class="tl-tag">{t.tag}</span>}
                 </span>
                 <span class="tl-org">
                   {t.org}
