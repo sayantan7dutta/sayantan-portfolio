@@ -1,14 +1,15 @@
 ---
+import { Image } from 'astro:assets';
 import CaseStudy from '../../layouts/CaseStudy.astro';
 import CaseStudyHero from '../../components/CaseStudyHero.astro';
 import StatCards from '../../components/StatCards.astro';
 import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
 import BrowserFrame from '../../components/BrowserFrame.astro';
-import ImagePH from '../../components/ImagePH.astro';
 import Lightbox from '../../components/Lightbox.astro';
 
-// Until real screenshots are dropped in, the case study uses BrowserFrame
-// placeholders. Swap these for <Image src=...> when assets are ready.
+import heroImg from '../../assets/work/soter-software/hero.jpg';
+import productsImg from '../../assets/work/soter-software/products.jpg';
+import knowledgeImg from '../../assets/work/soter-software/knowledge-centre.jpg';
 
 const stats = [
   { num: '6',  label: 'Top-level sections rebuilt around how buyers evaluate process-safety software' },
@@ -18,11 +19,11 @@ const stats = [
 ---
 
 <CaseStudy
-  title="Soter Software, Migrating a Process-Safety Site from WordPress to Wix"
-  description="Replatformed Soter Software's website from WordPress to Wix and rebuilt the information architecture so engineering buyers could understand the product, the process, and the company without needing a sales call."
+  title="Soter Software, Rebuilding the Web Presence of a Process-Safety Company"
+  description="Migrated Soter Software off WordPress and rebuilt the website in Wix, with an information architecture that matches how engineering buyers actually evaluate process-safety software."
 >
   <CaseStudyHero
-    title="Replatforming a Process-Safety Site so it Could Sell as Well as the Software"
+    title="Rebuilding the Web Presence of a Process-Safety Company"
     lead="Soter Software, the company behind HAZOP Edge, needed a website that matched how their buyers actually think. I migrated them off WordPress, rebuilt the information architecture around the way process-safety engineers evaluate software, and handed them a Wix site their marketing team could run without a developer."
     tags={['Web Redesign', 'CMS Migration', 'B2B SaaS', '2025']}
     meta={[
@@ -33,9 +34,7 @@ const stats = [
     ]}
     heroPlaceholder="Soter Software, new homepage"
   >
-    <BrowserFrame slot="hero-image" label="sotersoftware.com">
-      <ImagePH label="Soter Software homepage" instructions="Drop a 16/10 screenshot of the new homepage at /src/assets/work/soter-software/hero.jpg, then swap this ImagePH for an <Image>." aspect="16/10" />
-    </BrowserFrame>
+    <Image slot="hero-image" src={heroImg} alt="Soter Software new homepage, 'Clarity to Prevent Major Accidents' over an aerial view of a process facility" class="cs-hero-img-el" loading="eager" />
   </CaseStudyHero>
 
   <div class="cs-body">
@@ -139,20 +138,20 @@ const stats = [
 
         <div class="cs-grid-3" style="margin-top:2rem;">
           <figure class="cs-figure reveal" style="margin:0;">
-            <BrowserFrame label="Home, after">
-              <ImagePH label="Homepage" instructions="Drop a screenshot of /sotersoftware.com here." aspect="16/10" />
+            <BrowserFrame label="sotersoftware.com">
+              <Image src={heroImg} alt="Soter Software homepage, 'Clarity to Prevent Major Accidents'" data-lightbox loading="lazy" />
             </BrowserFrame>
             <figcaption class="cs-figure-cap">Home: clarity-to-prevent-major-accidents positioning, above the fold</figcaption>
           </figure>
           <figure class="cs-figure reveal" style="margin:0;transition-delay:.08s;">
-            <BrowserFrame label="Products, HAZOP Edge">
-              <ImagePH label="Products page" instructions="Drop a screenshot of /sotersoftware.com/products here." aspect="16/10" />
+            <BrowserFrame label="sotersoftware.com/products">
+              <Image src={productsImg} alt="HAZOP Edge product page, four persona-anchored sections for Facilitators, Team Members, Project Managers, and Senior Management" data-lightbox loading="lazy" />
             </BrowserFrame>
             <figcaption class="cs-figure-cap">Products: HAZOP Edge organised by the four user personas</figcaption>
           </figure>
           <figure class="cs-figure reveal" style="margin:0;transition-delay:.16s;">
-            <BrowserFrame label="Knowledge Centre">
-              <ImagePH label="Knowledge Centre" instructions="Drop a screenshot of the Knowledge Centre listing." aspect="16/10" />
+            <BrowserFrame label="sotersoftware.com/knowledge-centre">
+              <Image src={knowledgeImg} alt="Knowledge Centre landing page with article listings" data-lightbox loading="lazy" />
             </BrowserFrame>
             <figcaption class="cs-figure-cap">Knowledge Centre: a publishing surface owned by marketing, not engineering</figcaption>
           </figure>

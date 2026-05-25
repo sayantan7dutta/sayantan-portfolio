@@ -66,8 +66,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'soter-software',
-    title: 'Replatforming a Process-Safety Site so it Could Sell as Well as the Software',
-    shortTitle: 'Soter Software, WordPress to Wix Migration',
+    title: 'Rebuilding the Web Presence of a Process-Safety Company',
+    shortTitle: 'Rebuilding a Process-Safety Web Presence',
     context: 'Web Redesign · CMS Migration · 2025',
   },
   {
