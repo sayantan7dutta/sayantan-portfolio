@@ -165,6 +165,162 @@ const stats = [
         </figure>
       </div>
 
+      <!-- Design system: two layers -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Design system · Architecture</span>
+        <h2 class="cs-heading reveal">EDS as the foundation. Scaling API as the branch.</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The Ericsson Design System handled brand alignment and core patterns. What it couldn't provide was everything a three-product API vertical needs. The real design work was the second layer: adapting what EDS gave us and building the pieces it hadn't had reason to include.
+        </p>
+
+        <!-- Two-layer diagram -->
+        <div class="eds-layers reveal" style="margin-top:2.25rem;">
+          <div class="eds-layer eds-layer-base">
+            <span class="eds-layer-tag">Layer 01 · EDS Foundation</span>
+            <h3 class="eds-layer-title">Ericsson Design System</h3>
+            <p class="eds-layer-desc">Brand tokens, core patterns, and enterprise-grade components applied to the vertical as-is wherever they held.</p>
+            <div class="eds-chips">
+              <span>Colour tokens</span>
+              <span>Typography</span>
+              <span>Button</span>
+              <span>Input &amp; Select</span>
+              <span>Table</span>
+              <span>Modal</span>
+              <span>Toast</span>
+              <span>Grid system</span>
+              <span>Base iconography</span>
+            </div>
+          </div>
+          <div class="eds-layer-connector" aria-hidden="true">
+            <span>built on top of</span>
+          </div>
+          <div class="eds-layer eds-layer-branch">
+            <span class="eds-layer-tag">Layer 02 · Scaling API Vertical</span>
+            <h3 class="eds-layer-title">Built for the vertical</h3>
+            <p class="eds-layer-desc">What a three-product API lifecycle tool specifically needed, on top of what EDS provided.</p>
+            <div class="eds-chips">
+              <span>API workflow status taxonomy</span>
+              <span>Table density variants</span>
+              <span>Multi-product nav shell</span>
+              <span>API Lifecycle wheel</span>
+              <span>Side-panel detail view</span>
+              <span>Code display blocks</span>
+              <span>ScalingAPI product identity</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colour tokens -->
+        <div class="reveal" style="margin-top:2.5rem;">
+          <span class="cs-section-lbl" style="display:block;margin-bottom:1.1rem;">Colour tokens</span>
+          <div class="eds-tokens">
+            <div class="eds-tok">
+              <span class="eds-tok-chip" style="background:#0B6BF2;"></span>
+              <div class="eds-tok-meta">
+                <strong>Primary · EDS Blue</strong>
+                <em>#0B6BF2</em>
+                <span>CTAs, focus rings, active nav</span>
+              </div>
+            </div>
+            <div class="eds-tok">
+              <span class="eds-tok-chip" style="background:#0C2340;"></span>
+              <div class="eds-tok-meta">
+                <strong>Shell · Nav dark</strong>
+                <em>#0C2340</em>
+                <span>Application chrome, top navigation</span>
+              </div>
+            </div>
+            <div class="eds-tok">
+              <span class="eds-tok-chip eds-tok-chip-light"></span>
+              <div class="eds-tok-meta">
+                <strong>Surface white</strong>
+                <em>#FFFFFF</em>
+                <span>Cards, panels, modal backgrounds</span>
+              </div>
+            </div>
+            <div class="eds-tok">
+              <span class="eds-tok-chip" style="background:#F59E0B;"></span>
+              <div class="eds-tok-meta">
+                <strong>Status · Pending Review</strong>
+                <em>#F59E0B · vertical layer</em>
+                <span>Plan and Design stages</span>
+              </div>
+            </div>
+            <div class="eds-tok">
+              <span class="eds-tok-chip" style="background:#16A34A;"></span>
+              <div class="eds-tok-meta">
+                <strong>Status · Live</strong>
+                <em>#16A34A · vertical layer</em>
+                <span>Build, Test, Published stages</span>
+              </div>
+            </div>
+            <div class="eds-tok">
+              <span class="eds-tok-chip" style="background:#7C3AED;"></span>
+              <div class="eds-tok-meta">
+                <strong>Portal accent</strong>
+                <em>#7C3AED · vertical layer</em>
+                <span>API Portal product differentiation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- API lifecycle status taxonomy -->
+        <div class="reveal" style="margin-top:2.5rem;">
+          <span class="cs-section-lbl" style="display:block;margin-bottom:.75rem;">API lifecycle status taxonomy · the custom contribution</span>
+          <p class="t-body" style="margin-bottom:1.25rem;max-width:64ch;">
+            EDS had standard feedback states: success, warning, error. An API vertical needs a richer review taxonomy. Six ordered stages, each with a defined colour and permitted transitions. An API in Design can move to Build or return to Plan. It cannot skip directly to Published.
+          </p>
+          <div class="eds-stages">
+            <div class="eds-stage">
+              <span class="eds-stage-pip" style="background:#94A3B8;"></span>
+              <span>Draft</span>
+            </div>
+            <span class="eds-stage-sep" aria-hidden="true">→</span>
+            <div class="eds-stage">
+              <span class="eds-stage-pip" style="background:#F59E0B;"></span>
+              <span>Plan</span>
+            </div>
+            <span class="eds-stage-sep" aria-hidden="true">→</span>
+            <div class="eds-stage">
+              <span class="eds-stage-pip" style="background:#8B5CF6;"></span>
+              <span>Design</span>
+            </div>
+            <span class="eds-stage-sep" aria-hidden="true">→</span>
+            <div class="eds-stage">
+              <span class="eds-stage-pip" style="background:#3B82F6;"></span>
+              <span>Build</span>
+            </div>
+            <span class="eds-stage-sep" aria-hidden="true">→</span>
+            <div class="eds-stage">
+              <span class="eds-stage-pip" style="background:#06B6D4;"></span>
+              <span>Test</span>
+            </div>
+            <span class="eds-stage-sep" aria-hidden="true">→</span>
+            <div class="eds-stage eds-stage-final">
+              <span class="eds-stage-pip" style="background:#16A34A;"></span>
+              <span>Published</span>
+            </div>
+          </div>
+          <p class="cs-figure-cap" style="margin-top:.75rem;">Each stage carries its colour, badge label, and defined forward and backward transitions, enforced in the data model and reflected consistently across all three products.</p>
+        </div>
+
+        <!-- System in context: annotated screens -->
+        <div class="reveal" style="margin-top:2.5rem;">
+          <span class="cs-section-lbl" style="display:block;margin-bottom:1.1rem;">System in context</span>
+          <div class="cs-two" style="margin-top:1.25rem;">
+            <figure class="cs-figure" style="margin:0;">
+              <Image src={heroImg} alt="API Console welcome screen with custom API Lifecycle wheel" data-lightbox loading="lazy" />
+              <figcaption class="cs-figure-cap">The API Lifecycle wheel sits above the EDS layer entirely. It gave the product a visual identity distinct from standard Ericsson tooling, without breaking brand alignment.</figcaption>
+            </figure>
+            <figure class="cs-figure" style="margin:0;">
+              <Image src={designDetailsImg} alt="High Level Design Details multi-step form using EDS patterns" data-lightbox loading="lazy" />
+              <figcaption class="cs-figure-cap">Design Details form: EDS stepper, inputs, and file-upload shell, adapted with API-specific field types and stage-aware labelling that EDS hadn't needed to define.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
       <!-- Before / After -->
       <div class="cs-section">
         <span class="cs-section-lbl">Before / after</span>
@@ -329,3 +485,192 @@ const stats = [
   <MoreCaseStudies current="api-lifecycle" />
   <Lightbox />
 </CaseStudy>
+
+<style>
+/* ─── EDS two-layer diagram ─── */
+.eds-layers {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+.eds-layer {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.75rem 1.6rem;
+  height: 100%;
+  box-sizing: border-box;
+}
+.eds-layer-base {
+  background: var(--surface);
+}
+.eds-layer-branch {
+  border-color: rgba(201,169,110,.45);
+  background: var(--accent-bg);
+}
+:global([data-theme="light"]) .eds-layer-branch {
+  border-color: rgba(154,110,42,.4);
+}
+.eds-layer-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 0 .5rem;
+}
+.eds-layer-connector::before,
+.eds-layer-connector::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+.eds-layer-tag {
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  display: block;
+  margin-bottom: .5rem;
+}
+.eds-layer-branch .eds-layer-tag {
+  color: var(--accent);
+}
+.eds-layer-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin: 0 0 .5rem;
+}
+.eds-layer-desc {
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--text-2);
+  margin: 0 0 1.1rem;
+}
+.eds-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+.eds-chips span {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .04em;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: .28rem .6rem;
+}
+.eds-layer-branch .eds-chips span {
+  border-color: rgba(201,169,110,.35);
+  color: var(--text-1);
+}
+
+/* ─── Colour tokens ─── */
+.eds-tokens {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1rem;
+}
+.eds-tok {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+}
+.eds-tok-chip {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: block;
+}
+.eds-tok-chip-light {
+  background: #fff;
+  outline: 1px solid var(--border);
+}
+.eds-tok-meta strong {
+  display: block;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+.eds-tok-meta em {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  letter-spacing: .06em;
+  color: var(--text-3);
+  font-style: normal;
+  margin-top: .15rem;
+}
+.eds-tok-meta span {
+  display: block;
+  font-size: .72rem;
+  color: var(--text-2);
+  margin-top: .2rem;
+}
+
+/* ─── API lifecycle status stages ─── */
+.eds-stages {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.eds-stage {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .55rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+}
+.eds-stage-final {
+  border-color: rgba(22,163,74,.4);
+  background: rgba(22,163,74,.06);
+}
+.eds-stage-pip {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: block;
+}
+.eds-stage span:last-child,
+.eds-stage > span:not(.eds-stage-pip) {
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.eds-stage-sep {
+  color: var(--text-3);
+  font-size: .8rem;
+}
+
+@media (max-width: 820px) {
+  .eds-layers {
+    grid-template-columns: 1fr;
+  }
+  .eds-layer-connector {
+    flex-direction: row;
+    padding: .25rem 0;
+  }
+  .eds-layer-connector::before,
+  .eds-layer-connector::after {
+    width: 28px;
+    height: 1px;
+  }
+}
+</style>
