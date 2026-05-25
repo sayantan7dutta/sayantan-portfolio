@@ -34,6 +34,12 @@ export const caseStudies: CaseStudy[] = [
     thumb: hazopThumb,
   },
   {
+    slug: 'soter-software',
+    title: 'Replatforming a Process-Safety Site so it Could Sell as Well as the Software',
+    shortTitle: 'Soter Software, WordPress to Wix Migration',
+    context: 'Web Redesign · CMS Migration · 2025',
+  },
+  {
     slug: 'amble',
     title: 'Designing Care for an Ageing Society in 2065',
     shortTitle: 'Amble, a Speculative Service Design',

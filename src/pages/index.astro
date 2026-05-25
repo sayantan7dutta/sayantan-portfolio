@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import KvPhoneTrio from '../components/KvPhoneTrio.astro';
 import SWOpsHero from '../components/SWOpsHero.astro';
+import SoterSiteCover from '../components/SoterSiteCover.astro';
 import portrait from '../assets/sayantan.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
@@ -92,8 +93,31 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 02 Amble — Ageing 2065 -->
+    <!-- 02 Soter Software, WordPress to Wix migration -->
     <article class="project-item project-item-alt reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <SoterSiteCover />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">02</span>
+            <span class="t-tag">Web Redesign · CMS Migration · 2025</span>
+          </div>
+          <h2 class="p-title">Replatforming a Process-Safety Site so it Could Sell as Well as the Software</h2>
+          <p class="p-desc">Migrated Soter Software, the company behind HAZOP Edge, from WordPress to Wix. Rebuilt the information architecture around how engineering buyers actually evaluate process-safety software, and handed marketing a site they could run without a developer.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">Soter Software · Web Design &amp; IA</span>
+          <a href="/work/soter-software" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 Amble, Ageing 2065 -->
+    <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
           <Image src={ambleThumb} alt="Amble concept for an ageing society in 2065" class="p-img-actual" loading="lazy" />
@@ -102,7 +126,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">02</span>
+            <span class="p-num">03</span>
             <span class="t-tag t-tag-speculative">Speculative · Foresight Design · 2025</span>
           </div>
           <h2 class="p-title">Designing Care for an Ageing Society in 2065</h2>
@@ -115,8 +139,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 03 Ericsson — Designer to Design Leader -->
-    <article class="project-item reveal">
+    <!-- 04 Ericsson, Designer to Design Leader -->
+    <article class="project-item project-item-alt reveal">
       <div class="p-img-col">
         <div class="p-img">
           <!-- Real Ericsson API Console screenshot.
@@ -127,7 +151,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">03</span>
+            <span class="p-num">04</span>
             <span class="t-tag">B2B SaaS · IT · 2020-2023</span>
           </div>
           <h2 class="p-title">Designing a B2B SaaS API Console for Ericsson</h2>
@@ -140,8 +164,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 04 Sherwin-Williams — Design Operations -->
-    <article class="project-item project-item-alt reveal">
+    <!-- 05 Sherwin-Williams, Design Operations -->
+    <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
           <SWOpsHero />
@@ -150,7 +174,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">04</span>
+            <span class="p-num">05</span>
             <span class="t-tag">Design Ops · Sherwin-Williams · 2024</span>
           </div>
           <h2 class="p-title">Building Design Operations at Scale</h2>
@@ -163,8 +187,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 05 KinVault -->
-    <article class="project-item reveal">
+    <!-- 06 KinVault -->
+    <article class="project-item project-item-alt reveal">
       <div class="p-img-col">
         <div class="p-img">
           <KvPhoneTrio />
@@ -173,7 +197,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">05</span>
+            <span class="p-num">06</span>
             <span class="t-tag t-tag-speculative">Concept · Premium Fintech · 2025</span>
           </div>
           <h2 class="p-title">KinVault Heritage, a Digital Vault-Atelier</h2>
@@ -186,8 +210,8 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 06 Pensaar -->
-    <article class="project-item project-item-alt reveal">
+    <!-- 07 Pensaar -->
+    <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
           <Image src={pensaarThumb} alt="Pensaar Design website" class="p-img-actual" loading="lazy" />
@@ -196,7 +220,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">06</span>
+            <span class="p-num">07</span>
             <span class="t-tag">Web Redesign · Internship · 2020</span>
           </div>
           <h2 class="p-title">Elevating the Digital Presence of a Design Thinking Agency</h2>

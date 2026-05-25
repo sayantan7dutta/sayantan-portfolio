@@ -1,0 +1,126 @@
+---
+/**
+ * Branded cover for the Soter Software case study, used as the project
+ * card image on the homepage and in the MoreCaseStudies grid until real
+ * screenshots are ready. Soter brand language: deep navy + sun-yellow
+ * accent on cream/white type, with the rebuilt 6-section sitemap as
+ * the headline visual.
+ */
+const sections = ['Home', 'About', 'Products', 'Knowledge', 'FAQs', 'Contact'];
+---
+
+<div class="ss-cover">
+  <div class="ss-head">
+    <span class="ss-brand">Soter Software</span>
+    <span class="ss-tag">Clarity to Prevent Major Accidents</span>
+  </div>
+
+  <ol class="ss-sitemap" aria-label="Sitemap, after">
+    {sections.map((s, i) => (
+      <li class="ss-chip">
+        <span class="ss-num">{String(i + 1).padStart(2, '0')}</span>
+        <span class="ss-name">{s}</span>
+      </li>
+    ))}
+  </ol>
+
+  <div class="ss-foot">
+    <span class="ss-from">WordPress</span>
+    <span class="ss-arrow" aria-hidden="true">→</span>
+    <span class="ss-to">Wix</span>
+    <span class="ss-foot-lbl">CMS migration, IA rebuild</span>
+  </div>
+</div>
+
+<style>
+  .ss-cover {
+    width: 100%;
+    height: 100%;
+    background: #143251;             /* Soter navy */
+    color: #F4F1E8;
+    padding: 1.6rem 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    font-family: var(--font-body);
+  }
+  .ss-head { display: flex; flex-direction: column; gap: .25rem; }
+  .ss-brand {
+    font-family: var(--font-mono);
+    font-size: .55rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #F5C242;                  /* Soter sun-yellow */
+  }
+  .ss-tag {
+    font-family: var(--font-display);
+    font-size: clamp(.95rem, 1.6vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.25;
+    color: #F4F1E8;
+  }
+
+  .ss-sitemap {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .45rem;
+  }
+  .ss-chip {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .25rem;
+    padding: .55rem .65rem;
+    border: 1px solid rgba(244, 241, 232, .22);
+    border-radius: 2px;
+    background: rgba(244, 241, 232, .04);
+  }
+  .ss-num {
+    font-family: var(--font-mono);
+    font-size: .5rem;
+    letter-spacing: .14em;
+    color: rgba(245, 194, 66, .85);
+  }
+  .ss-name {
+    font-family: var(--font-display);
+    font-size: .82rem;
+    font-weight: 500;
+    color: #F4F1E8;
+    line-height: 1.1;
+  }
+
+  .ss-foot {
+    display: flex;
+    align-items: baseline;
+    gap: .55rem;
+    padding-top: .85rem;
+    border-top: 1px solid rgba(244, 241, 232, .14);
+  }
+  .ss-from, .ss-to {
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .04em;
+    color: #F4F1E8;
+  }
+  .ss-arrow {
+    font-family: var(--font-mono);
+    color: #F5C242;
+    font-size: .8rem;
+  }
+  .ss-foot-lbl {
+    font-family: var(--font-mono);
+    font-size: .52rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(244, 241, 232, .55);
+    margin-left: auto;
+  }
+
+  @media (max-width: 560px) {
+    .ss-sitemap { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
