@@ -86,11 +86,17 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 
   <!-- Nav scroll behaviour -->
   <script>
+    // Module-scoped flag survives across astro:page-load fires (because the
+    // module is only evaluated once). Without this, every nav re-runs initNav
+    // and stacks another scroll listener on the window.
+    let navBound = false;
     function initNav() {
       const nav = document.querySelector('.nav') as HTMLElement | null;
       if (!nav) return;
-      window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
       nav.classList.toggle('scrolled', scrollY > 40);
+      if (navBound) return;
+      navBound = true;
+      window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
     }
     initNav();
     document.addEventListener('astro:page-load', initNav);
@@ -98,14 +104,18 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 
   <!-- Theme toggle -->
   <script>
+    // The toggle button persists across view transitions (transition:persist on
+    // .nav), but this script can run again. Tag the button so we don't bind a
+    // second click handler -- two handlers would toggle twice and cancel out.
     function initTheme() {
-      const btn = document.getElementById('theme-toggle');
+      const btn = document.getElementById('theme-toggle') as HTMLButtonElement | null;
       if (!btn) return;
       const html = document.documentElement;
-      const saved = localStorage.getItem('theme') ?? 'dark';
-      html.dataset.theme = saved;
-      updateIcon(saved);
-
+      const current = (localStorage.getItem('theme') ?? html.dataset.theme ?? 'dark') as 'dark' | 'light';
+      html.dataset.theme = current;
+      updateIcon(current);
+      if (btn.dataset.bound === '1') return;
+      btn.dataset.bound = '1';
       btn.addEventListener('click', () => {
         const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
         html.dataset.theme = next;
