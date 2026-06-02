@@ -70,7 +70,8 @@ const hobbies = [
 
 // "Now" mini-cards. Swap these any time, they're meant to feel current.
 // If `link` is set, the whole card becomes a link.
-const nowItems = [
+interface NowItem { cat: string; title: string; sub: string; icon: string; link?: string; }
+const nowItems: NowItem[] = [
   {
     cat: 'Watching',
     title: 'Daredevil: Born Again, S2',
@@ -86,7 +87,8 @@ const nowItems = [
 ];
 
 // Podcasts in rotation. `featured: true` highlights the cameo card.
-const podcasts = [
+interface Podcast { name: string; url: string; featured?: boolean; badge?: string; }
+const podcasts: Podcast[] = [
   { name: 'Design as Leverage', url: 'https://open.spotify.com/episode/6ecf3EZgjKQgaDQiaOZdWA?si=d00511d8929a45bf', featured: true },
   { name: 'What the UX',        url: 'https://open.spotify.com/show/06zCSfjnln033zHotlqvZq?si=b393798010064a30' },
   { name: 'Design Life',        url: 'https://open.spotify.com/show/60VdDbOqh5NAqa82JRsZRq?si=ce81b00394a443d8' },
