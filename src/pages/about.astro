@@ -125,7 +125,11 @@ const certs = [
 
       <!-- Content column -->
       <div>
-        <span class="t-label">About</span>
+        <!-- a11y: every page needs an <h1>. The visible "About" label is
+             a mono caption, not a heading, so we surface a real h1 here
+             for SR users and SEO without changing the visual design. -->
+        <h1 class="sr-only">About Sayantan Dutta</h1>
+        <span class="t-label" aria-hidden="true">About</span>
         <p class="about-intro reveal" style="transition-delay:.1s;">
           I'm a Product Designer who works best where <em>complexity meets clarity</em>, turning systems that are genuinely difficult into experiences that feel obvious.
         </p>
@@ -204,7 +208,7 @@ const certs = [
           <div class="tool-grid" role="list" aria-label="Tools I work with">
             {tools.map((t) => (
               <div class="tool-tile" role="listitem">
-                <img src={`/images/tools/${t.file}`} alt="" class="tool-mark" loading="lazy" />
+                <img src={`/images/tools/${t.file}`} alt="" aria-hidden="true" class="tool-mark" loading="lazy" />
                 <span class="tool-name">{t.name}</span>
               </div>
             ))}
@@ -230,7 +234,7 @@ const certs = [
             {certs.map((c) => (
               <div class="cert-card" role="listitem">
                 <div class="cert-logo-wrap" aria-hidden="true">
-                  <img src={`/images/certs/${c.logo}`} alt="" class="cert-logo" loading="lazy" />
+                  <img src={`/images/certs/${c.logo}`} alt="" aria-hidden="true" class="cert-logo" loading="lazy" />
                 </div>
                 <p class="cert-title">{c.title}</p>
                 <p class="cert-issuer">{c.issuer}</p>

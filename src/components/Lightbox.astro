@@ -1,8 +1,12 @@
 ---
 ---
 
-<div class="lb-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button class="lb-close" id="lb-close" aria-label="Close">Close ✕</button>
+<!-- a11y: aria-hidden toggles instead of [hidden] so the fade transition
+     still runs. The dialog/modal role only matters once the user opens it. -->
+<div class="lb-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-close" id="lb-close" type="button" aria-label="Close image viewer">
+    Close <span aria-hidden="true">✕</span>
+  </button>
   <img id="lb-img" src="" alt="" />
 </div>
 
@@ -10,27 +14,55 @@
   function initLightbox() {
     const overlay = document.getElementById('lightbox') as HTMLElement | null;
     const img = document.getElementById('lb-img') as HTMLImageElement | null;
-    const closeBtn = document.getElementById('lb-close');
-    if (!overlay || !img) return;
+    const closeBtn = document.getElementById('lb-close') as HTMLButtonElement | null;
+    if (!overlay || !img || !closeBtn) return;
 
-    function open(src: string, alt: string) {
+    // a11y: remember which element opened the modal so we can return focus
+    // there on close (WCAG 2.4.3 Focus Order).
+    let lastTrigger: HTMLElement | null = null;
+
+    function open(src: string, alt: string, trigger: HTMLElement) {
       img!.src = src;
       img!.alt = alt;
+      overlay!.setAttribute('aria-hidden', 'false');
       overlay!.classList.add('open');
       document.body.style.overflow = 'hidden';
+      lastTrigger = trigger;
+      // Focus the close button so keyboard users can dismiss immediately.
+      closeBtn!.focus();
     }
     function close() {
       overlay!.classList.remove('open');
+      overlay!.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      // Return focus to the element that opened the modal.
+      lastTrigger?.focus();
+      lastTrigger = null;
     }
 
-    closeBtn?.addEventListener('click', close);
+    closeBtn.addEventListener('click', close);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay!.classList.contains('open')) close();
+    });
 
-    document.querySelectorAll<HTMLImageElement>('img[data-lightbox]').forEach(el => {
+    document.querySelectorAll<HTMLImageElement>('img[data-lightbox]').forEach((el) => {
+      // a11y: an <img> isn't focusable by default; tabindex makes it
+      // reachable. role=button + keyboard handler make it activatable like
+      // a button. Cursor + aria-label communicate the affordance visually
+      // and to AT.
       el.style.cursor = 'zoom-in';
-      el.addEventListener('click', () => open(el.src, el.alt));
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      const baseAlt = el.alt || 'image';
+      el.setAttribute('aria-label', `View full size: ${baseAlt}`);
+      el.addEventListener('click', () => open(el.src, baseAlt, el));
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(el.src, baseAlt, el);
+        }
+      });
     });
   }
 

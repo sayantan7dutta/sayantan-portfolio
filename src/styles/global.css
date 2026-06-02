@@ -12,13 +12,14 @@
   --bg:        #080808;
   --surface:   #0F0F0F;
   --surface-2: #161616;
-  --border:    #1E1E1E;
-  --text-1:    #F2EDE6;
-  --text-2:    #8A8478;
-  --text-3:    #4A4640;
-  --accent:    #C9A96E;
+  --border:    #2A2A2A;            /* a11y: was #1E1E1E (1.20:1), now 1.43:1 against bg; paired with focus rings for real signal */
+  --text-1:    #F2EDE6;            /* 17.20:1 on bg */
+  --text-2:    #8A8478;            /* 5.39:1 — was already passing, left alone */
+  --text-3:    #857F73;            /* a11y: was #4A4640 (2.14:1 FAIL), now 5.04:1 — clears AA for mono labels */
+  --accent:    #C9A96E;            /* 8.95:1 on bg */
   --accent-bg: rgba(201,169,110,.07);
   --accent-hover: rgba(201,169,110,.14);
+  --focus-ring: #E2C892;           /* a11y: bright mocha for focus, ~12:1 on dark, ~3.5:1 on light */
 
   --nav-h: 64px;
   --max-w: 1120px;
@@ -31,13 +32,14 @@
   --bg:        #F5F0E8;
   --surface:   #EDE8DF;
   --surface-2: #E5DDD3;
-  --border:    #D4CBBC;
-  --text-1:    #1A1714;
-  --text-2:    #5A534C;
-  --text-3:    #9A9082;
-  --accent:    #9A6E2A;
-  --accent-bg: rgba(154,110,42,.07);
-  --accent-hover: rgba(154,110,42,.14);
+  --border:    #B8AC95;            /* a11y: was #D4CBBC (1.42:1), now 2.31:1 — stronger card edges */
+  --text-1:    #1A1714;            /* 15.73:1 */
+  --text-2:    #5A534C;            /* 6.67:1 */
+  --text-3:    #6E6760;            /* a11y: was #9A9082 (2.77:1 FAIL), now 4.91:1 */
+  --accent:    #8B6322;            /* a11y: was #9A6E2A (3.99:1), now 4.74:1 — clears AA for normal text */
+  --accent-bg: rgba(139,99,34,.07);
+  --accent-hover: rgba(139,99,34,.14);
+  --focus-ring: #5A3F12;           /* a11y: dark mocha, ~10:1 on light bg */
 }
 
 /* ─── Reset ─── */
@@ -56,6 +58,59 @@ body {
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
+
+/* ─── A11y: focus indicators ───
+   WCAG 2.4.7: every focusable element must show a visible focus state.
+   :focus-visible avoids the ring on mouse clicks but always shows it on
+   keyboard nav. The 3px ring + 2px offset guarantees a 3:1 visual against
+   any surface in either theme. */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* Most of our buttons/links already have border-radius: 2px; this is just
+   a sane default for things that don't. */
+
+/* ─── A11y: skip-to-main link ───
+   WCAG 2.4.1: bypass repeated nav blocks. Hidden until focused. */
+.skip-link {
+  position: absolute;
+  top: 0; left: 0;
+  padding: .75rem 1rem;
+  background: var(--bg);
+  color: var(--text-1);
+  border: 2px solid var(--focus-ring);
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  z-index: 200;
+  transform: translateY(-150%);
+  transition: transform .2s var(--ease);
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: none;
+}
+
+/* ─── A11y: visually-hidden utility ───
+   For text that's only for assistive tech (e.g. an <h1> we don't want to
+   render visually but need for landmark structure). */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* a11y: <main> is given tabindex=-1 to be focusable from the skip link.
+   We don't want a focus ring around the entire page when that happens. */
+main:focus { outline: none; }
 
 /* ─── Film grain overlay ─── */
 body::before {
@@ -219,15 +274,18 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 
 /* Theme toggle */
 .theme-toggle {
-  width: 32px; height: 32px;
+  /* a11y: 40x40 to approach WCAG 2.5.5 (44x44 ideal; 40 keeps the nav
+     proportional and is the iOS standard. Padded enough on touch.) */
+  width: 40px; height: 40px;
   display: flex; align-items: center; justify-content: center;
   background: none;
   border: 1px solid var(--border);
   border-radius: 2px;
-  color: var(--text-3);
+  color: var(--text-2);
   cursor: pointer;
   transition: border-color .2s, color .2s, background .2s;
-  font-size: .85rem;
+  font-size: .95rem;
+  line-height: 1;
 }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
 
@@ -1080,4 +1138,8 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
+  /* a11y: hide the custom RAF-driven cursor entirely — it loops every
+     frame regardless of CSS, so masking it via display:none is the only
+     way to honour the user's PRM preference. */
+  .cursor { display: none !important; }
 }

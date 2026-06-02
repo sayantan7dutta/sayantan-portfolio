@@ -5,12 +5,14 @@ interface Props {
 const { activeNav } = Astro.props;
 ---
 
-<nav class="nav" transition:persist>
+<nav class="nav" transition:persist aria-label="Primary">
   <a href="/" class="nav-name">Sayantan Dutta</a>
   <div class="nav-links">
     <a href="/" class="nav-link" aria-current={activeNav === 'work' ? 'page' : undefined}>Work</a>
     <a href="/about" class="nav-link" aria-current={activeNav === 'about' ? 'page' : undefined}>About</a>
-    <a href="/resume.pdf" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">◑</button>
+    <a href="/resume.pdf" target="_blank" rel="noopener" class="nav-resume">Resume <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+    <!-- a11y: aria-label is set in JS to reflect the current theme. The
+         Unicode glyph inside is decorative and hidden from screen readers. -->
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light theme"><span aria-hidden="true">◑</span></button>
   </div>
 </nav>
