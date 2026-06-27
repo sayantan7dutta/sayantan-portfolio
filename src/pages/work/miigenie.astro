@@ -1,0 +1,505 @@
+---
+import { Image } from 'astro:assets';
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import CaseStudyHero from '../../components/CaseStudyHero.astro';
+import StatCards from '../../components/StatCards.astro';
+import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
+import MgPhoneTrio from '../../components/MgPhoneTrio.astro';
+import Lightbox from '../../components/Lightbox.astro';
+
+import homeImg from '../../assets/work/miigenie/home.png';
+import beforeHomeImg from '../../assets/work/miigenie/before-home.png';
+import listeningImg from '../../assets/work/miigenie/listening.png';
+import onboardingImg from '../../assets/work/miigenie/onboarding.png';
+import errorImg from '../../assets/work/miigenie/error-state.png';
+import carerImg from '../../assets/work/miigenie/carer-home.png';
+import connectImg from '../../assets/work/miigenie/connect.png';
+import documentImg from '../../assets/work/miigenie/document.png';
+
+const stats = [
+  { num: '2', label: 'User roles designed as one product: seniors and their family carers' },
+  { num: '5', label: 'Personas grounding every flow, from the living-alone senior to the working caregiver' },
+  { num: '90%', label: 'UK accent recognition target for the voice loop, with a typed fallback on every step' },
+];
+
+// Research personas, condensed from the full persona set.
+const personas = [
+  { who: 'Senior', age: '70-75', name: 'Living alone, away from family',
+    note: 'Wants to run her own life: medication on time, paperwork in order, family a tap away. Anxious that technology will make her feel stupid.' },
+  { who: 'Senior', age: '75-85', name: 'Recently moved, network lost',
+    note: 'New town, old habits gone. Wants to rebuild a routine and a social circle without depending on the family he moved closer to.' },
+  { who: 'Senior', age: '70-80', name: 'Prefers their own company',
+    note: 'Independent by choice. No interest in community groups; wants appointments, documents and health admin handled without fuss.' },
+  { who: 'Carer', age: '45-55', name: 'The busy family carer',
+    note: 'Sandwich generation. Helps parents with life admin from a distance while raising children. Needs visibility without surveillance.' },
+  { who: 'Carer', age: '60-66', name: 'The working caregiver',
+    note: 'Caring for a parent while still working full-time. The app has to be self-explanatory, because she has no spare hours to be tech support.' },
+];
+
+// Senior journey, condensed: the pain at each stage and the design response.
+const journey = [
+  { stage: 'Awareness',     pain: 'Hard to gauge whether a tech brand can be trusted at all.',
+    response: 'A warm, human identity, and a carer-led introduction path so the first contact comes from family, not an advert.' },
+  { stage: 'Consideration', pain: 'Comparing apps is exhausting and time-consuming.',
+    response: 'One clear promise, practical daily help, instead of a feature list.' },
+  { stage: 'Trial',         pain: 'Fear of being harassed for feedback or trapped by a card on file.',
+    response: 'A one-month trial on phone-number registration alone. Feedback is gathered in context, never by ambush.' },
+  { stage: 'Purchase',      pain: 'Working out what the app costs, and when, is genuinely confusing.',
+    response: 'The subscription page states the trial end date and terms in plain sentences before any commitment.' },
+  { stage: 'Service',       pain: 'Subscription tiers written for marketers, not for seniors.',
+    response: 'Two tiers only, each explained in words rather than a comparison matrix.' },
+  { stage: 'Retention',     pain: 'Deciding whether the app deserves a place in their life.',
+    response: 'The app earns it through routine: reminders that fire, documents that surface, a day that feels held together.' },
+];
+---
+
+<CaseStudy
+  title="miiGenie · Designing a Voice-First AI Companion for Older Adults"
+  description="Founding product designer for miiGenie, a voice-first AI companion that helps older adults live independently while giving family carers confidence. Ongoing, with MVP 1.1 entering production."
+>
+  <CaseStudyHero
+    title="Designing a Voice-First AI Companion for Older Adults"
+    lead="miiGenie helps older adults live independently while giving family carers confidence from a distance. I joined as the founding designer when the product was a working Flutter build without a design identity, and I have been giving it one since: a system, a voice, and an experience calm enough for a 75-year-old to trust."
+    tags={['AI Companion', 'Voice-First', 'iOS · Android', 'Current · 2026']}
+    meta={[
+      { key: 'Role', val: 'Lead Product Designer, founding designer' },
+      { key: 'Company', val: 'dAIs Genie, UK' },
+      { key: 'Platform', val: 'iOS and Android, built in Flutter' },
+      { key: 'Status', val: 'Ongoing · MVP 1.1 entering production' },
+    ]}
+    heroPlaceholder="miiGenie app screens"
+  >
+    <div slot="hero-image" class="mg-hero-wrap"><MgPhoneTrio /></div>
+  </CaseStudyHero>
+
+  <div class="cs-body">
+    <div class="container">
+
+      <!-- Context note -->
+      <div class="cs-section" style="padding-top:0;">
+        <blockquote class="cs-insight reveal" style="margin:0;">
+          <p>This is a live engagement, written from inside the work. The MVP is design-complete and entering production this month; a fuller case study with pilot results will follow once the first users are in. What is here is the part that is already true: the research, the system, and the decisions.</p>
+        </blockquote>
+      </div>
+
+      <!-- Problem / Approach -->
+      <div class="cs-section">
+        <div class="cs-two">
+          <div class="reveal">
+            <span class="cs-section-lbl">Problem</span>
+            <h2 class="cs-subheading">Smartphones quietly assume a user who isn't 75</h2>
+            <p class="t-body" style="margin-top:1rem;">Most apps assume steady hands, sharp eyesight, fast reading, and a mental model built from twenty years of using software. Many older adults have none of those, so the people who most need help with medication, documents, and staying connected get the least usable tools. Families absorb the gap, becoming remote tech support for parents who feel embarrassed asking.</p>
+            <p class="t-body" style="margin-top:.75rem;">The existing "senior app" category mostly patronises: huge buttons wrapped around stripped-down features, designed as if ageing meant losing the right to a capable product.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <span class="cs-section-lbl">Approach</span>
+            <h2 class="cs-subheading">Voice-first, never voice-only, and two users at once</h2>
+            <p class="t-body" style="margin-top:1rem;">miiGenie leads with the one interface older adults already master: talking. Every core job, reminders, finding a document, recording how the day went, calling for help, can be done by speaking. And every voice step has a typed fallback, because dignity means never being stuck.</p>
+            <p class="t-body" style="margin-top:.75rem;">The second design surface is the family carer: pairing, check-ins, and visibility designed as reassurance rather than surveillance. The product is deliberately framed as supportive everyday companionship, with hard guardrails: it is not a therapist and never pretends to be a relationship.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Founding designer -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Joining as the founding designer</span>
+        <h2 class="cs-heading reveal">The product I inherited worked. It didn't speak.</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          When I joined in March 2026, the engineering team had already shipped a functional Flutter build: registration, a voice loop, reminders. What it lacked was an identity. Emoji stood in for icons, components varied screen to screen, error states dead-ended, and nothing about it said "built for you" to a senior. My first job was not drawing screens, it was giving the company a design function: a visual language, an accessibility baseline, a Figma system the developers could actually build from, and a review rhythm so quality survived contact with the sprint.
+        </p>
+
+        <div class="ba-grid reveal" style="margin-top:2.25rem;">
+          <figure class="ba-col">
+            <span class="ba-tag is-before">Before · the build as I found it</span>
+            <div class="ba-shot">
+              <Image src={beforeHomeImg} alt="Original miiGenie home screen from the developer build" data-lightbox loading="lazy" />
+            </div>
+            <figcaption class="cs-figure-cap">The screens worked, but flat and generic: dark tiles, little warmth, and no hierarchy guiding the eye to the main voice action</figcaption>
+          </figure>
+          <figure class="ba-col">
+            <span class="ba-tag is-after">After · the designed system</span>
+            <div class="ba-shot">
+              <Image src={homeImg} alt="Redesigned miiGenie senior home: four large tiles, a central speak button, I'm OK and Home Emergency actions" data-lightbox loading="lazy" />
+            </div>
+            <figcaption class="cs-figure-cap">Warm cream and deep teal, large type, one clear voice action, help and reassurance held calmly at the foot</figcaption>
+          </figure>
+        </div>
+
+        <div class="sys-points reveal" style="margin-top:2rem;">
+          <div class="sys-point">
+            <span class="sys-num">01</span>
+            <p class="sys-title">A visual language with a temperature</p>
+            <p class="sys-desc">Warm cream surfaces, deep teal actions, generous type. Calm over clever, familiarity over fashion.</p>
+          </div>
+          <div class="sys-point">
+            <span class="sys-num">02</span>
+            <p class="sys-title">An accessibility baseline, not an afterthought</p>
+            <p class="sys-desc">WCAG AA contrast, 48dp minimum touch targets, large-font resilience, and copy written for reading ease.</p>
+          </div>
+          <div class="sys-point">
+            <span class="sys-num">03</span>
+            <p class="sys-title">A component library the team builds from</p>
+            <p class="sys-desc">Every flow specified with its edge states in Figma, so what ships is what was designed.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Research</span>
+        <h2 class="cs-heading reveal">Five people the product has to work for</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The research distilled into five personas across the two roles, and a journey map for each role from first awareness through to retention. The personas are not demographics, they are relationships to independence: each one wants to stay capable, and fears the moment technology proves they aren't.
+        </p>
+
+        <div class="persona-strip reveal" style="margin-top:2rem;">
+          {personas.map((p) => (
+            <div class="persona-tile">
+              <div class="persona-head">
+                <span class={`persona-role-tag ${p.who === 'Carer' ? 'is-carer' : ''}`}>{p.who}</span>
+                <span class="persona-age">{p.age}</span>
+              </div>
+              <p class="persona-name">{p.name}</p>
+              <p class="persona-note">{p.note}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 class="cs-subheading reveal" style="margin-top:3rem;">The senior journey, and what the design does about it</h3>
+        <ol class="journey reveal" style="margin-top:1.5rem;">
+          {journey.map((j, i) => (
+            <li class="journey-row">
+              <div class="journey-stage">
+                <span class="journey-num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="journey-name">{j.stage}</span>
+              </div>
+              <p class="journey-pain">{j.pain}</p>
+              <p class="journey-response">{j.response}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <!-- Voice-first -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Voice interaction</span>
+        <h2 class="cs-heading reveal">Voice-first, never voice-only</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Voice is the interface older adults already know, but it is also the one that fails most publicly. So the voice loop is designed around patience and forgiveness: the app waits without a countdown, every voice step offers "type instead", and a failed attempt produces help rather than a dead end.
+        </p>
+
+        <div class="ph-grid reveal" style="margin-top:2rem;">
+          <figure>
+            <Image src={onboardingImg} alt="Voice-guided onboarding step asking which city you live in, with the spoken answer shown and a type-instead fallback field" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Onboarding is a conversation: four spoken questions, each with a typed fallback</figcaption>
+          </figure>
+          <figure>
+            <Image src={listeningImg} alt="Listening screen: speak naturally, I'll wait until you're done, with a tap-to-stop control" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">No countdown anxiety: "speak naturally, I'll wait until you're done"</figcaption>
+          </figure>
+          <figure>
+            <Image src={errorImg} alt="Error state: sorry, I didn't catch that, offering quieter-space tips, try again, and a typed path" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Failure forgives: practical tips, try again, or switch to typing, never a dead end</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Two users -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Two users, one product</span>
+        <h2 class="cs-heading reveal">Reassurance for the carer, without surveillance of the senior</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          The carer side is its own product surface: pairing by a short code or QR, a feed of check-ins and missed medications, and profile management for the senior they support. The design line I held throughout: the senior is the user, the carer is the safety net. Visibility is framed as "Margaret shared I'm OK", never as monitoring.
+        </p>
+
+        <div class="ph-grid ph-grid-2 reveal" style="margin-top:2rem;">
+          <figure>
+            <Image src={connectImg} alt="Connect screen with a large pairing code and QR code for linking a family carer" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">Pairing is a moment of trust, not a configuration step: one big code, one scan</figcaption>
+          </figure>
+          <figure>
+            <Image src={carerImg} alt="Carer home feed showing check-ins: a missed evening medication and Margaret shared I'm OK" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">The carer feed: what matters since you last looked, in plain sentences</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Documents -->
+      <div class="cs-section">
+        <div class="cs-two">
+          <div class="reveal">
+            <span class="cs-section-lbl">Practical utility</span>
+            <h2 class="cs-subheading">"Find my gas bill from January"</h2>
+            <p class="t-body" style="margin-top:1rem;">The Digital Asset Manager is the feature that turns goodwill into daily habit. A senior photographs a letter or a bill, OCR extracts what it is, and from then on the document answers to voice. The design work here was mostly about confidence: a visible preview, a guessed category that can be corrected in one tap, and a retake path that never makes the first attempt feel like a mistake.</p>
+            <p class="t-body" style="margin-top:.75rem;">The same pattern, practical help with a forgiving surface, runs through reminders, My Day reflections, local activity suggestions built from the senior's own hobbies, and Home Emergency, which puts family and emergency services one tap from anywhere in the app.</p>
+          </div>
+          <figure class="reveal doc-shot" style="transition-delay:.1s;">
+            <Image src={documentImg} alt="Document details screen with OCR preview of a utility bill, editable name, and category selection" data-lightbox loading="lazy" />
+            <figcaption class="cs-figure-cap">OCR with a human in the loop: preview, confirm, correct</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Where it stands</span>
+        <h2 class="cs-heading reveal">Design-complete, entering production</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          MVP 1.1 is design-complete and the build is being brought up to the approved system for a production release this month, followed by a pilot with first users. The next chapter of this case study writes itself from there: onboarding completion, voice success rates, and whether the trial-to-subscription moment reads as honestly as it was designed to.
+        </p>
+        <StatCards stats={stats} />
+      </div>
+
+      <!-- Learnings -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Learnings &amp; Reflections</span>
+        <h2 class="cs-heading reveal">What being a founding designer actually means</h2>
+        <div class="cs-two" style="margin-top:1.5rem;">
+          <div class="reveal">
+            <p class="t-body">The job is only half screens. The other half is building the company's relationship to design: specs engineers can implement without guessing, a review rhythm that catches drift before it ships, and the patience to explain why an emoji is not an icon. A design system nobody follows is a portfolio piece; one the team builds from is infrastructure.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <p class="t-body">Designing for older adults has sharpened every instinct I have. The disciplines it forces, one idea per screen, errors that forgive, copy a tired person can read, fallbacks for every modality, are not "senior design". They are just good design, measured against the hardest grader there is.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <MoreCaseStudies current="miigenie" />
+  <Lightbox />
+</CaseStudy>
+
+<style>
+.mg-hero-wrap { width: 100%; height: 100%; }
+
+/* Before / after */
+.ba-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.ba-col {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.ba-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: .9rem;
+}
+.ba-tag.is-before { color: var(--text-3); }
+.ba-tag.is-after { color: var(--accent); }
+/* Both columns share an identical neutral stage so the only visible
+   difference is the design itself. Phones are capped tight. */
+.ba-shot {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  padding: 1.6rem 0;
+}
+.ba-shot img {
+  width: 58%;
+  max-width: 220px;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+}
+.ba-col .cs-figure-cap { margin-top: .9rem; max-width: 34ch; }
+
+/* System points */
+.sys-points {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.sys-point {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.25rem 1.3rem;
+}
+.sys-num {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .14em;
+  color: var(--accent);
+}
+.sys-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin: .5rem 0 .4rem;
+  line-height: 1.3;
+}
+.sys-desc {
+  font-size: .8rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Personas */
+.persona-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: .75rem;
+}
+.persona-tile {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.1rem 1.15rem;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  transition: border-color .25s, background .25s;
+}
+.persona-tile:hover { border-color: var(--accent); background: var(--accent-bg); }
+.persona-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.persona-role-tag {
+  font-family: var(--font-mono);
+  font-size: .52rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(201,169,110,.35);
+  border-radius: 2px;
+  padding: .18rem .4rem;
+}
+.persona-role-tag.is-carer { color: var(--text-2); border-color: var(--border); }
+.persona-age {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  color: var(--text-3);
+}
+.persona-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-1);
+  line-height: 1.3;
+  margin: 0;
+}
+.persona-note {
+  font-size: .76rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Journey */
+.journey {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+.journey-row {
+  display: grid;
+  grid-template-columns: 10rem 1fr 1fr;
+  gap: 1.25rem;
+  padding: 1.1rem 1.3rem;
+  align-items: start;
+}
+.journey-row + .journey-row { border-top: 1px dashed var(--border); }
+.journey-stage { display: flex; flex-direction: column; gap: .2rem; }
+.journey-num {
+  font-family: var(--font-mono);
+  font-size: .55rem;
+  letter-spacing: .14em;
+  color: var(--text-3);
+}
+.journey-name {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+.journey-pain {
+  font-size: .78rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0;
+}
+.journey-pain::before {
+  content: 'Pain';
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .52rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: .25rem;
+}
+.journey-response {
+  font-size: .78rem;
+  color: var(--text-1);
+  line-height: 1.55;
+  margin: 0;
+}
+.journey-response::before {
+  content: 'Design response';
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .52rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .25rem;
+}
+
+/* Phone shot grids — phones are portrait (390x884), so width is capped
+   tight and the group is centred. Detail lives in the lightbox. */
+.ph-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 208px));
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.ph-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 224px));
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.ph-grid figure { margin: 0; }
+.ph-grid img {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.22);
+}
+.doc-shot { margin: 0; max-width: 240px; justify-self: start; }
+.doc-shot img {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.22);
+}
+
+@media (max-width: 768px) {
+  .ba-grid { grid-template-columns: 1fr; }
+  .sys-points { grid-template-columns: 1fr; }
+  .journey-row { grid-template-columns: 1fr; gap: .8rem; }
+  .ph-grid { grid-template-columns: 1fr 1fr; }
+  .ph-grid-2 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .ph-grid, .ph-grid-2 { grid-template-columns: 1fr; }
+}
+</style>

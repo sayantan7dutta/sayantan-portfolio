@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { otherCaseStudies } from '../data/caseStudies';
 import SWOpsHero from './SWOpsHero.astro';
 import SoterSiteCover from './SoterSiteCover.astro';
+import MgCover from './MgCover.astro';
 
 interface Props {
   current: string; // slug of the current case study
@@ -23,6 +24,8 @@ const others = otherCaseStudies(current);
               <SWOpsHero />
             ) : cs.slug === 'soter-software' ? (
               <SoterSiteCover />
+            ) : cs.slug === 'miigenie' ? (
+              <MgCover />
             ) : cs.thumb ? (
               <Image src={cs.thumb} alt={cs.shortTitle} loading="lazy" />
             ) : cs.coverStat ? (

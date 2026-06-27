@@ -27,6 +27,12 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: 'miigenie',
+    title: 'Designing a Voice-First AI Companion for Older Adults',
+    shortTitle: 'miiGenie, a Voice-First AI Companion',
+    context: 'AI Companion · iOS & Android · Current',
+  },
+  {
     slug: 'hazop',
     title: 'UX Strategy for a B2B SaaS Platform in Industrial Safety',
     shortTitle: 'UX Strategy for an Industrial Safety Platform',

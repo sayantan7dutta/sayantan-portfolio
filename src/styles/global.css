@@ -157,6 +157,16 @@ body::before {
 [data-theme="light"] .t-tag-speculative {
   border-color: rgba(154,110,42,.35);
 }
+/* "Current" tag — accent treatment plus a tinted fill so the live
+   engagement stands out from archive tags at a glance. */
+.t-tag-current {
+  border-color: rgba(201,169,110,.45);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+[data-theme="light"] .t-tag-current {
+  border-color: rgba(139,99,34,.45);
+}
 .t-lead {
   font-size: clamp(.9rem, 2vw, 1.05rem);
   color: var(--text-2);

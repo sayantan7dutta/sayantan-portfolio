@@ -1,0 +1,39 @@
+---
+/**
+ * miiGenie 3-phone composition — case study hero and homepage project card.
+ * Fills a 16:10 frame; tall phones are clipped by the parent's overflow.
+ * Brand surface: the warm cream from the miiGenie design system, so the
+ * screens read as product-in-context rather than floating screenshots.
+ */
+import { Image } from 'astro:assets';
+import home from '../assets/work/miigenie/home.png';
+import conversation from '../assets/work/miigenie/conversation.png';
+import myDay from '../assets/work/miigenie/my-day.png';
+---
+
+<div class="mg-trio">
+  <Image src={conversation} alt="miiGenie voice conversation" class="phone" loading="eager" />
+  <Image src={home} alt="miiGenie senior home screen" class="phone phone-mid" loading="eager" />
+  <Image src={myDay} alt="miiGenie My Day reflection" class="phone" loading="eager" />
+</div>
+
+<style>
+  .mg-trio {
+    height: 100%;
+    display: flex;
+    gap: 1.1rem;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1.6rem 1.1rem 0;
+    background: #EFE9DE;
+  }
+  .mg-trio .phone {
+    width: 30%;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(14, 90, 90, .18);
+  }
+  .mg-trio .phone-mid { margin-top: -0.6rem; }
+  @media (max-width: 768px) {
+    .mg-trio { gap: .6rem; padding: 1rem .7rem 0; }
+  }
+</style>

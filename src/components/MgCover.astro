@@ -1,0 +1,101 @@
+---
+/**
+ * Branded mini cover for miiGenie — used in the MoreCaseStudies grid,
+ * where the 3-phone trio would shrink into unreadable slivers (the
+ * KinVault lesson). Deep teal field, wordmark, and a voice-waveform
+ * motif in the brand's warm cream.
+ */
+---
+
+<div class="mg-cover">
+  <div class="mg-head">
+    <span class="mg-brand">miiGenie</span>
+    <span class="mg-badge">Current</span>
+  </div>
+
+  <div class="mg-wave" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <p class="mg-line">A voice-first AI companion for older adults</p>
+
+  <div class="mg-foot">
+    <span class="mg-meta">Founding Product Designer</span>
+    <span class="mg-meta">iOS · Android</span>
+  </div>
+</div>
+
+<style>
+  .mg-cover {
+    width: 100%;
+    height: 100%;
+    background: #0E5A5A;
+    color: #F7F3EC;
+    padding: 1.5rem 1.6rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-body);
+  }
+  .mg-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mg-brand {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+  }
+  .mg-badge {
+    font-family: var(--font-mono);
+    font-size: .52rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .25rem .5rem;
+    border: 1px solid rgba(247, 243, 236, .45);
+    border-radius: 2px;
+    color: #F7E3C8;
+  }
+  .mg-wave {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    height: 44px;
+  }
+  .mg-wave span {
+    width: 5px;
+    border-radius: 3px;
+    background: rgba(247, 243, 236, .85);
+  }
+  .mg-wave span:nth-child(1) { height: 30%; }
+  .mg-wave span:nth-child(2) { height: 65%; }
+  .mg-wave span:nth-child(3) { height: 100%; }
+  .mg-wave span:nth-child(4) { height: 55%; }
+  .mg-wave span:nth-child(5) { height: 85%; }
+  .mg-wave span:nth-child(6) { height: 40%; }
+  .mg-wave span:nth-child(7) { height: 22%; }
+  .mg-line {
+    font-family: var(--font-display);
+    font-size: clamp(.95rem, 1.6vw, 1.15rem);
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0;
+    max-width: 22ch;
+  }
+  .mg-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: .8rem;
+    border-top: 1px solid rgba(247, 243, 236, .18);
+  }
+  .mg-meta {
+    font-family: var(--font-mono);
+    font-size: .54rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(247, 243, 236, .65);
+  }
+</style>
