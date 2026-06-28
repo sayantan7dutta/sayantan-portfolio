@@ -14,12 +14,19 @@ import onboardingImg from '../../assets/work/miigenie/onboarding.png';
 import errorImg from '../../assets/work/miigenie/error-state.png';
 import carerImg from '../../assets/work/miigenie/carer-home.png';
 import connectImg from '../../assets/work/miigenie/connect.png';
-import documentImg from '../../assets/work/miigenie/document.png';
 
 const stats = [
-  { num: '2', label: 'User roles designed as one product: seniors and their family carers' },
-  { num: '5', label: 'Personas grounding every flow, from the living-alone senior to the working caregiver' },
-  { num: '90%', label: 'UK accent recognition target for the voice loop, with a typed fallback on every step' },
+  { num: '50+', label: 'Interviews and conversations with seniors and carers across Hampshire, shaping the MVP' },
+  { num: '4', label: 'Core everyday jobs the app is built around: remind, organise, connect, support' },
+  { num: '2', label: 'Users designed as one product: seniors and their family carers' },
+];
+
+// What miiGenie helps with, the four pillars from the product's own framing.
+const pillars = [
+  { verb: 'Remind', desc: 'Appointments, medication, routines, and gentle daily prompts.' },
+  { verb: 'Organise', desc: 'Important information and documents in one accessible place. "Find my gas bill from January" works by voice.' },
+  { verb: 'Connect', desc: 'Family check-ins, reassurance, and easier communication, both ways.' },
+  { verb: 'Support', desc: 'Access to trusted local services and practical help around the home.' },
 ];
 
 // Research personas, condensed from the full persona set.
@@ -78,7 +85,7 @@ const journey = [
       <!-- Context note -->
       <div class="cs-section" style="padding-top:0;">
         <blockquote class="cs-insight reveal" style="margin:0;">
-          <p>This is a live engagement, written from inside the work. The MVP is design-complete and entering production this month; a fuller case study with pilot results will follow once the first users are in. What is here is the part that is already true: the research, the system, and the decisions.</p>
+          <p>"Just say it, miiGenie takes care of it." The product's whole promise is helping older adults age in place: stay organised, stay connected, and get support at home without adding digital complexity. This is a live engagement, written from inside the work. The MVP is design-complete and entering production; a fuller case study with pilot results will follow once the first users are in. What is here is already true: the research, the system, and the decisions.</p>
         </blockquote>
       </div>
 
@@ -88,7 +95,7 @@ const journey = [
           <div class="reveal">
             <span class="cs-section-lbl">Problem</span>
             <h2 class="cs-subheading">Smartphones quietly assume a user who isn't 75</h2>
-            <p class="t-body" style="margin-top:1rem;">Most apps assume steady hands, sharp eyesight, fast reading, and a mental model built from twenty years of using software. Many older adults have none of those, so the people who most need help with medication, documents, and staying connected get the least usable tools. Families absorb the gap, becoming remote tech support for parents who feel embarrassed asking.</p>
+            <p class="t-body" style="margin-top:1rem;">Older adults want to stay in the homes they know, but daily life gets harder to manage over time. The research surfaced the same three failures again and again: missed appointments, activities and medication; a constant coordination burden landing on family carers; and digital tools that feel confusing or impersonal. Most apps assume steady hands, sharp eyesight, fast reading, and a mental model built from twenty years of software. Many older adults have none of those.</p>
             <p class="t-body" style="margin-top:.75rem;">The existing "senior app" category mostly patronises: huge buttons wrapped around stripped-down features, designed as if ageing meant losing the right to a capable product.</p>
           </div>
           <div class="reveal" style="transition-delay:.1s;">
@@ -149,7 +156,7 @@ const journey = [
         <span class="cs-section-lbl">Research</span>
         <h2 class="cs-heading reveal">Five people the product has to work for</h2>
         <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
-          The research distilled into five personas across the two roles, and a journey map for each role from first awareness through to retention. The personas are not demographics, they are relationships to independence: each one wants to stay capable, and fears the moment technology proves they aren't.
+          Grounded in 50+ interviews and conversations with seniors and carers across Hampshire, with MVP priorities set through co-design sessions and pilot onboarding now underway. The research distilled into five personas across the two roles, and a journey map for each role from first awareness through to retention. The personas are not demographics, they are relationships to independence: each one wants to stay capable, and fears the moment technology proves they aren't.
         </p>
 
         <div class="persona-strip reveal" style="margin-top:2rem;">
@@ -178,6 +185,22 @@ const journey = [
             </li>
           ))}
         </ol>
+
+        <h3 class="cs-subheading reveal" style="margin-top:3rem;">Three principles the research made non-negotiable</h3>
+        <div class="principles reveal" style="margin-top:1.5rem;">
+          <div class="principle">
+            <p class="principle-title">Privacy comes first</p>
+            <p class="principle-desc">Trust is the biggest barrier to adoption. Older adults need to feel in control of their data, supported by transparency, non-intrusive design, and a trusted, family-involved onboarding.</p>
+          </div>
+          <div class="principle">
+            <p class="principle-title">Benefits must be obvious</p>
+            <p class="principle-desc">Adoption improves when the value is simple and immediate. Real-life use cases help users see exactly how the product fits their day, with no learning curve to climb first.</p>
+          </div>
+          <div class="principle">
+            <p class="principle-title">Technology should support, not replace, connection</p>
+            <p class="principle-desc">People want tools that strengthen relationships, not substitute for them. Every feature is pointed at communication and community, never at keeping someone on a screen.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Voice-first -->
@@ -224,19 +247,21 @@ const journey = [
         </div>
       </div>
 
-      <!-- Documents -->
+      <!-- Four pillars -->
       <div class="cs-section">
-        <div class="cs-two">
-          <div class="reveal">
-            <span class="cs-section-lbl">Practical utility</span>
-            <h2 class="cs-subheading">"Find my gas bill from January"</h2>
-            <p class="t-body" style="margin-top:1rem;">The Digital Asset Manager is the feature that turns goodwill into daily habit. A senior photographs a letter or a bill, OCR extracts what it is, and from then on the document answers to voice. The design work here was mostly about confidence: a visible preview, a guessed category that can be corrected in one tap, and a retake path that never makes the first attempt feel like a mistake.</p>
-            <p class="t-body" style="margin-top:.75rem;">The same pattern, practical help with a forgiving surface, runs through reminders, My Day reflections, local activity suggestions built from the senior's own hobbies, and Home Emergency, which puts family and emergency services one tap from anywhere in the app.</p>
-          </div>
-          <figure class="reveal doc-shot" style="transition-delay:.1s;">
-            <Image src={documentImg} alt="Document details screen with OCR preview of a utility bill, editable name, and category selection" data-lightbox loading="lazy" />
-            <figcaption class="cs-figure-cap">OCR with a human in the loop: preview, confirm, correct</figcaption>
-          </figure>
+        <span class="cs-section-lbl">What it helps with</span>
+        <h2 class="cs-heading reveal">Four everyday jobs, one calm surface</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Underneath the voice layer, miiGenie does four practical things. Each was designed with the same forgiving pattern: real help, presented simply enough that a tired 75-year-old can act on it the first time, every time.
+        </p>
+        <div class="pillars reveal" style="margin-top:2rem;">
+          {pillars.map((p, i) => (
+            <div class="pillar">
+              <span class="pillar-num">{String(i + 1).padStart(2, '0')}</span>
+              <p class="pillar-verb">{p.verb}</p>
+              <p class="pillar-desc">{p.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -484,12 +509,65 @@ const journey = [
   border-radius: 12px;
   box-shadow: 0 6px 22px rgba(0,0,0,.22);
 }
-.doc-shot { margin: 0; max-width: 240px; justify-self: start; }
-.doc-shot img {
-  width: 100%;
+/* Research principles */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.principle {
   border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: 0 6px 22px rgba(0,0,0,.22);
+  border-left: 2px solid var(--accent);
+  border-radius: 2px;
+  padding: 1.25rem 1.3rem;
+}
+.principle-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin: 0 0 .5rem;
+  line-height: 1.3;
+}
+.principle-desc {
+  font-size: .8rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Four pillars */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.pillar {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.3rem 1.35rem;
+  transition: border-color .25s, background .25s;
+}
+.pillar:hover { border-color: var(--accent); background: var(--accent-bg); }
+.pillar-num {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .14em;
+  color: var(--accent);
+}
+.pillar-verb {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin: .5rem 0 .5rem;
+  line-height: 1.2;
+}
+.pillar-desc {
+  font-size: .82rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0;
 }
 
 @media (max-width: 768px) {
@@ -498,8 +576,11 @@ const journey = [
   .journey-row { grid-template-columns: 1fr; gap: .8rem; }
   .ph-grid { grid-template-columns: 1fr 1fr; }
   .ph-grid-2 { grid-template-columns: 1fr 1fr; }
+  .pillars { grid-template-columns: 1fr 1fr; }
+  .principles { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .ph-grid, .ph-grid-2 { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
 }
 </style>
