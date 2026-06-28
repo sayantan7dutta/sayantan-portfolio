@@ -133,10 +133,11 @@ body::before {
 /* ─── Typography ─── */
 .t-label {
   font-family: var(--font-mono);
-  font-size: .68rem;
+  font-size: .72rem;            /* a11y: nudged up from .68rem */
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--text-3);
+  color: var(--text-2);         /* a11y: was --text-3; secondary token clears AA in both themes */
+  font-weight: 500;             /* a11y: labels at 500 for legibility */
 }
 .t-tag {
   display: inline-block;
@@ -611,10 +612,11 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .cs-section:last-child { border-bottom: none; }
 .cs-section-lbl {
   font-family: var(--font-mono);
-  font-size: .65rem;
+  font-size: .7rem;             /* a11y: nudged up from .65rem */
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent);         /* accent clears AA: 8.95:1 dark, 4.74:1 light */
+  font-weight: 500;             /* a11y: labels at 500 for legibility */
   margin-bottom: 1.5rem;
   display: block;
 }
@@ -805,12 +807,30 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 /* Case study image figure */
 .cs-figure { margin: 1.5rem 0; }
 .cs-figure-cap {
-  font-family: var(--font-mono);
-  font-size: .58rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin-top: .6rem;
+  /* a11y: was .58rem mono uppercase in --text-3 (tiny + faint). Now a
+     readable body caption: 14px min, sentence case, secondary token
+     (>=7.4:1 dark, >=7.8:1 light), weight 400, never italic. */
+  font-family: var(--font-body);
+  font-size: .875rem;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  line-height: 1.5;
+  color: var(--text-2);
+  margin-top: .7rem;
+}
+/* a11y: directional / note text inside callouts. Centralised here from
+   per-page scoped styles so it's one source of truth. Secondary token
+   (AA in both themes), 14px min, weight 400, not italic. */
+.ia-note {
+  font-size: .875rem;
+  line-height: 1.6;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--text-2);
+  margin-top: 1rem;
+  max-width: 64ch;
 }
 .cs-figure > img {
   width: 100%;

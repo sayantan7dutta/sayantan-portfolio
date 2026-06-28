@@ -476,10 +476,11 @@ const certs = [
 .about-block:last-of-type { border-bottom: 1px solid var(--border); }
 .about-block-lbl {
   font-family: var(--font-mono);
-  font-size: .62rem;
+  font-size: .68rem;            /* a11y: up from .62rem */
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--text-3);
+  color: var(--text-2);         /* a11y: was --text-3; secondary token, AA both themes */
+  font-weight: 500;             /* a11y: labels at 500 */
   margin-bottom: .875rem;
   display: flex;
   align-items: center;
