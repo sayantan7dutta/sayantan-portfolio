@@ -14,7 +14,7 @@
   --surface-2: #161616;
   --border:    #2A2A2A;            /* a11y: was #1E1E1E (1.20:1), now 1.43:1 against bg; paired with focus rings for real signal */
   --text-1:    #F2EDE6;            /* 17.20:1 on bg */
-  --text-2:    #8A8478;            /* 5.39:1 — was already passing, left alone */
+  --text-2:    #A39D90;            /* a11y: brightened from #8A8478 (5.39:1) to 7.42:1 for easier long-form reading in dark mode */
   --text-3:    #857F73;            /* a11y: was #4A4640 (2.14:1 FAIL), now 5.04:1 — clears AA for mono labels */
   --accent:    #C9A96E;            /* 8.95:1 on bg */
   --accent-bg: rgba(201,169,110,.07);
@@ -34,7 +34,7 @@
   --surface-2: #E5DDD3;
   --border:    #B8AC95;            /* a11y: was #D4CBBC (1.42:1), now 2.31:1 — stronger card edges */
   --text-1:    #1A1714;            /* 15.73:1 */
-  --text-2:    #5A534C;            /* 6.67:1 */
+  --text-2:    #4F4942;            /* a11y: darkened from #5A534C (6.67:1) to 7.83:1 for stronger body contrast */
   --text-3:    #6E6760;            /* a11y: was #9A9082 (2.77:1 FAIL), now 4.91:1 */
   --accent:    #8B6322;            /* a11y: was #9A6E2A (3.99:1), now 4.74:1 — clears AA for normal text */
   --accent-bg: rgba(139,99,34,.07);
@@ -168,15 +168,17 @@ body::before {
   border-color: rgba(139,99,34,.45);
 }
 .t-lead {
-  font-size: clamp(.9rem, 2vw, 1.05rem);
+  font-size: clamp(.95rem, 2vw, 1.08rem);
   color: var(--text-2);
   max-width: 56ch;
-  line-height: 1.8;
+  line-height: 1.75;
+  font-weight: 400;
 }
 .t-body {
-  font-size: .875rem;
+  font-size: .9rem;
   color: var(--text-2);
-  line-height: 1.8;
+  line-height: 1.75;
+  font-weight: 400;
 }
 .t-meta-key {
   font-family: var(--font-mono);
@@ -463,10 +465,10 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 }
 .cs-insight p {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 500;
   color: var(--text-1);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .cs-insight cite {
   display: block;

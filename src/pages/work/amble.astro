@@ -95,7 +95,7 @@ const palette = [
 >
   <CaseStudyHero
     title="Amble: <em>designing care</em> for an ageing society in 2065"
-    lead="Amble is a speculative service concept for the year 2065: a living, bioengineered plant system that supports older adults at home through presence rather than instruction. I led a four-person team through seven months of foresight research and design for Rodd Design Studio and the Winchester School of Art, and the work was exhibited at the London Design Festival."
+    lead="Amble asks a hard question for an ageing society: how can future care help people stay independent at home without making them dependent on the very systems meant to support them? Over seven months I led a four-person team through foresight research for Rodd Design Studio and the Winchester School of Art, arriving at a 2065 care service whose vehicle is a living, bioengineered plant system that supports older adults through presence rather than instruction. The work was exhibited at the London Design Festival."
     tags={['Speculative Design', 'Foresight & Service Design', '2025']}
     speculativeTag="Speculative / foresight project"
     meta={[
@@ -152,10 +152,28 @@ const palette = [
           </div>
           <div class="reveal" style="transition-delay:.1s;">
             <span class="cs-section-lbl">The brief</span>
-            <h2 class="cs-subheading">Design how care might feel in 2065, not what it might cost</h2>
+            <h2 class="cs-subheading">Design the care service, not the device</h2>
             <p class="t-body" style="margin-top:1rem;">Rodd Design Studio set the team a foresight brief through the Winchester School of Art's Global Smart Lab: explore how an ageing society might live, and be cared for, in 2065.</p>
-            <p class="t-body" style="margin-top:.75rem;">The forty-year horizon was the point. It freed the work from the constraints of today's devices and let us ask what care should feel like before asking what technology could deliver it. We were not designing a product. We were designing a position.</p>
+            <p class="t-body" style="margin-top:.75rem;">The forty-year horizon freed the work from today's devices and let us design at the level of the whole care service: the relationships between an older person and their family, carers, healthcare providers, and community, and how a future service could hold all of them together without making the person at its centre feel managed.</p>
           </div>
+        </div>
+      </div>
+
+      <!-- Service ecosystem -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">The service ecosystem</span>
+        <h2 class="cs-heading reveal">Independence is held by a whole system, not a device</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Treating this as a service, not a gadget, meant mapping everyone who shapes whether an older person stays independent at home, and designing Amble to support those relationships rather than replace them.
+        </p>
+        <div class="eco-grid reveal" style="margin-top:2rem;">
+          <div class="eco"><span class="eco-role">Older adults</span><p class="eco-note">The person at the centre. Independence and dignity, never the feeling of being managed.</p></div>
+          <div class="eco"><span class="eco-role">Families</span><p class="eco-note">Reassurance and connection from a distance, without tipping into surveillance.</p></div>
+          <div class="eco"><span class="eco-role">Carers</span><p class="eco-note">A lighter coordination load and clearer signals about what actually needs attention.</p></div>
+          <div class="eco"><span class="eco-role">Healthcare providers</span><p class="eco-note">Earlier, gentler signals that surface needs before they become crises.</p></div>
+          <div class="eco"><span class="eco-role">Local authorities</span><p class="eco-note">Prevention that helps people stay out of formal care for longer.</p></div>
+          <div class="eco"><span class="eco-role">Communities</span><p class="eco-note">Belonging and participation as part of care, not an afterthought to it.</p></div>
+          <div class="eco"><span class="eco-role">Technology providers</span><p class="eco-note">Infrastructure that stays in the background and earns its place quietly.</p></div>
         </div>
       </div>
 
@@ -774,10 +792,41 @@ const palette = [
   color: var(--text-1);
 }
 
+.eco-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+}
+.eco {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1rem 1.1rem;
+  transition: border-color .25s, background .25s;
+}
+.eco:hover { border-color: var(--accent); background: var(--accent-bg); }
+.eco-role {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-1);
+  display: block;
+  margin-bottom: .35rem;
+}
+.eco-note {
+  font-size: .76rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
 @media (max-width: 820px) {
   .concept-evo { grid-template-columns: 1fr; }
   .ce-arrow { transform: rotate(90deg); margin: -.2rem 0; }
   .amble-quotes { grid-template-columns: 1fr; }
   .ldf-facts { gap: 1.5rem; }
+  .eco-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .eco-grid { grid-template-columns: 1fr; }
 }
 </style>
