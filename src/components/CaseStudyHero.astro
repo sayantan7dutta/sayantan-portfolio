@@ -40,12 +40,9 @@ const { title, lead, tags, speculativeTag, meta, heroPlaceholder, heroInstructio
         </div>
       </div>
       <div class="cs-hero-img reveal" style="transition-delay:.12s;">
-        <!--
-          TO ADD THE HERO IMAGE:
-          Pass an image into the "hero-image" slot from the page, e.g.
-          <Image slot="hero-image" src={heroImg} alt="..." class="cs-hero-img-el" />
-          Tip: apply a 15-20px gaussian blur in Figma, add annotation callouts, export as PNG.
-        -->
+        {/* Pass an image into the "hero-image" slot from the page:
+            <Image slot="hero-image" src={heroImg} alt="..." class="cs-hero-img-el" />
+            (JSX-style comment, stripped at build, never shipped to HTML.) */}
         <slot name="hero-image">
           <ImagePH label={heroPlaceholder} instructions={heroInstructions} fill={true} icon="▣" />
         </slot>
