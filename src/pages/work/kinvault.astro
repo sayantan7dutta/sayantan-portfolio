@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import CaseStudy from '../../layouts/CaseStudy.astro';
 import CaseStudyHero from '../../components/CaseStudyHero.astro';
 import ProcessSteps from '../../components/ProcessSteps.astro';
-import StatCards from '../../components/StatCards.astro';
 import MoreCaseStudies from '../../components/MoreCaseStudies.astro';
 import KvPhoneTrio from '../../components/KvPhoneTrio.astro';
 import Lightbox from '../../components/Lightbox.astro';
@@ -41,11 +40,6 @@ const processSteps = [
   },
 ];
 
-const stats = [
-  { num: '18%', label: 'Increase in send flow completion in prototype testing' },
-  { num: '25%', label: 'Reduction in "where is my transfer" support queries' },
-  { num: '15%', label: 'Increase in repeat transfers within 30 days' },
-];
 ---
 
 <CaseStudy
@@ -221,13 +215,31 @@ const stats = [
         </div>
       </div>
 
-      <!-- Impact -->
+      <!-- Measurement -->
       <div class="cs-section">
-        <span class="cs-section-lbl">Projected impact</span>
-        <p class="t-body cs-intro reveal">
-          These figures are directional, drawn from prototype testing and benchmarked against published data from comparable remittance products. For a concept project they represent targets to design against, not live results.
+        <span class="cs-section-lbl">Measurement</span>
+        <h2 class="cs-heading reveal">What I'd measure if this were built</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          This is a concept, so there are no live results to report, and I'm not going to put invented percentages on a product no one has used. What I can be specific about is the bet each feature makes and the metric I'd test it against.
         </p>
-        <StatCards stats={stats} />
+        <ul class="measure-list reveal" style="transition-delay:.12s;">
+          <li class="measure">
+            <span class="measure-name">Send-flow completion</span>
+            <p class="measure-line"><span class="measure-k">The bet</span> Plain-language rate triggers remove the anxiety that makes people abandon a transfer.</p>
+            <p class="measure-line"><span class="measure-k">Test</span> Completion rate, before vs after.</p>
+          </li>
+          <li class="measure">
+            <span class="measure-name">"Where is my transfer?" contacts</span>
+            <p class="measure-line"><span class="measure-k">The bet</span> Shared visibility removes the need to ask.</p>
+            <p class="measure-line"><span class="measure-k">Test</span> Inbound status queries per 100 transfers.</p>
+          </li>
+          <li class="measure">
+            <span class="measure-name">30-day repeat transfers</span>
+            <p class="measure-line"><span class="measure-k">The bet</span> The relationship layer brings people back.</p>
+            <p class="measure-line"><span class="measure-k">Test</span> Repeat rate against a transactional baseline.</p>
+          </li>
+        </ul>
+        <p class="t-body reveal" style="margin-top:1.5rem;max-width:62ch;">The value of this project is the reasoning, not the numbers.</p>
       </div>
 
       <!-- Learnings -->
@@ -254,6 +266,43 @@ const stats = [
 </CaseStudy>
 
 <style>
+/* Measurement list: the bet each feature makes + the metric to test it */
+.measure-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+.measure {
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 2px;
+  padding: 1.25rem 1.4rem;
+}
+.measure-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: .6rem;
+}
+.measure-line {
+  font-size: .875rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin: .25rem 0 0;
+}
+.measure-k {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-right: .55rem;
+}
+
 /* Prototype flow: phone screens across the send-money journey */
 .kv-flow {
   display: flex;
