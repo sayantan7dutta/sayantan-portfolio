@@ -72,12 +72,32 @@ export const caseStudies: CaseStudy[] = [
 ];
 
 /**
+ * Slugs that actually have a page at src/pages/work/<slug>.astro.
+ *
+ * This is the safety net: "More case studies" is data-driven while the
+ * homepage cards are hand-written, so the two could drift. Filtering the
+ * registry against the pages that really exist means a removed case study
+ * can never resurface in the grid or produce a link to a dead route.
+ */
+const existingSlugs = new Set(
+  Object.keys(import.meta.glob('../pages/work/*.astro')).map(
+    (path) => path.split('/').pop()!.replace('.astro', '')
+  )
+);
+
+/** The case studies that are live: in the registry AND have a page. */
+export const publishedCaseStudies: CaseStudy[] = caseStudies.filter((cs) =>
+  existingSlugs.has(cs.slug)
+);
+
+/**
  * Returns the case studies to feature in the "More case studies" grid —
  * the `limit` entries that follow the current one in order, wrapping around.
  */
 export function otherCaseStudies(currentSlug: string, limit = 3): CaseStudy[] {
-  const idx = caseStudies.findIndex((cs) => cs.slug === currentSlug);
-  if (idx === -1) return caseStudies.slice(0, limit);
-  const rotated = [...caseStudies.slice(idx + 1), ...caseStudies.slice(0, idx)];
+  const list = publishedCaseStudies;
+  const idx = list.findIndex((cs) => cs.slug === currentSlug);
+  if (idx === -1) return list.slice(0, limit);
+  const rotated = [...list.slice(idx + 1), ...list.slice(0, idx)];
   return rotated.slice(0, limit);
 }
