@@ -5,6 +5,18 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/work/soter-software",
+      "destination": "/work/hazop",
+      "permanent": true
+    },
+    {
+      "source": "/work/pensaar",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/_astro/(.*)",

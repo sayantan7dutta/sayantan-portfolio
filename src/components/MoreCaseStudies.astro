@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import { otherCaseStudies } from '../data/caseStudies';
 import SWOpsHero from './SWOpsHero.astro';
-import SoterSiteCover from './SoterSiteCover.astro';
 import MgCover from './MgCover.astro';
 
 interface Props {
@@ -22,8 +21,6 @@ const others = otherCaseStudies(current);
           <div class="more-card-thumb">
             {cs.slug === 'sherwin-williams' ? (
               <SWOpsHero />
-            ) : cs.slug === 'soter-software' ? (
-              <SoterSiteCover />
             ) : cs.slug === 'miigenie' ? (
               <MgCover />
             ) : cs.thumb ? (

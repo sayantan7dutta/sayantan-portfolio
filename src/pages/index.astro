@@ -4,12 +4,10 @@ import { Image } from 'astro:assets';
 import KvPhoneTrio from '../components/KvPhoneTrio.astro';
 import MgPhoneTrio from '../components/MgPhoneTrio.astro';
 import SWOpsHero from '../components/SWOpsHero.astro';
-import SoterSiteCover from '../components/SoterSiteCover.astro';
 import portrait from '../assets/sayantan.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
 import ambleThumb from '../assets/work/amble/hero.jpg';
-import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 ---
 
 <Base
@@ -85,7 +83,7 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
             <span class="t-tag t-tag-current">Current · AI Companion · 2026</span>
           </div>
           <h2 class="p-title">Designing a Voice-First AI Companion for Older Adults</h2>
-          <p class="p-desc">Founding designer for miiGenie, a voice-first companion that helps older adults live independently while giving family carers confidence. Took a working Flutter build with no design identity and gave it a system, a voice, and an accessibility baseline. MVP entering production.</p>
+          <p class="p-desc">Founding and sole designer for miiGenie, a voice-first companion that helps older adults live independently while giving family carers confidence. Three-person product, engineering and design team reporting to the founders. Took a working Flutter build with no design identity and gave it a system, a voice, and an accessibility baseline. MVP entering production.</p>
         </div>
         <div class="p-footer">
           <span class="p-context">dAIs Genie · Lead Product Designer · Ongoing</span>
@@ -94,8 +92,31 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 02 HAZOP -->
+    <!-- 02 KinVault -->
     <article class="project-item project-item-alt reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <KvPhoneTrio />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">02</span>
+            <span class="t-tag t-tag-speculative">Concept · Premium Fintech · 2025</span>
+          </div>
+          <h2 class="p-title">KinVault Heritage, a Digital Vault-Atelier</h2>
+          <p class="p-desc">A self-initiated concept for a premium cross-border finance app that bridges heritage banking and modern remittance, with shared family vaults, AI-timed transfers, and direct bill payment.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">Self-initiated · Product Design</span>
+          <a href="/work/kinvault" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 HAZOP -->
+    <article class="project-item reveal">
       <div class="p-img-col">
         <div class="p-img">
           <Image src={hazopThumb} alt="HAZOP Edge platform" class="p-img-actual" loading="lazy" />
@@ -104,38 +125,15 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
-            <span class="p-num">02</span>
+            <span class="p-num">03</span>
             <span class="t-tag">B2B SaaS · UK · 2025</span>
           </div>
           <h2 class="p-title">UX Strategy for a B2B SaaS Platform in Industrial Safety</h2>
-          <p class="p-desc">Shaped the UX for HAZOP Edge, a platform that simplifies hazard and operability studies for safety professionals. From the first domain research through to MVP delivery.</p>
+          <p class="p-desc">Sole designer for HAZOP Edge, a platform that simplifies hazard and operability studies for safety professionals. From first domain research through to MVP delivery, alongside a parallel rebuild of the company website.</p>
         </div>
         <div class="p-footer">
-          <span class="p-context">Soter Safety Consulting · Senior Product Designer</span>
+          <span class="p-context">Soter Safety Consulting · Senior Product Designer · Sole designer</span>
           <a href="/work/hazop" class="p-link">View case study <span>→</span></a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 03 Amble, Ageing 2065 -->
-    <article class="project-item reveal">
-      <div class="p-img-col">
-        <div class="p-img">
-          <Image src={ambleThumb} alt="Amble concept for an ageing society in 2065" class="p-img-actual" loading="lazy" />
-        </div>
-      </div>
-      <div class="p-info">
-        <div class="p-info-top">
-          <div class="p-meta">
-            <span class="p-num">03</span>
-            <span class="t-tag t-tag-speculative">Speculative · Foresight Design · 2025</span>
-          </div>
-          <h2 class="p-title">Designing Care for an Ageing Society in 2065</h2>
-          <p class="p-desc">Amble, a speculative bioengineered plant system for the 2065 home. Seven months of foresight research and design for Rodd Design Studio, exhibited at the London Design Festival.</p>
-        </div>
-        <div class="p-footer">
-          <span class="p-context">Rodd Design × WSA · Project Lead</span>
-          <a href="/work/amble" class="p-link">View case study <span>→</span></a>
         </div>
       </div>
     </article>
@@ -188,71 +186,25 @@ import pensaarThumb from '../assets/work/pensaar/hero.jpg';
       </div>
     </article>
 
-    <!-- 06 KinVault -->
+    <!-- 06 Amble, Ageing 2065 -->
     <article class="project-item project-item-alt reveal">
       <div class="p-img-col">
         <div class="p-img">
-          <KvPhoneTrio />
+          <Image src={ambleThumb} alt="Amble concept for an ageing society in 2065" class="p-img-actual" loading="lazy" />
         </div>
       </div>
       <div class="p-info">
         <div class="p-info-top">
           <div class="p-meta">
             <span class="p-num">06</span>
-            <span class="t-tag t-tag-speculative">Concept · Premium Fintech · 2025</span>
+            <span class="t-tag t-tag-speculative">Speculative · Foresight Design · 2025</span>
           </div>
-          <h2 class="p-title">KinVault Heritage, a Digital Vault-Atelier</h2>
-          <p class="p-desc">A self-initiated concept for a premium cross-border finance app that bridges heritage banking and modern remittance, with shared family vaults, AI-timed transfers, and direct bill payment.</p>
+          <h2 class="p-title">Designing Care for an Ageing Society in 2065</h2>
+          <p class="p-desc">Amble, a speculative bioengineered plant system for the 2065 home. Seven months of foresight research and design for Rodd Design Studio, exhibited at the London Design Festival.</p>
         </div>
         <div class="p-footer">
-          <span class="p-context">Self-initiated · Product Design</span>
-          <a href="/work/kinvault" class="p-link">View case study <span>→</span></a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 07 Soter Software, WordPress to Wix migration -->
-    <article class="project-item reveal">
-      <div class="p-img-col">
-        <div class="p-img">
-          <SoterSiteCover />
-        </div>
-      </div>
-      <div class="p-info">
-        <div class="p-info-top">
-          <div class="p-meta">
-            <span class="p-num">07</span>
-            <span class="t-tag">Web Redesign · CMS Migration · 2025</span>
-          </div>
-          <h2 class="p-title">Rebuilding the Web Presence of a Process-Safety Company</h2>
-          <p class="p-desc">Migrated Soter Software, the company behind HAZOP Edge, from WordPress to Wix. Rebuilt the information architecture around how engineering buyers actually evaluate process-safety software, and handed marketing a site they could run without a developer. A parallel engagement to the HAZOP Edge MVP.</p>
-        </div>
-        <div class="p-footer">
-          <span class="p-context">Soter Software · Web Design &amp; IA</span>
-          <a href="/work/soter-software" class="p-link">View case study <span>→</span></a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 08 Pensaar -->
-    <article class="project-item project-item-alt reveal">
-      <div class="p-img-col">
-        <div class="p-img">
-          <Image src={pensaarThumb} alt="Pensaar Design website" class="p-img-actual" loading="lazy" />
-        </div>
-      </div>
-      <div class="p-info">
-        <div class="p-info-top">
-          <div class="p-meta">
-            <span class="p-num">08</span>
-            <span class="t-tag">Web Redesign · Internship · 2020</span>
-          </div>
-          <h2 class="p-title">Elevating the Digital Presence of a Design Thinking Agency</h2>
-          <p class="p-desc">Redesigned Pensaar Design's website and rebuilt it in Wix, migrating off a restrictive Squarespace template, with an information architecture that matches how the agency wants to be understood.</p>
-        </div>
-        <div class="p-footer">
-          <span class="p-context">Pensaar Design · Service Design Intern · 2020</span>
-          <a href="/work/pensaar" class="p-link">View case study <span>→</span></a>
+          <span class="p-context">Rodd Design × WSA · Project Lead</span>
+          <a href="/work/amble" class="p-link">View case study <span>→</span></a>
         </div>
       </div>
     </article>

@@ -12,7 +12,6 @@ import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
 import ambleThumb from '../assets/work/amble/hero.jpg';
 import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
 import kinvaultThumb from '../assets/work/kinvault/dashboard.jpg';
-import pensaarThumb from '../assets/work/pensaar/hero.jpg';
 
 export interface CaseStudy {
   slug: string;
@@ -33,19 +32,19 @@ export const caseStudies: CaseStudy[] = [
     context: 'AI Companion · iOS & Android · Current',
   },
   {
+    slug: 'kinvault',
+    title: 'KinVault Heritage, the Digital Vault-Atelier',
+    shortTitle: 'KinVault Heritage, a Digital Vault-Atelier',
+    context: 'Concept · Premium Fintech · 2025',
+    speculative: true,
+    thumb: kinvaultThumb,
+  },
+  {
     slug: 'hazop',
     title: 'UX Strategy for a B2B SaaS Platform in Industrial Safety',
     shortTitle: 'UX Strategy for an Industrial Safety Platform',
     context: 'B2B SaaS · UK · 2025',
     thumb: hazopThumb,
-  },
-  {
-    slug: 'amble',
-    title: 'Designing Care for an Ageing Society in 2065',
-    shortTitle: 'Amble, a Speculative Service Design',
-    context: 'Speculative Design · Rodd Design · 2025',
-    speculative: true,
-    thumb: ambleThumb,
   },
   {
     slug: 'api-lifecycle',
@@ -63,25 +62,12 @@ export const caseStudies: CaseStudy[] = [
     coverLabel: 'less rework across a 20+ person design team',
   },
   {
-    slug: 'kinvault',
-    title: 'KinVault Heritage, the Digital Vault-Atelier',
-    shortTitle: 'KinVault Heritage, a Digital Vault-Atelier',
-    context: 'Concept · Premium Fintech · 2025',
+    slug: 'amble',
+    title: 'Designing Care for an Ageing Society in 2065',
+    shortTitle: 'Amble, a Speculative Service Design',
+    context: 'Speculative Design · Rodd Design · 2025',
     speculative: true,
-    thumb: kinvaultThumb,
-  },
-  {
-    slug: 'soter-software',
-    title: 'Rebuilding the Web Presence of a Process-Safety Company',
-    shortTitle: 'Rebuilding a Process-Safety Web Presence',
-    context: 'Web Redesign · CMS Migration · 2025',
-  },
-  {
-    slug: 'pensaar',
-    title: 'Elevating the Digital Presence of a Design Thinking Agency',
-    shortTitle: 'Elevating a Design Thinking Agency',
-    context: 'Web Redesign · Internship · 2020',
-    thumb: pensaarThumb,
+    thumb: ambleThumb,
   },
 ];
 

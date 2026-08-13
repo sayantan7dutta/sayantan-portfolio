@@ -14,6 +14,12 @@ import scenarioImg from '../../assets/work/hazop/scenario-summary.jpg';
 import riskMatrixImg from '../../assets/work/hazop/risk-matrix.jpg';
 import sitesImg from '../../assets/work/hazop/sites-dashboard.jpg';
 
+// Parallel engagement: the Soter Software marketing site, rebuilt alongside
+// the HAZOP Edge MVP for the same company.
+import siteHomeImg from '../../assets/work/soter-software/hero.jpg';
+import siteProductsImg from '../../assets/work/soter-software/products.jpg';
+import siteKnowledgeImg from '../../assets/work/soter-software/knowledge-centre.jpg';
+
 const processSteps = [
   {
     title: 'Domain research and stakeholder interviews',
@@ -50,10 +56,10 @@ const stats = [
 >
   <CaseStudyHero
     title="UX Strategy for a B2B SaaS Platform in Industrial Safety"
-    lead="HAZOP Edge changed how safety assessments move through an organisation, not just how a screen looks. I redesigned the service behind hazard and operability studies in industrial environments: who does what, where accountability sits, how duplication and rework are removed, and how compliance evidence is produced. I owned it from the first domain research through to MVP delivery; the interface is the evidence of that service change."
+    lead="HAZOP Edge changed how safety assessments move through an organisation, not just how a screen looks. As the sole designer on the engagement, I redesigned the service behind hazard and operability studies in industrial environments: who does what, where accountability sits, how duplication and rework are removed, and how compliance evidence is produced. I owned it from the first domain research through to MVP delivery, alongside a parallel rebuild of the company website; the interface is the evidence of that service change."
     tags={['B2B SaaS', 'Industrial Safety', 'UK · 2025']}
     meta={[
-      { key: 'Role', val: 'Senior Product Designer' },
+      { key: 'Role', val: 'Senior Product Designer, sole designer' },
       { key: 'Company', val: 'Soter Safety Consulting' },
       { key: 'Industry', val: 'Industrial Safety / SaaS' },
       { key: 'Timeline', val: 'Jun-Aug 2025' },
@@ -174,6 +180,99 @@ const stats = [
         <StatCards stats={stats} />
       </div>
 
+      <!-- Parallel engagement: the company website -->
+      <div class="cs-section">
+        <span class="cs-section-lbl">Parallel engagement</span>
+        <h2 class="cs-heading reveal">Parallel engagement: rebuilding the company website</h2>
+        <p class="t-body cs-intro reveal" style="transition-delay:.08s;">
+          Alongside the HAZOP Edge MVP I rebuilt Soter Software's own website, migrating it off WordPress and into Wix. Same company, two outputs at the same time: a product platform their customers could trust, and a marketing site that could actually represent the company behind it. The website was the lighter brief, but its impact compounded the product, because every prospect now landed in the right place before the demo.
+        </p>
+
+        <div class="cs-two" style="margin-top:2rem;">
+          <div class="reveal">
+            <span class="cs-section-lbl">Problem</span>
+            <h3 class="cs-subheading">A WordPress site that under-sold a serious product</h3>
+            <p class="t-body" style="margin-top:1rem;">The existing site read like a brochure: a long homepage, a thin About page, and a Products page that listed features without explaining who they were for. Two compounding issues. The information architecture did not match how engineering buyers evaluate process-safety software, so visitors bounced before they understood the product. And every content change needed a developer, so marketing couldn't keep the site current with the roadmap.</p>
+          </div>
+          <div class="reveal" style="transition-delay:.1s;">
+            <span class="cs-section-lbl">Solution</span>
+            <h3 class="cs-subheading">A site that maps to how buyers actually evaluate</h3>
+            <p class="t-body" style="margin-top:1rem;">I rebuilt the information architecture around six top-level sections, each answering a specific question a process-safety buyer brings to the site, and organised the Products page by the four personas who touch a study. I delivered it inside Wix, hand-building every page, the navigation, and the responsive behaviour, so the team was left with a site they could update themselves. Zero developers needed for content changes.</p>
+          </div>
+        </div>
+
+        <!-- IA: six questions, six sections -->
+        <div class="ia-flow reveal" style="margin-top:2.5rem;">
+          <div class="ia-row">
+            <span class="ia-row-tag is-after">Sitemap, after</span>
+            <ol class="sm-list">
+              <li><span class="sm-num">01</span><div><span class="sm-name">Home</span><span class="sm-q">What does this company do?</span></div></li>
+              <li><span class="sm-num">02</span><div><span class="sm-name">About</span><span class="sm-q">Who's behind this, and can I trust them?</span></div></li>
+              <li><span class="sm-num">03</span><div><span class="sm-name">Products</span><span class="sm-q">What does HAZOP Edge do, and is it for me?</span></div></li>
+              <li><span class="sm-num">04</span><div><span class="sm-name">Knowledge Centre</span><span class="sm-q">How do these people think about safety?</span></div></li>
+              <li><span class="sm-num">05</span><div><span class="sm-name">FAQs</span><span class="sm-q">What's the catch, what does it cost, how does it deploy?</span></div></li>
+              <li><span class="sm-num">06</span><div><span class="sm-name">Contact</span><span class="sm-q">I'm in. How do I talk to a human?</span></div></li>
+            </ol>
+            <p class="ia-note">Each section earns its place by answering one question. The Knowledge Centre, in particular, was a deliberate addition. Buyers in process safety read before they buy, and giving them a place to read built credibility before any sales conversation.</p>
+          </div>
+        </div>
+
+        <!-- Product page, organised by persona -->
+        <h3 class="cs-subheading reveal" style="margin-top:2.5rem;">A product page that speaks to four people at once</h3>
+        <p class="t-body reveal" style="margin-top:1rem;max-width:62ch;">
+          HAZOP Edge is used by four very different people on the same study. The old page listed features in one long flow, leaving each persona to find their own relevance. The rebuilt page is structured by user role, so each visitor finds their own job described in their own language within the first scroll of their section. It also gave the sales team a cleaner share artefact: drop one persona-anchored section into a follow-up email rather than sending a deck.
+        </p>
+
+        <div class="persona-grid reveal" style="margin-top:1.5rem;">
+          <div class="persona-card">
+            <span class="persona-num">01</span>
+            <p class="persona-role">Facilitators &amp; Scribes</p>
+            <p class="persona-job">Set up workshops, document decisions, cut manual rework.</p>
+          </div>
+          <div class="persona-card">
+            <span class="persona-num">02</span>
+            <p class="persona-role">Team Members</p>
+            <p class="persona-job">Access studies, collaborate live, see risks in context.</p>
+          </div>
+          <div class="persona-card">
+            <span class="persona-num">03</span>
+            <p class="persona-role">Project Managers</p>
+            <p class="persona-job">Real-time dashboards, bottleneck visibility, consolidated insights.</p>
+          </div>
+          <div class="persona-card">
+            <span class="persona-num">04</span>
+            <p class="persona-role">Senior Management</p>
+            <p class="persona-job">Risk trend visibility, data-driven decisions, compliance evidence.</p>
+          </div>
+        </div>
+
+        <!-- Built in Wix -->
+        <div class="cs-grid-3" style="margin-top:2.5rem;">
+          <figure class="cs-figure reveal" style="margin:0;">
+            <BrowserFrame label="sotersoftware.com">
+              <Image src={siteHomeImg} alt="Soter Software homepage, 'Clarity to Prevent Major Accidents'" data-lightbox loading="lazy" />
+            </BrowserFrame>
+            <figcaption class="cs-figure-cap">Home: clarity-to-prevent-major-accidents positioning, above the fold</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.08s;">
+            <BrowserFrame label="sotersoftware.com/products">
+              <Image src={siteProductsImg} alt="HAZOP Edge product page, four persona-anchored sections for Facilitators, Team Members, Project Managers, and Senior Management" data-lightbox loading="lazy" />
+            </BrowserFrame>
+            <figcaption class="cs-figure-cap">Products: HAZOP Edge organised by the four user personas</figcaption>
+          </figure>
+          <figure class="cs-figure reveal" style="margin:0;transition-delay:.16s;">
+            <BrowserFrame label="sotersoftware.com/knowledge-centre">
+              <Image src={siteKnowledgeImg} alt="Knowledge Centre landing page with article listings" data-lightbox loading="lazy" />
+            </BrowserFrame>
+            <figcaption class="cs-figure-cap">Knowledge Centre: a publishing surface owned by marketing, not engineering</figcaption>
+          </figure>
+        </div>
+
+        <p class="t-body reveal" style="margin-top:2rem;max-width:62ch;">
+          Wix wasn't the fashionable choice, and it wasn't meant to be. Soter's team is small and fast, and they needed a surface they could run themselves. A custom build would have looked better in a portfolio and worked worse in the business. Choosing the boring tool was the design decision.
+        </p>
+      </div>
+
       <!-- Learnings -->
       <div class="cs-section">
         <span class="cs-section-lbl">Learnings &amp; Reflections</span>
@@ -204,3 +303,105 @@ const stats = [
   <MoreCaseStudies current="hazop" />
   <Lightbox />
 </CaseStudy>
+
+<style>
+/* ─── Parallel engagement: company website section ───
+   Moved here from the former standalone soter-software case study. */
+
+/* Sitemap list */
+.sm-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem 1.25rem;
+}
+.sm-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: .75rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+}
+.sm-num {
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  letter-spacing: .12em;
+  color: var(--text-3);
+}
+.sm-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+.sm-q {
+  display: block;
+  font-size: .78rem;
+  color: var(--text-2);
+  margin-top: .15rem;
+  line-height: 1.45;
+}
+
+/* IA flow wrapper */
+.ia-flow { display: flex; flex-direction: column; gap: 1rem; }
+.ia-row {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.5rem 1.6rem;
+}
+.ia-row-tag {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.ia-row-tag.is-after { color: var(--accent); }
+/* .ia-note is defined globally in global.css (a11y-fixed) */
+
+/* Persona cards */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.persona-card {
+  padding: 1.2rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+  transition: border-color .25s, background .25s;
+}
+.persona-card:hover { border-color: var(--accent); background: var(--accent-bg); }
+.persona-num {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .14em;
+  color: var(--text-3);
+}
+.persona-role {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-1);
+  margin: .35rem 0 .4rem;
+  line-height: 1.3;
+}
+.persona-job {
+  font-size: .82rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .sm-list { grid-template-columns: 1fr; }
+  .persona-grid { grid-template-columns: 1fr; }
+}
+</style>
