@@ -100,6 +100,9 @@
     font-size: 0.6875rem;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: rgba(247, 243, 236, .65);
+    /* a11y: .65 alpha over the teal field was 4.04:1. .82 gives 5.40:1.
+       axe reported this node as "unable to determine", not as a failure,
+       so it only turned up in a manual contrast sweep. */
+    color: rgba(247, 243, 236, .82);
   }
 </style>

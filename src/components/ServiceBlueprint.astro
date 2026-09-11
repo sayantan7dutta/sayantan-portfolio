@@ -50,7 +50,11 @@ const layers = [
 ---
 
 <figure class="blueprint">
-  <div class="bp-scroll">
+  <!-- a11y: the blueprint scrolls sideways on narrow viewports. Without a
+       tabindex it was mouse-only (axe: scrollable-region-focusable, WCAG
+       2.1.1). tabindex=0 lets keyboard users scroll it with the arrow keys;
+       role=region + a label give it a name when they land there. -->
+  <div class="bp-scroll" tabindex="0" role="region" aria-label="HAZOP service blueprint, scrolls horizontally">
     <div class="bp-grid">
       <div class="bp-corner"><span>HAZOP lifecycle →</span></div>
       {stages.map((s, i) => (

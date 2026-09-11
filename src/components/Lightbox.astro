@@ -3,7 +3,11 @@
 
 <!-- a11y: aria-hidden toggles instead of [hidden] so the fade transition
      still runs. The dialog/modal role only matters once the user opens it. -->
-<div class="lb-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+<!-- a11y: `inert` while closed. aria-hidden alone left the close button in the
+     tab order (axe: aria-hidden-focus), so keyboard users could land on an
+     invisible control. inert removes it from focus AND the a11y tree, and
+     unlike [hidden] it does not block the fade transition. -->
+<div class="lb-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true" inert>
   <button class="lb-close" id="lb-close" type="button" aria-label="Close image viewer">
     Close <span aria-hidden="true">✕</span>
   </button>
@@ -24,6 +28,7 @@
     function open(src: string, alt: string, trigger: HTMLElement) {
       img!.src = src;
       img!.alt = alt;
+      overlay!.removeAttribute('inert');
       overlay!.setAttribute('aria-hidden', 'false');
       overlay!.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -35,8 +40,11 @@
       overlay!.classList.remove('open');
       overlay!.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      // Return focus to the element that opened the modal.
+      // Return focus to the element that opened the modal, then make the
+      // overlay inert. Order matters: inert on a container holding the
+      // focused element would blur it to <body> and lose our place.
       lastTrigger?.focus();
+      overlay!.setAttribute('inert', '');
       lastTrigger = null;
     }
 

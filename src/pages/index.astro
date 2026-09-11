@@ -166,7 +166,10 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
     <!-- 05 Sherwin-Williams, Design Operations -->
     <article class="project-item reveal">
       <div class="p-img-col">
-        <div class="p-img">
+        <!-- a11y: p-img-free releases the fixed 16:10 box on narrow
+             viewports. This card is the one whose text does not survive
+             the crop there (WCAG 1.4.10 Reflow). -->
+        <div class="p-img p-img-free">
           <SWOpsHero />
         </div>
       </div>
@@ -217,7 +220,9 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
   <div class="container">
     <span class="clients-title">Selected clients</span>
     <p class="clients-sub">Organisations I've designed for, across enterprise software, industrial safety, manufacturing technology, and financial inclusion.</p>
-    <div class="clients-marquee" aria-label="Selected client logos">
+    <!-- a11y: aria-label on a bare div is ignored by most screen readers
+         (axe: aria-prohibited-attr). role="group" makes the label valid. -->
+    <div class="clients-marquee" role="group" aria-label="Selected client logos">
       <div class="clients-track">
         <!-- Set A -->
         <img src="/images/clients/ericsson.png" alt="Ericsson" style="height:40px;" />
@@ -381,6 +386,15 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
 .clients-section {
   background: #ece7da;
   padding: clamp(3rem, 7vw, 4.75rem) 0;
+  /* a11y: this band stays cream in BOTH themes, so it has to carry the
+     light palette regardless of [data-theme]. Inheriting the dark tokens
+     here put pale grey text on a cream ground at 2.19:1. Redefining the
+     tokens on the section means anything nested inside it is correct by
+     default rather than needing its own override. */
+  --text-1: #1A1714;
+  --text-2: #4F4942;
+  --text-3: #615B55;
+  --accent: #7A5619;
 }
 .clients-title {
   display: block;
@@ -389,13 +403,17 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
   font-size: 0.6875rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #6a5f48;
+  /* a11y: was hardcoded #6a5f48, 3.19:1. Now the section's own light
+     palette, so it is AA whichever theme is active. */
+  color: var(--text-2);
+  font-weight: 500;
 }
 .clients-sub {
   text-align: center;
   font-size: .82rem;
   line-height: 1.65;
-  color: #5b5240;
+  /* a11y: was hardcoded #5b5240, 2.60:1. */
+  color: var(--text-2);
   max-width: 52ch;
   margin: .85rem auto 0;
 }
@@ -468,6 +486,12 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
   transition: background .25s;
 }
 .project-item:hover { background: var(--surface); }
+/* a11y (WCAG 1.4.10 Reflow): grid children default to min-width:auto, so
+   these columns refused to shrink below the min-content width of the
+   branded hero cards inside them. At 320px that pushed the whole document
+   to 444px and forced horizontal scrolling. */
+.p-img-col,
+.p-info { min-width: 0; }
 .project-item-alt .p-img-col { order: 2; }
 .project-item-alt .p-info { order: 1; }
 
@@ -616,6 +640,9 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
   .hero-photo { max-width: 280px; }
   .project-item,
   .project-item-alt { grid-template-columns: 1fr; }
+  /* a11y (WCAG 1.4.10): a fixed 16:10 box clipped this card's text once
+     the column was allowed to shrink. Photo thumbnails keep their ratio. */
+  .p-img-free { aspect-ratio: auto; }
   .project-item-alt .p-img-col,
   .project-item-alt .p-info { order: unset; }
   .contact-inner { flex-direction: column; align-items: flex-start; }

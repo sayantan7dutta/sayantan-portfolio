@@ -35,10 +35,14 @@
   --border:    #B8AC95;            /* a11y: was #D4CBBC (1.42:1), now 2.31:1 — stronger card edges */
   --text-1:    #1A1714;            /* 15.73:1 */
   --text-2:    #4F4942;            /* a11y: darkened from #5A534C (6.67:1) to 7.83:1 for stronger body contrast */
-  --text-3:    #6E6760;            /* a11y: was #9A9082 (2.77:1 FAIL), now 4.91:1 */
-  --accent:    #8B6322;            /* a11y: was #9A6E2A (3.99:1), now 4.74:1 — clears AA for normal text */
-  --accent-bg: rgba(139,99,34,.07);
-  --accent-hover: rgba(139,99,34,.14);
+  /* a11y: these two are now rated against --surface-2 (#E5DDD3), the darkest
+     surface they ever sit on, not against --bg. The previous values were
+     checked on --bg alone and quietly dropped below AA on raised cards:
+     --text-3 fell to 4.13:1 and --accent to 4.34:1. */
+  --text-3:    #615B55;            /* 4.98:1 on surface-2, 5.90:1 on bg */
+  --accent:    #7A5619;            /* 4.92:1 on surface-2, 5.84:1 on bg */
+  --accent-bg: rgba(122,86,25,.07);
+  --accent-hover: rgba(122,86,25,.14);
   --focus-ring: #5A3F12;           /* a11y: dark mocha, ~10:1 on light bg */
 }
 
@@ -168,7 +172,7 @@ body::before {
   color: var(--accent);
 }
 [data-theme="light"] .t-tag-current {
-  border-color: rgba(139,99,34,.45);
+  border-color: rgba(122,86,25,.45);
 }
 .t-lead {
   font-size: clamp(.95rem, 2vw, 1.08rem);

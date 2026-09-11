@@ -77,6 +77,13 @@
     display: flex;
     flex-direction: column;
     font-family: var(--font-mono);
+
+    /* a11y: SW brand red #DA291C is only 3.94:1 on this near-black field, so
+       it fails AA as text. Kept for fills and rules (non-text needs 3:1, and
+       it clears that); --sw-red-text is a lightened tint at 4.89:1 used
+       wherever the red carries words or numbers. */
+    --sw-red: #DA291C;
+    --sw-red-text: #F03A26;
   }
 
   /* ── Red brand band ── */
@@ -92,7 +99,9 @@
     font-size: 0.6875rem;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: rgba(255,255,255,.9);
+    /* a11y: was rgba(255,255,255,.9), which composites to #FBEAE8 and gives
+       4.17:1 on the red band. Pure white is 4.87:1. */
+    color: #fff;
   }
   .sw-band-dots {
     display: flex;
@@ -141,7 +150,7 @@
     font-size: 0.6875rem;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: #DA291C;
+    color: var(--sw-red-text);
   }
   .sw-title {
     font-family: var(--font-display);
@@ -177,20 +186,22 @@
     font-family: var(--font-display);
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     font-weight: 700;
-    color: #DA291C;
+    color: var(--sw-red-text);
     line-height: 1;
   }
   .sw-arrow {
     font-family: var(--font-mono);
     font-size: .7em;
-    color: rgba(240, 234, 214, .35);
+    /* a11y: .35 alpha read 2.83:1. .52 clears AA at 4.91:1. */
+    color: rgba(240, 234, 214, .52);
     vertical-align: middle;
   }
   .sw-stat-lbl {
     font-size: 0.6875rem;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: rgba(240, 234, 214, .35);
+    /* a11y: was .35 alpha — 2.83:1. Now 4.91:1. */
+    color: rgba(240, 234, 214, .52);
   }
 
   /* ── Bottom stats bar ── */
@@ -219,12 +230,37 @@
     font-size: 0.6875rem;
     letter-spacing: .09em;
     text-transform: uppercase;
-    color: rgba(240, 234, 214, .4);
+    /* a11y: was .4 alpha — 3.35:1. Now 4.88:1. */
+    color: rgba(240, 234, 214, .52);
   }
   .sw-foot-div {
     width: 1px;
     height: 1rem;
     background: rgba(240, 234, 214, .12);
     flex-shrink: 0;
+  }
+
+  /* ── Narrow viewports ──
+     a11y (WCAG 1.4.10 Reflow): three columns cannot hold 11px text at
+     phone widths, and the text was being clipped by the card's fixed
+     16:10 box. Stack the pillars and let the card grow instead. Nothing
+     is hidden, so no content is lost at 320px. */
+  @media (max-width: 560px) {
+    .sw-pillars {
+      grid-template-columns: 1fr;
+      gap: .5rem;
+      overflow: visible;
+    }
+    .sw-pillar { padding: .6rem .7rem; }
+    /* The card is free-height here, so there is no reason to truncate. */
+    .sw-desc {
+      display: block;
+      overflow: visible;
+      -webkit-line-clamp: unset;
+    }
+    .sw-body { overflow: visible; }
+    .sw-band { flex-wrap: wrap; gap: .4rem; }
+    .sw-foot { flex-wrap: wrap; gap: .5rem 1rem; }
+    .sw-foot-div { display: none; }
   }
 </style>
