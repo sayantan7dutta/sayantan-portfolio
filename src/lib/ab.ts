@@ -49,6 +49,20 @@ export const VARIANTS: Variant[] = [
     enabled: true,
   },
   {
+    id: 'product-page',
+    name: 'Product Page',
+    path: '/v/product-page',
+    thesis: 'The practice presented in the grammar of a B2B SaaS marketing site — value prop, logo strip, customer stories, FAQ. Betting that speaking the buyer\u2019s own language is the shortest route to being understood.',
+    enabled: true,
+  },
+  {
+    id: 'workspace',
+    name: 'Workspace',
+    path: '/v/workspace',
+    thesis: 'The portfolio built as the kind of product it documents: sidebar, table and board views, a detail panel, a command palette. Betting that a SaaS designer proves it fastest by handing you working SaaS.',
+    enabled: true,
+  },
+  {
     // Retired: too engineer-coded for a product designer. Kept so the route
     // and the work survive, but out of the split and out of the lab.
     id: 'control-room',

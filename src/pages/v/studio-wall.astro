@@ -27,13 +27,15 @@ import ambleImg from '../../assets/work/amble/routines.jpg';
  */
 // Sherwin-Williams was infrastructure work — there is no screen to photograph,
 // so it goes up as a printed figure instead of a borrowed image.
-const pinned: Record<string, { img?: any; figure?: string; figureNote?: string; span: number; tilt: number; sticky: 'yellow' | 'blue' | 'pink' }> = {
-  miigenie:           { img: miigenieImg, span: 7, tilt: -1.8, sticky: 'yellow' },
-  kinvault:           { img: kinvaultImg, span: 5, tilt: 2.2,  sticky: 'blue' },
-  hazop:              { img: hazopImg,    span: 6, tilt: 1.2,  sticky: 'pink' },
-  'api-lifecycle':    { img: ericssonImg, span: 6, tilt: -2.4, sticky: 'yellow' },
-  'sherwin-williams': { figure: '30–40%', figureNote: 'less rework, 20+ person team', span: 4, tilt: 1.8, sticky: 'blue' },
-  amble:              { img: ambleImg,    span: 6, tilt: -1.1, sticky: 'pink' },
+const pinned: Record<string, { img?: any; figure?: string; figureNote?: string; span: number; ratio: string; tilt: number; sticky: 'yellow' | 'blue' | 'pink' }> = {
+  // `ratio` is set to the source's own shape so the crop doesn't cut through a
+  // headline. A phone screenshot forced into a wide box loses most of itself.
+  miigenie:           { img: miigenieImg, span: 5, ratio: '3 / 4',   tilt: -1.8, sticky: 'yellow' },
+  kinvault:           { img: kinvaultImg, span: 4, ratio: '3 / 4',   tilt: 2.2,  sticky: 'blue' },
+  hazop:              { img: hazopImg,    span: 7, ratio: '16 / 10', tilt: 1.2,  sticky: 'pink' },
+  'api-lifecycle':    { img: ericssonImg, span: 6, ratio: '16 / 10', tilt: -2.4, sticky: 'yellow' },
+  'sherwin-williams': { figure: '30–40%', figureNote: 'less rework, 20+ person team', span: 3, ratio: '4 / 5', tilt: 1.8, sticky: 'blue' },
+  amble:              { img: ambleImg,    span: 6, ratio: '4 / 3',   tilt: -1.1, sticky: 'pink' },
 };
 
 const wall = projects.map((p) => ({ ...p, ...pinned[p.slug] }));
@@ -83,7 +85,7 @@ const fonts =
 
     <div class="pinboard">
       {wall.map((p) => (
-        <article class={`pin-item span-${p.span}`} style={`--tilt:${p.tilt}deg`}>
+        <article class={`pin-item span-${p.span}`} style={`--tilt:${p.tilt}deg;--ratio:${p.ratio}`}>
           <a class="print" href={p.href} data-ab={`wall:${p.slug}`}>
             <span class="pin pin-steel" aria-hidden="true"></span>
             {p.img
@@ -254,10 +256,14 @@ const fonts =
 
   /* ── pinboard ── */
   .pinboard {
-    display: grid; grid-template-columns: repeat(12, 1fr);
+    /* `dense` lets the small prints backfill the gaps the big ones leave,
+       which is how a wall actually fills up. */
+    display: grid; grid-auto-flow: dense;
+    grid-template-columns: repeat(12, 1fr);
     gap: clamp(2.2rem, 5vw, 4rem) clamp(1.4rem, 3vw, 2.6rem);
     align-items: start;
   }
+  .span-3 { grid-column: span 3; }
   .span-4 { grid-column: span 4; }
   .span-5 { grid-column: span 5; }
   .span-6 { grid-column: span 6; }
@@ -267,10 +273,10 @@ const fonts =
   .pin-item:nth-child(3n) { margin-top: clamp(.4rem, 1.6vw, 1.2rem); }
 
   .print { display: block; padding: 12px 12px 0; }
-  .print img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: top center; background: #fff; }
+  .print img { width: 100%; aspect-ratio: var(--ratio, 4 / 3); object-fit: cover; object-position: top center; background: #fff; }
   .print-figure {
     display: flex; flex-direction: column; justify-content: center; gap: .5rem;
-    aspect-ratio: 4 / 3; padding: 1.4rem;
+    aspect-ratio: var(--ratio, 4 / 3); padding: 1.4rem;
     background: #223b52; color: #f2ece0; text-align: center;
   }
   .print-figure em { font-style: normal; font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.035em; }
@@ -281,7 +287,9 @@ const fonts =
   .print-org { font-size: .82rem; color: var(--ink-2); }
   .print-go { display: inline-block; margin-top: .7rem; font-size: .84rem; font-weight: 600; color: var(--red); }
   .print:hover .print-go { text-decoration: underline; text-underline-offset: 3px; }
-  .pin-item .sticky { max-width: 17rem; margin: -.6rem 0 0 clamp(.6rem, 3vw, 2.4rem); }
+  /* A sticky note is a fixed physical size. Let it overhang a narrow column
+     into the gap rather than squeeze into a tall ribbon of text. */
+  .pin-item .sticky { width: max(14rem, 100%); max-width: 18rem; margin: -.6rem 0 0 clamp(.6rem, 3vw, 2.4rem); }
 
   /* ── thread of index cards ── */
   .thread { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: clamp(1.6rem, 3.5vw, 2.6rem); }
@@ -313,7 +321,7 @@ const fonts =
   }
   @media (max-width: 720px) {
     .pinboard { grid-template-columns: 1fr; }
-    .span-4, .span-5, .span-6, .span-7 { grid-column: auto; }
+    .span-3, .span-4, .span-5, .span-6, .span-7 { grid-column: auto; }
     .pin-item:nth-child(even), .pin-item:nth-child(3n) { margin-top: 0; }
     .pin-item .sticky { margin-left: 0; max-width: 100%; }
   }

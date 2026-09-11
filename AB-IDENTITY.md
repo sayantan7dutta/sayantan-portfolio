@@ -4,13 +4,21 @@ Three presentations of the same six projects. The content is identical; the
 *position* is not. The point is to find out which one makes a stranger read
 further and click through, rather than arguing about it.
 
-| Route | Name | What it bets |
-|---|---|---|
-| `/` | **Editorial** (current) | Serif headline, portrait, card grid. Safe, legible, familiar — and the exact shape most designer portfolios now share. |
-| `/v/drawing-set` | **Drawing Set** | An issued drawing set with the markup left on: sheets, title blocks, registration marks, a career as revisions A–H, and handwritten redlines you can toggle off. |
-| `/v/sketchbook` | **Sketchbook** | The working notebook, turned a spread at a time. Left page: the scribble, the pen sketch, the blunt line. Right page: the outcome. Arrow keys turn pages; `#p3` deep-links a spread. |
-| `/v/studio-wall` | **Studio Wall** | The wall behind the desk. Prints pinned up crooked, index cards for the timeline, sticky notes carrying the blunt lines. Nothing lines up, on purpose. |
-| `/lab` | Review room | The live ones side by side at desktop / tablet / phone width, plus the beacon readout. |
+| Route | Name | Family | What it bets |
+|---|---|---|---|
+| `/` | **Editorial** (current) | — | Serif headline, portrait, card grid. Safe, legible, familiar — and the exact shape most designer portfolios now share. |
+| `/v/drawing-set` | **Drawing Set** | Analog | An issued drawing set with the markup left on: sheets, title blocks, a career as revisions A–H, and handwritten redlines you can toggle off. |
+| `/v/sketchbook` | **Sketchbook** | Analog | The working notebook, a spread at a time. Left page: the pen sketch and the blunt line. Right page: the outcome. Arrow keys turn pages; `#p3` deep-links one. |
+| `/v/studio-wall` | **Studio Wall** | Analog | The wall behind the desk. Prints pinned up crooked, index cards, sticky notes. Nothing lines up, on purpose. |
+| `/v/product-page` | **Product Page** | SaaS | The practice in the grammar of a B2B SaaS marketing site: value prop, logo strip, customer stories, process, FAQ. Says out loud that it is doing this. |
+| `/v/workspace` | **Workspace** | SaaS | The portfolio built as the product it documents: sidebar, table and board views, a detail panel, a command palette on ⌘K. |
+| `/lab` | Review room | — | The live ones side by side at desktop / tablet / phone width, plus the beacon readout. |
+
+**Two families, two arguments.** The analog three say *a person made this, and here
+is the thinking*. The SaaS two say *this is the exact thing I build, judge the craft
+directly*. Most of the work and most of the clients are B2B SaaS, which is what the
+second pair is grounded in — Ericsson's API vertical, HAZOP Edge, design ops across
+six products.
 
 **Retired:** `/v/control-room` — the site as a process control panel. Accurate to the
 domain, but it reads as an engineer or a scientist rather than a product designer.
