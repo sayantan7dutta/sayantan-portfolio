@@ -28,18 +28,34 @@ export const VARIANTS: Variant[] = [
     enabled: true,
   },
   {
-    id: 'control-room',
-    name: 'Control Room',
-    path: '/v/control-room',
-    thesis: 'The site is a process panel. Betting that the fastest way to prove you design high-stakes systems is to make the portfolio itself behave like one.',
-    enabled: true,
-  },
-  {
     id: 'drawing-set',
     name: 'Drawing Set',
     path: '/v/drawing-set',
-    thesis: 'The site is an issued drawing set with redline markup. Betting that visible rigour and a hand in the margins reads as a person, not a template.',
+    thesis: 'An issued drawing set with the markup left on. Betting that visible rigour plus a hand in the margins reads as a person, not a template.',
     enabled: true,
+  },
+  {
+    id: 'sketchbook',
+    name: 'Sketchbook',
+    path: '/v/sketchbook',
+    thesis: 'The working notebook, turned a spread at a time: the scribble on the left, the outcome on the right. Betting that showing the thinking beats showing only the polish.',
+    enabled: true,
+  },
+  {
+    id: 'studio-wall',
+    name: 'Studio Wall',
+    path: '/v/studio-wall',
+    thesis: 'Prints pinned up crooked, index cards, sticky notes. Betting that an arrangement no grid would produce is the fastest proof a person made it.',
+    enabled: true,
+  },
+  {
+    // Retired: too engineer-coded for a product designer. Kept so the route
+    // and the work survive, but out of the split and out of the lab.
+    id: 'control-room',
+    name: 'Control Room',
+    path: '/v/control-room',
+    thesis: 'The site as a process panel. Accurate to the domain, but it reads as an engineer or a scientist rather than a designer.',
+    enabled: false,
   },
 ];
 

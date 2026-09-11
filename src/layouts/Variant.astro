@@ -50,7 +50,11 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 
   <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* `height: auto` matters: Astro's <Image> emits width/height attributes, and
+       those presentational hints otherwise beat any CSS aspect-ratio, so a tall
+       source renders at full intrinsic height. */
     img, svg { display: block; max-width: 100%; }
+    img { height: auto; }
     a { color: inherit; text-decoration: none; }
     ul, ol { list-style: none; }
     button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
@@ -95,8 +99,9 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
   <nav class="ab-switch" aria-label="Design variant">
     <span>Version</span>
     <a href="/?ab=1" data-ab="switch:control">Editorial</a>
-    <a href="/v/control-room?ab=1" data-ab="switch:control-room">Control room</a>
     <a href="/v/drawing-set?ab=1" data-ab="switch:drawing-set">Drawing set</a>
+    <a href="/v/sketchbook?ab=1" data-ab="switch:sketchbook">Sketchbook</a>
+    <a href="/v/studio-wall?ab=1" data-ab="switch:studio-wall">Studio wall</a>
     <a href="/lab" data-ab="switch:lab">Compare ↗</a>
   </nav>
 

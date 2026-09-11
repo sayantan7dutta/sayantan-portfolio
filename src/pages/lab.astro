@@ -41,7 +41,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;5
   </header>
 
   <div class="grid">
-    {VARIANTS.map((v) => (
+    {VARIANTS.filter((v) => v.enabled).map((v) => (
       <section class="col">
         <div class="col-head">
           <h2>{v.name}</h2>
@@ -174,7 +174,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;5
     .size-row { display: flex; align-items: center; gap: .5rem; margin-top: 1.4rem; flex-wrap: wrap; }
     .size-row .lbl { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-right: .3rem; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.4rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.4rem; }
     .col { border: 1px solid var(--line); background: var(--panel); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
     .col-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: .9rem 1rem .4rem; }
     .col-head h2 { font-size: 1.05rem; font-weight: 600; }

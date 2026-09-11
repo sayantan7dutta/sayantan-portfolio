@@ -1,0 +1,512 @@
+---
+/**
+ * Variant: SKETCHBOOK
+ *
+ * Same family as the drawing set — paper, a hand, visible thinking — but a
+ * designer's artefact rather than an engineer's. This is the book the work
+ * happened in, not the document that came out of it.
+ *
+ * Navigation is by spread, not scroll. It is the identity of the thing: you
+ * turn a page, and the page has a left half that thinks and a right half that
+ * shows. Everything stays in the DOM, so links, search and screen readers get
+ * the whole book regardless.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { projects, log, contact } from '../../lib/variants';
+
+import miigenieImg from '../../assets/work/miigenie/conversation.png';
+import kinvaultImg from '../../assets/work/kinvault/dashboard.jpg';
+import hazopImg from '../../assets/work/hazop/analytics-dashboard.jpg';
+import ericssonImg from '../../assets/work/api-lifecycle/dashboard.png';
+import ambleImg from '../../assets/work/amble/family.jpg';
+
+/**
+ * Each project gets a thumbnail sketch, the scribble you make before you open
+ * a design tool. `kind` picks which one gets drawn.
+ */
+const pages: Record<string, { img?: any; figure?: string; kind: 'phone' | 'board' | 'grid' | 'flow'; alt: string }> = {
+  miigenie:           { img: miigenieImg, kind: 'phone', alt: 'miiGenie conversation screen' },
+  kinvault:           { img: kinvaultImg, kind: 'phone', alt: 'KinVault dashboard' },
+  hazop:              { img: hazopImg,    kind: 'grid',  alt: 'HAZOP Edge analytics dashboard' },
+  'api-lifecycle':    { img: ericssonImg, kind: 'grid',  alt: 'Ericsson API Console dashboard' },
+  'sherwin-williams': { figure: '30–40%', kind: 'flow',  alt: 'Less rework across a team of more than twenty' },
+  amble:              { img: ambleImg,    kind: 'board', alt: 'Amble, a family at home in 2065' },
+};
+
+const spreads = projects.map((p) => ({ ...p, ...pages[p.slug] }));
+
+const fonts =
+  'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Kalam:wght@400;700&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta · Sketchbook"
+  description="Product designer working across enterprise software and AI. A portfolio kept as a working notebook."
+  variant="sketchbook"
+  fonts={fonts}
+  themeColor="#3a332c"
+>
+
+<!-- pen-drawn wobble, applied to the thumbnail sketches -->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <filter id="pen">
+    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" seed="12" result="n" />
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G" />
+  </filter>
+</svg>
+
+<div class="desk">
+  <div class="book" id="book">
+    <span class="ribbon" aria-hidden="true"></span>
+
+    <main id="main">
+      <!-- ═══ 0 · COVER ═══════════════════════════════════════════════ -->
+      <article class="spread cover-spread" data-spread="0" aria-label="Cover">
+        <div class="page page-l cover-l">
+          <div class="sticker">
+            <span class="sticker-k">Name</span>
+            <span class="sticker-v">Sayantan Dutta</span>
+            <span class="sticker-k">Book</span>
+            <span class="sticker-v">Vol. 5 · 2020–2026</span>
+            <span class="sticker-k">If found</span>
+            <span class="sticker-v small">{contact.email}</span>
+          </div>
+          <p class="hand cover-hand">Everything in here was made with someone else in the room.</p>
+        </div>
+
+        <div class="page page-r cover-r">
+          <p class="kicker">Product designer · enterprise &amp; AI</p>
+          <h1>Working<br /><em>notebook</em></h1>
+          <p class="cover-body">
+            Six projects and five years, kept the way I actually keep them.
+            Industrial hazard studies, enterprise API infrastructure, design
+            operations for a twenty-person team, and a voice companion older
+            adults use every morning.
+          </p>
+
+          <h2 class="toc-h">Contents</h2>
+          <ol class="toc">
+            {spreads.map((s, i) => (
+              <li>
+                <button class="toc-go" data-go={i + 1} data-ab={`toc:${s.slug}`}>
+                  <span class="toc-n">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="toc-t">{s.short}</span>
+                  <span class="toc-y">{s.period}</span>
+                </button>
+              </li>
+            ))}
+            <li>
+              <button class="toc-go" data-go={spreads.length + 1} data-ab="toc:back">
+                <span class="toc-n">{String(spreads.length + 1).padStart(2, '0')}</span>
+                <span class="toc-t">Back pages</span>
+                <span class="toc-y">About · contact</span>
+              </button>
+            </li>
+          </ol>
+
+          <p class="turn-hint hand">Turn the page →</p>
+        </div>
+      </article>
+
+      <!-- ═══ 1..n · PROJECT SPREADS ══════════════════════════════════ -->
+      {spreads.map((s, i) => (
+        <article class="spread" data-spread={i + 1} aria-label={s.short} hidden>
+          <!-- LEFT: the thinking -->
+          <div class="page page-l">
+            <p class="kicker">{s.sector} · {s.period}</p>
+
+            <figure class="sketch" aria-hidden="true">
+              {s.kind === 'phone' && (
+                <svg viewBox="0 0 220 200">
+                  <rect class="pen" x="52" y="14" width="86" height="168" rx="12" />
+                  <line class="pen" x1="70" y1="40" x2="120" y2="40" />
+                  <rect class="pen" x="70" y="58" width="52" height="34" rx="4" />
+                  <rect class="pen" x="70" y="100" width="52" height="34" rx="4" />
+                  <circle class="pen" cx="95" cy="158" r="13" />
+                  <path class="pen squiggle" d="M158 60 q22 14 6 30 q-14 14 4 26" />
+                  <text class="scrawl" x="150" y="48">voice first</text>
+                </svg>
+              )}
+              {s.kind === 'grid' && (
+                <svg viewBox="0 0 220 200">
+                  <rect class="pen" x="14" y="18" width="192" height="164" rx="5" />
+                  <line class="pen" x1="14" y1="44" x2="206" y2="44" />
+                  <line class="pen" x1="62" y1="44" x2="62" y2="182" />
+                  <rect class="pen" x="76" y="58" width="54" height="40" />
+                  <rect class="pen" x="142" y="58" width="52" height="40" />
+                  <line class="pen" x1="76" y1="120" x2="194" y2="120" />
+                  <line class="pen" x1="76" y1="136" x2="168" y2="136" />
+                  <line class="pen" x1="76" y1="152" x2="186" y2="152" />
+                  <text class="scrawl" x="22" y="36">nav</text>
+                </svg>
+              )}
+              {s.kind === 'flow' && (
+                <svg viewBox="0 0 220 200">
+                  <rect class="pen" x="16" y="30" width="52" height="34" rx="4" />
+                  <rect class="pen" x="88" y="30" width="52" height="34" rx="4" />
+                  <rect class="pen" x="160" y="30" width="46" height="34" rx="4" />
+                  <path class="pen arrow" d="M68 47 h18 m-6 -5 l6 5 l-6 5" />
+                  <path class="pen arrow" d="M140 47 h18 m-6 -5 l6 5 l-6 5" />
+                  <rect class="pen" x="52" y="112" width="52" height="34" rx="4" />
+                  <rect class="pen" x="124" y="112" width="52" height="34" rx="4" />
+                  <path class="pen arrow" d="M104 129 h18 m-6 -5 l6 5 l-6 5" />
+                  <path class="pen squiggle" d="M42 64 q-10 26 12 44" />
+                  <text class="scrawl" x="18" y="176">one path, five steps</text>
+                </svg>
+              )}
+              {s.kind === 'board' && (
+                <svg viewBox="0 0 220 200">
+                  <rect class="pen" x="26" y="30" width="46" height="34" transform="rotate(-3 49 47)" />
+                  <rect class="pen" x="88" y="24" width="46" height="34" transform="rotate(2 111 41)" />
+                  <rect class="pen" x="150" y="34" width="46" height="34" transform="rotate(-2 173 51)" />
+                  <rect class="pen" x="56" y="96" width="46" height="34" transform="rotate(3 79 113)" />
+                  <rect class="pen" x="120" y="102" width="46" height="34" transform="rotate(-3 143 119)" />
+                  <path class="pen squiggle" d="M72 64 q14 20 -4 34" />
+                  <path class="pen squiggle" d="M134 60 q-12 24 10 40" />
+                  <text class="scrawl" x="24" y="176">2065, working backwards</text>
+                </svg>
+              )}
+              <figcaption class="hand sketch-cap">first pass, before any tool</figcaption>
+            </figure>
+
+            <p class="hand note">{s.note}</p>
+
+            <p class="who">
+              <span>{s.org}</span>
+              <span class="who-role">{s.role}</span>
+            </p>
+          </div>
+
+          <!-- RIGHT: the thing itself -->
+          <div class="page page-r">
+            <h2>{s.title}</h2>
+            <figure class="taped">
+              <span class="clip" aria-hidden="true"></span>
+              {s.img
+                ? <Image src={s.img} alt={s.alt} widths={[420, 760]} sizes="(max-width: 900px) 84vw, 430px" loading="lazy" />
+                : <span class="taped-figure" role="img" aria-label={s.alt}><em>{s.figure}</em>less rework, 20+ person team</span>}
+            </figure>
+            <p class="body">{s.summary}</p>
+            <a class="pen-link" href={s.href} data-ab={`spread:${s.slug}`}>
+              Read the whole thing <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+      ))}
+
+      <!-- ═══ BACK PAGES ══════════════════════════════════════════════ -->
+      <article class="spread" data-spread={spreads.length + 1} aria-label="Back pages" hidden>
+        <div class="page page-l">
+          <p class="kicker">The back pages</p>
+          <h2 class="back-h">Where I have been</h2>
+          <ol class="years">
+            {log.map((l) => (
+              <li>
+                <span class="yr">{l.stamp}</span>
+                <span class="ev">{l.event}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="page page-r">
+          <p class="kicker">Last page</p>
+          <h2 class="back-h">Say hello</h2>
+          <p class="body">
+            If you have a workflow people dread using, send it over. I read
+            everything, and I will tell you honestly whether I am the right
+            person for it.
+          </p>
+          <p class="hand big-hand">
+            <a href={`mailto:${contact.email}`} data-ab="contact:email">{contact.email}</a>
+          </p>
+          <ul class="ends">
+            <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="contact:linkedin">LinkedIn ↗</a></li>
+            <li><a href={contact.resume} data-ab="contact:cv">CV (PDF)</a></li>
+            <li>{contact.base}</li>
+          </ul>
+          <p class="hand end-hand">— end of book —</p>
+        </div>
+      </article>
+    </main>
+
+    <!-- page numbers sit in the outer corners, like a real book -->
+    <span class="folio folio-l" id="folio-l" aria-hidden="true"></span>
+    <span class="folio folio-r" id="folio-r" aria-hidden="true"></span>
+  </div>
+
+  <!-- ═══ TURN CONTROLS ═══════════════════════════════════════════════ -->
+  <nav class="turn" aria-label="Pages">
+    <button id="prev" class="turn-btn" data-ab="turn:prev">
+      <span aria-hidden="true">←</span><span class="sr-only">Previous spread</span>
+    </button>
+    <p class="turn-read" aria-live="polite" id="turn-read">Cover</p>
+    <button id="next" class="turn-btn" data-ab="turn:next">
+      <span aria-hidden="true">→</span><span class="sr-only">Next spread</span>
+    </button>
+  </nav>
+</div>
+
+<script>
+  const spreads = Array.from(document.querySelectorAll<HTMLElement>('.spread'));
+  const prev = document.getElementById('prev') as HTMLButtonElement;
+  const next = document.getElementById('next') as HTMLButtonElement;
+  const read = document.getElementById('turn-read')!;
+  const folioL = document.getElementById('folio-l')!;
+  const folioR = document.getElementById('folio-r')!;
+  const book = document.getElementById('book')!;
+
+  let at = 0;
+
+  function show(i: number, focus = true) {
+    at = Math.max(0, Math.min(spreads.length - 1, i));
+    spreads.forEach((s, n) => { s.hidden = n !== at; });
+
+    prev.disabled = at === 0;
+    next.disabled = at === spreads.length - 1;
+
+    const label = spreads[at].getAttribute('aria-label') ?? '';
+    read.textContent = at === 0 ? 'Cover' : `${at} of ${spreads.length - 1} · ${label}`;
+    folioL.textContent = at === 0 ? '' : String(at * 2);
+    folioR.textContent = at === 0 ? '' : String(at * 2 + 1);
+
+    book.classList.remove('turning');
+    // restart the page-turn tint; the class is removed above so it can re-run
+    void book.offsetWidth;
+    book.classList.add('turning');
+
+    if (focus) spreads[at].querySelector<HTMLElement>('h1, h2')?.focus?.();
+    history.replaceState(null, '', at === 0 ? location.pathname : `#p${at}`);
+  }
+
+  prev.addEventListener('click', () => show(at - 1));
+  next.addEventListener('click', () => show(at + 1));
+
+  document.querySelectorAll<HTMLButtonElement>('.toc-go').forEach((b) => {
+    b.addEventListener('click', () => show(Number(b.dataset.go)));
+  });
+
+  addEventListener('keydown', (e) => {
+    const t = e.target as HTMLElement;
+    if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(at + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
+  });
+
+  // Deep links: /v/sketchbook#p3 opens on that spread.
+  const m = location.hash.match(/^#p(\d+)$/);
+  show(m ? Number(m[1]) : 0, false);
+</script>
+
+<style>
+  :root {
+    --desk: #3a332c;
+    --paper: #faf6ec;
+    --paper-2: #f3eee1;
+    --ink: #2a2620;
+    --ink-2: #5d564b;
+    --faint: #9a9184;
+    --dot: #cfc6b2;
+    --pen: #26405e;
+    --accent: #b4552f;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'Figtree', system-ui, sans-serif;
+    --hand: 'Kalam', 'Bradley Hand', cursive;
+  }
+
+  :global(body) {
+    background: var(--desk);
+    background-image:
+      radial-gradient(ellipse at 50% 0%, #463e35 0%, #2e2823 72%);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  :global(.skip-link) { background: var(--accent); color: #fff; }
+  :global(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .defs { position: absolute; width: 0; height: 0; }
+
+  .desk {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1.2rem;
+    padding: clamp(1rem, 3vw, 2.4rem) clamp(.6rem, 3vw, 2rem) clamp(5rem, 8vw, 6.5rem);
+  }
+
+  /* ── the book ── */
+  .book {
+    position: relative;
+    width: min(1120px, 100%);
+    background: var(--paper);
+    border-radius: 3px 10px 10px 3px;
+    box-shadow:
+      0 30px 60px -24px rgba(0,0,0,.65),
+      0 2px 0 rgba(255,255,255,.06) inset;
+    /* dot grid, the way a designer's notebook is ruled */
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 19px 19px;
+    background-position: 8px 8px;
+  }
+  /* the gutter: two pages, one spine */
+  .book::before {
+    content: ''; position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 46px; transform: translateX(-50%); pointer-events: none; z-index: 3;
+    background: linear-gradient(90deg, transparent, rgba(90,78,62,.16) 42%, rgba(90,78,62,.26) 50%, rgba(90,78,62,.16) 58%, transparent);
+  }
+  .book.turning .spread:not([hidden]) { animation: turn .42s cubic-bezier(.22,1,.36,1); }
+  @keyframes turn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .ribbon {
+    position: absolute; top: -6px; right: 56px; width: 13px; height: 96px; z-index: 4;
+    background: linear-gradient(180deg, #9d3f2c, #7e3122);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 86%, 0 100%);
+    box-shadow: 1px 0 3px rgba(0,0,0,.3);
+  }
+
+  /* `display: grid` here outranks the UA's [hidden] rule, so say it explicitly. */
+  .spread[hidden] { display: none; }
+  .spread {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: min(68vh, 620px);
+  }
+  .page { padding: clamp(1.5rem, 3.4vw, 2.9rem); position: relative; }
+  .page-l { padding-right: clamp(2rem, 4vw, 3.4rem); }
+  .page-r { padding-left: clamp(2rem, 4vw, 3.4rem); background: linear-gradient(90deg, rgba(90,78,62,.05), transparent 8%); }
+
+  /* keep the right page's text out from under the ribbon */
+  @media (min-width: 861px) { .page-r { padding-right: 5.4rem; } }
+
+  .folio { position: absolute; bottom: 1.1rem; font-family: var(--sans); font-size: .72rem; color: var(--faint); z-index: 4; }
+  .folio-l { left: clamp(1.5rem, 3.4vw, 2.9rem); }
+  .folio-r { right: clamp(1.5rem, 3.4vw, 2.9rem); }
+
+  /* ── shared type ── */
+  .kicker { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); font-weight: 500; }
+  h1 { font-family: var(--serif); font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 400; line-height: .92; letter-spacing: -.01em; margin: .7rem 0 1.3rem; }
+  h1 em { font-style: italic; color: var(--accent); }
+  h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 400; line-height: 1.12; letter-spacing: -.01em; margin-bottom: 1.1rem; }
+  h2:focus { outline: none; }
+  .body { color: var(--ink-2); max-width: 42ch; }
+  .hand { font-family: var(--hand); color: var(--pen); font-size: clamp(1.02rem, 2.1vw, 1.22rem); line-height: 1.45; }
+
+  /* ── cover ── */
+  .cover-l { display: flex; flex-direction: column; justify-content: center; gap: 2.4rem; }
+  .sticker {
+    display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.1rem; align-items: baseline;
+    background: var(--paper-2); border: 1px solid #ddd3bd;
+    padding: 1.4rem 1.6rem; border-radius: 2px;
+    transform: rotate(-1.3deg);
+    box-shadow: 0 6px 16px -10px rgba(0,0,0,.4);
+    max-width: 27rem;
+  }
+  .sticker-k { font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  .sticker-v { font-family: var(--hand); font-size: 1.5rem; color: var(--pen); line-height: 1.1; }
+  .sticker-v.small { font-size: 1.1rem; word-break: break-all; }
+  .cover-hand { transform: rotate(-.7deg); max-width: 26ch; }
+
+  .cover-body { color: var(--ink-2); max-width: 40ch; }
+  .toc-h { font-family: var(--sans); font-size: .68rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); margin: 2.2rem 0 .3rem; }
+  .toc li { border-bottom: 1px solid #e4dbc8; }
+  .toc-go {
+    display: grid; grid-template-columns: 2.2rem 1fr auto; gap: .8rem; align-items: baseline;
+    width: 100%; text-align: left; padding: .62rem .2rem; min-height: 44px;
+  }
+  .toc-go:hover { background: rgba(180,85,47,.07); }
+  .toc-go:hover .toc-t { color: var(--accent); }
+  .toc-n { font-size: .72rem; color: var(--faint); }
+  .toc-t { font-weight: 500; }
+  .toc-y { font-size: .72rem; color: var(--faint); white-space: nowrap; }
+  .turn-hint { margin-top: 1.6rem; color: var(--faint); }
+
+  /* ── sketches ── */
+  .sketch { margin: 1.4rem 0 1.6rem; }
+  .sketch svg { width: min(100%, 320px); height: auto; filter: url(#pen); }
+  .pen { fill: none; stroke: var(--pen); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .squiggle { stroke-width: 1.4; opacity: .75; }
+  .arrow { stroke-width: 1.5; }
+  .scrawl { font-family: var(--hand); font-size: 12px; fill: var(--pen); opacity: .85; }
+  .sketch-cap { font-size: .95rem; color: var(--faint); margin-top: .3rem; }
+
+  .note { max-width: 34ch; margin-bottom: 1.8rem; }
+  .who { display: flex; flex-direction: column; font-size: .8rem; color: var(--ink-2); border-top: 1px solid #e4dbc8; padding-top: .8rem; }
+  .who-role { color: var(--faint); }
+
+  /* ── taped print ── */
+  .taped { position: relative; margin: 0 0 1.4rem; transform: rotate(-1deg); }
+  .taped-figure {
+    display: flex; flex-direction: column; justify-content: center; gap: .5rem;
+    aspect-ratio: 4 / 3; padding: 1.4rem; text-align: center;
+    background: var(--pen); color: var(--paper); font-size: .85rem;
+    border: 1px solid #e0d7c3; box-shadow: 0 10px 24px -16px rgba(0,0,0,.6);
+  }
+  .taped-figure em { font-style: normal; font-family: var(--serif); font-size: clamp(2.2rem, 6vw, 3.4rem); }
+  .taped img { border: 1px solid #e0d7c3; box-shadow: 0 10px 24px -16px rgba(0,0,0,.6); background: #fff; max-height: 340px; object-fit: cover; object-position: top center; width: 100%; }
+  .clip {
+    position: absolute; top: -14px; left: 22px; width: 16px; height: 40px; z-index: 2;
+    border: 2.5px solid #9aa0a6; border-radius: 8px; border-bottom-color: transparent;
+    transform: rotate(-7deg);
+  }
+  .pen-link {
+    display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; margin-top: .6rem;
+    font-weight: 600; font-size: .92rem; color: var(--accent);
+    border-bottom: 2px solid rgba(180,85,47,.35);
+  }
+  .pen-link:hover { border-bottom-color: var(--accent); }
+
+  /* ── back pages ── */
+  .back-h { margin-top: .6rem; }
+  .years { margin-top: 1.2rem; }
+  .years li { display: grid; grid-template-columns: 8.4rem 1fr; gap: .8rem; padding: .55rem 0; border-bottom: 1px solid #e4dbc8; font-size: .9rem; }
+  .yr { color: var(--accent); font-weight: 500; }
+  .ev { color: var(--ink-2); }
+  .big-hand { font-size: clamp(1.4rem, 3.4vw, 2rem); margin: 1.6rem 0 1.2rem; word-break: break-word; }
+  .big-hand a { border-bottom: 2px solid rgba(38,64,94,.3); }
+  .big-hand a:hover { border-bottom-color: var(--pen); }
+  .ends { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; font-size: .88rem; color: var(--ink-2); }
+  .ends a { border-bottom: 1px solid var(--faint); }
+  .end-hand { margin-top: 2.4rem; color: var(--faint); }
+
+  /* ── turning ── */
+  /* Pinned, so the controls are reachable whatever the spread's height. */
+  .turn {
+    position: fixed; left: 50%; bottom: clamp(.7rem, 2vw, 1.4rem);
+    transform: translateX(-50%); z-index: 400;
+    display: flex; align-items: center; gap: 1.1rem;
+    padding: .4rem .5rem; border-radius: 40px;
+    background: rgba(30,26,22,.72);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(250,246,236,.14);
+  }
+  .turn-btn {
+    width: 46px; height: 46px; display: grid; place-items: center;
+    border: 1px solid rgba(250,246,236,.28); border-radius: 50%;
+    color: var(--paper); font-size: 1.05rem;
+    transition: background .18s, border-color .18s, opacity .18s;
+  }
+  .turn-btn:hover:not(:disabled) { background: rgba(250,246,236,.12); border-color: var(--paper); }
+  .turn-btn:disabled { opacity: .3; cursor: default; }
+  .turn-read { color: rgba(250,246,236,.72); font-size: .78rem; letter-spacing: .05em; min-width: 15rem; text-align: center; }
+
+  /* ── narrow: the book opens flat, one page under the other ── */
+  @media (max-width: 860px) {
+    .spread { grid-template-columns: 1fr; min-height: 0; }
+    .book::before { display: none; }
+    .ribbon { right: 30px; height: 96px; }
+    .page-l { padding-right: clamp(1.5rem, 3.4vw, 2.9rem); padding-bottom: 0; }
+    .page-r { padding-left: clamp(1.5rem, 3.4vw, 2.9rem); background: none; border-top: 1px dashed #ddd3bd; margin: 1.4rem clamp(1.5rem, 3.4vw, 2.9rem) 0; padding-left: 0; padding-right: 0; }
+    .folio { display: none; }
+    .turn-read { min-width: 0; font-size: .72rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .book.turning .spread:not([hidden]) { animation: none; }
+    .taped, .sticker { transform: none; }
+  }
+</style>
+</Variant>
