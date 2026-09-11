@@ -1,0 +1,343 @@
+---
+/**
+ * Variant: FEATURE
+ *
+ * Editorial, in the magazine-profile sense: a masthead, an opening portrait,
+ * a standfirst with a drop cap, and each project set as a feature article —
+ * kicker, headline, standfirst, two columns of body, a pull quote, a plate.
+ *
+ * Written to stay unmistakably a portfolio (name, face, work, about, contact)
+ * while giving the enterprise SaaS work the room a case study deserves.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { projects, log, contact } from '../../lib/variants';
+
+import portrait from '../../assets/sayantan-studio.jpg';
+import portraitAlt from '../../assets/sayantan.jpg';
+import miigenieImg from '../../assets/work/miigenie/carer-home.png';
+import kinvaultImg from '../../assets/work/kinvault/dashboard.jpg';
+import hazopImg from '../../assets/work/hazop/analytics-dashboard.jpg';
+import ericssonImg from '../../assets/work/api-lifecycle/hero.png';
+import ambleImg from '../../assets/work/amble/family.jpg';
+
+/**
+ * `fit: contain` sits a phone screen on a tinted ground, the way a magazine
+ * presents app work. `cover` fills the plate with a landscape shot.
+ */
+const plates: Record<string, { img?: any; figure?: string; fit: 'cover' | 'contain'; tone: string; caption: string }> = {
+  miigenie:           { img: miigenieImg, fit: 'contain', tone: '#e8efe9', caption: 'miiGenie · the carer’s view of someone else’s day' },
+  kinvault:           { img: kinvaultImg, fit: 'contain', tone: '#ece8f2', caption: 'KinVault Heritage · the family dashboard' },
+  hazop:              { img: hazopImg,    fit: 'cover',   tone: '#e6ecf2', caption: 'HAZOP Edge · study analytics across sites' },
+  'api-lifecycle':    { img: ericssonImg, fit: 'cover',   tone: '#eceff2', caption: 'Ericsson · the API Console' },
+  'sherwin-williams': { figure: '30–40%', fit: 'cover',   tone: '#17324f', caption: 'Less rework across six products, team of 20+' },
+  amble:              { img: ambleImg,    fit: 'cover',   tone: '#ece9e2', caption: 'Amble · a household in 2065' },
+};
+
+const features = projects.map((p, i) => ({ ...p, ...plates[p.slug], n: String(i + 1).padStart(2, '0') }));
+
+const clients = ['Ericsson', 'Sherwin-Williams', 'McAfee', 'ITC', 'CGAP', 'Soter Safety Consulting', 'dAIs Genie', 'Rodd Design', 'Pensaar Design'];
+
+const fonts =
+  'https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta · Product Designer"
+  description="Product designer for enterprise SaaS and AI. Five years on industrial safety platforms, API infrastructure and a voice-first AI companion."
+  variant="feature"
+  fonts={fonts}
+  themeColor="#fcfbf9"
+>
+
+<header class="masthead">
+  <p class="mast-name">Sayantan Dutta</p>
+  <p class="mast-meta">
+    <span>Product designer</span>
+    <span class="rule" aria-hidden="true"></span>
+    <span>Enterprise SaaS &amp; AI</span>
+    <span class="rule" aria-hidden="true"></span>
+    <span>{contact.base}</span>
+  </p>
+  <a class="mast-cta" href={`mailto:${contact.email}`} data-ab="mast:email">Get in touch</a>
+</header>
+
+<main id="main">
+
+  <!-- ═══ OPENING ═══════════════════════════════════════════════════ -->
+  <section class="opener">
+    <figure class="opener-photo">
+      <Image src={portrait} alt="Sayantan Dutta" widths={[560, 1000]} sizes="(max-width: 900px) 92vw, 460px" />
+    </figure>
+
+    <div class="opener-copy">
+      <p class="kicker">Portfolio · 2020—2026</p>
+      <h1>Five years on the software nobody gets to abandon halfway.</h1>
+      <p class="standfirst">
+        <span class="drop">I</span>ndustrial hazard studies. Enterprise API infrastructure.
+        Design operations for a research team of more than twenty. A voice companion
+        that older adults open every morning, and that their families check at night.
+        Six projects, three of them as the founding and only designer, and one
+        continuous argument underneath all of them: complex work deserves software
+        that respects how complex it is.
+      </p>
+      <p class="byline">
+        Currently founding product designer at dAIs Genie, on miiGenie.
+        Previously design lead across Ericsson’s API vertical at TCS.
+      </p>
+      <div class="opener-cta">
+        <a class="btn" href="#work" data-ab="opener:work">Read the work</a>
+        <a class="btn btn-quiet" href={contact.resume} data-ab="opener:cv">CV (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CLIENT LINE ═══════════════════════════════════════════════ -->
+  <section class="clients" aria-label="Clients">
+    <p class="clients-h">Work delivered for</p>
+    <p class="clients-list">
+      {clients.map((c, i) => (
+        <span>{c}{i < clients.length - 1 && <i aria-hidden="true"> · </i>}</span>
+      ))}
+    </p>
+  </section>
+
+  <!-- ═══ FEATURES ══════════════════════════════════════════════════ -->
+  <div id="work">
+    {features.map((f) => (
+      <article class="feature" aria-labelledby={`f-${f.slug}`}>
+        <div class="f-head">
+          <p class="f-n">{f.n}</p>
+          <p class="kicker">{f.sector} · {f.period}</p>
+          <h2 id={`f-${f.slug}`}>{f.title}</h2>
+          <p class="f-org">{f.org} <span class="dot" aria-hidden="true">·</span> {f.role}</p>
+        </div>
+
+        <figure class="plate" style={`--tone:${f.tone}`}>
+          {f.img
+            ? <Image class={`plate-img fit-${f.fit}`} src={f.img} alt={f.caption} widths={[720, 1280]} sizes="(max-width: 1000px) 92vw, 900px" loading="lazy" />
+            : <span class="plate-figure">{f.figure}</span>}
+          <figcaption>{f.caption}</figcaption>
+        </figure>
+
+        <div class="f-body">
+          <p class="f-lede">{f.summary}</p>
+          <blockquote class="pull">{f.note}</blockquote>
+          <a class="f-go" href={f.href} data-ab={`feature:${f.slug}`}>
+            Read the full case study <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- ═══ ABOUT ═════════════════════════════════════════════════════ -->
+  <section class="about" id="about">
+    <div class="about-copy">
+      <p class="kicker">About</p>
+      <h2>I read the domain before I draw anything.</h2>
+      <p>
+        On HAZOP Edge that meant learning what a hazard and operability study
+        actually is — a room full of engineers imagining how a plant kills
+        someone — before a single screen existed. Enterprise software fails
+        when the designer never understood the job.
+      </p>
+      <p>
+        I have been the only designer on a three-person team and the design lead
+        across a three-product vertical. Both taught me the same lesson from
+        opposite ends: a design system is a political document before it is a
+        technical one, and the handoff is part of the design.
+      </p>
+      <p>
+        MA Design Management, University of Southampton. Based in {contact.base},
+        working with distributed teams since 2020.
+      </p>
+    </div>
+
+    <figure class="about-photo">
+      <Image src={portraitAlt} alt="Sayantan Dutta" widths={[520, 900]} sizes="(max-width: 900px) 92vw, 420px" loading="lazy" />
+      <figcaption>Sayantan Dutta</figcaption>
+    </figure>
+  </section>
+
+  <!-- ═══ TIMELINE ══════════════════════════════════════════════════ -->
+  <section class="cv">
+    <p class="kicker">The short version</p>
+    <ol>
+      {log.map((l) => (
+        <li>
+          <span class="cv-when">{l.stamp}</span>
+          <span class="cv-what">{l.event}</span>
+          <span class="cv-kind">{l.kind}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- ═══ COLOPHON ══════════════════════════════════════════════════ -->
+  <section class="colophon">
+    <h2>Got a workflow people dread using?</h2>
+    <p>
+      Send it over. I read everything, and I will tell you honestly whether
+      I am the right person for it.
+    </p>
+    <p class="colophon-mail">
+      <a href={`mailto:${contact.email}`} data-ab="colophon:email">{contact.email}</a>
+    </p>
+    <p class="colophon-links">
+      <a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="colophon:linkedin">LinkedIn ↗</a>
+      <span aria-hidden="true">·</span>
+      <a href={contact.resume} data-ab="colophon:cv">CV (PDF)</a>
+      <span aria-hidden="true">·</span>
+      <span>{contact.base}</span>
+    </p>
+  </section>
+</main>
+
+<style>
+  :root {
+    --paper: #fcfbf9;
+    --paper-2: #f4f2ed;
+    --ink: #15130f;
+    --ink-2: #4b4741;
+    --faint: #8b857c;
+    --line: #ded9d0;
+    --accent: #17324f;
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'Public Sans', system-ui, sans-serif;
+    --pad: clamp(1.2rem, 5vw, 4rem);
+    --measure: 1100px;
+  }
+
+  :global(body) { background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+  :global(.skip-link) { background: var(--accent); color: #fff; }
+  :global(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .kicker { font-size: .7rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+
+  .btn {
+    display: inline-flex; align-items: center; min-height: 46px; padding: .7rem 1.3rem;
+    background: var(--ink); color: var(--paper); font-weight: 600; font-size: .92rem;
+  }
+  .btn:hover { background: var(--accent); }
+  .btn-quiet { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-quiet:hover { background: transparent; border-color: var(--ink); }
+
+  /* ── masthead ── */
+  .masthead {
+    display: flex; align-items: baseline; gap: 1.4rem; flex-wrap: wrap;
+    max-width: var(--measure); margin: 0 auto;
+    padding: 1.5rem var(--pad) 1.1rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .mast-name { font-family: var(--serif); font-size: clamp(1.35rem, 2.6vw, 1.7rem); font-weight: 500; letter-spacing: -.015em; }
+  .mast-meta { display: flex; align-items: center; gap: .7rem; font-size: .74rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .rule { width: 14px; height: 1px; background: var(--line); }
+  .mast-cta { margin-left: auto; font-size: .86rem; font-weight: 600; border-bottom: 1.5px solid var(--accent); color: var(--accent); }
+  @media (max-width: 700px) { .mast-meta { display: none; } }
+
+  /* ── opener ── */
+  .opener {
+    display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+    gap: clamp(1.8rem, 5vw, 4rem); align-items: start;
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 5rem) var(--pad) clamp(2rem, 5vw, 3.5rem);
+  }
+  @media (max-width: 900px) { .opener { grid-template-columns: 1fr; } .opener-photo { max-width: 340px; } }
+  .opener-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; }
+
+  .opener h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.08; letter-spacing: -.02em;
+    margin: .8rem 0 1.4rem; max-width: 18ch; text-wrap: balance;
+  }
+  .standfirst { font-size: clamp(1.02rem, 2.1vw, 1.14rem); color: var(--ink-2); max-width: 54ch; }
+  .drop {
+    float: left; font-family: var(--serif); font-weight: 400;
+    font-size: 3.4em; line-height: .78; padding: .06em .1em 0 0; color: var(--accent);
+  }
+  .byline { margin-top: 1.3rem; font-size: .92rem; color: var(--faint); max-width: 48ch; }
+  .opener-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.9rem; }
+
+  /* ── clients ── */
+  .clients { max-width: var(--measure); margin: 0 auto; padding: clamp(1.4rem, 4vw, 2.2rem) var(--pad); border-block: 1px solid var(--line); }
+  .clients-h { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); margin-bottom: .7rem; }
+  .clients-list { font-family: var(--serif); font-size: clamp(1.05rem, 2.4vw, 1.45rem); line-height: 1.45; color: var(--ink); }
+  .clients-list i { color: var(--line); font-style: normal; }
+
+  /* ── features ── */
+  .feature { max-width: var(--measure); margin: 0 auto; padding: clamp(3rem, 8vw, 5.5rem) var(--pad) 0; }
+  .feature + .feature { border-top: 1px solid var(--line); margin-top: clamp(3rem, 8vw, 5.5rem); }
+  .f-head { max-width: 40ch; }
+  .f-n { font-family: var(--serif); font-size: 2.4rem; line-height: 1; color: var(--line); margin-bottom: .5rem; }
+  .feature h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.7rem, 4vw, 2.7rem); line-height: 1.1; letter-spacing: -.02em;
+    margin: .55rem 0 .6rem;
+  }
+  .f-org { font-size: .85rem; color: var(--faint); font-weight: 500; }
+  .dot { color: var(--line); padding: 0 .2rem; }
+
+  .plate {
+    margin: clamp(1.6rem, 4vw, 2.6rem) 0 clamp(1.4rem, 3vw, 2rem);
+    background: var(--tone); overflow: hidden;
+  }
+  .plate-img { width: 100%; display: block; }
+  .fit-cover { aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; }
+  /* A phone screen needs a taller plate than a dashboard, or it sits tiny
+     in the middle of a lot of tint. */
+  .fit-contain { aspect-ratio: 3 / 2; object-fit: contain; object-position: center; padding: clamp(1.2rem, 3vw, 2.4rem) 0; }
+  .plate-figure {
+    display: grid; place-items: center; aspect-ratio: 16 / 6;
+    font-family: var(--serif); font-size: clamp(2.4rem, 8vw, 5rem); color: var(--paper);
+  }
+  .plate figcaption { padding: .7rem .1rem 0; font-size: .74rem; color: var(--faint); background: var(--paper); }
+  .plate { background: var(--paper); }
+  .plate-img, .plate-figure { background: var(--tone); }
+
+  .f-body { columns: 2; column-gap: clamp(1.6rem, 4vw, 3rem); }
+  @media (max-width: 760px) { .f-body { columns: 1; } }
+  .f-lede { font-size: 1rem; color: var(--ink-2); break-inside: avoid; }
+  .pull {
+    break-inside: avoid; margin: 1.2rem 0;
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(1.2rem, 2.6vw, 1.5rem); line-height: 1.3; color: var(--ink);
+    padding-left: 1rem; border-left: 2px solid var(--accent);
+  }
+  .f-go { display: inline-block; break-inside: avoid; min-height: 44px; padding-top: .6rem; font-weight: 600; font-size: .92rem; color: var(--accent); border-bottom: 1.5px solid transparent; }
+  .f-go:hover { border-bottom-color: var(--accent); }
+
+  /* ── about ── */
+  .about {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
+    gap: clamp(1.8rem, 5vw, 4rem); align-items: start;
+    max-width: var(--measure); margin: clamp(3.5rem, 9vw, 6rem) auto 0;
+    padding: clamp(3rem, 7vw, 4.5rem) var(--pad);
+    border-top: 2px solid var(--ink);
+  }
+  @media (max-width: 900px) { .about { grid-template-columns: 1fr; } .about-photo { max-width: 320px; } }
+  .about h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.6rem, 3.6vw, 2.3rem); line-height: 1.12; letter-spacing: -.02em; margin: .6rem 0 1.2rem; max-width: 20ch; }
+  .about-copy p { color: var(--ink-2); max-width: 56ch; }
+  .about-copy p + p { margin-top: .9rem; }
+  .about-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .about-photo figcaption { padding-top: .6rem; font-size: .74rem; color: var(--faint); }
+
+  /* ── cv ── */
+  .cv { max-width: var(--measure); margin: 0 auto; padding: 0 var(--pad) clamp(3rem, 7vw, 4.5rem); }
+  .cv ol { margin-top: 1rem; }
+  .cv li { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr) auto; gap: 1rem; padding: .7rem 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .cv-when { font-size: .84rem; font-weight: 600; color: var(--accent); }
+  .cv-what { font-size: .96rem; }
+  .cv-kind { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  @media (max-width: 640px) { .cv li { grid-template-columns: 1fr; gap: .15rem; } }
+
+  /* ── colophon ── */
+  .colophon { background: var(--paper-2); border-top: 1px solid var(--line); padding: clamp(3.5rem, 9vw, 6rem) var(--pad); text-align: center; }
+  .colophon h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 4.6vw, 3rem); letter-spacing: -.02em; max-width: 18ch; margin: 0 auto .9rem; }
+  .colophon > p { color: var(--ink-2); max-width: 46ch; margin: 0 auto; }
+  .colophon-mail { margin-top: 1.8rem !important; font-family: var(--serif); font-size: clamp(1.2rem, 3.4vw, 1.9rem); }
+  .colophon-mail a { border-bottom: 1.5px solid var(--accent); color: var(--accent); }
+  .colophon-links { margin-top: 1.4rem !important; display: flex; gap: .6rem; justify-content: center; font-size: .88rem; color: var(--faint); flex-wrap: wrap; }
+  .colophon-links a { font-weight: 600; color: var(--ink); }
+</style>
+</Variant>

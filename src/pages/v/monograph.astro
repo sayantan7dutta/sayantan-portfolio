@@ -1,0 +1,261 @@
+---
+/**
+ * Variant: MONOGRAPH
+ *
+ * The other editorial register. Where the feature asks to be read, this asks
+ * to be looked at: a strict grid, a lot of white, large plates of the actual
+ * product work, and captions that stay out of the way.
+ *
+ * Restraint is the argument. A designer who ships enterprise systems should
+ * be able to hold a grid for six sections without decorating it.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { projects, log, contact } from '../../lib/variants';
+
+import portrait from '../../assets/sayantan.jpg';
+import miigenieImg from '../../assets/work/miigenie/conversation.png';
+import miigenieAlt from '../../assets/work/miigenie/carer-home.png';
+import kinvaultImg from '../../assets/work/kinvault/vault.jpg';
+import kinvaultAlt from '../../assets/work/kinvault/smart-transfer.jpg';
+import hazopImg from '../../assets/work/hazop/sites-dashboard.jpg';
+import hazopAlt from '../../assets/work/hazop/risk-matrix.jpg';
+import ericssonImg from '../../assets/work/api-lifecycle/dashboard.png';
+import ericssonAlt from '../../assets/work/api-lifecycle/collaborator.png';
+import ambleImg from '../../assets/work/amble/routines.jpg';
+import ambleAlt from '../../assets/work/amble/bedroom.jpg';
+
+const plates: Record<string, { a?: any; b?: any; figure?: string; tall?: boolean }> = {
+  miigenie:           { a: miigenieImg, b: miigenieAlt, tall: true },
+  kinvault:           { a: kinvaultImg, b: kinvaultAlt, tall: true },
+  hazop:              { a: hazopImg,    b: hazopAlt },
+  'api-lifecycle':    { a: ericssonImg, b: ericssonAlt },
+  'sherwin-williams': { figure: '30–40%' },
+  amble:              { a: ambleImg,    b: ambleAlt },
+};
+
+const works = projects.map((p, i) => ({ ...p, ...plates[p.slug], n: String(i + 1).padStart(2, '0') }));
+
+const disciplines = [
+  'Product design', 'UX strategy', 'Design systems', 'Research & synthesis',
+  'Design operations', 'Accessibility · WCAG', 'Service design', 'Prototyping',
+];
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta — Product Designer"
+  description="Product designer for enterprise SaaS and AI. Selected work, 2020 to 2026."
+  variant="monograph"
+  fonts={fonts}
+  themeColor="#ffffff"
+>
+
+<main id="main">
+
+  <!-- ═══ COVER ═════════════════════════════════════════════════════ -->
+  <section class="cover">
+    <div class="cover-type">
+      <h1>Sayantan<br />Dutta</h1>
+      <p class="role">Product designer — enterprise SaaS &amp; AI</p>
+    </div>
+
+    <figure class="cover-plate">
+      <Image src={portrait} alt="Sayantan Dutta" widths={[760, 1400]} sizes="(max-width: 860px) 92vw, 620px" />
+    </figure>
+
+    <dl class="cover-meta">
+      <div><dt>Selected work</dt><dd>2020 — 2026</dd></div>
+      <div><dt>Projects</dt><dd>{works.length}</dd></div>
+      <div><dt>Based</dt><dd>{contact.base}</dd></div>
+      <div><dt>Now</dt><dd>dAIs Genie · miiGenie</dd></div>
+    </dl>
+
+    <p class="cover-note">
+      Industrial hazard studies, enterprise API infrastructure, design operations
+      for a team of more than twenty, and a voice companion older adults open
+      every morning. Three of the six as the founding and only designer.
+    </p>
+
+    <ul class="cover-cta">
+      <li><a class="link" href="#w-1" data-ab="cover:work">Selected work</a></li>
+      <li><a class="link" href="#about" data-ab="cover:about">About</a></li>
+      <li><a class="link" href={`mailto:${contact.email}`} data-ab="cover:email">Get in touch</a></li>
+    </ul>
+  </section>
+
+  <!-- ═══ WORK ══════════════════════════════════════════════════════ -->
+  {works.map((w, i) => (
+    <section class="work" id={`w-${i + 1}`} aria-labelledby={`h-${w.slug}`}>
+      <div class="w-rail">
+        <p class="w-n">{w.n}</p>
+        <dl class="w-meta">
+          <div><dt>Client</dt><dd>{w.org}</dd></div>
+          <div><dt>Role</dt><dd>{w.role}</dd></div>
+          <div><dt>Field</dt><dd>{w.sector}</dd></div>
+          <div><dt>Period</dt><dd>{w.period}</dd></div>
+        </dl>
+      </div>
+
+      <div class="w-main">
+        <h2 id={`h-${w.slug}`}>{w.title}</h2>
+        <p class="w-sum">{w.summary}</p>
+        <p class="w-note">{w.note}</p>
+        <a class="link link-go" href={w.href} data-ab={`work:${w.slug}`}>Full case study <span aria-hidden="true">→</span></a>
+
+        {w.figure ? (
+          <figure class="w-figure"><span>{w.figure}</span><figcaption>less rework across six products, team of 20+</figcaption></figure>
+        ) : (
+          <div class={`w-plates ${w.tall ? 'tall' : ''}`}>
+            <figure><Image src={w.a} alt="" widths={[520, 960]} sizes="(max-width: 860px) 92vw, 420px" loading="lazy" /></figure>
+            <figure><Image src={w.b} alt="" widths={[520, 960]} sizes="(max-width: 860px) 92vw, 420px" loading="lazy" /></figure>
+          </div>
+        )}
+      </div>
+    </section>
+  ))}
+
+  <!-- ═══ ABOUT ═════════════════════════════════════════════════════ -->
+  <section class="work about" id="about">
+    <div class="w-rail">
+      <p class="w-n">—</p>
+      <dl class="w-meta">
+        <div><dt>Education</dt><dd>MA Design Management, University of Southampton</dd></div>
+        <div><dt>Based</dt><dd>{contact.base}</dd></div>
+      </dl>
+    </div>
+
+    <div class="w-main">
+      <h2>I read the domain before I draw anything.</h2>
+      <p class="w-sum">
+        On HAZOP Edge that meant learning what a hazard and operability study
+        actually is before a single screen existed. Enterprise software fails when
+        the designer never understood the job. I have been the only designer on a
+        three-person team and the design lead across a three-product vertical, and
+        both taught the same lesson from opposite ends: a design system is a
+        political document before it is a technical one, and the handoff is part
+        of the design.
+      </p>
+
+      <ul class="disciplines">
+        {disciplines.map((d) => <li>{d}</li>)}
+      </ul>
+
+      <ol class="cv">
+        {log.map((l) => (
+          <li><span>{l.stamp}</span><span>{l.event}</span></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══ END ═══════════════════════════════════════════════════════ -->
+  <section class="end">
+    <h2>Got a workflow people dread using?</h2>
+    <p>Send it over. I read everything, and I will tell you honestly whether I am the right person for it.</p>
+    <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
+    <ul class="end-links">
+      <li><a class="link" href={contact.linkedin} target="_blank" rel="me noopener" data-ab="end:linkedin">LinkedIn ↗</a></li>
+      <li><a class="link" href={contact.resume} data-ab="end:cv">CV (PDF)</a></li>
+    </ul>
+  </section>
+</main>
+
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #101010;
+    --ink-2: #52524f;
+    --faint: #8f8f8a;
+    --line: #e3e3df;
+    --accent: #d6350f;
+    --sans: 'Archivo', system-ui, sans-serif;
+    --pad: clamp(1.2rem, 5vw, 4.5rem);
+    --measure: 1240px;
+  }
+
+  :global(body) { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; }
+  :global(.skip-link) { background: var(--accent); color: #fff; }
+  :global(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .link { font-size: .88rem; font-weight: 600; border-bottom: 1.5px solid var(--line); padding-bottom: 1px; }
+  .link:hover { border-bottom-color: var(--accent); color: var(--accent); }
+  .link-go { display: inline-block; min-height: 44px; padding-top: .6rem; color: var(--accent); border-bottom-color: transparent; }
+  .link-go:hover { border-bottom-color: var(--accent); }
+
+  dt { font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  dd { font-size: .88rem; margin-top: .1rem; }
+
+  /* ── cover ── */
+  .cover {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(1.2rem, 3vw, 2.4rem);
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 5rem) var(--pad) clamp(3rem, 8vw, 5.5rem);
+    align-items: start;
+  }
+  .cover-type { grid-column: 1 / 7; }
+  .cover h1 { font-size: clamp(2.6rem, 8vw, 5.4rem); font-weight: 700; letter-spacing: -.045em; line-height: .93; }
+  .role { margin-top: 1rem; font-size: clamp(.92rem, 1.8vw, 1.05rem); font-weight: 500; color: var(--ink-2); }
+  .cover-plate { grid-column: 7 / 13; grid-row: 1 / 4; }
+  .cover-plate img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .cover-meta { grid-column: 1 / 7; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+  .cover-note { grid-column: 1 / 7; font-size: clamp(.95rem, 1.9vw, 1.05rem); color: var(--ink-2); max-width: 46ch; }
+  .cover-cta { grid-column: 1 / 13; display: flex; flex-wrap: wrap; gap: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  @media (max-width: 860px) {
+    .cover-type, .cover-meta, .cover-note, .cover-cta { grid-column: 1 / 13; }
+    .cover-plate { grid-column: 1 / 13; grid-row: auto; }
+  }
+
+  /* ── work ── */
+  .work {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    gap: clamp(1.2rem, 3vw, 2.4rem);
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 5rem) var(--pad);
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .w-rail { grid-column: 1 / 4; position: sticky; top: 2rem; }
+  .w-n { font-size: 2rem; font-weight: 700; letter-spacing: -.04em; color: var(--accent); line-height: 1; margin-bottom: 1.4rem; }
+  .w-meta { display: grid; gap: .9rem; }
+  .w-main { grid-column: 4 / 13; }
+  @media (max-width: 860px) {
+    .w-rail, .w-main { grid-column: 1 / 13; }
+    .w-rail { position: static; }
+    .w-meta { grid-template-columns: 1fr 1fr; }
+  }
+
+  .work h2 { font-size: clamp(1.5rem, 3.4vw, 2.35rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; max-width: 22ch; }
+  .w-sum { margin-top: 1rem; font-size: clamp(.98rem, 1.9vw, 1.06rem); color: var(--ink-2); max-width: 60ch; }
+  .w-note { margin-top: 1.1rem; padding-left: 1rem; border-left: 2px solid var(--accent); font-size: clamp(.98rem, 1.9vw, 1.06rem); max-width: 54ch; }
+
+  .w-plates { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.5vw, 1.8rem); margin-top: clamp(1.8rem, 4vw, 2.8rem); }
+  .w-plates img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: top center; background: #f4f4f2; }
+  .w-plates.tall img { aspect-ratio: 3 / 4; object-position: top center; }
+  @media (max-width: 560px) { .w-plates { grid-template-columns: 1fr; } }
+
+  .w-figure { margin-top: clamp(1.8rem, 4vw, 2.8rem); background: #f4f4f2; padding: clamp(2rem, 6vw, 4rem); text-align: center; }
+  .w-figure span { display: block; font-size: clamp(2.6rem, 9vw, 5.5rem); font-weight: 700; letter-spacing: -.05em; color: var(--accent); line-height: 1; }
+  .w-figure figcaption { margin-top: .8rem; font-size: .82rem; color: var(--ink-2); }
+
+  /* ── about ── */
+  .disciplines { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem; }
+  .disciplines li { font-size: .8rem; font-weight: 500; padding: .3rem .7rem; border: 1px solid var(--line); border-radius: 40px; color: var(--ink-2); }
+  .about .cv { margin-top: 2.2rem; border-top: 1px solid var(--line); }
+  .about .cv li { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 1rem; padding: .65rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+  .about .cv li span:first-child { font-weight: 600; color: var(--faint); }
+  @media (max-width: 560px) { .about .cv li { grid-template-columns: 1fr; gap: .1rem; } }
+
+  /* ── end ── */
+  .end { max-width: var(--measure); margin: 0 auto; padding: clamp(3.5rem, 9vw, 6.5rem) var(--pad); border-top: 1px solid var(--line); }
+  .end h2 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -.04em; max-width: 16ch; line-height: 1.04; }
+  .end > p { margin-top: 1rem; color: var(--ink-2); max-width: 46ch; }
+  .end-mail { margin-top: 2rem !important; font-size: clamp(1.2rem, 3.6vw, 2rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; }
+  .end-mail a { border-bottom: 2px solid var(--accent); }
+  .end-mail a:hover { color: var(--accent); }
+  .end-links { display: flex; gap: 1.6rem; margin-top: 1.6rem; flex-wrap: wrap; }
+</style>
+</Variant>

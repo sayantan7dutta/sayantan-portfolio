@@ -35,18 +35,36 @@ export const VARIANTS: Variant[] = [
     enabled: true,
   },
   {
+    id: 'feature',
+    name: 'Feature',
+    path: '/v/feature',
+    thesis: 'A magazine profile: masthead, opening portrait, a standfirst with a drop cap, each project set as a feature with a pull quote and a plate. Betting that the work reads best when it is given room to be read.',
+    enabled: true,
+  },
+  {
+    id: 'monograph',
+    name: 'Monograph',
+    path: '/v/monograph',
+    thesis: 'A design monograph: strict grid, a lot of white, large plates of the actual product work, captions that stay out of the way. Betting that restraint held for six sections is itself the proof.',
+    enabled: true,
+  },
+  {
+    // Retired: beautiful, but it reads as a craft/illustration portfolio.
+    // Nothing in it says enterprise SaaS, which is where the work is.
     id: 'sketchbook',
     name: 'Sketchbook',
     path: '/v/sketchbook',
     thesis: 'The working notebook, turned a spread at a time: the scribble on the left, the outcome on the right. Betting that showing the thinking beats showing only the polish.',
-    enabled: true,
+    enabled: false,
   },
   {
+    // Retired: same problem as the sketchbook, louder. The analog framing
+    // carried personality but buried the product work.
     id: 'studio-wall',
     name: 'Studio Wall',
     path: '/v/studio-wall',
     thesis: 'Prints pinned up crooked, index cards, sticky notes. Betting that an arrangement no grid would produce is the fastest proof a person made it.',
-    enabled: true,
+    enabled: false,
   },
   {
     id: 'product-page',
@@ -56,11 +74,13 @@ export const VARIANTS: Variant[] = [
     enabled: true,
   },
   {
+    // Retired: it reads as an app, not as a portfolio being presented.
+    // The craft argument worked; the format did not.
     id: 'workspace',
     name: 'Workspace',
     path: '/v/workspace',
     thesis: 'The portfolio built as the kind of product it documents: sidebar, table and board views, a detail panel, a command palette. Betting that a SaaS designer proves it fastest by handing you working SaaS.',
-    enabled: true,
+    enabled: false,
   },
   {
     // Retired: too engineer-coded for a product designer. Kept so the route
