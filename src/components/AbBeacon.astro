@@ -1,0 +1,110 @@
+---
+/**
+ * A/B instrumentation.
+ *
+ * Records what a visitor actually did on whichever version they landed on,
+ * and hands it to any analytics tool that happens to be present. With none
+ * present it still works: every event lands in localStorage, and
+ * `__ab.report()` in the console prints a readable summary. That is enough
+ * to run moderated tests and compare sessions by hand.
+ *
+ * To wire real analytics, add the snippet for Plausible / Vercel / GA and
+ * this file finds it — no changes needed here.
+ */
+interface Props {
+  /** Variant id from src/lib/ab.ts */
+  variant: string;
+}
+const { variant } = Astro.props;
+---
+
+<script is:inline define:vars={{ variant }}>
+  (function () {
+    var KEY = 'ab.events';
+    var CAP = 500;
+
+    function read() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; }
+    }
+    function write(rows) {
+      try { localStorage.setItem(KEY, JSON.stringify(rows.slice(-CAP))); } catch (e) { /* private mode */ }
+    }
+
+    var session = Math.random().toString(36).slice(2, 10);
+    var t0 = Date.now();
+
+    function track(name, props) {
+      var payload = Object.assign({ variant: variant, session: session }, props || {});
+      var rows = read();
+      rows.push({ t: new Date().toISOString(), name: name, props: payload });
+      write(rows);
+
+      // Hand off to whatever is installed. All optional.
+      if (typeof window.plausible === 'function') window.plausible(name, { props: payload });
+      if (typeof window.va === 'function') window.va('event', { name: name, data: payload });
+      if (typeof window.gtag === 'function') window.gtag('event', name, payload);
+    }
+
+    track('view', { path: location.pathname, ref: document.referrer || 'direct' });
+
+    // Scroll depth — one event per threshold, per page view.
+    var hit = {};
+    function onScroll() {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      if (max <= 0) return;
+      var pct = Math.round((h.scrollTop / max) * 100);
+      [25, 50, 75, 100].forEach(function (mark) {
+        if (pct >= mark && !hit[mark]) { hit[mark] = 1; track('scroll', { depth: mark }); }
+      });
+    }
+    addEventListener('scroll', onScroll, { passive: true });
+
+    // Anything tagged data-ab="<label>" reports its clicks.
+    addEventListener('click', function (e) {
+      var el = e.target instanceof Element ? e.target.closest('[data-ab]') : null;
+      if (el) track('click', { target: el.getAttribute('data-ab') });
+    });
+
+    // Time on page, sent when the tab goes away.
+    addEventListener('pagehide', function () {
+      track('dwell', { seconds: Math.round((Date.now() - t0) / 1000), maxDepth: Math.max.apply(null, Object.keys(hit).map(Number).concat([0])) });
+    });
+
+    window.__ab = {
+      variant: variant,
+      events: read,
+      reset: function () { localStorage.removeItem(KEY); return 'cleared'; },
+      /** Per-variant summary you can read straight out of the console. */
+      report: function () {
+        var rows = read();
+        var by = {};
+        rows.forEach(function (r) {
+          var v = (r.props && r.props.variant) || 'unknown';
+          by[v] = by[v] || { views: 0, sessions: {}, reached100: 0, clicks: {}, dwell: [] };
+          var b = by[v];
+          if (r.props && r.props.session) b.sessions[r.props.session] = 1;
+          if (r.name === 'view') b.views++;
+          if (r.name === 'scroll' && r.props.depth === 100) b.reached100++;
+          if (r.name === 'click') b.clicks[r.props.target] = (b.clicks[r.props.target] || 0) + 1;
+          if (r.name === 'dwell') b.dwell.push(r.props.seconds);
+        });
+        var out = {};
+        Object.keys(by).forEach(function (v) {
+          var b = by[v];
+          var med = b.dwell.slice().sort(function (a, c) { return a - c; })[Math.floor(b.dwell.length / 2)];
+          out[v] = {
+            views: b.views,
+            sessions: Object.keys(b.sessions).length,
+            'read to end %': b.views ? Math.round((b.reached100 / b.views) * 100) : 0,
+            'median dwell (s)': med === undefined ? null : med,
+            clicks: b.clicks,
+          };
+        });
+        console.table(out);
+        return out;
+      },
+      export: function () { return JSON.stringify(read(), null, 2); },
+    };
+  })();
+</script>

@@ -1,0 +1,119 @@
+---
+/**
+ * Bare layout for the identity variants.
+ *
+ * Deliberately does NOT import global.css, Nav, Footer or Cursor. Each
+ * variant is a whole design position, not a reskin, so it owns its reset,
+ * its type, and its chrome. Shared here: head/meta, the skip link, the
+ * reduced-motion baseline, and the A/B beacon.
+ */
+import AbBeacon from '../components/AbBeacon.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  variant: string;
+  /** Google Fonts css2 href for this variant. */
+  fonts: string;
+  themeColor: string;
+}
+
+const { title, description, variant, fonts, themeColor } = Astro.props;
+const siteUrl = Astro.site ?? 'https://sayantandutta.com';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+---
+
+<!doctype html>
+<html lang="en" data-variant={variant}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content={themeColor} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Variants are presentation experiments, not new content. Keep them out of search. -->
+  <meta name="robots" content="noindex, follow" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL('/og/default.png', siteUrl)} />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href={fonts} rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { list-style: none; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { overflow-x: hidden; }
+
+    .skip-link {
+      position: absolute; left: 1rem; top: -4rem; z-index: 999;
+      padding: .6rem 1rem; font-size: .85rem; font-weight: 600;
+      background: currentColor; transition: top .2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* Anything that moves for decoration stops here. */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Variant switcher — only rendered when you ask for it (?ab= or localhost). */
+    .ab-switch {
+      position: fixed; left: 0; bottom: 0; z-index: 900;
+      display: none; gap: .5rem; align-items: center;
+      padding: .45rem .7rem;
+      font: 500 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .06em; text-transform: uppercase;
+      background: #111; color: #eee; border-top-right-radius: 4px;
+    }
+    .ab-switch[data-on] { display: flex; }
+    .ab-switch a { padding: .25rem .45rem; border: 1px solid #444; border-radius: 2px; }
+    .ab-switch a[aria-current] { background: #eee; color: #111; border-color: #eee; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <slot />
+
+  <nav class="ab-switch" aria-label="Design variant">
+    <span>Version</span>
+    <a href="/?ab=1" data-ab="switch:control">Editorial</a>
+    <a href="/v/control-room?ab=1" data-ab="switch:control-room">Control room</a>
+    <a href="/v/drawing-set?ab=1" data-ab="switch:drawing-set">Drawing set</a>
+    <a href="/lab" data-ab="switch:lab">Compare ↗</a>
+  </nav>
+
+  <script is:inline>
+    (function () {
+      var show = new URLSearchParams(location.search).has('ab')
+        || ['localhost', '127.0.0.1'].indexOf(location.hostname) > -1;
+      if (!show) return;
+      var bar = document.querySelector('.ab-switch');
+      if (!bar) return;
+      bar.setAttribute('data-on', '');
+      bar.querySelectorAll('a').forEach(function (a) {
+        if (new URL(a.href).pathname === location.pathname) a.setAttribute('aria-current', 'page');
+      });
+    })();
+  </script>
+
+  <AbBeacon variant={variant} />
+</body>
+</html>

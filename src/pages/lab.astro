@@ -1,0 +1,209 @@
+---
+/**
+ * /lab — the A/B review room.
+ *
+ * Three live versions side by side in real frames, a note on what each one
+ * is betting, and a readout of whatever the beacon has collected so far.
+ * This is a working tool, not a portfolio page — it stays out of search.
+ */
+import { VARIANTS, SPLIT_AT_ROOT } from '../lib/ab';
+
+const fonts = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A/B lab · Sayantan Dutta</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href={fonts} rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <header class="top">
+    <h1>A/B lab</h1>
+    <p class="sub">Three presentations of the same six projects. Pick with evidence, not vibes.</p>
+    <p class={`split ${SPLIT_AT_ROOT ? 'on' : 'off'}`}>
+      Traffic split at <code>/</code>: <strong>{SPLIT_AT_ROOT ? 'ON' : 'OFF'}</strong>
+      <span class="hint">— toggle <code>SPLIT_AT_ROOT</code> in <code>src/lib/ab.ts</code></span>
+    </p>
+
+    <div class="size-row" role="group" aria-label="Preview width">
+      <span class="lbl">Frame</span>
+      <button class="size" data-w="1280" aria-pressed="true">Desktop</button>
+      <button class="size" data-w="834">Tablet</button>
+      <button class="size" data-w="390">Phone</button>
+    </div>
+  </header>
+
+  <div class="grid">
+    {VARIANTS.map((v) => (
+      <section class="col">
+        <div class="col-head">
+          <h2>{v.name}</h2>
+          <a class="open" href={`${v.path}?ab=1`} target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <p class="thesis">{v.thesis}</p>
+        <div class="frame-wrap">
+          <iframe src={v.path} title={`${v.name} preview`} loading="lazy"></iframe>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <section class="results">
+    <div class="res-head">
+      <h2>Beacon readout</h2>
+      <div class="res-actions">
+        <button id="refresh">Refresh</button>
+        <button id="download">Download JSON</button>
+        <button id="clear" class="danger">Clear</button>
+      </div>
+    </div>
+    <p class="note">
+      Collected in this browser only. Open each version, use it the way a visitor would,
+      and the table fills in. For real traffic, add Plausible, Vercel Analytics or GA —
+      the beacon forwards to whichever it finds, no code changes needed.
+    </p>
+    <div class="table-wrap"><table id="res"><tbody><tr><td class="empty">No events yet. Visit a version, then refresh.</td></tr></tbody></table></div>
+  </section>
+
+  <script>
+    const KEY = 'ab.events';
+    const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
+
+    function summarise(rows) {
+      const by = {};
+      for (const r of rows) {
+        const v = r?.props?.variant ?? 'unknown';
+        by[v] ??= { views: 0, sessions: new Set(), end: 0, dwell: [], clicks: {} };
+        const b = by[v];
+        if (r.props?.session) b.sessions.add(r.props.session);
+        if (r.name === 'view') b.views++;
+        if (r.name === 'scroll' && r.props.depth === 100) b.end++;
+        if (r.name === 'dwell') b.dwell.push(r.props.seconds);
+        if (r.name === 'click') b.clicks[r.props.target] = (b.clicks[r.props.target] || 0) + 1;
+      }
+      return by;
+    }
+
+    function render() {
+      const rows = read();
+      const by = summarise(rows);
+      const table = document.getElementById('res');
+      const names = Object.keys(by);
+      if (!names.length) {
+        table.innerHTML = '<tbody><tr><td class="empty">No events yet. Visit a version, then refresh.</td></tr></tbody>';
+        return;
+      }
+      const head = '<thead><tr><th>Version</th><th>Views</th><th>Sessions</th><th>Read to end</th><th>Median dwell</th><th>Top clicks</th></tr></thead>';
+      const body = names.map((v) => {
+        const b = by[v];
+        const d = b.dwell.slice().sort((a, c) => a - c);
+        const med = d.length ? d[Math.floor(d.length / 2)] : null;
+        const top = Object.entries(b.clicks).sort((a, c) => c[1] - a[1]).slice(0, 4)
+          .map(([k, n]) => `${k} <span class="n">${n}</span>`).join(', ') || '—';
+        return `<tr><th scope="row">${v}</th><td>${b.views}</td><td>${b.sessions.size}</td>` +
+               `<td>${b.views ? Math.round((b.end / b.views) * 100) : 0}%</td>` +
+               `<td>${med === null ? '—' : med + 's'}</td><td class="clicks">${top}</td></tr>`;
+      }).join('');
+      table.innerHTML = head + '<tbody>' + body + '</tbody>';
+    }
+
+    document.getElementById('refresh').addEventListener('click', render);
+    document.getElementById('clear').addEventListener('click', () => {
+      if (confirm('Clear all recorded A/B events in this browser?')) { localStorage.removeItem(KEY); render(); }
+    });
+    document.getElementById('download').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(read(), null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'ab-events.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    // Frame width switcher — the variants are responsive, so check them that way.
+    const H = 620; // visible height of each preview well, px
+
+    function fit() {
+      const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--frame-w'), 10) || 1280;
+      document.querySelectorAll('.frame-wrap').forEach((wrap) => {
+        const s = wrap.clientWidth / w;
+        wrap.style.setProperty('--s', String(s));
+        wrap.style.setProperty('--frame-h', (H / s) + 'px');
+      });
+    }
+
+    document.querySelectorAll('.size').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.size').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        document.documentElement.style.setProperty('--frame-w', btn.dataset.w + 'px');
+        fit();
+      });
+    });
+
+    fit();
+    addEventListener('resize', fit);
+
+    render();
+    addEventListener('storage', render);
+  </script>
+
+  <style is:global>
+    :root { --frame-w: 1280px; --bg: #101214; --panel: #17191c; --line: #272b30; --ink: #e6e9ea; --dim: #909799; --accent: #f2a33c; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; padding: clamp(1.2rem, 4vw, 2.5rem); line-height: 1.55; }
+    code { font-family: 'IBM Plex Mono', monospace; font-size: .85em; color: var(--accent); }
+    button { font: inherit; color: inherit; background: none; border: 1px solid var(--line); border-radius: 3px; padding: .45rem .8rem; min-height: 38px; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+    button:hover { border-color: var(--accent); color: var(--accent); }
+    button[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: #111; }
+    button.danger:hover { border-color: #e5544b; color: #e5544b; }
+    a { color: inherit; }
+
+    .top { max-width: 900px; margin-bottom: 2.4rem; }
+    .top h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 600; letter-spacing: -.02em; }
+    .sub { color: var(--dim); margin-top: .3rem; }
+    .split { margin-top: 1rem; font-family: 'IBM Plex Mono', monospace; font-size: .76rem; }
+    .split.off strong { color: #e5544b; } .split.on strong { color: #5fd08a; }
+    .split .hint { color: var(--dim); }
+    .size-row { display: flex; align-items: center; gap: .5rem; margin-top: 1.4rem; flex-wrap: wrap; }
+    .size-row .lbl { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-right: .3rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.4rem; }
+    .col { border: 1px solid var(--line); background: var(--panel); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+    .col-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: .9rem 1rem .4rem; }
+    .col-head h2 { font-size: 1.05rem; font-weight: 600; }
+    .open { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+    .thesis { padding: 0 1rem 1rem; color: var(--dim); font-size: .84rem; border-bottom: 1px solid var(--line); }
+    /* The frame renders at real device width, then scales down to fit the
+       column, so what you see is a true responsive render, not a squeeze. */
+    /* No `flex: 1` here — in a column flex container that resolves flex-basis to
+       0 and collapses the well. The height is fixed on purpose. */
+    .frame-wrap { position: relative; overflow: hidden; background: #000; height: 620px; }
+    iframe {
+      position: absolute; top: 0; left: 0; border: 0;
+      width: var(--frame-w); height: var(--frame-h, 1600px);
+      transform: scale(var(--s, .35)); transform-origin: 0 0;
+    }
+
+    .results { margin-top: 2.6rem; border: 1px solid var(--line); border-radius: 4px; padding: 1.2rem; background: var(--panel); }
+    .res-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .res-head h2 { font-size: 1.05rem; font-weight: 600; }
+    .res-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .note { color: var(--dim); font-size: .84rem; margin: .7rem 0 1.2rem; max-width: 72ch; }
+    .table-wrap { overflow-x: auto; }
+    #res { width: 100%; border-collapse: collapse; font-size: .86rem; }
+    #res th, #res td { text-align: left; padding: .6rem .7rem; border-bottom: 1px solid var(--line); }
+    #res thead th { font-family: 'IBM Plex Mono', monospace; font-size: .64rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+    #res tbody th { color: var(--accent); font-weight: 500; }
+    #res .clicks { color: var(--dim); font-size: .8rem; }
+    #res .n { color: var(--ink); }
+    #res .empty { color: var(--dim); padding: 1.4rem .7rem; }
+  </style>
+</body>
+</html>

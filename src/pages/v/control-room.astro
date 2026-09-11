@@ -1,0 +1,608 @@
+---
+/**
+ * Variant: CONTROL ROOM
+ *
+ * The bet: the fastest way to prove you design high-stakes systems is to
+ * make the portfolio behave like one. Instrument tags, a process schematic,
+ * a dense index table, an event log. Borrowed wholesale from the HAZOP /
+ * process-safety world Sayantan actually works in — which is the point.
+ * It is specific to him in a way a card grid can never be.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { projects, log, disciplines, contact } from '../../lib/variants';
+
+const LINE_Y = 160;
+const nodes = projects.map((p, i) => {
+  const x = 72 + i * 86;
+  const up = i % 2 === 0;
+  return {
+    ...p,
+    x,
+    cy: up ? 74 : 246,
+    stubY: up ? 88 : 232,
+    valveY: up ? 122 : 198,
+    labelY: up ? 44 : 284,
+    up,
+  };
+});
+
+const services = [
+  'Product design', 'UX strategy', 'Design systems', 'Research synthesis',
+  'Design operations', 'Accessibility · WCAG', 'Service design', 'Foresight',
+];
+
+const fonts =
+  'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta · Control Room"
+  description="Product designer working on high-stakes enterprise and AI workflows. Portfolio built as a process control panel."
+  variant="control-room"
+  fonts={fonts}
+  themeColor="#0B0D0E"
+>
+
+<!-- ── Top status strip ─────────────────────────────────────────────── -->
+<header class="bar bar-top">
+  <span class="lamp" aria-hidden="true"></span>
+  <span class="bar-id">SAYANTAN DUTTA · PRODUCT DESIGN</span>
+  <span class="bar-sep" aria-hidden="true">/</span>
+  <span class="dim">PANEL REV 03</span>
+  <span class="bar-sep" aria-hidden="true">/</span>
+  <span class="dim">BASE {contact.base.toUpperCase()}</span>
+  <span class="bar-spacer"></span>
+  <span class="dim" id="clock">--:--:--</span>
+  <span class="ok">● CURRENT · dAIs GENIE</span>
+</header>
+
+<main id="main">
+
+  <!-- ── Hero ───────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="tag">PANEL-000 · OVERVIEW</p>
+      <h1>
+        <span>Most software can afford</span>
+        <span>to be confusing for a minute.</span>
+        <em>Mine can't.</em>
+      </h1>
+      <p class="lead">
+        Five years on the high-stakes workflows — industrial hazard studies, enterprise
+        API infrastructure, and a voice companion older adults depend on every morning.
+        The kind of screen someone reads once, quickly, while already worried.
+      </p>
+      <p class="aside">
+        So this page is built like one of them. Every project below carries a loop tag.
+        Nothing hides behind a hover.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#index" data-ab="hero:index">Open index <span aria-hidden="true">↓</span></a>
+        <a class="btn" href={contact.resume} data-ab="hero:cv">CV (PDF)</a>
+      </div>
+    </div>
+
+    <div class="hero-panel">
+      <div class="panel-head">
+        <span>PROCESS SCHEMATIC · 6 LOOPS</span>
+        <span class="dim">SELECT A NODE</span>
+      </div>
+
+      <svg class="schematic" viewBox="0 0 574 320" role="group" aria-label="Project schematic. Six loops, each one a project.">
+        <!-- header/footer rails -->
+        <line class="rail" x1="24" y1={LINE_Y} x2="550" y2={LINE_Y} />
+        <path class="flow" d={`M24 ${LINE_Y} H550`} />
+        <polygon class="arrow" points="550,160 540,155 540,165" />
+
+        {nodes.map((n) => (
+          <g>
+            <line class="rail thin" x1={n.x} y1={LINE_Y} x2={n.x} y2={n.stubY} />
+            <rect class="tee" x={n.x - 3} y={LINE_Y - 3} width="6" height="6" />
+            <path
+              class="valve"
+              d={`M${n.x - 7} ${n.valveY - 6} L${n.x + 7} ${n.valveY + 6} L${n.x + 7} ${n.valveY - 6} L${n.x - 7} ${n.valveY + 6} Z`}
+            />
+          </g>
+        ))}
+
+        {nodes.map((n, i) => (
+          <g
+            class="node"
+            data-node={n.slug}
+            tabindex="0"
+            role="button"
+            aria-label={`${n.tag}. ${n.short}. Press to show details.`}
+          >
+            <circle class="hit" cx={n.x} cy={n.cy} r="24" />
+            <circle class="ring" cx={n.x} cy={n.cy} r="15" />
+            <circle class="core" cx={n.x} cy={n.cy} r="6" />
+            <text class="key" x={n.x} y={n.cy + 3.5}>{i + 1}</text>
+            <text class="label" x={n.x} y={n.labelY}>{n.tag}</text>
+          </g>
+        ))}
+      </svg>
+
+      <p class="hint dim">Keys 1–6 select a loop.</p>
+
+      <!-- Readout -->
+      <div class="readout" aria-live="polite">
+        {nodes.map((n, i) => (
+          <article class="read" data-read={n.slug} hidden={i !== 0}>
+            <div class="read-head">
+              <span class="read-tag">{n.tag}</span>
+              <span class={`chip chip-${n.status.toLowerCase()}`}>{n.status}</span>
+            </div>
+            <h2 class="read-title">{n.short}</h2>
+            <dl class="read-dl">
+              <div><dt>Client</dt><dd>{n.org}</dd></div>
+              <div><dt>Role</dt><dd>{n.role}</dd></div>
+              <div><dt>Sector</dt><dd>{n.sector}</dd></div>
+              <div><dt>Period</dt><dd>{n.period}</dd></div>
+            </dl>
+            <p class="read-note">{n.note}</p>
+            <a class="read-link" href={n.href} data-ab={`readout:${n.slug}`}>
+              Open case study <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Index table ─────────────────────────────────────────────────── -->
+  <section class="section" id="index">
+    <div class="sec-head">
+      <h2>Loop index</h2>
+      <span class="tag">PANEL-100 · 6 ENTRIES</span>
+    </div>
+
+    <div class="table-scroll">
+      <table class="index">
+        <caption class="sr-only">All six projects, with tag, client, role, period and status.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Tag</th>
+            <th scope="col">Project</th>
+            <th scope="col">Client</th>
+            <th scope="col">Role</th>
+            <th scope="col">Period</th>
+            <th scope="col">Status</th>
+            <th scope="col"><span class="sr-only">Open</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects.map((p) => (
+            <tr>
+              <td class="mono accent">{p.tag}</td>
+              <th scope="row" class="cell-title"><a href={p.href} data-ab={`index:${p.slug}`}>{p.title}</a></th>
+              <td>{p.org}</td>
+              <td>{p.role}</td>
+              <td class="mono nowrap">{p.period}</td>
+              <td><span class={`chip chip-${p.status.toLowerCase()}`}>{p.status}</span></td>
+              <td class="cell-go"><a href={p.href} aria-label={`Open ${p.short}`} data-ab={`index-go:${p.slug}`}>→</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Competency matrix ───────────────────────────────────────────── -->
+  <section class="section">
+    <div class="sec-head">
+      <h2>Competency matrix</h2>
+      <span class="tag">PANEL-200 · DEPTH × REACH</span>
+    </div>
+    <div class="matrix-layout">
+    <div>
+    <p class="sec-lead">
+      Every safety engineer I've worked with reads one of these before they read anything else.
+      Same grid, different axes: how deep I go on a thing, against how much of an organisation
+      it touches. Top right is where I am most useful.
+    </p>
+    <ul class="matrix-list">
+      {disciplines.map((d) => <li><span class="mono dim">{d.depth}·{d.reach}</span> {d.name}</li>)}
+    </ul>
+    </div>
+
+    <div class="matrix-wrap">
+      <div class="matrix" role="img" aria-label={`Competency matrix. ${disciplines.map(d => `${d.name}: depth ${d.depth} of 5, reach ${d.reach} of 5`).join('. ')}.`}>
+        {Array.from({ length: 25 }).map((_, idx) => {
+          const col = (idx % 5) + 1;
+          const row = 5 - Math.floor(idx / 5);
+          const heat = Math.min(5, Math.round((col + row) / 2));
+          const d = disciplines.find((x) => x.depth === col && x.reach === row);
+          return (
+            <div class={`cell heat-${heat}`} style={`grid-column:${col};grid-row:${6 - row}`}>
+              {d && <span class="plot">{d.name}</span>}
+            </div>
+          );
+        })}
+      </div>
+      <div class="axis axis-x"><span>DEPTH →</span></div>
+      <div class="axis axis-y"><span>REACH →</span></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ── Event log ───────────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="sec-head">
+      <h2>Event log</h2>
+      <span class="tag">PANEL-300 · 8 ENTRIES · OLDEST FIRST</span>
+    </div>
+    <ol class="log">
+      {log.map((l, i) => (
+        <li>
+          <span class="ln" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <span class="stamp">{l.stamp}</span>
+          <span class="event">{l.event}</span>
+          <span class="kind dim">{l.kind}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- ── Contact ─────────────────────────────────────────────────────── -->
+  <section class="section contact" id="contact">
+    <div class="sec-head">
+      <h2>Open channel</h2>
+      <span class="tag">PANEL-900 · CONTACT</span>
+    </div>
+    <p class="contact-lead">
+      If you have a workflow that people dread using, I would like to hear about it.
+    </p>
+    <div class="contact-row">
+      <a class="btn btn-primary btn-lg" href={`mailto:${contact.email}`} data-ab="contact:email">{contact.email}</a>
+      <a class="btn btn-lg" href={contact.linkedin} rel="me noopener" target="_blank" data-ab="contact:linkedin">LinkedIn ↗</a>
+    </div>
+  </section>
+</main>
+
+<!-- ── Bottom ticker ────────────────────────────────────────────────── -->
+<footer class="bar bar-bottom">
+  <button class="tick-btn" id="tick-btn" aria-pressed="false">❚❚<span class="sr-only"> Pause the scrolling service list</span></button>
+  <div class="tick" id="tick">
+    <div class="tick-track">
+      {[0, 1].map(() => (
+        <span class="tick-run" aria-hidden="true">
+          {services.map((s) => <span class="tick-item">{s}<i>·</i></span>)}
+        </span>
+      ))}
+    </div>
+  </div>
+  <span class="dim bar-end">© {new Date().getFullYear()}</span>
+</footer>
+
+<script>
+  // ── Node ↔ readout wiring ──────────────────────────────────────────
+  const nodeEls = Array.from(document.querySelectorAll<SVGGElement>('.node'));
+  const reads = Array.from(document.querySelectorAll<HTMLElement>('.read'));
+
+  function select(slug: string) {
+    nodeEls.forEach((n) => n.classList.toggle('on', n.dataset.node === slug));
+    reads.forEach((r) => { r.hidden = r.dataset.read !== slug; });
+  }
+
+  nodeEls.forEach((n, i) => {
+    const slug = n.dataset.node!;
+    n.addEventListener('mouseenter', () => select(slug));
+    n.addEventListener('focus', () => select(slug));
+    n.addEventListener('click', () => select(slug));
+    n.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(slug); }
+    });
+    if (i === 0) n.classList.add('on');
+  });
+
+  // Number keys jump between loops, the way a panel operator would expect.
+  addEventListener('keydown', (e) => {
+    const target = e.target as HTMLElement;
+    if (target && /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return;
+    const i = Number(e.key) - 1;
+    if (Number.isInteger(i) && i >= 0 && i < nodeEls.length) {
+      nodeEls[i].focus();
+      select(nodeEls[i].dataset.node!);
+    }
+  });
+
+  // ── Clock ──────────────────────────────────────────────────────────
+  const clock = document.getElementById('clock');
+  if (clock) {
+    const tick = () => {
+      clock.textContent = new Date().toLocaleTimeString('en-GB', { hour12: false });
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  // ── Ticker pause (WCAG 2.2.2) ──────────────────────────────────────
+  const tickBtn = document.getElementById('tick-btn');
+  const tickEl = document.getElementById('tick');
+  tickBtn?.addEventListener('click', () => {
+    const paused = tickEl?.classList.toggle('paused');
+    tickBtn.setAttribute('aria-pressed', String(!!paused));
+    tickBtn.firstChild!.textContent = paused ? '▶' : '❚❚';
+  });
+</script>
+
+<style>
+  /* ─────────── tokens ─────────── */
+  :root {
+    --bg: #0b0d0e;
+    --panel: #111416;
+    --panel-2: #161a1c;
+    --line: #232a2d;
+    --line-2: #2e3639;
+    --ink: #dde2e4;
+    --dim: #8b9599;
+    --amber: #f2a33c;
+    --green: #5fd08a;
+    --red: #e5544b;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --pad: clamp(1rem, 4vw, 3rem);
+  }
+
+  :global(body) {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    padding: 34px 0 38px;
+    /* faint panel grid, the kind silkscreened onto a real enclosure */
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 88px 88px;
+    background-position: -1px -1px;
+  }
+  :global(body)::after {
+    content: '';
+    position: fixed; inset: 0; pointer-events: none; z-index: 800;
+    background: radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(0,0,0,.55) 100%);
+  }
+  :global(.skip-link) { background: var(--amber); color: #000; }
+  /* lift the variant switcher clear of the ticker bar */
+  :global(.ab-switch) { bottom: 38px; }
+  :global(:focus-visible) { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .mono { font-family: var(--mono); }
+  .dim { color: var(--dim); }
+  .nowrap { white-space: nowrap; }
+  .accent { color: var(--amber); }
+
+  .tag {
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--dim);
+  }
+
+  /* ─────────── status bars ─────────── */
+  .bar {
+    position: fixed; left: 0; right: 0; z-index: 850;
+    display: flex; align-items: center; gap: .6rem;
+    height: 34px; padding: 0 var(--pad);
+    font-family: var(--mono); font-size: .66rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    background: #08090a; border-bottom: 1px solid var(--line);
+  }
+  .bar-top { top: 0; }
+  .bar-bottom { bottom: 0; top: auto; height: 38px; border-bottom: 0; border-top: 1px solid var(--line); gap: .9rem; }
+  .bar-spacer { flex: 1; }
+  .bar-sep { color: var(--line-2); }
+  .bar-id { color: var(--ink); }
+  .ok { color: var(--green); }
+  .lamp {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green); box-shadow: 0 0 8px var(--green);
+    animation: pulse 2.6s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+  @media (max-width: 860px) {
+    .bar-top .bar-sep, .bar-top .dim { display: none; }
+    .bar-top #clock { display: inline; }
+  }
+
+  /* ─────────── hero ─────────── */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+    padding: clamp(3rem, 8vw, 6rem) var(--pad) clamp(2rem, 5vw, 4rem);
+    max-width: 1360px; margin: 0 auto;
+  }
+  @media (max-width: 940px) { .hero { grid-template-columns: 1fr; } }
+
+  .hero-copy h1 {
+    font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+    font-weight: 600; line-height: 1.12; letter-spacing: -.02em;
+    margin: .9rem 0 1.4rem;
+  }
+  .hero-copy h1 span, .hero-copy h1 em { display: block; }
+  .hero-copy h1 em { font-style: normal; color: var(--amber); }
+  .lead { max-width: 46ch; color: var(--ink); font-size: 1.02rem; }
+  .aside {
+    max-width: 46ch; margin-top: .9rem; padding-left: .9rem;
+    border-left: 2px solid var(--line-2);
+    color: var(--dim); font-size: .92rem;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: .45rem;
+    min-height: 44px; padding: .6rem 1.1rem;
+    font-family: var(--mono); font-size: .74rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    border: 1px solid var(--line-2); color: var(--ink);
+    transition: background .18s, border-color .18s, color .18s;
+  }
+  .btn:hover { border-color: var(--amber); color: var(--amber); }
+  .btn-primary { background: var(--amber); border-color: var(--amber); color: #0b0d0e; font-weight: 600; }
+  .btn-primary:hover { background: #ffb95c; border-color: #ffb95c; color: #0b0d0e; }
+  .btn-lg { min-height: 52px; padding: .8rem 1.4rem; font-size: .82rem; }
+
+  /* ─────────── schematic panel ─────────── */
+  .hero-panel { border: 1px solid var(--line); background: var(--panel); }
+  .panel-head {
+    display: flex; justify-content: space-between; gap: 1rem;
+    padding: .6rem .85rem; border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: .64rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+  }
+  .schematic { width: 100%; height: auto; padding: .5rem .25rem 0; }
+  .hint { padding: 0 .85rem .7rem; font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
+  /* Keyboard hint and the second header label are desktop affordances. */
+  @media (max-width: 620px) {
+    .panel-head .dim { display: none; }
+    .hint { display: none; }
+  }
+
+  .rail { stroke: var(--line-2); stroke-width: 2; }
+  .rail.thin { stroke-width: 1.5; }
+  .tee { fill: var(--line-2); }
+  .valve { fill: none; stroke: var(--line-2); stroke-width: 1.5; }
+  .arrow { fill: var(--line-2); }
+  .flow {
+    fill: none; stroke: var(--amber); stroke-width: 2;
+    stroke-dasharray: 3 26; opacity: .75;
+    animation: drift 3.2s linear infinite;
+  }
+  @keyframes drift { to { stroke-dashoffset: -29; } }
+
+  .node { cursor: pointer; }
+  .node .hit { fill: transparent; }
+  .node .ring { fill: var(--panel-2); stroke: var(--line-2); stroke-width: 1.5; transition: stroke .2s; }
+  .node .core { fill: var(--line-2); transition: fill .2s; }
+  .node .key {
+    font-family: var(--mono); font-size: 9px; fill: var(--dim);
+    text-anchor: middle; pointer-events: none; opacity: 0; transition: opacity .2s;
+  }
+  .node .label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+    fill: var(--dim); text-anchor: middle; transition: fill .2s;
+  }
+  .node:hover .ring, .node:focus .ring, .node.on .ring { stroke: var(--amber); }
+  .node:hover .core, .node:focus .core, .node.on .core { fill: var(--amber); }
+  .node:hover .label, .node:focus .label, .node.on .label { fill: var(--amber); }
+  .node.on .ring { filter: drop-shadow(0 0 6px rgba(242,163,60,.5)); }
+  .node:focus .key { opacity: 1; }
+  .node:focus { outline: none; }
+  .node:focus .ring { stroke-dasharray: 3 3; }
+
+  /* ─────────── readout ─────────── */
+  .readout { border-top: 1px solid var(--line); padding: 1.1rem .95rem 1.3rem; min-height: 258px; }
+  .read-head { display: flex; align-items: center; gap: .7rem; }
+  .read-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; color: var(--amber); }
+  .chip {
+    font-family: var(--mono); font-size: .6rem; letter-spacing: .12em;
+    padding: .15rem .45rem; border: 1px solid currentColor; color: var(--dim);
+  }
+  .chip-live { color: var(--green); }
+  .chip-shipped { color: var(--ink); }
+  .chip-concept, .chip-exhibited { color: var(--amber); }
+  .read-title { font-size: 1.22rem; font-weight: 600; letter-spacing: -.01em; margin: .55rem 0 .9rem; }
+  .read-dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem 1.2rem; margin-bottom: .95rem; }
+  .read-dl dt { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  .read-dl dd { font-size: .88rem; }
+  .read-note { color: var(--dim); font-size: .92rem; max-width: 52ch; border-left: 2px solid var(--line-2); padding-left: .8rem; }
+  .read-link {
+    display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem;
+    min-height: 44px;
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--amber);
+    border-bottom: 1px solid transparent;
+  }
+  .read-link:hover { border-bottom-color: var(--amber); }
+
+  /* ─────────── sections ─────────── */
+  .section { max-width: 1360px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 5rem) var(--pad); border-top: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .sec-head h2 { font-size: clamp(1.3rem, 2.4vw, 1.75rem); font-weight: 600; letter-spacing: -.01em; }
+  .sec-lead { max-width: 60ch; color: var(--dim); margin-bottom: 2rem; }
+
+  /* ─────────── index table ─────────── */
+  .table-scroll { overflow-x: auto; }
+  table.index { width: 100%; border-collapse: collapse; font-size: .86rem; min-width: 820px; }
+  table.index th, table.index td { text-align: left; padding: .85rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.index thead th {
+    font-family: var(--mono); font-size: .62rem; font-weight: 500;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--dim);
+    border-bottom-color: var(--line-2);
+  }
+  table.index tbody tr { transition: background .15s; }
+  table.index tbody tr:hover { background: var(--panel); }
+  .cell-title { font-weight: 500; max-width: 34ch; }
+  .cell-title a { border-bottom: 1px solid transparent; }
+  table.index tbody tr:hover .cell-title a { border-bottom-color: var(--amber); color: var(--amber); }
+  .cell-go a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -.65rem 0; color: var(--dim); }
+  table.index tbody tr:hover .cell-go a { color: var(--amber); }
+
+  /* ─────────── matrix ─────────── */
+  .matrix-layout { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  @media (max-width: 900px) { .matrix-layout { grid-template-columns: 1fr; } }
+  .matrix-wrap { position: relative; padding: 0 0 2rem 2rem; max-width: 620px; }
+  .matrix { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(5, 1fr); gap: 2px; aspect-ratio: 5 / 4; }
+  .cell { background: var(--panel); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: .3rem; }
+  .heat-1 { background: #0e1112; }
+  .heat-2 { background: #12151550; }
+  .heat-3 { background: rgba(242,163,60,.05); }
+  .heat-4 { background: rgba(242,163,60,.10); }
+  .heat-5 { background: rgba(242,163,60,.18); border-color: rgba(242,163,60,.35); }
+  .plot {
+    font-family: var(--mono); font-size: .6rem; line-height: 1.3;
+    letter-spacing: .03em; text-align: center; color: var(--ink);
+  }
+  .heat-5 .plot, .heat-4 .plot { color: var(--amber); }
+  .axis { position: absolute; font-family: var(--mono); font-size: .6rem; letter-spacing: .14em; color: var(--dim); }
+  .axis-x { bottom: 0; left: 2rem; }
+  .axis-y { left: 0; bottom: 2rem; transform-origin: left bottom; transform: rotate(-90deg); }
+  /* The grid is the picture; this list is the same data in a form a screen
+     reader and a narrow phone can both use. */
+  .matrix-list { display: grid; gap: .5rem; margin-top: 1.8rem; }
+  .matrix-list li { font-size: .86rem; display: flex; gap: .8rem; }
+  .matrix-list .mono { font-size: .72rem; letter-spacing: .06em; }
+  @media (max-width: 620px) { .matrix-wrap { display: none; } }
+
+  /* ─────────── log ─────────── */
+  .log { font-family: var(--mono); font-size: .8rem; }
+  .log li {
+    display: grid;
+    grid-template-columns: 2.2rem 9.5rem minmax(0, 1fr) auto;
+    gap: .9rem; align-items: baseline;
+    padding: .62rem 0; border-bottom: 1px solid var(--line);
+  }
+  .log .ln { color: var(--line-2); }
+  .log .stamp { color: var(--amber); letter-spacing: .04em; }
+  .log .event { font-family: var(--sans); font-size: .92rem; }
+  .log .kind { font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; }
+  @media (max-width: 700px) {
+    .log li { grid-template-columns: 2rem minmax(0, 1fr); }
+    .log .kind { grid-column: 2; }
+  }
+
+  /* ─────────── contact ─────────── */
+  .contact-lead { font-size: clamp(1.15rem, 2.6vw, 1.7rem); max-width: 22ch; font-weight: 500; letter-spacing: -.01em; margin-bottom: 1.8rem; }
+  .contact-row { display: flex; flex-wrap: wrap; gap: .7rem; }
+
+  /* ─────────── ticker ─────────── */
+  .tick { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+  .tick-track { display: flex; width: max-content; animation: slide 46s linear infinite; }
+  .tick.paused .tick-track { animation-play-state: paused; }
+  .tick-run { display: flex; }
+  .tick-item { display: inline-flex; gap: .9rem; padding-right: .9rem; color: var(--dim); }
+  .tick-item i { color: var(--line-2); font-style: normal; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  .tick-btn { width: 34px; height: 34px; display: grid; place-items: center; color: var(--dim); font-size: .6rem; }
+  .tick-btn:hover { color: var(--amber); }
+  .bar-end { margin-left: auto; }
+  @media (prefers-reduced-motion: reduce) {
+    .tick-track { animation: none; }
+    .flow { animation: none; stroke-dasharray: none; opacity: .35; }
+  }
+</style>
+</Variant>

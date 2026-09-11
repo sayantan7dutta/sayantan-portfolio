@@ -4,6 +4,8 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Cursor from '../components/Cursor.astro';
 import { ClientRouter } from 'astro:transitions';
+import AbBeacon from '../components/AbBeacon.astro';
+import { SPLIT_AT_ROOT, VARIANTS, BUCKET_DAYS } from '../lib/ab';
 
 interface Props {
   title: string;
@@ -21,6 +23,12 @@ const {
 
 const siteUrl = Astro.site ?? 'https://sayantandutta.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+
+// `/` is the control arm of the A/B test. It only divides traffic when
+// SPLIT_AT_ROOT is on; otherwise this page is simply the live home page.
+const isHome = Astro.url.pathname === '/';
+const splitHere = SPLIT_AT_ROOT && isHome;
+const buckets = VARIANTS.filter((v) => v.enabled).map((v) => ({ id: v.id, path: v.path }));
 ---
 
 <!doctype html>
@@ -56,6 +64,40 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 
   <ClientRouter />
 
+  {splitHere && (
+    <!-- Bucket assignment. Runs before first paint, so a redirected visitor
+         never sees the control arm flash past. `?ab=<id>` forces a bucket. -->
+    <script is:inline define:vars={{ buckets, days: BUCKET_DAYS }}>
+      (function () {
+        try {
+          var KEY = 'ab.variant';
+          var forced = new URLSearchParams(location.search).get('ab');
+          var ids = buckets.map(function (b) { return b.id; });
+          var id = null;
+
+          if (forced && ids.indexOf(forced) > -1) {
+            id = forced;
+          } else {
+            var saved = localStorage.getItem(KEY);
+            try { saved = saved ? JSON.parse(saved) : null; } catch (e) { saved = null; }
+            if (saved && ids.indexOf(saved.id) > -1 && Date.now() < saved.until) {
+              id = saved.id;
+            } else {
+              id = ids[Math.floor(Math.random() * ids.length)];
+            }
+          }
+
+          localStorage.setItem(KEY, JSON.stringify({ id: id, until: Date.now() + days * 864e5 }));
+
+          var target = buckets.filter(function (b) { return b.id === id; })[0];
+          if (target && target.path !== location.pathname) {
+            location.replace(target.path + location.search + location.hash);
+          }
+        } catch (e) { /* private mode, blocked storage — just show the control */ }
+      })();
+    </script>
+  )}
+
   <!-- Applied before paint: restore theme + mark JS available (gates scroll-reveal) -->
   <script is:inline>
     (function() {
@@ -76,6 +118,8 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
        on activation so the next Tab moves into page content, not the nav. -->
   <main id="main" tabindex="-1"><slot /></main>
   <Footer />
+
+  {isHome && <AbBeacon variant="control" />}
 
   <!-- Scroll reveal — Motion's inView() detects viewport entry; CSS runs the transition -->
   <script>
