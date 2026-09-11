@@ -8,6 +8,7 @@
  */
 import { VARIANTS, SPLIT_AT_ROOT } from '../lib/ab';
 
+const live = VARIANTS.filter((v) => v.enabled);
 const fonts = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap';
 ---
 
@@ -26,7 +27,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;5
 <body>
   <header class="top">
     <h1>A/B lab</h1>
-    <p class="sub">Three presentations of the same six projects. Pick with evidence, not vibes.</p>
+    <p class="sub">{live.length} presentations of the same six projects. Pick with evidence, not vibes.</p>
     <p class={`split ${SPLIT_AT_ROOT ? 'on' : 'off'}`}>
       Traffic split at <code>/</code>: <strong>{SPLIT_AT_ROOT ? 'ON' : 'OFF'}</strong>
       <span class="hint">— toggle <code>SPLIT_AT_ROOT</code> in <code>src/lib/ab.ts</code></span>
@@ -41,7 +42,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;5
   </header>
 
   <div class="grid">
-    {VARIANTS.filter((v) => v.enabled).map((v) => (
+    {live.map((v) => (
       <section class="col">
         <div class="col-head">
           <h2>{v.name}</h2>
