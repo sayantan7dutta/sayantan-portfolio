@@ -89,7 +89,7 @@
     flex-shrink: 0;
   }
   .sw-band-label {
-    font-size: .52rem;
+    font-size: 0.6875rem;
     letter-spacing: .14em;
     text-transform: uppercase;
     color: rgba(255,255,255,.9);
@@ -112,8 +112,8 @@
     min-height: 0;          /* prevents flex child overflow */
     display: flex;
     flex-direction: column;
-    padding: 1.1rem 1.25rem .9rem;
-    gap: .75rem;
+    padding: .85rem 1.25rem .75rem;
+    gap: .6rem;
     overflow: hidden;
   }
 
@@ -130,43 +130,47 @@
     border: 1px solid rgba(218, 41, 28, .22);
     border-top: 2px solid #DA291C;
     border-radius: 2px;
-    padding: .85rem .9rem;
+    /* a11y: tightened from .85rem to buy back vertical space for 11px text */
+    padding: .7rem .8rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* pins stat-row to bottom in every pillar */
     background: rgba(218, 41, 28, .03);
   }
   .sw-num {
-    font-size: .5rem;
+    font-size: 0.6875rem;
     letter-spacing: .14em;
     text-transform: uppercase;
     color: #DA291C;
   }
   .sw-title {
     font-family: var(--font-display);
-    font-size: clamp(.75rem, 1.2vw, .95rem);
+    font-size: clamp(.75rem, 1.2vw, .9rem);
     font-weight: 600;
     color: #f0ead6;
-    margin: .35rem 0 .45rem;
+    margin: .2rem 0 .25rem;
     line-height: 1.2;
   }
   .sw-desc {
-    font-size: clamp(.45rem, .75vw, .56rem);
-    line-height: 1.65;
-    color: rgba(240, 234, 214, .45);
+    /* a11y: was clamp(.45rem, .75vw, .56rem) — 7.2-9px, under the 11px
+       floor. Raised, with the line clamp cut 4 -> 2 so the taller text
+       still fits the fixed 16:10 card. */
+    font-size: clamp(.6875rem, 1vw, .75rem);
+    line-height: 1.5;
+    color: rgba(240, 234, 214, .55);
     flex: 1;
     min-height: 0;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 2;
   }
   .sw-stat-row {
     display: flex;
     align-items: baseline;
     gap: .5rem;
-    margin-top: .85rem;
-    padding-top: .65rem;
+    margin-top: .5rem;
+    padding-top: .5rem;
     border-top: 1px solid rgba(240, 234, 214, .07);
   }
   .sw-stat {
@@ -183,7 +187,7 @@
     vertical-align: middle;
   }
   .sw-stat-lbl {
-    font-size: .48rem;
+    font-size: 0.6875rem;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: rgba(240, 234, 214, .35);
@@ -212,7 +216,7 @@
     line-height: 1;
   }
   .sw-foot-lbl {
-    font-size: .48rem;
+    font-size: 0.6875rem;
     letter-spacing: .09em;
     text-transform: uppercase;
     color: rgba(240, 234, 214, .4);

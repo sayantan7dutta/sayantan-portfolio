@@ -49,7 +49,9 @@ body {
   background: var(--bg);
   color: var(--text-1);
   font-family: var(--font-body);
-  font-weight: 300;
+  /* a11y: was 300. HIG typography — "avoid Ultralight, Thin, and Light font
+     weights, which can be difficult to see, especially when text is small." */
+  font-weight: 400;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -142,7 +144,7 @@ body::before {
 .t-tag {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: .65rem;
+  font-size: 0.6875rem;
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: .25rem .65rem;
@@ -183,7 +185,7 @@ body::before {
 }
 .t-meta-key {
   font-family: var(--font-mono);
-  font-size: .58rem;
+  font-size: 0.6875rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -287,8 +289,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 
 /* Theme toggle */
 .theme-toggle {
-  /* a11y: 40x40 to approach WCAG 2.5.5 (44x44 ideal; 40 keeps the nav
-     proportional and is the iOS standard. Padded enough on touch.) */
+  /* Visual stays 40x40 so the nav keeps its proportions. */
   width: 40px; height: 40px;
   display: flex; align-items: center; justify-content: center;
   background: none;
@@ -299,6 +300,15 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
   transition: border-color .2s, color .2s, background .2s;
   font-size: .95rem;
   line-height: 1;
+  position: relative;
+}
+/* a11y: HIG (components/menus-and-actions/buttons.md) — "a button needs a
+   hit region of at least 44x44 pt". Extend the target 2px on every side
+   (40 + 2 + 2 = 44) without changing the rendered 40px control. */
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
 }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
 
@@ -317,7 +327,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 .footer-link {
   font-family: var(--font-mono);
-  font-size: .62rem;
+  font-size: 0.6875rem;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -327,7 +337,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .footer-right { text-align: right; }
 .footer-copy {
   font-family: var(--font-mono);
-  font-size: .62rem;
+  font-size: 0.6875rem;
   color: var(--text-3);
   display: block;
 }
@@ -402,7 +412,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .img-ph-label {
   position: relative;
   font-family: var(--font-mono);
-  font-size: .62rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -412,7 +422,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .img-ph-sub {
   position: relative;
   font-family: var(--font-mono);
-  font-size: .55rem;
+  font-size: 0.6875rem;
   letter-spacing: .08em;
   color: var(--text-3);
   opacity: .7;
@@ -447,7 +457,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
   border: 1px solid var(--border);
   color: var(--text-2);
   font-family: var(--font-mono);
-  font-size: .65rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   padding: .4rem .8rem;
@@ -474,7 +484,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .cs-insight cite {
   display: block;
   font-family: var(--font-mono);
-  font-size: .58rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -503,7 +513,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .diagram-ph-lbl {
   position: relative;
   font-family: var(--font-mono);
-  font-size: .65rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -554,7 +564,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
   align-items: center;
   gap: .45rem;
   font-family: var(--font-mono);
-  font-size: .62rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -685,7 +695,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 }
 .stat-lbl {
   font-family: var(--font-mono);
-  font-size: .62rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -707,7 +717,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .ps:hover { padding-left: .5rem; }
 .ps-num {
   font-family: var(--font-mono);
-  font-size: .62rem;
+  font-size: 0.6875rem;
   color: var(--accent);
   padding-top: .15rem;
 }
@@ -758,7 +768,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .more-card:hover .more-card-thumb img { transform: scale(1.05); }
 .more-card-thumb-ph {
   font-family: var(--font-mono);
-  font-size: .55rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -769,7 +779,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .more-card-info { padding: 1rem 1.25rem 1.25rem; }
 .more-ctx {
   font-family: var(--font-mono);
-  font-size: .58rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -794,7 +804,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
   position: absolute;
   bottom: .6rem; left: .6rem;
   font-family: var(--font-mono);
-  font-size: .52rem;
+  font-size: 0.6875rem;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--text-2);
@@ -884,7 +894,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 }
 .browser-frame-label {
   font-family: var(--font-mono);
-  font-size: .58rem;
+  font-size: 0.6875rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -935,7 +945,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .cs-card:hover { border-color: var(--text-3); transform: translateY(-3px); }
 .cs-card-lbl {
   font-family: var(--font-mono);
-  font-size: .58rem;
+  font-size: 0.6875rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--accent);
@@ -998,7 +1008,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 [data-theme="light"] .cs-ba-col.is-after { border-color: rgba(154,110,42,.35); }
 .cs-ba-head {
   font-family: var(--font-mono);
-  font-size: .6rem;
+  font-size: 0.6875rem;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -1012,7 +1022,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .cs-ba-row:last-child { border-bottom: none; }
 .cs-ba-row dt {
   font-family: var(--font-mono);
-  font-size: .56rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -1062,7 +1072,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 .cs-tl-node.is-last::before { background: var(--accent); border-color: var(--accent); }
 .cs-tl-date {
   font-family: var(--font-mono);
-  font-size: .58rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -1107,7 +1117,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 }
 .cs-fig-lbl {
   font-family: var(--font-mono);
-  font-size: .6rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--text-3);
@@ -1127,7 +1137,7 @@ html.has-js .reveal.visible { opacity: 1; transform: none; }
 }
 .cs-note-mark {
   font-family: var(--font-mono);
-  font-size: .58rem;
+  font-size: 0.6875rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--accent);
