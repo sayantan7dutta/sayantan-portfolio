@@ -563,6 +563,9 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* Same trap as .p-footer: space-between with no gap closes to 0. */
+  flex-wrap: wrap;
+  gap: .4rem .75rem;
 }
 .p-num {
   font-family: var(--font-mono);
@@ -589,9 +592,17 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* a11y: space-between with no gap let the context label and the CTA
+     shrink until they touched, then both wrapped into each other, so
+     "...Design Ops Lead" and "View case study" ran together as one line
+     of text. A gap keeps them apart and flex-wrap drops the CTA onto its
+     own row rather than squeezing it. */
+  flex-wrap: wrap;
+  gap: .5rem 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
 }
+.p-context { flex: 1 1 auto; }
 .p-context {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -599,18 +610,36 @@ import ambleThumb from '../assets/work/amble/hero.jpg';
   text-transform: uppercase;
   color: var(--text-3);
 }
+/* Matches the .btn pattern used by the hero CTAs. It was previously bare
+   text, which read as a label rather than something you could click: the
+   only affordance was the arrow. Bordering it also takes the target from
+   18px to ~35px tall, clearing WCAG 2.2 2.5.8 on its own rather than
+   relying on the spacing exception.
+   It stays an <a> because it navigates; only the look is a button. */
 .p-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: .7rem;
   letter-spacing: .1em;
   text-transform: uppercase;
+  padding: .6rem 1.15rem;
+  /* --border is 1.43:1 on the dark ground, too faint to read as an edge.
+     --text-3 is 5.04:1 dark and 4.98:1 light, so the boundary clears the
+     3:1 that WCAG 1.4.11 asks of a control's visual affordance. */
+  border: 1px solid var(--text-3);
+  border-radius: 2px;
   color: var(--text-2);
-  display: flex;
-  align-items: center;
-  gap: .4rem;
-  transition: color .2s, gap .2s;
+  /* Keep the call to action on one line; wrapping it mid-phrase was what
+     made the earlier collision unreadable. */
+  flex: 0 0 auto;
+  white-space: nowrap;
+  transition: border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);
 }
-.p-link:hover { color: var(--accent); gap: .7rem; }
+.p-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+.p-link span { transition: transform .2s var(--ease); }
+.p-link:hover span { transform: translateX(4px); }
 
 /* ─── Contact ─── */
 .contact-section {
