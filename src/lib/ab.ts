@@ -49,6 +49,27 @@ export const VARIANTS: Variant[] = [
     enabled: true,
   },
   {
+    id: 'before-after',
+    name: 'Before & After',
+    path: '/v/before-after',
+    thesis: 'The page split down the middle: dark for what I walked into, light for what shipped. A designer\u2019s most persuasive move is the pair, and it needs no prose to land.',
+    enabled: true,
+  },
+  {
+    id: 'report',
+    name: 'Annual Report',
+    path: '/v/report',
+    thesis: 'The portfolio as a company report: a signed letter from the designer, the period in figures, the work reviewed, a record of engagements. Betting on institutional seriousness.',
+    enabled: true,
+  },
+  {
+    id: 'interview',
+    name: 'Interview',
+    path: '/v/interview',
+    thesis: 'A transcript. Only the questions an interviewer actually asks, answered at length. Judgment is what gets senior designers hired and it does not survive being compressed into a card.',
+    enabled: true,
+  },
+  {
     id: 'feature',
     name: 'Feature',
     path: '/v/feature',

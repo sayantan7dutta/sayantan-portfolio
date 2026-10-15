@@ -1,0 +1,290 @@
+---
+/**
+ * Variant: ANNUAL REPORT
+ *
+ * The portfolio as a company's annual report: a letter from the designer,
+ * the period in figures, holdings reviewed one by one, capabilities, and a
+ * signature at the end.
+ *
+ * The bet is institutional seriousness. Enterprise buyers read documents
+ * shaped exactly like this, and nobody else's portfolio looks like one.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { projects, log, contact } from '../../lib/variants';
+
+import portrait from '../../assets/sayantan-studio.jpg';
+
+const figures = [
+  { fig: '6', unit: '', label: 'products designed', note: 'Across safety, fintech, telecoms and care' },
+  { fig: '3', unit: '', label: 'as founding designer', note: 'SparkSoft, Soter Safety, dAIs Genie' },
+  { fig: '3', unit: 'yrs', label: 'on one API vertical', note: 'Ericsson, product designer to design lead' },
+  { fig: '20+', unit: '', label: 'person team supported', note: 'Design operations across six digital products' },
+  { fig: '30–40', unit: '%', label: 'less rework', note: 'Sherwin-Williams, after the handoff rebuild' },
+  { fig: '50+', unit: '', label: 'research interviews', note: 'Seniors and carers across Hampshire, for miiGenie' },
+];
+
+const capabilities = [
+  { k: 'Product design', v: 'End-to-end, discovery through delivery. Flows, journeys, prototypes, interaction detail.' },
+  { k: 'UX strategy', v: 'Turning a vague request into something a small team can build inside a quarter.' },
+  { k: 'Design systems', v: 'Component libraries, tokens, and a written accessibility baseline. One system held across three products at Ericsson.' },
+  { k: 'Research', v: 'Domain immersion, interviews, synthesis, usability testing, heuristic evaluation.' },
+  { k: 'Design operations', v: 'File architecture, shared templates, and a research-to-design handoff a team of twenty actually used.' },
+  { k: 'Accessibility', v: 'WCAG AA as a starting constraint rather than a pass at the end.' },
+];
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta — Design Report 2020–2026"
+  description="Six years of product design across enterprise SaaS and AI, reported in full: the work, the figures, and the method."
+  variant="report"
+  fonts={fonts}
+  themeColor="#fbfaf7"
+>
+
+<main id="main">
+
+  <!-- ═══ COVER ═════════════════════════════════════════════════════ -->
+  <header class="cover">
+    <div class="cover-type">
+      <p class="imprint">Sayantan Dutta · Product design</p>
+      <h1>Design<br />Report</h1>
+      <p class="period">2020 — 2026</p>
+      <p class="cover-sub">
+        Six products across industrial safety, telecoms, retail operations and
+        care. Prepared for anyone deciding whether to work with me.
+      </p>
+      <p class="cover-go"><a href="#letter" data-ab="cover:read">Read the report ↓</a></p>
+    </div>
+    <figure class="cover-plate">
+      <Image src={portrait} alt="Sayantan Dutta" widths={[560, 1000]} sizes="(max-width: 900px) 80vw, 420px" />
+      <figcaption>Sayantan Dutta, {contact.base}</figcaption>
+    </figure>
+  </header>
+
+  <!-- ═══ LETTER ════════════════════════════════════════════════════ -->
+  <section class="sheet" id="letter">
+    <p class="sec-n">01</p>
+    <h2>A letter from the designer</h2>
+    <div class="letter">
+      <p>
+        Most of what I have worked on, people did not choose. A safety engineer
+        running a hazard study, a developer wiring up an API, a woman of
+        seventy-five checking whether she has taken her tablets. None of them
+        picked the software. It arrived with the job, or with the diagnosis.
+      </p>
+      <p>
+        That changes what good means. Delight is not the measure. The measure is
+        whether someone can get through the task on a bad day, at speed, while
+        worried, without the interface adding to the problem. It is quieter work
+        than consumer design and it takes longer to learn, because you cannot
+        design the thing until you understand the job, and the job is usually
+        more complicated than the brief admits.
+      </p>
+      <p>
+        Over six years that has taken me from a three-year engagement on
+        Ericsson's API vertical, where I grew from product designer to design
+        lead, to being the only designer in a room of three at dAIs Genie. The
+        large team taught me that most of a design system is negotiation. The
+        small one taught me that if you do not write it down, it does not exist.
+      </p>
+      <p>
+        What follows is the period in figures, the six products in full, and the
+        method. If you are weighing up whether I am right for something difficult,
+        the fastest answer is in section three.
+      </p>
+      <p class="sign">Sayantan Dutta</p>
+      <p class="sign-role">Product designer · {contact.base}</p>
+    </div>
+  </section>
+
+  <!-- ═══ FIGURES ═══════════════════════════════════════════════════ -->
+  <section class="sheet">
+    <p class="sec-n">02</p>
+    <h2>The period in figures</h2>
+    <div class="figures">
+      {figures.map((f) => (
+        <div class="fig-cell">
+          <p class="fig-n">{f.fig}<span>{f.unit}</span></p>
+          <p class="fig-l">{f.label}</p>
+          <p class="fig-note">{f.note}</p>
+        </div>
+      ))}
+    </div>
+    <p class="footnote">
+      Every figure above appears elsewhere on this site and in my CV. None are estimates.
+    </p>
+  </section>
+
+  <!-- ═══ HOLDINGS ══════════════════════════════════════════════════ -->
+  <section class="sheet">
+    <p class="sec-n">03</p>
+    <h2>The work, reviewed</h2>
+    <ol class="holdings">
+      {projects.map((p, i) => (
+        <li>
+          <div class="h-head">
+            <span class="h-n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{p.title}</h3>
+            <span class={`h-status st-${p.status.toLowerCase()}`}>{p.status}</span>
+          </div>
+          <dl class="h-meta">
+            <div><dt>Client</dt><dd>{p.org}</dd></div>
+            <div><dt>Role</dt><dd>{p.role}</dd></div>
+            <div><dt>Period</dt><dd>{p.period}</dd></div>
+            <div><dt>Field</dt><dd>{p.sector}</dd></div>
+          </dl>
+          <p class="h-sum">{p.summary}</p>
+          <p class="h-note">{p.note}</p>
+          <a class="h-go" href={p.href} data-ab={`report:${p.slug}`}>Full case study →</a>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- ═══ CAPABILITIES ══════════════════════════════════════════════ -->
+  <section class="sheet">
+    <p class="sec-n">04</p>
+    <h2>Capabilities</h2>
+    <dl class="caps">
+      {capabilities.map((c) => <div><dt>{c.k}</dt><dd>{c.v}</dd></div>)}
+    </dl>
+  </section>
+
+  <!-- ═══ RECORD ════════════════════════════════════════════════════ -->
+  <section class="sheet">
+    <p class="sec-n">05</p>
+    <h2>Record of engagements</h2>
+    <table class="record">
+      <thead><tr><th scope="col">Period</th><th scope="col">Engagement</th><th scope="col">Basis</th></tr></thead>
+      <tbody>
+        {log.slice().reverse().map((l) => (
+          <tr><td class="rec-when">{l.stamp}</td><td>{l.event}</td><td class="rec-kind">{l.kind}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══ CLOSE ═════════════════════════════════════════════════════ -->
+  <section class="sheet close">
+    <p class="sec-n">06</p>
+    <h2>Enquiries</h2>
+    <p class="close-b">
+      If you are weighing up something difficult and want a second opinion before
+      you commit to it, that conversation is free and I am happy to have it.
+    </p>
+    <dl class="close-dl">
+      <div><dt>Email</dt><dd><a href={`mailto:${contact.email}`} data-ab="report:email">{contact.email}</a></dd></div>
+      <div><dt>LinkedIn</dt><dd><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="report:linkedin">in/sayantan7dutta ↗</a></dd></div>
+      <div><dt>CV</dt><dd><a href={contact.resume} data-ab="report:cv">resume.pdf</a></dd></div>
+      <div><dt>Based</dt><dd>{contact.base}</dd></div>
+    </dl>
+  </section>
+</main>
+
+<style>
+  :root {
+    --paper: #fbfaf7;
+    --paper-2: #f2f0e9;
+    --ink: #16211c;
+    --ink-2: #4a544e;
+    --faint: #8a918b;
+    --line: #ddd9cf;
+    --accent: #1d5c45;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Figtree', system-ui, sans-serif;
+    --pad: clamp(1.2rem, 5vw, 4rem);
+    --measure: 980px;
+  }
+  :global(body) { background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.62; }
+  :global(.skip-link) { background: var(--accent); color: #fff; }
+  :global(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.015em; line-height: 1.1; }
+
+  /* ── cover ── */
+  .cover {
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 5rem) var(--pad) clamp(3rem, 7vw, 5rem);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+    gap: clamp(2rem, 5vw, 4rem); align-items: end;
+    border-bottom: 3px double var(--ink);
+  }
+  @media (max-width: 860px) { .cover { grid-template-columns: 1fr; } .cover-plate { max-width: 280px; } }
+  .imprint { font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .cover h1 { font-size: clamp(3rem, 10vw, 6.5rem); margin: 1rem 0 .4rem; }
+  .period { font-family: var(--serif); font-size: clamp(1.1rem, 2.6vw, 1.5rem); color: var(--accent); }
+  .cover-sub { margin-top: 1.6rem; max-width: 40ch; color: var(--ink-2); }
+  .cover-go { margin-top: 1.6rem; }
+  .cover-go a { font-weight: 600; border-bottom: 2px solid var(--accent); padding-bottom: 2px; min-height: 44px; display: inline-flex; align-items: center; }
+  .cover-plate img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; }
+  .cover-plate figcaption { margin-top: .6rem; font-size: .74rem; color: var(--faint); }
+
+  /* ── sheets ── */
+  .sheet { max-width: var(--measure); margin: 0 auto; padding: clamp(2.5rem, 7vw, 4.5rem) var(--pad); border-bottom: 1px solid var(--line); }
+  .sec-n { font-family: var(--serif); font-size: .9rem; color: var(--accent); letter-spacing: .1em; }
+  .sheet h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin: .4rem 0 1.6rem; }
+
+  /* ── letter ── */
+  .letter { max-width: 62ch; }
+  .letter p { font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); }
+  .letter p + p { margin-top: 1rem; }
+  .letter p:first-child::first-letter {
+    float: left; font-family: var(--serif); font-size: 3.6em; line-height: .82;
+    padding: .06em .09em 0 0; color: var(--accent);
+  }
+  .sign { margin-top: 2rem !important; font-family: var(--serif); font-size: 1.4rem; color: var(--ink) !important; }
+  .sign-role { margin-top: .1rem !important; font-size: .82rem; color: var(--faint) !important; }
+
+  /* ── figures ── */
+  .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .fig-cell { background: var(--paper); padding: clamp(1.2rem, 3vw, 1.8rem); }
+  .fig-n { font-family: var(--serif); font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1; color: var(--accent); }
+  .fig-n span { font-size: .45em; margin-left: .1em; }
+  .fig-l { font-weight: 600; margin-top: .5rem; font-size: .95rem; }
+  .fig-note { font-size: .82rem; color: var(--faint); margin-top: .25rem; }
+  .footnote { margin-top: 1.2rem; font-size: .8rem; color: var(--faint); font-style: italic; }
+
+  /* ── holdings ── */
+  .holdings { display: grid; gap: clamp(2rem, 5vw, 3rem); }
+  .holdings li { padding-top: 1.6rem; border-top: 1px solid var(--line); }
+  .holdings li:first-child { border-top: 0; padding-top: 0; }
+  .h-head { display: flex; align-items: baseline; gap: .9rem; flex-wrap: wrap; }
+  .h-n { font-family: var(--serif); color: var(--faint); font-size: 1rem; }
+  .h-head h3 { font-size: clamp(1.15rem, 2.6vw, 1.5rem); flex: 1 1 18rem; }
+  .h-status { font-size: .62rem; font-weight: 700; letter-spacing: .14em; padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); }
+  .st-live { color: var(--accent); }
+  .h-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .9rem; margin: 1.1rem 0; padding: .9rem 0; border-block: 1px solid var(--line); }
+  .h-meta dt { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .h-meta dd { font-size: .88rem; margin-top: .15rem; }
+  .h-sum { color: var(--ink-2); max-width: 62ch; }
+  .h-note { margin-top: .9rem; padding-left: 1rem; border-left: 2px solid var(--accent); max-width: 58ch; }
+  .h-go { display: inline-flex; align-items: center; min-height: 44px; margin-top: .9rem; font-weight: 600; font-size: .9rem; color: var(--accent); border-bottom: 1.5px solid transparent; }
+  .h-go:hover { border-bottom-color: var(--accent); }
+
+  /* ── capabilities ── */
+  .caps { display: grid; gap: 0; }
+  .caps > div { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: 1rem 1.6rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+  .caps dt { font-weight: 600; }
+  .caps dd { color: var(--ink-2); }
+  @media (max-width: 640px) { .caps > div { grid-template-columns: 1fr; gap: .2rem; } }
+
+  /* ── record ── */
+  .record { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  .record th, .record td { text-align: left; padding: .7rem .6rem; border-bottom: 1px solid var(--line); }
+  .record thead th { font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
+  .rec-when { white-space: nowrap; font-weight: 600; color: var(--accent); }
+  .rec-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
+  @media (max-width: 620px) { .record thead { display: none; } .record tr { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--line); } .record td { border: 0; padding: .1rem 0; } }
+
+  /* ── close ── */
+  .close { border-bottom: 0; }
+  .close-b { max-width: 50ch; color: var(--ink-2); font-size: clamp(1rem, 2.2vw, 1.12rem); }
+  .close-dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.4rem; margin-top: 2rem; }
+  .close-dl dt { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-bottom: .25rem; }
+  .close-dl dd { font-weight: 500; }
+  .close-dl a { border-bottom: 1.5px solid var(--accent); }
+</style>
+</Variant>

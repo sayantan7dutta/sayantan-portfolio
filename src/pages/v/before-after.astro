@@ -1,0 +1,286 @@
+---
+/**
+ * Variant: BEFORE & AFTER
+ *
+ * The page is split down the middle: dark on the left for the state of things
+ * when I arrived, light on the right for what shipped.
+ *
+ * The bet is that a designer's single most persuasive move is the pair. It
+ * needs no prose to land, it survives a ten-second scan, and it is the only
+ * format where the work argues for itself.
+ *
+ * Every "before" below is the problem as the live site already states it. None
+ * of them claim a specific prior tool, because I do not know what was there.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { projects, contact } from '../../lib/variants';
+
+import portrait from '../../assets/sayantan.jpg';
+import mgBefore from '../../assets/work/miigenie/before-home.png';
+import mgAfter from '../../assets/work/miigenie/home.png';
+import kinvaultImg from '../../assets/work/kinvault/smart-transfer.jpg';
+import hazopImg from '../../assets/work/hazop/scenario-summary.jpg';
+import ericssonImg from '../../assets/work/api-lifecycle/dashboard.png';
+import ambleImg from '../../assets/work/amble/routines.jpg';
+
+const pairs: Record<string, { before: string; after: string; img?: any; tall?: boolean }> = {
+  miigenie: {
+    before: 'A working Flutter build with no design identity. Emoji standing in for icons, components varying screen to screen, error states that dead-ended, and nothing in it saying “built for you” to a seventy-five-year-old.',
+    after: 'A visual language with a temperature, an accessibility baseline written down rather than assumed, and a Figma system the developers build from. MVP 1.1 entering production.',
+    img: mgAfter, tall: true,
+  },
+  hazop: {
+    before: 'A hazard and operability study is a fast, argumentative room of engineers working through how a plant might kill someone. Software that cannot keep up with that conversation gets abandoned in it.',
+    after: 'A platform that holds the pace of the session, designed from first domain research through to MVP delivery as the only designer on it.',
+    img: hazopImg,
+  },
+  'api-lifecycle': {
+    before: 'Three products inside one API vertical, each free to drift into its own component set, its own patterns and its own idea of what a button is.',
+    after: 'One design system held across all three for three years, defended through every quarter that would have been faster without it. I grew from product designer to design lead across the engagement.',
+    img: ericssonImg,
+  },
+  'sherwin-williams': {
+    before: 'Research arriving too late to change anything. A team of more than twenty across six digital products, with the findings landing after the decisions had been made.',
+    after: 'A rebuilt file architecture, shared templates, and a five-step research-to-design handoff. Rework across the six products came down 30 to 40 per cent.',
+  },
+  kinvault: {
+    before: 'Cross-border remittance apps treat sending money home as a transaction like any other. For a lot of families it is closer to inheritance.',
+    after: 'A self-initiated concept for a premium cross-border finance app: shared family vaults, AI-timed transfers and direct bill payment. Nobody briefed it.',
+    img: kinvaultImg,
+  },
+  amble: {
+    before: 'A brief about care in 2065, with no product to point at, no technology that exists yet, and no users who are old yet.',
+    after: 'Amble, a speculative bioengineered plant system for the home, after seven months of foresight research with Rodd Design. Exhibited at the London Design Festival.',
+    img: ambleImg,
+  },
+};
+
+const items = projects.map((p, i) => ({ ...p, ...pairs[p.slug], n: String(i + 1).padStart(2, '0') }));
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta — Before and after"
+  description="Six enterprise and AI products, each shown as what it was when I arrived and what it became. Product designer, Southampton."
+  variant="before-after"
+  fonts={fonts}
+  themeColor="#111110"
+>
+
+<main id="main">
+
+  <header class="top">
+    <div class="top-l">
+      <p class="kick">Sayantan Dutta · Product designer · {contact.base}</p>
+      <h1>Six things that were one way,<br />and then another.</h1>
+      <p class="lede">
+        Enterprise software and AI: industrial safety, API infrastructure, design
+        operations, a voice-first companion for older adults. Founding designer
+        three times over. Left side is what I walked into. Right side is what shipped.
+      </p>
+      <div class="top-cta">
+        <a class="btn" href="#p-1" data-ab="top:work">Start at the first one</a>
+        <a class="btn btn-ghost" href={contact.resume} data-ab="top:cv">CV (PDF)</a>
+      </div>
+    </div>
+    <figure class="top-r">
+      <Image src={portrait} alt="Sayantan Dutta" widths={[520, 900]} sizes="(max-width: 900px) 70vw, 330px" />
+    </figure>
+  </header>
+
+  <!-- ═══ THE SLIDER ════════════════════════════════════════════════ -->
+  <div class="wipe-band">
+  <section class="wipe-sec" aria-labelledby="wipe-h">
+    <div class="wipe-copy">
+      <p class="sec-k">Drag it</p>
+      <h2 id="wipe-h">miiGenie, before and after</h2>
+      <p>The same screen, four months apart. The one on the left worked perfectly well.</p>
+    </div>
+
+    <figure class="wipe" id="wipe">
+      <Image class="w-img w-after" src={mgAfter} alt="The miiGenie home screen after the redesign" widths={[400, 800]} sizes="340px" />
+      <div class="w-clip" id="w-clip">
+        <Image class="w-img w-before" src={mgBefore} alt="The miiGenie home screen before the redesign" widths={[400, 800]} sizes="340px" />
+      </div>
+      <div class="w-handle" id="w-handle" aria-hidden="true"><span></span></div>
+      <label class="sr-only" for="wipe-range">Reveal the before and after</label>
+      <input id="wipe-range" class="w-range" type="range" min="0" max="100" value="50" aria-describedby="wipe-h" />
+      <figcaption><b>Before</b> — dark tiles, no hierarchy. <b>After</b> — warm cream, deep teal, one clear voice action.</figcaption>
+    </figure>
+  </section>
+  </div>
+
+  <!-- ═══ THE PAIRS ═════════════════════════════════════════════════ -->
+  {items.map((it, i) => (
+    <section class="pair" id={`p-${i + 1}`} aria-labelledby={`t-${it.slug}`}>
+      <div class="side before">
+        <p class="side-k">Before</p>
+        <p class="side-b">{it.before}</p>
+      </div>
+
+      <div class="side after">
+        <p class="side-k">After</p>
+        <p class="side-b">{it.after}</p>
+        {it.img && (
+          <figure class={it.tall ? 'shot tall' : 'shot'}>
+            <Image src={it.img} alt="" widths={[420, 840]} sizes="(max-width: 860px) 80vw, 380px" loading="lazy" />
+          </figure>
+        )}
+      </div>
+
+      <div class="pair-head">
+        <span class="p-n">{it.n}</span>
+        <h2 id={`t-${it.slug}`}>{it.short}</h2>
+        <span class="p-meta">{it.org} · {it.period}</span>
+        <a class="p-go" href={it.href} data-ab={`ba:${it.slug}`}>Case study →</a>
+      </div>
+    </section>
+  ))}
+
+  <section class="end">
+    <h2>What does yours look like right now?</h2>
+    <p>If the honest answer is “the left-hand side”, that is the conversation I want.</p>
+    <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
+    <ul class="end-links">
+      <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="end:linkedin">LinkedIn ↗</a></li>
+      <li><a href={contact.resume} data-ab="end:cv">CV (PDF)</a></li>
+      <li>{contact.base}</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  // The wipe is driven by a real range input: keyboard, screen readers and
+  // touch all work without a line of custom pointer handling.
+  const range = document.getElementById('wipe-range') as HTMLInputElement | null;
+  const clip = document.getElementById('w-clip');
+  const handle = document.getElementById('w-handle');
+
+  function set(v: number) {
+    clip?.style.setProperty('--w', `${v}%`);
+    handle?.style.setProperty('--x', `${v}%`);
+  }
+  range?.addEventListener('input', () => set(Number(range.value)));
+  set(Number(range?.value ?? 50));
+</script>
+
+<style>
+  :root {
+    --dark: #111110;
+    --dark-2: #1b1b19;
+    --light: #f7f5f1;
+    --ink: #15140f;
+    --ink-2: #4e4b44;
+    --dim: #8d8a82;
+    --line: #e2ded5;
+    --accent: #c2410c;
+    --sans: 'Manrope', system-ui, sans-serif;
+    --pad: clamp(1.2rem, 5vw, 4rem);
+    --measure: 1200px;
+  }
+  :global(body) { background: var(--light); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+  :global(.skip-link) { background: var(--accent); color: #fff; }
+  :global(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  h1, h2 { letter-spacing: -.035em; line-height: 1.08; font-weight: 800; text-wrap: balance; }
+  .kick { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+
+  .btn { display: inline-flex; align-items: center; min-height: 48px; padding: .75rem 1.4rem; background: var(--ink); color: var(--light); font-weight: 700; font-size: .92rem; border-radius: 3px; }
+  .btn:hover { background: var(--accent); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  .btn-ghost:hover { background: transparent; border-color: var(--ink); }
+
+  /* ── top ── */
+  .top {
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 5rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 330px);
+    gap: clamp(1.8rem, 5vw, 3.5rem); align-items: center;
+  }
+  @media (max-width: 900px) { .top { grid-template-columns: 1fr; } .top-r { max-width: 280px; } }
+  .top h1 { font-size: clamp(2rem, 5.4vw, 3.5rem); margin: 1rem 0 1.2rem; }
+  .lede { color: var(--ink-2); max-width: 52ch; font-size: clamp(1rem, 2vw, 1.08rem); }
+  .top-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; }
+  .top-r img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 3px; }
+
+  /* ── the wipe ── */
+  /* Held to the same measure as everything else, or the dark band sprawls. */
+  .wipe-band { background: var(--dark); color: var(--light); }
+  .wipe-sec {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(2rem, 5vw, 4rem); align-items: center;
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) var(--pad);
+  }
+  @media (max-width: 860px) { .wipe-sec { grid-template-columns: 1fr; } }
+  .wipe-copy { max-width: 36ch; }
+  .sec-k { font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+  .wipe-copy h2 { font-size: clamp(1.5rem, 3.6vw, 2.2rem); margin: .6rem 0 .8rem; }
+  .wipe-copy p { color: #a9a69e; }
+
+  .wipe { position: relative; width: min(340px, 86vw); }
+  /* The two captures are 640x1422 and 788x1778 — near but not identical, so
+     both are pinned to one box or the seam drifts as you drag. */
+  .w-img { width: 100%; display: block; border-radius: 14px; aspect-ratio: 788 / 1778; object-fit: cover; object-position: top center; }
+  .w-clip { position: absolute; inset: 0; width: var(--w, 50%); overflow: hidden; border-radius: 14px 0 0 14px; }
+  .w-clip .w-before { width: min(340px, 86vw); max-width: none; border-radius: 14px; }
+  .w-handle { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 2px; background: var(--light); pointer-events: none; }
+  .w-handle span {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 36px; height: 36px; border-radius: 50%; background: var(--light);
+    box-shadow: 0 3px 10px rgba(0,0,0,.45);
+  }
+  .w-range {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; cursor: ew-resize; margin: 0;
+  }
+  .w-range:focus-visible + figcaption { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .wipe figcaption { margin-top: 1rem; font-size: .8rem; color: #a9a69e; }
+  .wipe figcaption b { color: var(--light); font-weight: 700; }
+
+  /* ── pairs ── */
+  .pair {
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'head head' 'before after';
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 860px) { .pair { grid-template-columns: 1fr; grid-template-areas: 'head' 'before' 'after'; } }
+
+  .pair-head {
+    grid-area: head; display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem 1rem;
+    max-width: var(--measure); width: 100%; margin: 0 auto;
+    padding: clamp(2rem, 5vw, 3rem) var(--pad) clamp(1.2rem, 3vw, 1.8rem);
+  }
+  .p-n { font-weight: 800; color: var(--accent); font-size: .9rem; }
+  .pair-head h2 { font-size: clamp(1.3rem, 3.2vw, 1.9rem); flex: 1 1 16rem; }
+  .p-meta { font-size: .82rem; color: var(--dim); }
+  .p-go { font-weight: 700; font-size: .88rem; color: var(--accent); min-height: 44px; display: inline-flex; align-items: center; border-bottom: 1.5px solid transparent; }
+  .p-go:hover { border-bottom-color: var(--accent); }
+
+  .side { padding: clamp(1.6rem, 4vw, 2.8rem) var(--pad) clamp(2.5rem, 6vw, 4rem); }
+  .before { grid-area: before; background: var(--dark); color: #a9a69e; }
+  .after { grid-area: after; background: var(--light); }
+  .side-k { font-size: .68rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; margin-bottom: .8rem; }
+  .before .side-k { color: #6e6b64; }
+  .after .side-k { color: var(--accent); }
+  .side-b { font-size: clamp(1rem, 2.1vw, 1.12rem); max-width: 46ch; }
+  .after .side-b { color: var(--ink); font-weight: 500; }
+
+  .shot { margin-top: 1.6rem; max-width: 380px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 20px 40px -26px rgba(0,0,0,.5); }
+  .shot.tall { max-width: 230px; }
+
+  /* ── end ── */
+  .end { max-width: var(--measure); margin: 0 auto; padding: clamp(3.5rem, 9vw, 6rem) var(--pad); border-top: 1px solid var(--line); }
+  .end h2 { font-size: clamp(1.7rem, 4.6vw, 2.8rem); max-width: 18ch; }
+  .end > p { margin-top: .9rem; color: var(--ink-2); max-width: 46ch; }
+  .end-mail { margin-top: 2rem !important; font-size: clamp(1.15rem, 3.2vw, 1.8rem); font-weight: 800; letter-spacing: -.03em; word-break: break-word; }
+  .end-mail a { border-bottom: 3px solid var(--accent); }
+  .end-mail a:hover { color: var(--accent); }
+  .end-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.6rem; font-size: .88rem; color: var(--dim); }
+  .end-links a { color: var(--ink); font-weight: 700; }
+</style>
+</Variant>

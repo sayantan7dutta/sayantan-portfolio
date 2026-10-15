@@ -1,0 +1,156 @@
+---
+/**
+ * Variant: INTERVIEW
+ *
+ * The portfolio as a transcript. Nothing but the questions an interviewer
+ * actually asks, answered at length.
+ *
+ * The bet: judgment is what gets senior designers hired, and judgment does
+ * not survive being compressed into a card. It needs someone talking. It is
+ * also the one format that cannot be mistaken for a template, because the
+ * content is a voice rather than a layout.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { contact } from '../../lib/variants';
+import { interview } from '../../lib/interview';
+
+import portrait from '../../assets/sayantan-studio.jpg';
+
+const answered = interview.filter((qa) => qa.a.trim().length > 0);
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Space+Grotesk:wght@400;500;600;700&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta — In conversation"
+  description="A product designer for enterprise SaaS and AI, interviewed about the work: why enterprise, the hardest thing shipped, and what being the only designer actually involves."
+  variant="interview"
+  fonts={fonts}
+  themeColor="#fdfcfa"
+>
+
+<main id="main">
+
+  <header class="top">
+    <div class="top-copy">
+      <p class="kick">In conversation</p>
+      <h1>Sayantan&nbsp;Dutta</h1>
+      <p class="standfirst">
+        Product designer, {contact.base}. Six years on software people did not
+        choose to use: industrial safety, API infrastructure, design operations,
+        and a voice-first AI companion for older adults. Founding designer three
+        times over.
+      </p>
+      <p class="note">
+        {answered.length} questions, answered at length. No cards, no case study grid.
+      </p>
+      <div class="top-cta">
+        <a class="btn" href={`mailto:${contact.email}`} data-ab="top:email">Get in touch</a>
+        <a class="btn btn-ghost" href={contact.resume} data-ab="top:cv">CV (PDF)</a>
+      </div>
+    </div>
+    <figure class="top-photo">
+      <Image src={portrait} alt="Sayantan Dutta" widths={[520, 920]} sizes="(max-width: 900px) 70vw, 330px" />
+    </figure>
+  </header>
+
+  <ol class="qa">
+    {answered.map((qa, i) => (
+      <li>
+        <p class="q-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+        <h2 class="q">{qa.q}</h2>
+        <p class="a">{qa.a}</p>
+        {qa.link && (
+          <p class="a-link">
+            <a href={qa.link.href} data-ab={`interview:${qa.link.href}`}>{qa.link.label} <span aria-hidden="true">→</span></a>
+          </p>
+        )}
+      </li>
+    ))}
+  </ol>
+
+  <section class="end">
+    <h2>Anything else you want to ask?</h2>
+    <p>That is usually a better use of both our time than a deck.</p>
+    <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
+    <ul class="end-links">
+      <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="end:linkedin">LinkedIn ↗</a></li>
+      <li><a href={contact.resume} data-ab="end:cv">CV (PDF)</a></li>
+      <li>{contact.base}</li>
+    </ul>
+  </section>
+</main>
+
+<style>
+  :root {
+    --paper: #fdfcfa;
+    --ink: #1a1815;
+    --ink-2: #4e4a44;
+    --faint: #8d8880;
+    --line: #e6e2da;
+    --accent: #b23a1e;
+    --serif: 'Literata', Georgia, serif;
+    --sans: 'Space Grotesk', system-ui, sans-serif;
+    --pad: clamp(1.2rem, 5vw, 4rem);
+    --measure: 760px;
+  }
+  :global(body) { background: var(--paper); color: var(--ink); font-family: var(--serif); line-height: 1.68; }
+  :global(.skip-link) { background: var(--accent); color: #fff; }
+  :global(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .kick { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+
+  .btn {
+    display: inline-flex; align-items: center; min-height: 46px; padding: .7rem 1.3rem;
+    font-family: var(--sans); font-weight: 600; font-size: .9rem;
+    background: var(--ink); color: var(--paper);
+  }
+  .btn:hover { background: var(--accent); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  .btn-ghost:hover { background: transparent; border-color: var(--ink); }
+
+  /* ── top ── */
+  .top {
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 4.5rem) var(--pad) clamp(2rem, 5vw, 3rem);
+    display: grid; grid-template-columns: minmax(0, 1fr) 190px;
+    gap: clamp(1.6rem, 4vw, 2.6rem); align-items: start;
+  }
+  @media (max-width: 720px) { .top { grid-template-columns: 1fr; } .top-photo { max-width: 180px; } }
+  .top h1 { font-family: var(--sans); font-size: clamp(2.1rem, 6vw, 3.2rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.04; margin: .7rem 0 1.1rem; }
+  .standfirst { font-size: clamp(1.02rem, 2.1vw, 1.12rem); color: var(--ink-2); }
+  .note { margin-top: .9rem; font-family: var(--sans); font-size: .82rem; color: var(--faint); }
+  .top-cta { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+  .top-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; border-radius: 2px; }
+
+  /* ── q and a ── */
+  .qa { max-width: var(--measure); margin: 0 auto; padding: 0 var(--pad); }
+  .qa li { padding: clamp(2rem, 5vw, 3rem) 0; border-top: 1px solid var(--line); }
+  .q-n { font-family: var(--sans); font-size: .76rem; font-weight: 600; color: var(--faint); letter-spacing: .1em; }
+  .q {
+    font-family: var(--sans); font-size: clamp(1.25rem, 3.2vw, 1.72rem);
+    font-weight: 600; letter-spacing: -.025em; line-height: 1.16;
+    margin: .6rem 0 1.1rem; max-width: 26ch;
+    text-wrap: balance;
+  }
+  .q::before { content: ''; display: block; width: 26px; height: 3px; background: var(--accent); margin-bottom: .9rem; }
+  .a { font-size: clamp(1.02rem, 2.1vw, 1.14rem); color: var(--ink-2); max-width: 62ch; }
+  .a-link { margin-top: 1rem; }
+  .a-link a {
+    display: inline-flex; align-items: center; gap: .4rem; min-height: 44px;
+    font-family: var(--sans); font-size: .88rem; font-weight: 600; color: var(--accent);
+    border-bottom: 1.5px solid transparent;
+  }
+  .a-link a:hover { border-bottom-color: var(--accent); }
+
+  /* ── end ── */
+  .end { max-width: var(--measure); margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) var(--pad) clamp(4rem, 10vw, 6.5rem); border-top: 3px double var(--ink); }
+  .end h2 { font-family: var(--sans); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
+  .end > p { margin-top: .7rem; color: var(--ink-2); }
+  .end-mail { margin-top: 1.8rem !important; font-family: var(--sans); font-size: clamp(1.1rem, 3vw, 1.6rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; }
+  .end-mail a { border-bottom: 2px solid var(--accent); }
+  .end-links { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 1.5rem; font-family: var(--sans); font-size: .86rem; color: var(--faint); }
+  .end-links a { color: var(--ink); font-weight: 600; }
+</style>
+</Variant>
