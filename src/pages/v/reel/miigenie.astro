@@ -1,0 +1,325 @@
+---
+/**
+ * Reel — case study: miiGenie.
+ *
+ * Proof that a home-page variant can carry all the way through. Every word of
+ * substance here is Sayantan's own, lifted from /work/miigenie; what changed is
+ * the order and the language it sits in.
+ *
+ * Restructured against the hiring research: role, scope and status are
+ * scannable before any prose, because reviewers scan a case study the way they
+ * scan a homepage. The trade-off block reads from src/lib/decisions.ts, so
+ * filling `cost` once lights it up here and on /v/decisions together.
+ */
+import Variant from '../../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { projects, contact } from '../../../lib/variants';
+import { decisions } from '../../../lib/decisions';
+
+import beforeShot from '../../../assets/work/miigenie/before-home.png';
+import afterShot from '../../../assets/work/miigenie/home.png';
+import carerShot from '../../../assets/work/miigenie/carer-home.png';
+import listeningShot from '../../../assets/work/miigenie/listening.png';
+import myDayShot from '../../../assets/work/miigenie/my-day.png';
+
+const project = projects.find((p) => p.slug === 'miigenie')!;
+const decision = decisions.find((d) => d.slug === 'miigenie');
+
+const glance = [
+  { k: 'Role', v: 'Founding and sole designer' },
+  { k: 'Team', v: 'Three people, reporting to the founders' },
+  { k: 'Platform', v: 'iOS and Android, Flutter' },
+  { k: 'Joined', v: 'March 2026' },
+  { k: 'Status', v: 'MVP 1.1 entering production' },
+];
+
+const scope = [
+  'Design function built from nothing: visual language, Figma system, review rhythm',
+  'Accessibility baseline: WCAG AA contrast, 48dp targets, large-font resilience',
+  'Research: 50+ interviews with seniors and carers across Hampshire',
+  'Two product surfaces: the senior’s app and the family carer’s view',
+];
+
+const principles = [
+  {
+    t: 'Voice-first, never voice-only',
+    b: 'Every core job — reminders, finding a document, recording how the day went, calling for help — can be done by speaking. Every voice step has a typed fallback, because dignity means never being stuck.',
+  },
+  {
+    t: 'Reassurance, not surveillance',
+    b: 'The carer surface gives pairing, check-ins and visibility. It is framed as reassurance for the family, not monitoring of the senior, and the difference shows up in every default.',
+  },
+  {
+    t: 'A companion, with guardrails',
+    b: 'Deliberately framed as supportive everyday companionship. It is not a therapist and never pretends to be a relationship.',
+  },
+];
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap';
+---
+
+<Variant
+  title="miiGenie — Sayantan Dutta"
+  description="Founding and sole designer on miiGenie, a voice-first AI companion for older adults. Research, design system, accessibility baseline, and two product surfaces."
+  variant="reel-case"
+  fonts={fonts}
+  themeColor="#000000"
+>
+
+<p class="back-bar"><a href="/v/reel" data-ab="case:back">← All work</a></p>
+
+<main id="main">
+
+  <!-- ═══ ABOVE THE FOLD: scannable in ten seconds ═══════════════════ -->
+  <header class="hero">
+    <p class="meta">
+      <span class="status">LIVE</span>
+      <span>{project.sector}</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <span>{project.period}</span>
+    </p>
+    <h1>Designing a voice-first AI companion for older adults</h1>
+    <p class="lead">
+      miiGenie helps older adults live independently while giving family carers
+      confidence from a distance. I joined as the founding and sole designer when
+      the product was a working Flutter build with no design identity.
+    </p>
+
+    <dl class="glance">
+      {glance.map((g) => <div><dt>{g.k}</dt><dd>{g.v}</dd></div>)}
+    </dl>
+
+    <ul class="scope">
+      {scope.map((s) => <li>{s}</li>)}
+    </ul>
+  </header>
+
+  <!-- ═══ THE PROBLEM ════════════════════════════════════════════════ -->
+  <section class="sec">
+    <p class="sec-k">The problem</p>
+    <h2>Smartphones quietly assume a user who isn’t 75</h2>
+    <div class="prose">
+      <p>
+        Older adults want to stay in the homes they know, but daily life gets harder
+        to manage over time. The research surfaced the same three failures again and
+        again: missed appointments, activities and medication; a constant coordination
+        burden landing on family carers; and digital tools that feel confusing or
+        impersonal. Most apps assume steady hands, sharp eyesight, fast reading, and a
+        mental model built from twenty years of software. Many older adults have none
+        of those.
+      </p>
+      <p class="pull">
+        The existing “senior app” category mostly patronises: huge buttons wrapped
+        around stripped-down features, designed as if ageing meant losing the right
+        to a capable product.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ WHAT I INHERITED ═══════════════════════════════════════════ -->
+  <section class="sec">
+    <p class="sec-k">Where it started</p>
+    <h2>The product I inherited worked. It didn’t speak.</h2>
+    <div class="prose">
+      <p>
+        When I joined in March 2026 the engineering team had already shipped a
+        functional Flutter build: registration, a voice loop, reminders. What it
+        lacked was an identity. Emoji stood in for icons, components varied screen to
+        screen, error states dead-ended, and nothing about it said “built for you” to
+        a senior. My first job was not drawing screens. It was giving the company a
+        design function.
+      </p>
+    </div>
+
+    <div class="ba">
+      <figure>
+        <div class="plate plate-dim"><Image src={beforeShot} alt="The miiGenie home screen before the redesign" widths={[320, 640]} sizes="260px" /></div>
+        <figcaption><b>Before.</b> Dark tiles, little warmth, no hierarchy guiding the eye to the main voice action.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate plate-lit"><Image src={afterShot} alt="The miiGenie home screen after the redesign" widths={[320, 640]} sizes="260px" /></div>
+        <figcaption><b>After.</b> Warm cream and deep teal, large type, one clear voice action, help held calmly at the foot.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══ THE DECISION ═══════════════════════════════════════════════ -->
+  {decision && (
+    <section class="sec sec-decision">
+      <p class="sec-k">The decision it turned on</p>
+      <h2>{decision.question}</h2>
+      <div class="forks">
+        <div class="fork fork-took">
+          <p class="fork-k">What I did</p>
+          <p>{decision.took}</p>
+        </div>
+        <div class="fork fork-left">
+          <p class="fork-k">What I didn’t</p>
+          <p>{decision.left}</p>
+        </div>
+      </div>
+      {decision.cost && (
+        <div class="cost">
+          <p class="cost-k">What it cost</p>
+          <p>{decision.cost}</p>
+        </div>
+      )}
+    </section>
+  )}
+
+  <!-- ═══ RESEARCH ═══════════════════════════════════════════════════ -->
+  <section class="sec">
+    <p class="sec-k">Research</p>
+    <h2>Five people the product has to work for</h2>
+    <div class="prose">
+      <p>
+        Grounded in 50+ interviews and conversations with seniors and carers across
+        Hampshire, with MVP priorities set through co-design sessions and pilot
+        onboarding now underway. The personas are not demographics. They are
+        relationships to independence: each one wants to stay capable, and fears the
+        moment technology proves they aren’t.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ PRINCIPLES ═════════════════════════════════════════════════ -->
+  <section class="sec">
+    <p class="sec-k">What the research made non-negotiable</p>
+    <ol class="principles">
+      {principles.map((p, i) => (
+        <li>
+          <span class="pr-n">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{p.t}</h3>
+            <p>{p.b}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="trio">
+      <figure><div class="plate plate-lit"><Image src={listeningShot} alt="miiGenie listening state" widths={[300, 600]} sizes="220px" loading="lazy" /></div><figcaption>Listening, with a typed fallback always one tap away</figcaption></figure>
+      <figure><div class="plate plate-lit"><Image src={myDayShot} alt="miiGenie My Day screen" widths={[300, 600]} sizes="220px" loading="lazy" /></div><figcaption>My Day — the routine the app earns its place by holding together</figcaption></figure>
+      <figure><div class="plate plate-lit"><Image src={carerShot} alt="The carer view in miiGenie" widths={[300, 600]} sizes="220px" loading="lazy" /></div><figcaption>The carer view — visibility written as reassurance, not monitoring</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ═══ STATUS, HONESTLY ═══════════════════════════════════════════ -->
+  <section class="sec">
+    <p class="sec-k">Where it is now</p>
+    <h2>Design-complete, entering production</h2>
+    <div class="prose">
+      <p>
+        This is a live engagement, written from inside the work. The MVP is
+        design-complete and entering production; a fuller case study with pilot
+        results will follow once the first users are in. What is here is already
+        true: the research, the system, and the decisions.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ END ════════════════════════════════════════════════════════ -->
+  <section class="end">
+    <p class="end-k">Next</p>
+    <ul class="next">
+      {projects.filter((p) => p.slug !== 'miigenie').slice(0, 3).map((p) => (
+        <li><a href={p.href} data-ab={`next:${p.slug}`}><span>{p.short}</span><em>{p.sector}</em></a></li>
+      ))}
+    </ul>
+    <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="case:email">{contact.email}</a></p>
+  </section>
+</main>
+
+<style>
+  :root {
+    --bg: #000; --ink: #f4f4f3; --ink-2: #a3a3a0; --faint: #6d6d6a; --line: #232322;
+    --live: #4ade80; --warn: #ff7a63;
+    --sans: 'Inter Tight', system-ui, sans-serif;
+    --pad: clamp(1.2rem, 5vw, 4rem); --measure: 820px;
+  }
+  :global(body) { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+  :global(.skip-link) { background: var(--ink); color: #000; }
+  :global(:focus-visible) { outline: 2px solid var(--ink); outline-offset: 4px; }
+  :global(.ab-switch) { background: #0d0d0d; }
+
+  h1, h2 { letter-spacing: -.035em; line-height: 1.08; font-weight: 700; text-wrap: balance; }
+
+  .back-bar { max-width: var(--measure); margin: 0 auto; padding: 1.6rem var(--pad) 0; }
+  .back-bar a { font-size: .85rem; font-weight: 600; color: var(--ink-2); min-height: 44px; display: inline-flex; align-items: center; }
+  .back-bar a:hover { color: var(--ink); }
+
+  /* ── hero ── */
+  .hero { max-width: var(--measure); margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) var(--pad) clamp(2.5rem, 6vw, 4rem); }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; font-size: .8rem; color: var(--faint); }
+  .status { font-size: .64rem; font-weight: 700; letter-spacing: .16em; padding: .25rem .55rem; border: 1px solid var(--live); color: var(--live); border-radius: 2px; }
+  .dot { color: var(--line); }
+  .hero h1 { font-size: clamp(2rem, 5.4vw, 3.4rem); margin: 1.2rem 0 1.3rem; }
+  .lead { font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: var(--ink-2); }
+
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.2rem; margin: 2.4rem 0; padding: 1.6rem 0; border-block: 1px solid var(--line); }
+  .glance dt { font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .glance dd { font-size: .92rem; margin-top: .25rem; }
+
+  .scope { display: grid; gap: .6rem; }
+  .scope li { position: relative; padding-left: 1.4rem; color: var(--ink-2); font-size: .95rem; }
+  .scope li::before { content: ''; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; background: var(--live); border-radius: 50%; }
+
+  /* ── sections ── */
+  .sec { max-width: var(--measure); margin: 0 auto; padding: clamp(2.5rem, 7vw, 4.5rem) var(--pad); border-top: 1px solid var(--line); }
+  .sec-k { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); margin-bottom: .9rem; }
+  .sec h2 { font-size: clamp(1.5rem, 3.6vw, 2.2rem); max-width: 22ch; }
+  .prose { margin-top: 1.4rem; }
+  .prose p { color: var(--ink-2); font-size: clamp(1rem, 2vw, 1.08rem); }
+  .prose p + p { margin-top: 1rem; }
+  .pull { color: var(--ink) !important; border-left: 2px solid var(--warn); padding-left: 1.1rem; font-size: clamp(1.05rem, 2.3vw, 1.2rem) !important; }
+
+  /* ── plates ── */
+  .plate { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid #262625; background: #0a0a0a; }
+  .plate img { width: 100%; display: block; }
+  .plate-lit { box-shadow: 0 0 60px -14px rgba(26,110,88,.6), 0 30px 60px -30px #000; }
+  .plate-dim { filter: saturate(.45) brightness(.78); }
+
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); margin-top: 2.2rem; }
+  .ba figcaption, .trio figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); }
+  .ba figcaption b, .trio figcaption b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 620px) { .ba { grid-template-columns: 1fr; } }
+
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.5vw, 1.8rem); margin-top: 2.4rem; }
+  @media (max-width: 720px) { .trio { grid-template-columns: 1fr; } }
+
+  /* ── decision ── */
+  .sec-decision { background: #080808; }
+  .forks { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); margin-top: 1.8rem; }
+  @media (max-width: 680px) { .forks { grid-template-columns: 1fr; } }
+  .fork { padding-left: 1.1rem; }
+  .fork-took { border-left: 2.5px solid var(--ink); }
+  .fork-left { border-left: 2.5px dashed #3a3a38; }
+  .fork-k { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .6rem; }
+  .fork-took .fork-k { color: var(--ink); }
+  .fork-left .fork-k { color: var(--faint); }
+  .fork-took p:last-child { font-weight: 500; }
+  .fork-left p:last-child { color: var(--faint); }
+  .cost { margin-top: 1.8rem; padding: 1.4rem 1.6rem; border: 1px solid var(--warn); border-radius: 4px; }
+  .cost-k { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--warn); margin-bottom: .6rem; }
+
+  /* ── principles ── */
+  .principles { display: grid; gap: 1.8rem; margin-top: 2rem; }
+  .principles li { display: grid; grid-template-columns: 2.6rem 1fr; gap: 1rem; }
+  .pr-n { font-size: .8rem; font-weight: 700; color: var(--faint); padding-top: .3rem; }
+  .principles h3 { font-size: 1.1rem; font-weight: 600; letter-spacing: -.02em; }
+  .principles p { color: var(--ink-2); margin-top: .4rem; font-size: .96rem; }
+
+  /* ── end ── */
+  .end { max-width: var(--measure); margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) var(--pad) clamp(4rem, 10vw, 7rem); border-top: 1px solid var(--line); }
+  .end-k { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .next { margin: 1.2rem 0 2.6rem; }
+  .next li { border-bottom: 1px solid var(--line); }
+  .next a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1rem; align-items: baseline; padding: .95rem 0; min-height: 44px; }
+  .next a:hover span { color: var(--live); }
+  .next span { font-weight: 600; font-size: 1.02rem; }
+  .next em { font-style: normal; font-size: .8rem; color: var(--faint); }
+  .end-mail { font-size: clamp(1.05rem, 2.8vw, 1.5rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; }
+  .end-mail a { border-bottom: 2px solid #3a3a38; }
+  .end-mail a:hover { border-bottom-color: var(--ink); }
+</style>
+</Variant>

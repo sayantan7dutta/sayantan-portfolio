@@ -104,7 +104,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
               <div><dt>Field</dt><dd>{c.sector}</dd></div>
             </dl>
 
-            <a class="ch-go" href={c.href} data-ab={`reel:${c.slug}`}>
+            <a class="ch-go" href={c.slug === 'miigenie' ? '/v/reel/miigenie' : c.href} data-ab={`reel:${c.slug}`}>
               Open the case study <span aria-hidden="true">→</span>
             </a>
           </div>
