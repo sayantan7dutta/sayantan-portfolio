@@ -22,7 +22,7 @@ export interface VariantProject {
   period: string;
   status: Status;
   summary: string;
-  /** One blunt line in Sayantan's own voice — the thing a card usually sands off. */
+  /** One blunt line in Sayantan’s own voice — the thing a card usually sands off. */
   note: string;
   href: string;
 }
@@ -39,8 +39,8 @@ export const projects: VariantProject[] = [
     period: '2026 — now',
     status: 'LIVE',
     summary:
-      'Founding and sole designer for miiGenie, a voice-first companion that helps older adults live independently while giving family carers confidence. Three-person product, engineering and design team reporting to the founders.',
-    note: 'Inherited a working Flutter build with no design identity. Gave it a system, a voice, and an accessibility baseline.',
+      'Founding and sole designer on miiGenie, a voice-first companion for older adults living independently, with a second view built for the family member checking in. Three people on the product team, reporting to the founders.',
+    note: 'The Flutter build already worked when I joined. It just didn’t look like anything, and it wasn’t readable if your eyesight isn’t what it was. Type sizes, contrast and naming took the first few months.',
     href: '/work/miigenie',
   },
   {
@@ -55,7 +55,7 @@ export const projects: VariantProject[] = [
     status: 'CONCEPT',
     summary:
       'A self-initiated concept for a premium cross-border finance app that bridges heritage banking and modern remittance, with shared family vaults, AI-timed transfers, and direct bill payment.',
-    note: 'Nobody briefed this one. I wanted to find out what cross-border money feels like when it is treated as inheritance rather than a transaction.',
+    note: 'Nobody briefed this one. Remittance apps treat money as a transaction, and for a lot of families sending it home it is closer to inheritance. I wanted to see what the other version looked like.',
     href: '/work/kinvault',
   },
   {
@@ -70,7 +70,7 @@ export const projects: VariantProject[] = [
     status: 'SHIPPED',
     summary:
       'Sole designer for HAZOP Edge, a platform that simplifies hazard and operability studies for safety professionals. From first domain research through to MVP delivery, alongside a parallel rebuild of the company website.',
-    note: 'A HAZOP study is a room full of engineers imagining how a plant kills someone. The software had to keep up with that conversation, not slow it down.',
+    note: 'A HAZOP study is a room of engineers working through the ways a plant might kill someone. They move fast and they argue. Designing for that ruled out most of what I would normally reach for.',
     href: '/work/hazop',
   },
   {
@@ -84,8 +84,8 @@ export const projects: VariantProject[] = [
     period: '2020 — 2023',
     status: 'SHIPPED',
     summary:
-      "Led product design and the design system across Ericsson's three-product API vertical, a B2B SaaS suite centred on the API Console, growing from product designer to design lead across a three-year engagement.",
-    note: 'Three years on one vertical. Long enough to watch my own early decisions come back and ask to be defended.',
+      "Led product design and the design system across Ericsson’s three-product API vertical, a B2B SaaS suite centred on the API Console, growing from product designer to design lead across a three-year engagement.",
+    note: 'Three years on one vertical. Long enough that I had to live with my own early decisions, and quietly redo a couple of them.',
     href: '/work/api-lifecycle',
   },
   {
@@ -100,7 +100,7 @@ export const projects: VariantProject[] = [
     status: 'SHIPPED',
     summary:
       'Rebuilt the shared infrastructure for a research and design team of more than 20, across six digital products: the file architecture, the research templates, and a proper research-to-design handoff.',
-    note: 'Unglamorous work. Twenty people stopped losing an afternoon a week to finding things, which is the only metric I cared about.',
+    note: 'Not glamorous. Folder structures, shared templates, and a five-step handoff so research reached design while it could still change something. Rework across the six products came down 30 to 40 per cent.',
     href: '/work/sherwin-williams',
   },
   {
@@ -115,7 +115,7 @@ export const projects: VariantProject[] = [
     status: 'EXHIBITED',
     summary:
       'Amble, a speculative bioengineered plant system for the 2065 home. Seven months of foresight research and design for Rodd Design Studio, exhibited at the London Design Festival.',
-    note: 'Seven months designing something that cannot be built yet, for people who are not old yet. It changed how I read every brief since.',
+    note: 'Seven months on something that cannot be built yet, for people who are not old yet. Strange brief. I still think about it when I am scoping ordinary ones.',
     href: '/work/amble',
   },
 ];

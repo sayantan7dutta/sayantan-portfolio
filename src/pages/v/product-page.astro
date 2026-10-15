@@ -30,7 +30,7 @@ const clients = [
 
 /** Every figure here appears on the main site. None are estimates. */
 const proof = [
-  { fig: '5', unit: 'yrs', label: 'in practice, four of them on enterprise SaaS' },
+  { fig: '5', unit: 'yrs', label: 'in practice, most of it enterprise software' },
   { fig: '3', unit: 'yrs', label: 'on one API vertical at Ericsson, designer to lead' },
   { fig: '20+', unit: '', label: 'person research and design team I built ops for' },
   { fig: '30–40%', unit: '', label: 'less rework across six products after that' },
@@ -40,41 +40,41 @@ const stages = [
   {
     n: '01',
     name: 'Domain first',
-    body: 'On HAZOP Edge I learned what a hazard and operability study actually is before drawing a single screen. Enterprise software fails when the designer never understood the job.',
+    body: 'On HAZOP Edge I sat with the studies until I could follow the argument, then started drawing. You cannot design a tool for a conversation you do not understand.',
   },
   {
     n: '02',
     name: 'Framing',
-    body: 'Jobs to be done, user flows, journey mapping. The part where a vague request becomes a thing a three-person team can build in a quarter.',
+    body: 'Jobs to be done, flows, journey maps. This is the part where a vague request turns into something a small team can build in a quarter.',
   },
   {
     n: '03',
     name: 'A system, not screens',
-    body: 'Component libraries, design tokens, an accessibility baseline. Ericsson ran three products off one system; miiGenie got its first one from me.',
+    body: 'Component library, tokens, and an accessibility baseline written down rather than assumed. Ericsson ran three products off one system. miiGenie got its first from me.',
   },
   {
     n: '04',
     name: 'Delivery, then operations',
-    body: 'Sat in the product trio through build. Then, at Sherwin-Williams, fixed the handoff itself so findings reached design as a starting point rather than an afterthought.',
+    body: 'I stay in the product trio through build. At Sherwin-Williams I went further and rebuilt the handoff itself, because research kept arriving too late to change anything.',
   },
 ];
 
 const faqs = [
   {
     q: 'What kind of work do you take?',
-    a: 'Enterprise and AI product work, and particularly the high-consequence end of it: hazard studies, API infrastructure, care products. Workflows where being wrong is expensive.',
+    a: 'Enterprise and AI product work, especially where being wrong is expensive. Hazard studies, API infrastructure, care products. I am less useful on marketing sites.',
   },
   {
     q: 'Do you work on contract?',
-    a: 'Yes. My last three engagements — SparkSoft, Soter Safety Consulting and dAIs Genie — have all been UK contract roles as a founding product designer.',
+    a: 'Yes. My last three engagements (SparkSoft, Soter Safety Consulting and dAIs Genie) were all UK contract roles as a founding product designer.',
   },
   {
     q: 'Do you do the research too, or only the design?',
-    a: 'Both. On HAZOP Edge I ran it from first domain research through to MVP delivery. Research, synthesis, usability testing and heuristic evaluation are part of the job, not a separate engagement.',
+    a: 'Both. On HAZOP Edge I ran it from the first domain research through to MVP delivery. I treat research, synthesis and usability testing as part of the job rather than a separate engagement you buy in.',
   },
   {
     q: 'Can you set up design operations?',
-    a: 'Yes, and I have. At Sherwin-Williams I rebuilt the file architecture, the research templates and the research-to-design handoff for a team of more than twenty across six digital products.',
+    a: 'Yes. At Sherwin-Williams I rebuilt the file architecture, the research templates and the handoff, for a team of more than twenty working across six digital products.',
   },
   {
     q: 'Where are you based?',
@@ -115,17 +115,18 @@ const fonts =
       <p class="pill">Product designer · B2B SaaS &amp; AI · {contact.base}</p>
       <h1>Enterprise software people can get through the day with.</h1>
       <p class="sub">
-        Five years designing the workflows nobody gets to abandon halfway:
-        industrial hazard studies, API infrastructure, a voice companion older
-        adults open every morning. Founding designer three times over.
+        Five years of it. Hazard-study software for a process-safety firm, three
+        years on Ericsson’s API console, and a voice companion older adults open
+        every morning. Founding designer three times over, which mostly means
+        doing your own research.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href={`mailto:${contact.email}`} data-ab="hero:cta">Start a conversation</a>
         <a class="btn btn-ghost" href="#work" data-ab="hero:work">See the work <span aria-hidden="true">→</span></a>
       </div>
       <p class="wink">
-        Yes — this is a SaaS landing page. It is the thing I have spent five years
-        designing, so presenting the work in any other grammar felt like a dodge.
+        And yes, this is laid out like a SaaS landing page. It’s the thing I’ve
+        spent five years designing.
       </p>
     </div>
 
@@ -162,7 +163,7 @@ const fonts =
   <section class="section" id="work">
     <div class="sec-head">
       <p class="eyebrow">Selected work</p>
-      <h2>Six products, and what each one actually needed.</h2>
+      <h2>Six products, and what each one needed.</h2>
     </div>
 
     <ul class="stories">
@@ -193,16 +194,17 @@ const fonts =
     </figure>
     <div class="who-copy">
       <p class="eyebrow">Who you would be working with</p>
-      <h2>Hello — I'm Sayantan.</h2>
+      <h2>Hi, I’m Sayantan.</h2>
       <p>
-        I have been the only designer on a three-person team, and the design lead
-        across a three-product vertical at Ericsson. Both taught me the same thing:
-        in enterprise software the hard part is almost never the interface. It is
-        understanding a job well enough that the interface stops being in the way.
+        I’ve been the only designer on a three-person team, and the design lead
+        across a three-product vertical at Ericsson. In enterprise software the
+        interface is rarely the hard part. Understanding the job well enough to
+        get out of its way is the hard part, and it takes longer than anyone
+        budgets for.
       </p>
       <p>
-        I read the domain first, I write things down, and I would rather tell you
-        early that something will not work than find out politely at the end.
+        I read the domain first and I write things down. I’d also rather tell you
+        in week two that something won’t work than be polite about it until launch.
         MA Design Management, University of Southampton. Currently the founding
         designer at dAIs Genie.
       </p>
@@ -214,7 +216,7 @@ const fonts =
   <section class="section band" id="how">
     <div class="sec-head">
       <p class="eyebrow">How I work</p>
-      <h2>Four things, in this order, every time.</h2>
+      <h2>Four things, roughly in this order.</h2>
     </div>
     <ol class="stages">
       {stages.map((s) => (
@@ -231,7 +233,7 @@ const fonts =
   <section class="section" id="faq">
     <div class="sec-head">
       <p class="eyebrow">Questions</p>
-      <h2>The ones people actually ask.</h2>
+      <h2>The ones people ask.</h2>
     </div>
     <div class="faq">
       {faqs.map((f, i) => (
@@ -250,8 +252,8 @@ const fonts =
   <section class="close">
     <h2>Got a workflow people dread using?</h2>
     <p>
-      Send it over. I read everything, and I will tell you honestly whether
-      I am the right person for it.
+      Send it over. Worst case I tell you it’s not my kind of problem and point
+      you at someone better suited.
     </p>
     <div class="cta-row cta-centre">
       <a class="btn btn-primary btn-lg" href={`mailto:${contact.email}`} data-ab="close:email">{contact.email}</a>
