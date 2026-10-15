@@ -35,6 +35,20 @@ export const VARIANTS: Variant[] = [
     enabled: true,
   },
   {
+    id: 'reel',
+    name: 'Reel',
+    path: '/v/reel',
+    thesis: 'Cinematic. Black ground, product lit on it, poster-scale type, the career as end credits. Built around the 10-second scan: face, positioning and proof before anything scrolls.',
+    enabled: true,
+  },
+  {
+    id: 'decisions',
+    name: 'Decisions',
+    path: '/v/decisions',
+    thesis: 'One fork per project: what I chose, what I left, what it cost. Built on the finding that trade-offs are what reviewers want and what almost every portfolio skips.',
+    enabled: true,
+  },
+  {
     id: 'feature',
     name: 'Feature',
     path: '/v/feature',

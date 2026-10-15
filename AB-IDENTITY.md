@@ -7,11 +7,34 @@ further and click through, rather than arguing about it.
 | Route | Name | What it bets |
 |---|---|---|
 | `/` | **Editorial** (current) | Serif headline, portrait, card grid. Safe, legible, familiar. |
-| `/v/feature` | **Feature** | A magazine profile: masthead, opening portrait, a standfirst with a drop cap, each project set as a feature with a pull quote and a plate. Betting the work reads best given room to be read. |
-| `/v/monograph` | **Monograph** | A design monograph: strict grid, a lot of white, large plates of the product work, captions that stay out of the way. Betting that restraint held for six sections is itself the proof. |
-| `/v/product-page` | **Product Page** | The practice in the grammar of a B2B SaaS marketing site — value prop, client logo strip, customer stories, a "who you'd be working with" section, FAQ. |
-| `/v/drawing-set` | **Drawing Set** | An issued drawing set with the markup left on: sheets, title blocks, a career as revisions A–H, a portrait taped to the cover, and handwritten redlines you can toggle off. |
-| `/lab` | Review room | The live ones side by side at desktop / tablet / phone width, plus the beacon readout. |
+| `/v/reel` | **Reel** | Cinematic. Black ground, product lit on it, poster-scale type, the career as end credits. Everything a 10-second scan needs sits above the fold. |
+| `/v/decisions` | **Decisions** | One fork per project: what I chose, what I left, what it cost. Built on the strongest finding in the hiring research. |
+| `/v/feature` | **Feature** | A magazine profile: masthead, opening portrait, drop-cap standfirst, each project a feature with a pull quote and a plate. |
+| `/v/monograph` | **Monograph** | A design monograph: strict grid, a lot of white, large plates of the product work. |
+| `/v/product-page` | **Product Page** | The practice in the grammar of a B2B SaaS marketing site. |
+| `/v/drawing-set` | **Drawing Set** | An issued drawing set with the markup left on. |
+| `/lab` | Review room | The live ones side by side at three widths, plus the beacon readout. |
+
+## What the hiring research says
+
+Sources are career and vendor blogs rather than primary research, so treat the
+numbers as directional. The qualitative agreement across them is strong.
+
+- A reviewer gives a homepage **10 to 15 seconds** and a whole portfolio **2 to 3
+  minutes**. Whatever matters has to be above the fold.
+- The screening question is **"is it live, traceable, and scaling?"** Shipped work
+  beats beautiful work. A redesign that never shipped counts for very little.
+- **Trade-offs are the single most valuable and most commonly skipped section.**
+  Reviewers want constraints, what you tried first, where you changed direction,
+  and what you gave up.
+- **Three to five deep case studies beat seven shallow ones.** Sayantan has six;
+  Decisions deliberately leads with four.
+- **Depth in one problem space differentiates.** In one Design Lead search only
+  about 20% of 250+ applicants matched on specialism.
+- **AI fluency is now a signal** — 73% of design managers report needing it
+  (Figma, Feb 2026). miiGenie is an asset here and should stay first.
+
+Reel answers the first two findings. Decisions answers the third and fourth.
 
 **Retired** — routes still build, `enabled: false` keeps them out of the split and the lab:
 
@@ -114,6 +137,9 @@ src/lib/ab.ts                  variant registry + SPLIT_AT_ROOT
 src/lib/variants.ts            shared content (single source for both variants)
 src/components/AbBeacon.astro  instrumentation
 src/layouts/Variant.astro      bare layout — no global nav/footer/CSS
+src/pages/v/reel.astro
+src/pages/v/decisions.astro
+src/lib/decisions.ts            the trade-off data — `cost` is yours to fill
 src/pages/v/feature.astro
 src/pages/v/monograph.astro
 src/pages/v/product-page.astro

@@ -1,0 +1,254 @@
+---
+/**
+ * Variant: DECISIONS
+ *
+ * The research-led one. Hiring guides agree that the trade-offs section is
+ * what reviewers want and what almost every portfolio leaves out, so this
+ * page is nothing but that: one fork per project, the path taken, the path
+ * left, and what it cost.
+ *
+ * Blocks with no content are omitted rather than stubbed — a visible "TBC"
+ * on a portfolio is worse than a shorter page.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { projects, contact } from '../../lib/variants';
+import { decisions } from '../../lib/decisions';
+
+import portrait from '../../assets/sayantan.jpg';
+
+const byId = Object.fromEntries(projects.map((p) => [p.slug, p]));
+const items = decisions
+  .filter((d) => byId[d.slug])
+  .map((d, i) => ({ ...d, project: byId[d.slug], n: String(i + 1).padStart(2, '0') }));
+
+const rest = projects.filter((p) => !decisions.some((d) => d.slug === p.slug));
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta — Decisions"
+  description="Product designer for enterprise SaaS and AI. Four projects, told through the decision each one turned on and what it cost."
+  variant="decisions"
+  fonts={fonts}
+  themeColor="#ffffff"
+>
+
+<header class="top">
+  <div class="top-copy">
+    <p class="kick">Sayantan Dutta · Product designer · {contact.base}</p>
+    <h1>Anyone can show you the screens. Here is what they cost.</h1>
+    <p class="lede">
+      Five years on enterprise and AI products: industrial safety, API infrastructure,
+      and a voice companion older adults use daily. Every project below turned on one
+      decision. This page is those decisions, including the ones that were expensive.
+    </p>
+    <div class="top-cta">
+      <a class="btn" href="#d-1" data-ab="top:read">Read the decisions</a>
+      <a class="btn btn-ghost" href={contact.resume} data-ab="top:cv">CV (PDF)</a>
+    </div>
+  </div>
+  <figure class="top-photo">
+    <Image src={portrait} alt="Sayantan Dutta" widths={[520, 900]} sizes="(max-width: 880px) 70vw, 360px" />
+  </figure>
+</header>
+
+<main id="main">
+  {items.map((d, i) => (
+    <article class="decision" id={`d-${i + 1}`} aria-labelledby={`q-${d.slug}`}>
+      <div class="d-head">
+        <p class="d-meta">
+          <span class="d-n">{d.n}</span>
+          <span>{d.project.short}</span>
+          <span class="d-dot" aria-hidden="true">·</span>
+          <span>{d.project.org}</span>
+          <span class="d-dot" aria-hidden="true">·</span>
+          <span>{d.project.period}</span>
+        </p>
+        <h2 id={`q-${d.slug}`}>{d.question}</h2>
+      </div>
+
+      <div class="fork">
+        <svg class="fork-art" viewBox="0 0 120 220" aria-hidden="true" preserveAspectRatio="none">
+          <path class="stem" d="M60 0 V70" />
+          <path class="taken" d="M60 70 C60 110 14 110 14 150 V220" />
+          <path class="untaken" d="M60 70 C60 110 106 110 106 150 V186" />
+          <circle class="joint" cx="60" cy="70" r="4.5" />
+          <circle class="stop" cx="106" cy="190" r="4.5" />
+        </svg>
+
+        <div class="path path-took">
+          <p class="path-k">What I did</p>
+          <p class="path-b">{d.took}</p>
+        </div>
+
+        <div class="path path-left">
+          <p class="path-k">What I didn’t</p>
+          <p class="path-b">{d.left}</p>
+        </div>
+      </div>
+
+      {d.cost && (
+        <div class="cost">
+          <p class="cost-k">What it cost</p>
+          <p class="cost-b">{d.cost}</p>
+        </div>
+      )}
+
+      <div class="outcome">
+        <p class="out-k">What came of it</p>
+        <p class="out-b">{d.outcome}</p>
+        <a class="out-go" href={d.project.href} data-ab={`decision:${d.slug}`}>
+          The full case study <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+  ))}
+
+  {rest.length > 0 && (
+    <section class="also">
+      <h2>Also in the portfolio</h2>
+      <ul>
+        {rest.map((p) => (
+          <li>
+            <a href={p.href} data-ab={`also:${p.slug}`}>
+              <span class="also-t">{p.short}</span>
+              <span class="also-m">{p.sector} · {p.period}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="end">
+    <h2>Got a decision you’re stuck on?</h2>
+    <p>That is usually the part worth talking about. Tell me what you are weighing up.</p>
+    <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
+    <ul class="end-links">
+      <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="end:linkedin">LinkedIn ↗</a></li>
+      <li><a href={contact.resume} data-ab="end:cv">CV (PDF)</a></li>
+      <li>{contact.base}</li>
+    </ul>
+  </section>
+</main>
+
+<style>
+  :root {
+    --bg: #fff;
+    --ink: #0d0d0d;
+    --ink-2: #4c4c4c;
+    --faint: #8a8a8a;
+    --line: #e2e2e0;
+    --red: #d7260f;
+    --sans: 'Instrument Sans', system-ui, sans-serif;
+    --pad: clamp(1.2rem, 5vw, 4.5rem);
+    --measure: 1160px;
+  }
+
+  :global(body) { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; }
+  :global(.skip-link) { background: var(--red); color: #fff; }
+  :global(:focus-visible) { outline: 2px solid var(--red); outline-offset: 3px; }
+
+  h1, h2 { letter-spacing: -.035em; line-height: 1.06; font-weight: 700; text-wrap: balance; }
+  .kick { font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+
+  .btn {
+    display: inline-flex; align-items: center; min-height: 48px; padding: .75rem 1.4rem;
+    background: var(--ink); color: #fff; font-weight: 600; font-size: .94rem;
+  }
+  .btn:hover { background: var(--red); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  .btn-ghost:hover { background: transparent; border-color: var(--ink); }
+
+  /* ── top ── */
+  .top {
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 5rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+    gap: clamp(1.8rem, 5vw, 4rem); align-items: center;
+  }
+  @media (max-width: 880px) { .top { grid-template-columns: 1fr; } .top-photo { max-width: 300px; } }
+  .top h1 { font-size: clamp(2rem, 5.4vw, 3.6rem); margin: 1rem 0 1.2rem; max-width: 17ch; }
+  .lede { color: var(--ink-2); max-width: 50ch; font-size: clamp(1rem, 2vw, 1.08rem); }
+  .top-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.9rem; }
+  .top-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  /* ── a decision ── */
+  .decision {
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(3rem, 8vw, 5.5rem) var(--pad);
+    border-top: 2px solid var(--ink);
+  }
+  .d-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; font-size: .82rem; color: var(--faint); }
+  .d-n { font-weight: 700; color: var(--red); letter-spacing: .04em; }
+  .d-dot { color: var(--line); }
+  .decision h2 { font-size: clamp(1.5rem, 4vw, 2.6rem); margin-top: .9rem; max-width: 24ch; }
+
+  /* the fork */
+  .fork {
+    display: grid; grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
+    gap: 0 clamp(1rem, 3vw, 2rem); align-items: start;
+    margin: clamp(2rem, 5vw, 3.2rem) 0;
+  }
+  .fork-art { grid-column: 2; grid-row: 1; width: 120px; height: 100%; min-height: 200px; align-self: stretch; }
+  .stem, .taken { fill: none; stroke: var(--ink); stroke-width: 2.5; }
+  .untaken { fill: none; stroke: var(--faint); stroke-width: 2; stroke-dasharray: 5 6; }
+  .joint { fill: var(--ink); }
+  .stop { fill: none; stroke: var(--faint); stroke-width: 2; }
+
+  .path { grid-row: 1; padding-top: .4rem; }
+  .path-took { grid-column: 1; text-align: right; }
+  .path-left { grid-column: 3; }
+  .path-k { font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .6rem; }
+  .path-took .path-k { color: var(--ink); }
+  .path-left .path-k { color: var(--faint); }
+  .path-b { font-size: clamp(.98rem, 2vw, 1.1rem); max-width: 40ch; }
+  .path-took .path-b { font-weight: 500; margin-left: auto; }
+  .path-left .path-b { color: var(--faint); }
+
+  @media (max-width: 760px) {
+    .fork { grid-template-columns: 1fr; gap: 1.8rem; }
+    .fork-art { display: none; }
+    .path { grid-column: 1 !important; grid-row: auto; text-align: left; }
+    .path-took .path-b { margin-left: 0; }
+    .path-took { border-left: 3px solid var(--ink); padding-left: 1rem; }
+    .path-left { border-left: 3px dashed var(--line); padding-left: 1rem; }
+  }
+
+  .cost { background: var(--ink); color: #fff; padding: clamp(1.4rem, 3.5vw, 2.4rem); margin-bottom: 1.8rem; }
+  .cost-k { font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #ff7a63; margin-bottom: .7rem; }
+  .cost-b { font-size: clamp(1.05rem, 2.4vw, 1.3rem); max-width: 56ch; }
+
+  .outcome { display: grid; gap: .5rem; }
+  .out-k { font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  .out-b { font-size: clamp(1rem, 2vw, 1.1rem); max-width: 56ch; }
+  .out-go {
+    justify-self: start; display: inline-flex; align-items: center; gap: .45rem;
+    min-height: 44px; padding-top: .5rem;
+    font-weight: 600; font-size: .94rem; color: var(--red);
+    border-bottom: 1.5px solid transparent;
+  }
+  .out-go:hover { border-bottom-color: var(--red); }
+
+  /* ── also ── */
+  .also { max-width: var(--measure); margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) var(--pad); border-top: 2px solid var(--ink); }
+  .also h2 { font-size: 1.1rem; margin-bottom: 1.2rem; }
+  .also li { border-bottom: 1px solid var(--line); }
+  .also a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1.2rem; padding: .9rem 0; min-height: 44px; align-items: baseline; }
+  .also a:hover .also-t { color: var(--red); }
+  .also-t { font-weight: 600; font-size: 1.02rem; }
+  .also-m { font-size: .82rem; color: var(--faint); }
+
+  /* ── end ── */
+  .end { max-width: var(--measure); margin: 0 auto; padding: clamp(3.5rem, 9vw, 6rem) var(--pad); border-top: 2px solid var(--ink); }
+  .end h2 { font-size: clamp(1.7rem, 4.6vw, 2.8rem); max-width: 18ch; }
+  .end > p { margin-top: .9rem; color: var(--ink-2); max-width: 46ch; }
+  .end-mail { margin-top: 2rem !important; font-size: clamp(1.15rem, 3.2vw, 1.8rem); font-weight: 700; letter-spacing: -.03em; word-break: break-word; }
+  .end-mail a { border-bottom: 2.5px solid var(--red); }
+  .end-mail a:hover { color: var(--red); }
+  .end-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.6rem; font-size: .9rem; color: var(--faint); }
+  .end-links a { color: var(--ink); font-weight: 600; }
+</style>
+</Variant>
