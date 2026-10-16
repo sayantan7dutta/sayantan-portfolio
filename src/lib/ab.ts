@@ -35,6 +35,13 @@ export const VARIANTS: Variant[] = [
     enabled: true,
   },
   {
+    id: 'cut',
+    name: 'Director’s Cut',
+    path: '/v/cut',
+    thesis: 'The three parts that worked, assembled: Reel’s cinematic opening, the Annual Report’s review of the work, and the Interview as a section. Black hero gives way to paper for the substance.',
+    enabled: true,
+  },
+  {
     id: 'reel',
     name: 'Reel',
     path: '/v/reel',

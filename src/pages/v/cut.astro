@@ -1,0 +1,332 @@
+---
+/**
+ * Variant: DIRECTOR'S CUT
+ *
+ * The three parts that worked, assembled into one page:
+ *   · Reel's opening — cinematic black, the face, the proof, poster type
+ *   · the Annual Report's review of the work — numbered, with its metadata
+ *     stated plainly rather than implied
+ *   · the Interview — as a section, because judgment needs someone talking
+ *
+ * The join is the point. A cinematic opening and long-form substance want
+ * opposite things from a page, so the hero stays black and the body turns to
+ * paper, deliberately, the way a title sequence gives way to the article.
+ * One type system holds both: Inter Tight for display, Literata for reading.
+ */
+import Variant from '../../layouts/Variant.astro';
+import { Image } from 'astro:assets';
+import { projects, log, contact } from '../../lib/variants';
+import { interview } from '../../lib/interview';
+
+import portrait from '../../assets/sayantan-studio.jpg';
+import miigenieImg from '../../assets/work/miigenie/home.png';
+import kinvaultImg from '../../assets/work/kinvault/vault.jpg';
+import hazopImg from '../../assets/work/hazop/analytics-dashboard.jpg';
+import ericssonImg from '../../assets/work/api-lifecycle/hero.png';
+import ambleImg from '../../assets/work/amble/hero.jpg';
+
+const shots: Record<string, { img?: any; figure?: string; tall?: boolean }> = {
+  miigenie:           { img: miigenieImg, tall: true },
+  kinvault:           { img: kinvaultImg, tall: true },
+  hazop:              { img: hazopImg },
+  'api-lifecycle':    { img: ericssonImg },
+  'sherwin-williams': { figure: '30–40%' },
+  amble:              { img: ambleImg },
+};
+
+const work = projects.map((p, i) => ({ ...p, ...shots[p.slug], n: String(i + 1).padStart(2, '0') }));
+const answered = interview.filter((qa) => qa.a.trim().length > 0);
+
+/** Counted off the status field in variants.ts, not estimated. */
+const liveOrShipped = projects.filter((p) => p.status === 'LIVE' || p.status === 'SHIPPED').length;
+
+const proof = [
+  { n: '5', l: 'years in practice' },
+  { n: '3', l: 'as sole designer' },
+  { n: String(liveOrShipped), l: 'shipped or live' },
+  { n: '20+', l: 'person team supported' },
+];
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap';
+---
+
+<Variant
+  title="Sayantan Dutta — Product Designer"
+  description="Product designer for enterprise SaaS and AI. Industrial safety, API infrastructure, design operations, and a voice-first AI companion. Six products, founding designer on three."
+  variant="cut"
+  fonts={fonts}
+  themeColor="#0a0a0a"
+>
+
+<!-- ═══ 1 · THE OPENING ════════════════════════════════════════════ -->
+<header class="open">
+  <figure class="open-bg" aria-hidden="true">
+    <Image src={portrait} alt="" widths={[900, 1600]} sizes="100vw" />
+  </figure>
+
+  <div class="open-in">
+    <p class="supra">Sayantan Dutta · Product designer · {contact.base}</p>
+    <h1><span>I design the enterprise software</span><span>people can’t opt out of using.</span></h1>
+    <p class="logline">
+      Industrial safety, API infrastructure, and a voice-first AI companion.
+      Five years, six products, founding designer on three of them.
+    </p>
+
+    <ul class="proof">
+      {proof.map((p) => <li><b>{p.n}</b><span>{p.l}</span></li>)}
+    </ul>
+
+    <div class="open-cta">
+      <a class="btn" href="#work" data-ab="open:work">See the work</a>
+      <a class="btn btn-ghost" href={`mailto:${contact.email}`} data-ab="open:email">Get in touch</a>
+    </div>
+  </div>
+
+  <p class="cue" aria-hidden="true"><span></span>Scroll</p>
+</header>
+
+<main id="main">
+
+  <!-- ═══ 2 · THE WORK ═════════════════════════════════════════════ -->
+  <section class="band" id="work">
+    <div class="band-head">
+      <p class="sec-k">The work</p>
+      <h2>Six products, reviewed in full</h2>
+      <p class="sec-lede">
+        Every engagement below, with what it was, who it was for, what my role
+        actually covered, and where it got to. No curation — this is all of it.
+      </p>
+    </div>
+
+    <ol class="work">
+      {work.map((w) => (
+        <li>
+          <div class="w-main">
+            <div class="w-top">
+              <span class="w-n">{w.n}</span>
+              <span class={`w-status st-${w.status.toLowerCase()}`}>{w.status}</span>
+            </div>
+            <h3>{w.title}</h3>
+
+            <dl class="w-meta">
+              <div><dt>Client</dt><dd>{w.org}</dd></div>
+              <div><dt>Role</dt><dd>{w.role}</dd></div>
+              <div><dt>Field</dt><dd>{w.sector}</dd></div>
+              <div><dt>Period</dt><dd>{w.period}</dd></div>
+            </dl>
+
+            <p class="w-sum">{w.summary}</p>
+            <p class="w-note">{w.note}</p>
+            <a class="w-go" href={w.href} data-ab={`cut:${w.slug}`}>Full case study <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="w-plate">
+            {w.img
+              ? <Image class={w.tall ? 'shot tall' : 'shot'} src={w.img} alt="" widths={[420, 840]} sizes="(max-width: 900px) 70vw, 330px" loading="lazy" />
+              : <div class="shot figure"><span>{w.figure}</span><em>less rework, six products, team of 20+</em></div>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- ═══ 3 · IN CONVERSATION ══════════════════════════════════════ -->
+  <section class="band band-talk">
+    <div class="band-head">
+      <p class="sec-k">In conversation</p>
+      <h2>The questions people actually ask</h2>
+      <p class="sec-lede">
+        A portfolio shows what got made. This is the part that usually only comes
+        up in the interview, written down so you can skip ahead.
+      </p>
+    </div>
+
+    <ol class="qa">
+      {answered.map((qa, i) => (
+        <li>
+          <p class="q-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+          <h3 class="q">{qa.q}</h3>
+          <p class="a">{qa.a}</p>
+          {qa.link && (
+            <p class="a-link"><a href={qa.link.href} data-ab={`cut-qa:${qa.link.href}`}>{qa.link.label} <span aria-hidden="true">→</span></a></p>
+          )}
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- ═══ 4 · RECORD ═══════════════════════════════════════════════ -->
+  <section class="band">
+    <div class="band-head">
+      <p class="sec-k">Record</p>
+      <h2>Where I have been</h2>
+    </div>
+    <table class="record">
+      <thead><tr><th scope="col">Period</th><th scope="col">Engagement</th><th scope="col">Basis</th></tr></thead>
+      <tbody>
+        {log.slice().reverse().map((l) => (
+          <tr><td class="rc-when">{l.stamp}</td><td>{l.event}</td><td class="rc-kind">{l.kind}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══ 5 · CONTACT ══════════════════════════════════════════════ -->
+  <section class="end">
+    <h2>Working on something people have to use, not something they choose to?</h2>
+    <p>That is the work I am best at. Tell me what you are weighing up.</p>
+    <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
+    <ul class="end-links">
+      <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="end:linkedin">LinkedIn ↗</a></li>
+      <li><a href={contact.resume} data-ab="end:cv">CV (PDF)</a></li>
+      <li>{contact.base}</li>
+    </ul>
+  </section>
+</main>
+
+<style>
+  :root {
+    --black: #0a0a0a;
+    --paper: #faf9f6;
+    --paper-2: #f1efe9;
+    --ink: #14130f;
+    --ink-2: #4d4a43;
+    --faint: #8b877e;
+    --line: #e3e0d8;
+    --accent: #15594a;
+    --live: #1c7a5e;
+    --display: 'Inter Tight', system-ui, sans-serif;
+    --read: 'Literata', Georgia, serif;
+    --pad: clamp(1.2rem, 5vw, 4.5rem);
+    --measure: 1180px;
+  }
+
+  :global(body) { background: var(--paper); color: var(--ink); font-family: var(--display); line-height: 1.6; }
+  :global(.skip-link) { background: var(--accent); color: #fff; }
+  :global(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  h1, h2, h3 { letter-spacing: -.035em; line-height: 1.06; font-weight: 700; text-wrap: balance; }
+  .sec-k { font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+
+  .btn {
+    display: inline-flex; align-items: center; min-height: 48px; padding: .8rem 1.5rem;
+    background: #f4f4f3; color: #0a0a0a; font-weight: 600; font-size: .95rem; border-radius: 2px;
+  }
+  .btn:hover { opacity: .85; }
+  .btn-ghost { background: transparent; color: #f4f4f3; border: 1px solid #3a3a38; }
+  .btn-ghost:hover { border-color: #f4f4f3; opacity: 1; }
+
+  /* ── 1 · opening ── */
+  .open {
+    position: relative; min-height: 100svh; display: flex; align-items: flex-end;
+    padding: clamp(3rem, 10vw, 7rem) var(--pad) clamp(3.5rem, 8vw, 6rem);
+    background: var(--black); color: #f4f4f3; overflow: hidden;
+  }
+  .open-bg { position: absolute; inset: 0; z-index: 0; }
+  .open-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 22%; animation: push 26s ease-out forwards; }
+  @keyframes push { from { transform: scale(1.1); } to { transform: scale(1); } }
+  .open::after {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(to top, var(--black) 4%, rgba(10,10,10,.88) 32%, rgba(10,10,10,.42) 68%, rgba(10,10,10,.6) 100%),
+      linear-gradient(to right, var(--black) 0%, rgba(10,10,10,.56) 46%, transparent 78%);
+  }
+  .open-in { position: relative; z-index: 2; max-width: 46rem; }
+  .supra { font-size: .74rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #a3a3a0; }
+  .open h1 { font-size: clamp(2.2rem, 6.2vw, 4.8rem); font-weight: 800; margin: 1.1rem 0 1.3rem; }
+  .open h1 span { display: block; }
+  .logline { font-size: clamp(1rem, 2.1vw, 1.18rem); color: #a3a3a0; max-width: 44ch; }
+  .proof { display: flex; flex-wrap: wrap; gap: 1.4rem 2.6rem; margin: 2.2rem 0 2.3rem; }
+  .proof li { display: flex; flex-direction: column; }
+  .proof b { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700; letter-spacing: -.04em; }
+  .proof span { font-size: .78rem; color: #6d6d6a; }
+  .open-cta { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .cue {
+    position: absolute; z-index: 2; right: var(--pad); bottom: clamp(3.5rem, 8vw, 6rem);
+    display: flex; align-items: center; gap: .6rem;
+    font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: #6d6d6a;
+  }
+  .cue span { width: 34px; height: 1px; background: #6d6d6a; transform-origin: left; animation: sweep 2.4s ease-in-out infinite; }
+  @keyframes sweep { 0%,100% { transform: scaleX(.35); opacity: .5 } 50% { transform: scaleX(1); opacity: 1 } }
+  @media (max-width: 760px) { .cue { display: none; } }
+
+  /* ── bands ── */
+  .band { max-width: var(--measure); margin: 0 auto; padding: clamp(3rem, 8vw, 5.5rem) var(--pad); }
+  .band + .band { border-top: 1px solid var(--line); }
+  .band-head { max-width: 46rem; margin-bottom: clamp(2rem, 5vw, 3.2rem); }
+  .band-head h2 { font-size: clamp(1.7rem, 4.2vw, 2.6rem); margin: .6rem 0 .9rem; }
+  .sec-lede { font-family: var(--read); color: var(--ink-2); max-width: 54ch; font-size: clamp(1rem, 2vw, 1.06rem); }
+
+  /* ── 2 · work ── */
+  .work { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
+  .work li {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 330px);
+    gap: clamp(1.6rem, 4vw, 3rem); align-items: start;
+    padding-top: clamp(2rem, 5vw, 3rem); border-top: 1px solid var(--line);
+  }
+  .work li:first-child { border-top: 0; padding-top: 0; }
+  @media (max-width: 900px) { .work li { grid-template-columns: 1fr; } .w-plate { max-width: 300px; } }
+
+  .w-top { display: flex; align-items: center; gap: .8rem; margin-bottom: .7rem; }
+  .w-n { font-size: .82rem; font-weight: 700; color: var(--faint); letter-spacing: .06em; }
+  .w-status { font-size: .62rem; font-weight: 700; letter-spacing: .14em; padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); border-radius: 2px; }
+  .st-live { color: var(--live); }
+  .work h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); max-width: 22ch; }
+
+  .w-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .9rem; margin: 1.2rem 0; padding: .95rem 0; border-block: 1px solid var(--line); }
+  .w-meta dt { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
+  .w-meta dd { font-size: .88rem; margin-top: .15rem; }
+
+  .w-sum { font-family: var(--read); color: var(--ink-2); max-width: 58ch; }
+  .w-note { font-family: var(--read); margin-top: 1rem; padding-left: 1rem; border-left: 2px solid var(--accent); max-width: 54ch; }
+  .w-go { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; margin-top: 1rem; font-weight: 600; font-size: .92rem; color: var(--accent); border-bottom: 1.5px solid transparent; }
+  .w-go:hover { border-bottom-color: var(--accent); }
+
+  .shot { width: 100%; border-radius: 6px; border: 1px solid var(--line); background: #fff; box-shadow: 0 24px 44px -30px rgba(0,0,0,.45); aspect-ratio: 4 / 3; object-fit: cover; object-position: top center; }
+  .shot.tall { aspect-ratio: 3 / 4; width: min(230px, 80%); border-radius: 14px; }
+  .shot.figure {
+    display: grid; place-content: center; gap: .6rem; text-align: center; padding: 1.8rem;
+    background: var(--accent); color: var(--paper); border-color: var(--accent);
+  }
+  .shot.figure span { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.04em; }
+  .shot.figure em { font-style: normal; font-size: .8rem; opacity: .85; }
+
+  /* ── 3 · conversation ── */
+  .band-talk { background: var(--paper-2); max-width: none; }
+  .band-talk > * { max-width: var(--measure); margin-inline: auto; }
+  .qa { max-width: 62rem; margin-inline: auto; display: grid; gap: 0; }
+  .qa li { padding: clamp(1.6rem, 4vw, 2.4rem) 0; border-top: 1px solid var(--line); }
+  .qa li:first-child { border-top: 0; padding-top: 0; }
+  .q-n { font-size: .74rem; font-weight: 600; color: var(--faint); letter-spacing: .1em; }
+  .q { font-size: clamp(1.15rem, 2.8vw, 1.5rem); font-weight: 600; margin: .5rem 0 .9rem; max-width: 28ch; }
+  .q::before { content: ''; display: block; width: 24px; height: 3px; background: var(--accent); margin-bottom: .8rem; }
+  .a { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); max-width: 64ch; }
+  .a-link { margin-top: .8rem; }
+  .a-link a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; font-size: .88rem; font-weight: 600; color: var(--accent); border-bottom: 1.5px solid transparent; }
+  .a-link a:hover { border-bottom-color: var(--accent); }
+
+  /* ── 4 · record ── */
+  .record { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  .record th, .record td { text-align: left; padding: .72rem .6rem; border-bottom: 1px solid var(--line); }
+  .record thead th { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
+  .rc-when { white-space: nowrap; font-weight: 600; color: var(--accent); }
+  .rc-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
+  @media (max-width: 620px) { .record thead { display: none; } .record tr { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--line); } .record td { border: 0; padding: .1rem 0; } }
+
+  /* ── 5 · end ── */
+  .end { background: var(--black); color: #f4f4f3; padding: clamp(4rem, 10vw, 7rem) var(--pad); }
+  .end > * { max-width: var(--measure); margin-inline: auto; }
+  .end h2 { font-size: clamp(1.8rem, 5vw, 3.2rem); max-width: 20ch; }
+  .end > p { margin-top: 1rem; color: #a3a3a0; max-width: 48ch; font-family: var(--read); }
+  .end-mail { margin-top: 2.2rem !important; font-size: clamp(1.1rem, 3.2vw, 1.9rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; font-family: var(--display) !important; color: #f4f4f3 !important; }
+  .end-mail a { border-bottom: 2px solid #3a3a38; }
+  .end-mail a:hover { border-bottom-color: #f4f4f3; }
+  .end-links { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-top: 1.8rem; font-size: .9rem; color: #6d6d6a; }
+  .end-links a { color: #f4f4f3; font-weight: 500; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .open-bg img { animation: none; transform: none; }
+    .cue span { animation: none; }
+  }
+</style>
+</Variant>
