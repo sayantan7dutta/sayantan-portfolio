@@ -13,17 +13,17 @@
  * paper, deliberately, the way a title sequence gives way to the article.
  * One type system holds both: Inter Tight for display, Literata for reading.
  */
-import Variant from '../../layouts/Variant.astro';
+import Cut from '../../../layouts/Cut.astro';
 import { Image } from 'astro:assets';
-import { projects, log, contact } from '../../lib/variants';
-import { interview } from '../../lib/interview';
+import { projects, log, contact } from '../../../lib/variants';
+import { interview } from '../../../lib/interview';
 
-import portrait from '../../assets/sayantan-studio.jpg';
-import miigenieImg from '../../assets/work/miigenie/home.png';
-import kinvaultImg from '../../assets/work/kinvault/vault.jpg';
-import hazopImg from '../../assets/work/hazop/analytics-dashboard.jpg';
-import ericssonImg from '../../assets/work/api-lifecycle/hero.png';
-import ambleImg from '../../assets/work/amble/hero.jpg';
+import portrait from '../../../assets/sayantan-studio.jpg';
+import miigenieImg from '../../../assets/work/miigenie/home.png';
+import kinvaultImg from '../../../assets/work/kinvault/vault.jpg';
+import hazopImg from '../../../assets/work/hazop/analytics-dashboard.jpg';
+import ericssonImg from '../../../assets/work/api-lifecycle/hero.png';
+import ambleImg from '../../../assets/work/amble/hero.jpg';
 
 const shots: Record<string, { img?: any; figure?: string; tall?: boolean }> = {
   miigenie:           { img: miigenieImg, tall: true },
@@ -47,15 +47,13 @@ const proof = [
   { n: '20+', l: 'person team supported' },
 ];
 
-const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap';
 ---
 
-<Variant
+<Cut
   title="Sayantan Dutta — Product Designer"
   description="Product designer for enterprise SaaS and AI. Industrial safety, API infrastructure, design operations, and a voice-first AI companion. Six products, founding designer on three."
-  variant="cut"
-  fonts={fonts}
-  themeColor="#0a0a0a"
+  navTone="dark"
+  active="work"
 >
 
 <!-- ═══ 1 · THE OPENING ════════════════════════════════════════════ -->
@@ -117,7 +115,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
 
             <p class="w-sum">{w.summary}</p>
             <p class="w-note">{w.note}</p>
-            <a class="w-go" href={w.href} data-ab={`cut:${w.slug}`}>Full case study <span aria-hidden="true">→</span></a>
+            <a class="w-go" href={`/v/cut/${w.slug}`} data-ab={`cut:${w.slug}`}>Full case study <span aria-hidden="true">→</span></a>
           </div>
 
           <div class="w-plate">
@@ -148,7 +146,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
           <h3 class="q">{qa.q}</h3>
           <p class="a">{qa.a}</p>
           {qa.link && (
-            <p class="a-link"><a href={qa.link.href} data-ab={`cut-qa:${qa.link.href}`}>{qa.link.label} <span aria-hidden="true">→</span></a></p>
+            <p class="a-link"><a href={qa.link.href.replace("/work/", "/v/cut/")} data-ab={`cut-qa:${qa.link.href}`}>{qa.link.label} <span aria-hidden="true">→</span></a></p>
           )}
         </li>
       ))}
@@ -176,46 +174,10 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     <h2>Working on something people have to use, not something they choose to?</h2>
     <p>That is the work I am best at. Tell me what you are weighing up.</p>
     <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
-    <ul class="end-links">
-      <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="end:linkedin">LinkedIn ↗</a></li>
-      <li><a href={contact.resume} data-ab="end:cv">CV (PDF)</a></li>
-      <li>{contact.base}</li>
-    </ul>
   </section>
 </main>
 
 <style>
-  :root {
-    --black: #0a0a0a;
-    --paper: #faf9f6;
-    --paper-2: #f1efe9;
-    --ink: #14130f;
-    --ink-2: #4d4a43;
-    --faint: #8b877e;
-    --line: #e3e0d8;
-    --accent: #15594a;
-    --live: #1c7a5e;
-    --display: 'Inter Tight', system-ui, sans-serif;
-    --read: 'Literata', Georgia, serif;
-    --pad: clamp(1.2rem, 5vw, 4.5rem);
-    --measure: 1180px;
-  }
-
-  :global(body) { background: var(--paper); color: var(--ink); font-family: var(--display); line-height: 1.6; }
-  :global(.skip-link) { background: var(--accent); color: #fff; }
-  :global(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-  h1, h2, h3 { letter-spacing: -.035em; line-height: 1.06; font-weight: 700; text-wrap: balance; }
-  .sec-k { font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
-
-  .btn {
-    display: inline-flex; align-items: center; min-height: 48px; padding: .8rem 1.5rem;
-    background: #f4f4f3; color: #0a0a0a; font-weight: 600; font-size: .95rem; border-radius: 2px;
-  }
-  .btn:hover { opacity: .85; }
-  .btn-ghost { background: transparent; color: #f4f4f3; border: 1px solid #3a3a38; }
-  .btn-ghost:hover { border-color: #f4f4f3; opacity: 1; }
-
   /* ── 1 · opening ── */
   .open {
     position: relative; min-height: 100svh; display: flex; align-items: flex-end;
@@ -249,13 +211,6 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
   .cue span { width: 34px; height: 1px; background: #6d6d6a; transform-origin: left; animation: sweep 2.4s ease-in-out infinite; }
   @keyframes sweep { 0%,100% { transform: scaleX(.35); opacity: .5 } 50% { transform: scaleX(1); opacity: 1 } }
   @media (max-width: 760px) { .cue { display: none; } }
-
-  /* ── bands ── */
-  .band { max-width: var(--measure); margin: 0 auto; padding: clamp(3rem, 8vw, 5.5rem) var(--pad); }
-  .band + .band { border-top: 1px solid var(--line); }
-  .band-head { max-width: 46rem; margin-bottom: clamp(2rem, 5vw, 3.2rem); }
-  .band-head h2 { font-size: clamp(1.7rem, 4.2vw, 2.6rem); margin: .6rem 0 .9rem; }
-  .sec-lede { font-family: var(--read); color: var(--ink-2); max-width: 54ch; font-size: clamp(1rem, 2vw, 1.06rem); }
 
   /* ── 2 · work ── */
   .work { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
@@ -313,7 +268,12 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
   .rc-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
   @media (max-width: 620px) { .record thead { display: none; } .record tr { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--line); } .record td { border: 0; padding: .1rem 0; } }
 
-  /* ── 5 · end ── */
+  @media (prefers-reduced-motion: reduce) {
+    .open-bg img { animation: none; transform: none; }
+    .cue span { animation: none; }
+  }
+
+  /* ── closing ── */
   .end { background: var(--black); color: #f4f4f3; padding: clamp(4rem, 10vw, 7rem) var(--pad); }
   .end > * { max-width: var(--measure); margin-inline: auto; }
   .end h2 { font-size: clamp(1.8rem, 5vw, 3.2rem); max-width: 20ch; }
@@ -321,12 +281,5 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
   .end-mail { margin-top: 2.2rem !important; font-size: clamp(1.1rem, 3.2vw, 1.9rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; font-family: var(--display) !important; color: #f4f4f3 !important; }
   .end-mail a { border-bottom: 2px solid #3a3a38; }
   .end-mail a:hover { border-bottom-color: #f4f4f3; }
-  .end-links { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-top: 1.8rem; font-size: .9rem; color: #6d6d6a; }
-  .end-links a { color: #f4f4f3; font-weight: 500; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .open-bg img { animation: none; transform: none; }
-    .cue span { animation: none; }
-  }
 </style>
-</Variant>
+</Cut>

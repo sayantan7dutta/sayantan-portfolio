@@ -1,0 +1,210 @@
+---
+/**
+ * About, in the Director's Cut language.
+ *
+ * Carries the Annual Report's letter (the piece with the most voice in it),
+ * the interview answers that are about the person rather than a project, the
+ * capabilities, and the full record of engagements.
+ */
+import { Image } from 'astro:assets';
+import Cut from '../../../layouts/Cut.astro';
+import { log, contact } from '../../../lib/variants';
+import { interview } from '../../../lib/interview';
+
+import portrait from '../../../assets/sayantan-studio.jpg';
+import portraitAlt from '../../../assets/sayantan.jpg';
+
+const capabilities = [
+  { k: 'Product design', v: 'End to end, discovery through delivery. Flows, journeys, prototypes, interaction detail.' },
+  { k: 'UX strategy', v: 'Turning a vague request into something a small team can build inside a quarter.' },
+  { k: 'Design systems', v: 'Component libraries, tokens, and a written accessibility baseline. One system held across three products at Ericsson.' },
+  { k: 'Research', v: 'Domain immersion, interviews, synthesis, usability testing, heuristic evaluation.' },
+  { k: 'Design operations', v: 'File architecture, shared templates, and a research-to-design handoff a team of twenty actually used.' },
+  { k: 'Accessibility', v: 'WCAG AA as a starting constraint rather than a pass at the end.' },
+];
+
+/** The answers that are about how I work rather than about one project. */
+const personal = interview.filter(
+  (qa) => qa.a.trim().length > 0 && !qa.link
+);
+
+const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 'Webflow'];
+---
+
+<Cut
+  title="About — Sayantan Dutta"
+  description="Product designer for enterprise SaaS and AI, based in Southampton. Five years across industrial safety, API infrastructure, design operations and a voice-first AI companion."
+  navTone="light"
+  active="about"
+>
+
+<header class="about-top">
+  <div class="at-copy">
+    <p class="sec-k">About</p>
+    <h1>I design the software people are handed, not the software they pick.</h1>
+    <p class="at-lead">
+      Five years across industrial safety, enterprise SaaS, design operations and
+      AI. Founding designer three times over. Based in {contact.base}, working
+      with distributed teams since 2020.
+    </p>
+    <div class="at-cta">
+      <a class="btn" href={`mailto:${contact.email}`} data-ab="about:email">Get in touch</a>
+      <a class="btn btn-ghost" href={contact.resume} data-ab="about:cv">CV (PDF)</a>
+    </div>
+  </div>
+  <figure class="at-photo">
+    <Image src={portrait} alt="Sayantan Dutta" widths={[520, 920]} sizes="(max-width: 900px) 70vw, 360px" />
+  </figure>
+</header>
+
+<main id="main">
+
+  <!-- ═══ THE LETTER ════════════════════════════════════════════════ -->
+  <section class="band">
+    <div class="band-head">
+      <p class="sec-k">In my own words</p>
+      <h2>Why this work, and not the other kind</h2>
+    </div>
+    <div class="letter">
+      <p>
+        Most of what I have worked on, people did not choose. A safety engineer
+        running a hazard study, a developer wiring up an API, a woman of
+        seventy-five checking whether she has taken her tablets. None of them
+        picked the software. It arrived with the job, or with the diagnosis.
+      </p>
+      <p>
+        That changes what good means. Delight is not the measure. The measure is
+        whether someone can get through the task on a bad day, at speed, while
+        worried, without the interface adding to the problem. It is quieter work
+        than consumer design and it takes longer to learn, because you cannot
+        design the thing until you understand the job, and the job is usually
+        more complicated than the brief admits.
+      </p>
+      <p>
+        Over five years that has taken me from a three-year engagement on
+        Ericsson’s API vertical, where I grew from product designer to design
+        lead, to being the only designer in a room of three at dAIs Genie. The
+        large team taught me that most of a design system is negotiation. The
+        small one taught me that if you do not write it down, it does not exist.
+      </p>
+      <p class="sign">Sayantan Dutta</p>
+      <p class="sign-role">Product designer · {contact.base}</p>
+    </div>
+  </section>
+
+  <!-- ═══ Q&A ══════════════════════════════════════════════════════ -->
+  {personal.length > 0 && (
+    <section class="band band-talk">
+      <div class="band-head">
+        <p class="sec-k">In conversation</p>
+        <h2>How I work</h2>
+      </div>
+      <ol class="qa">
+        {personal.map((qa, i) => (
+          <li>
+            <p class="q-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+            <h3 class="q">{qa.q}</h3>
+            <p class="a">{qa.a}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <!-- ═══ CAPABILITIES ══════════════════════════════════════════════ -->
+  <section class="band">
+    <div class="band-head">
+      <p class="sec-k">Capabilities</p>
+      <h2>What I actually do</h2>
+    </div>
+    <dl class="caps">
+      {capabilities.map((c) => <div><dt>{c.k}</dt><dd>{c.v}</dd></div>)}
+    </dl>
+    <p class="tools"><span>Tools</span> {tools.join(' · ')}</p>
+  </section>
+
+  <!-- ═══ RECORD ════════════════════════════════════════════════════ -->
+  <section class="band">
+    <div class="band-head">
+      <p class="sec-k">Record</p>
+      <h2>Where I have been</h2>
+    </div>
+    <table class="record">
+      <thead><tr><th scope="col">Period</th><th scope="col">Engagement</th><th scope="col">Basis</th></tr></thead>
+      <tbody>
+        {log.slice().reverse().map((l) => (
+          <tr><td class="rc-when">{l.stamp}</td><td>{l.event}</td><td class="rc-kind">{l.kind}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══ CLOSE ═════════════════════════════════════════════════════ -->
+  <section class="band about-end">
+    <figure class="ae-photo">
+      <Image src={portraitAlt} alt="Sayantan Dutta" widths={[480, 860]} sizes="(max-width: 820px) 70vw, 320px" loading="lazy" />
+    </figure>
+    <div>
+      <h2>Working on something people have to use?</h2>
+      <p class="sec-lede">That is the work I am best at. Tell me what you are weighing up.</p>
+      <p class="ae-mail"><a href={`mailto:${contact.email}`} data-ab="about-end:email">{contact.email}</a></p>
+    </div>
+  </section>
+</main>
+
+<style>
+  .about-top {
+    max-width: var(--measure); margin: 0 auto;
+    padding: clamp(5rem, 11vw, 8rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+    gap: clamp(1.8rem, 5vw, 4rem); align-items: center;
+  }
+  @media (max-width: 900px) { .about-top { grid-template-columns: 1fr; } .at-photo { max-width: 300px; } }
+  .about-top h1 { font-size: clamp(2rem, 5.2vw, 3.3rem); margin: .8rem 0 1.2rem; max-width: 18ch; }
+  .at-lead { font-family: var(--read); color: var(--ink-2); max-width: 50ch; font-size: clamp(1rem, 2vw, 1.1rem); }
+  .at-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; }
+  .at-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; border-radius: 4px; }
+
+  .letter { max-width: 62ch; }
+  .letter p { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); }
+  .letter p + p { margin-top: 1rem; }
+  .letter p:first-child::first-letter {
+    float: left; font-family: var(--read); font-size: 3.4em; line-height: .84;
+    padding: .06em .09em 0 0; color: var(--accent); font-weight: 600;
+  }
+  .sign { margin-top: 2rem !important; font-family: var(--display) !important; font-size: 1.3rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink) !important; }
+  .sign-role { margin-top: .1rem !important; font-size: .82rem; color: var(--faint) !important; font-family: var(--display) !important; }
+
+  .band-talk { background: var(--paper-2); max-width: none; }
+  .band-talk > * { max-width: var(--measure); margin-inline: auto; }
+  .qa { max-width: 62rem; margin-inline: auto; }
+  .qa li { padding: clamp(1.6rem, 4vw, 2.2rem) 0; border-top: 1px solid var(--line); }
+  .qa li:first-child { border-top: 0; padding-top: 0; }
+  .q-n { font-size: .74rem; font-weight: 600; color: var(--faint); letter-spacing: .1em; }
+  .q { font-size: clamp(1.15rem, 2.8vw, 1.5rem); font-weight: 600; margin: .5rem 0 .9rem; max-width: 28ch; }
+  .q::before { content: ''; display: block; width: 24px; height: 3px; background: var(--accent); margin-bottom: .8rem; }
+  .a { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); max-width: 64ch; }
+
+  .caps > div { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: .6rem 1.6rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+  .caps dt { font-weight: 600; }
+  .caps dd { font-family: var(--read); color: var(--ink-2); }
+  @media (max-width: 640px) { .caps > div { grid-template-columns: 1fr; gap: .2rem; } }
+  .tools { margin-top: 1.6rem; font-size: .9rem; color: var(--ink-2); }
+  .tools span { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-right: .6rem; }
+
+  .record { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  .record th, .record td { text-align: left; padding: .72rem .6rem; border-bottom: 1px solid var(--line); }
+  .record thead th { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
+  .rc-when { white-space: nowrap; font-weight: 600; color: var(--accent); }
+  .rc-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
+  @media (max-width: 620px) { .record thead { display: none; } .record tr { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--line); } .record td { border: 0; padding: .1rem 0; } }
+
+  .about-end { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: clamp(1.8rem, 5vw, 3.5rem); align-items: center; }
+  @media (max-width: 820px) { .about-end { grid-template-columns: 1fr; } .ae-photo { max-width: 260px; } }
+  .ae-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; }
+  .about-end h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 18ch; }
+  .ae-mail { margin-top: 1.6rem; font-size: clamp(1.1rem, 3vw, 1.6rem); font-weight: 700; letter-spacing: -.03em; word-break: break-word; }
+  .ae-mail a { border-bottom: 2.5px solid var(--accent); }
+  .ae-mail a:hover { color: var(--accent); }
+</style>
+</Cut>

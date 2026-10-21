@@ -1,0 +1,150 @@
+---
+/**
+ * Shared chrome and design system for the Director's Cut site.
+ *
+ * Every page in /v/cut/ uses this: one nav, one footer, one set of tokens.
+ * The styles are global on purpose so case studies can use the same classes
+ * as the home page without each file restating the system.
+ */
+import Variant from './Variant.astro';
+import { contact } from '../lib/variants';
+
+interface Props {
+  title: string;
+  description: string;
+  /** 'dark' lets a page's own hero own the top of the screen. */
+  navTone?: 'dark' | 'light';
+  active?: 'work' | 'about';
+}
+const { title, description, navTone = 'light', active } = Astro.props;
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap';
+---
+
+<Variant
+  title={title}
+  description={description}
+  variant="cut"
+  fonts={fonts}
+  themeColor={navTone === 'dark' ? '#0a0a0a' : '#faf9f6'}
+>
+  <header class={`nav nav-${navTone}`} id="nav">
+    <a class="nav-name" href="/v/cut" data-ab="nav:home">Sayantan&nbsp;Dutta</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="/v/cut#work" aria-current={active === 'work' ? 'page' : undefined} data-ab="nav:work">Work</a>
+      <a href="/v/cut/about" aria-current={active === 'about' ? 'page' : undefined} data-ab="nav:about">About</a>
+      <a class="nav-cta" href={`mailto:${contact.email}`} data-ab="nav:email">Get in touch</a>
+    </nav>
+  </header>
+
+  <slot />
+
+  <footer class="foot">
+    <div class="foot-in">
+      <p class="foot-name">Sayantan Dutta</p>
+      <p class="foot-role">Product designer, enterprise SaaS &amp; AI · {contact.base}</p>
+      <ul class="foot-links">
+        <li><a href={`mailto:${contact.email}`} data-ab="foot:email">{contact.email}</a></li>
+        <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="foot:linkedin">LinkedIn ↗</a></li>
+        <li><a href={contact.resume} data-ab="foot:cv">CV (PDF)</a></li>
+      </ul>
+      <p class="foot-fine">© {new Date().getFullYear()} Sayantan Dutta</p>
+    </div>
+  </footer>
+
+  <script>
+    // The nav sits over a dark hero on the home page and goes solid once you
+    // scroll past it. Pages with a light top start solid.
+    const nav = document.getElementById('nav');
+    if (nav?.classList.contains('nav-dark')) {
+      const onScroll = () => nav.classList.toggle('solid', scrollY > innerHeight * 0.72);
+      onScroll();
+      addEventListener('scroll', onScroll, { passive: true });
+    }
+  </script>
+
+  <style is:global>
+    :root {
+      --black: #0a0a0a;
+      --paper: #faf9f6;
+      --paper-2: #f1efe9;
+      --ink: #14130f;
+      --ink-2: #4d4a43;
+      --faint: #8b877e;
+      --line: #e3e0d8;
+      --accent: #15594a;
+      --live: #1c7a5e;
+      --display: 'Inter Tight', system-ui, sans-serif;
+      --read: 'Literata', Georgia, serif;
+      --pad: clamp(1.2rem, 5vw, 4.5rem);
+      --measure: 1180px;
+    }
+
+    body { background: var(--paper); color: var(--ink); font-family: var(--display); line-height: 1.6; }
+    .skip-link { background: var(--accent); color: #fff; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    h1, h2, h3 { letter-spacing: -.035em; line-height: 1.07; font-weight: 700; text-wrap: balance; }
+    .sec-k { font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+
+    .btn {
+      display: inline-flex; align-items: center; min-height: 48px; padding: .8rem 1.5rem;
+      background: var(--ink); color: var(--paper); font-weight: 600; font-size: .95rem; border-radius: 2px;
+    }
+    .btn:hover { background: var(--accent); }
+    .btn-on-dark { background: #f4f4f3; color: #0a0a0a; }
+    .btn-on-dark:hover { background: #f4f4f3; opacity: .85; }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .btn-ghost:hover { background: transparent; border-color: var(--ink); }
+    .btn-ghost-dark { background: transparent; color: #f4f4f3; border: 1px solid #3a3a38; }
+    .btn-ghost-dark:hover { border-color: #f4f4f3; }
+
+    /* ── nav ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+      display: flex; align-items: center; justify-content: space-between; gap: 1.2rem;
+      padding: .9rem var(--pad);
+      transition: background .3s, border-color .3s, color .3s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-light { background: rgba(250,249,246,.9); backdrop-filter: blur(10px); border-bottom-color: var(--line); }
+    .nav-dark { color: #f4f4f3; }
+    .nav-dark.solid { background: rgba(10,10,10,.86); backdrop-filter: blur(10px); border-bottom-color: #232322; }
+    .nav-name { font-weight: 700; letter-spacing: -.02em; font-size: 1rem; }
+    .nav-links { display: flex; align-items: center; gap: .3rem; }
+    .nav-links a {
+      display: inline-flex; align-items: center; min-height: 40px; padding: .4rem .7rem;
+      font-size: .9rem; font-weight: 500; border-radius: 2px;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-dark .nav-links a:hover { color: #fff; opacity: .8; }
+    .nav-links a[aria-current] { color: var(--accent); font-weight: 700; }
+    .nav-dark .nav-links a[aria-current] { color: #fff; }
+    .nav-cta { border: 1px solid var(--line); }
+    .nav-dark .nav-cta { border-color: #3a3a38; }
+    @media (max-width: 560px) { .nav-cta { display: none; } .nav-links a { padding: .4rem .5rem; } }
+
+    /* ── shared page furniture ── */
+    .band { max-width: var(--measure); margin: 0 auto; padding: clamp(3rem, 8vw, 5.5rem) var(--pad); }
+    .band + .band { border-top: 1px solid var(--line); }
+    .band-head { max-width: 46rem; margin-bottom: clamp(2rem, 5vw, 3.2rem); }
+    .band-head h2 { font-size: clamp(1.7rem, 4.2vw, 2.6rem); margin: .6rem 0 .9rem; }
+    .sec-lede { font-family: var(--read); color: var(--ink-2); max-width: 54ch; font-size: clamp(1rem, 2vw, 1.06rem); }
+
+    .status-chip {
+      font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); border-radius: 2px;
+    }
+    .st-live { color: var(--live); }
+
+    /* ── footer ── */
+    .foot { background: var(--black); color: #f4f4f3; padding: clamp(3rem, 8vw, 5rem) var(--pad); }
+    .foot-in { max-width: var(--measure); margin: 0 auto; }
+    .foot-name { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; letter-spacing: -.03em; }
+    .foot-role { color: #a3a3a0; margin-top: .3rem; font-size: .95rem; }
+    .foot-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.8rem; font-size: .92rem; }
+    .foot-links a { border-bottom: 1px solid #3a3a38; padding-bottom: 2px; }
+    .foot-links a:hover { border-bottom-color: #f4f4f3; }
+    .foot-fine { margin-top: 2.2rem; font-size: .78rem; color: #6d6d6a; }
+  </style>
+</Variant>

@@ -1,0 +1,240 @@
+---
+/**
+ * Every case study in the Director's Cut language, from one template.
+ *
+ * Structure follows the hiring research: role, scope and status are scannable
+ * before any prose, a status chip answers "is it live?", and where
+ * src/lib/decisions.ts carries a trade-off it is given its own block.
+ */
+import type { GetStaticPaths } from 'astro';
+import { Image } from 'astro:assets';
+import Cut from '../../../layouts/Cut.astro';
+import { projects } from '../../../lib/variants';
+import { cutCases } from '../../../lib/cut-cases';
+import { decisions } from '../../../lib/decisions';
+
+import mgBefore from '../../../assets/work/miigenie/before-home.png';
+import mgAfter from '../../../assets/work/miigenie/home.png';
+import mgListening from '../../../assets/work/miigenie/listening.png';
+import mgMyDay from '../../../assets/work/miigenie/my-day.png';
+import mgCarer from '../../../assets/work/miigenie/carer-home.png';
+import hzScenario from '../../../assets/work/hazop/scenario-summary.jpg';
+import hzAnalytics from '../../../assets/work/hazop/analytics-dashboard.jpg';
+import apDashboard from '../../../assets/work/api-lifecycle/dashboard.png';
+import apDetails from '../../../assets/work/api-lifecycle/design-details.png';
+import kvVault from '../../../assets/work/kinvault/vault.jpg';
+import kvTransfer from '../../../assets/work/kinvault/smart-transfer.jpg';
+import amFamily from '../../../assets/work/amble/family.jpg';
+import amRoutines from '../../../assets/work/amble/routines.jpg';
+
+/** Per-case image slots, keyed by the `shot` names used in cut-cases.ts. */
+const shots: Record<string, Record<string, any>> = {
+  miigenie: { trio: [mgListening, mgMyDay, mgCarer], before: mgBefore, after: mgAfter },
+  hazop: { wide: hzScenario, wide2: hzAnalytics },
+  'api-lifecycle': { wide: apDashboard, wide2: apDetails },
+  kinvault: { wide: kvVault, wide2: kvTransfer },
+  amble: { wide: amFamily, wide2: amRoutines },
+  'sherwin-williams': {},
+};
+
+export const getStaticPaths = (() =>
+  cutCases.map((c) => ({ params: { slug: c.slug } }))) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const data = cutCases.find((c) => c.slug === slug)!;
+const project = projects.find((p) => p.slug === slug)!;
+const decision = decisions.find((d) => d.slug === slug);
+const img = shots[slug] ?? {};
+
+const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
+---
+
+<Cut
+  title={`${project.short} — Sayantan Dutta`}
+  description={data.lead}
+  navTone="light"
+  active="work"
+>
+
+<article>
+  <!-- ═══ HEADER: scannable before any prose ════════════════════════ -->
+  <header class="case-top">
+    <p class="crumb"><a href="/v/cut#work" data-ab="case:back">Work</a> <span aria-hidden="true">/</span> {project.short}</p>
+    <p class="case-meta">
+      <span class={`status-chip st-${project.status.toLowerCase()}`}>{project.status}</span>
+      <span>{project.sector}</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <span>{project.period}</span>
+    </p>
+    <h1>{project.title}</h1>
+    <p class="case-lead">{data.lead}</p>
+
+    <dl class="glance">
+      {data.glance.map((g) => <div><dt>{g.k}</dt><dd>{g.v}</dd></div>)}
+    </dl>
+
+    <ul class="scope">
+      {data.scope.map((s) => <li>{s}</li>)}
+    </ul>
+  </header>
+
+  <!-- ═══ SECTIONS ══════════════════════════════════════════════════ -->
+  {data.sections.map((sec) => (
+    <section class="band">
+      <div class="case-sec">
+        <p class="sec-k">{sec.kicker}</p>
+        <h2>{sec.heading}</h2>
+        {sec.body.map((p) => <p class="case-p">{p}</p>)}
+        {sec.pull && <p class="case-pull">{sec.pull}</p>}
+      </div>
+
+      {sec.shot === 'beforeAfter' && img.before && (
+        <div class="ba">
+          <figure>
+            <div class="plate dim"><Image src={img.before} alt="The home screen before the redesign" widths={[320, 640]} sizes="260px" /></div>
+            <figcaption><b>Before.</b> Dark tiles, little warmth, no hierarchy guiding the eye to the main voice action.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate"><Image src={img.after} alt="The home screen after the redesign" widths={[320, 640]} sizes="260px" /></div>
+            <figcaption><b>After.</b> Warm cream and deep teal, large type, one clear voice action.</figcaption>
+          </figure>
+        </div>
+      )}
+
+      {sec.shot === 'trio' && img.trio && (
+        <div class="trio">
+          {img.trio.map((t: any) => (
+            <figure><div class="plate"><Image src={t} alt="" widths={[300, 600]} sizes="220px" loading="lazy" /></div></figure>
+          ))}
+        </div>
+      )}
+
+      {(sec.shot === 'wide' || sec.shot === 'wide2') && img[sec.shot] && (
+        <figure class="wide">
+          <Image src={img[sec.shot]} alt={sec.caption ?? ''} widths={[760, 1400]} sizes="(max-width: 1100px) 92vw, 1000px" loading="lazy" />
+          {sec.caption && <figcaption>{sec.caption}</figcaption>}
+        </figure>
+      )}
+
+      {sec.shot === 'figure' && (
+        <figure class="statfig">
+          <span>30–40%</span>
+          <figcaption>less rework across six digital products, for a team of more than twenty</figcaption>
+        </figure>
+      )}
+    </section>
+  ))}
+
+  <!-- ═══ THE DECISION ══════════════════════════════════════════════ -->
+  {decision && (
+    <section class="band decision-band">
+      <div class="case-sec">
+        <p class="sec-k">The decision it turned on</p>
+        <h2>{decision.question}</h2>
+        <div class="forks">
+          <div class="fork took"><p class="fork-k">What I did</p><p>{decision.took}</p></div>
+          <div class="fork left"><p class="fork-k">What I didn’t</p><p>{decision.left}</p></div>
+        </div>
+        {decision.cost && (
+          <div class="cost"><p class="cost-k">What it cost</p><p>{decision.cost}</p></div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- ═══ REFLECTION ════════════════════════════════════════════════ -->
+  <section class="band">
+    <div class="case-sec">
+      <p class="sec-k">Reflection</p>
+      <h2>{data.reflection.heading}</h2>
+      {data.reflection.body.map((p) => <p class="case-p">{p}</p>)}
+    </div>
+  </section>
+
+  <!-- ═══ NEXT ══════════════════════════════════════════════════════ -->
+  <section class="band">
+    <p class="sec-k">Next</p>
+    <ul class="next">
+      {others.map((o) => (
+        <li>
+          <a href={`/v/cut/${o.slug}`} data-ab={`next:${o.slug}`}>
+            <span class="nx-t">{o.short}</span>
+            <span class="nx-m">{o.sector} · {o.period}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</article>
+
+<style>
+  .case-top { max-width: var(--measure); margin: 0 auto; padding: clamp(5rem, 11vw, 8rem) var(--pad) clamp(2rem, 5vw, 3rem); }
+  .crumb { font-size: .82rem; color: var(--faint); margin-bottom: 1.4rem; }
+  .crumb a { font-weight: 600; color: var(--accent); }
+  .case-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; font-size: .82rem; color: var(--faint); }
+  .dot { color: var(--line); }
+  .case-top h1 { font-size: clamp(2rem, 5.2vw, 3.4rem); margin: 1.1rem 0 1.2rem; max-width: 20ch; }
+  .case-lead { font-family: var(--read); font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: var(--ink-2); max-width: 58ch; }
+
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.2rem; margin: 2.4rem 0; padding: 1.5rem 0; border-block: 1px solid var(--line); }
+  .glance dt { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
+  .glance dd { font-size: .92rem; margin-top: .2rem; }
+
+  .scope { display: grid; gap: .6rem; }
+  .scope li { position: relative; padding-left: 1.4rem; color: var(--ink-2); font-size: .95rem; }
+  .scope li::before { content: ''; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+
+  .case-sec { max-width: 64rem; }
+  .case-sec h2 { font-size: clamp(1.45rem, 3.6vw, 2.2rem); margin: .6rem 0 1.2rem; max-width: 24ch; }
+  .case-p { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); max-width: 64ch; }
+  .case-p + .case-p { margin-top: 1rem; }
+  .case-pull {
+    font-family: var(--read); margin-top: 1.4rem; padding-left: 1.2rem;
+    border-left: 2.5px solid var(--accent); max-width: 56ch;
+    font-size: clamp(1.05rem, 2.3vw, 1.2rem); color: var(--ink);
+  }
+
+  /* plates */
+  .plate { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; box-shadow: 0 24px 46px -32px rgba(0,0,0,.5); }
+  .plate img { width: 100%; display: block; aspect-ratio: 788 / 1778; object-fit: cover; object-position: top center; }
+  .dim { filter: saturate(.45) brightness(.9); }
+  .ba { display: grid; grid-template-columns: repeat(2, minmax(0, 260px)); gap: clamp(1.4rem, 4vw, 3rem); margin-top: 2.4rem; }
+  .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 220px)); gap: clamp(1rem, 3vw, 2rem); margin-top: 2.4rem; }
+  @media (max-width: 720px) { .ba, .trio { grid-template-columns: 1fr; max-width: 280px; } }
+  .ba figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); }
+  .ba figcaption b { color: var(--ink); font-weight: 700; }
+
+  .wide { margin-top: 2.4rem; }
+  .wide img { width: 100%; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 28px 54px -36px rgba(0,0,0,.45); }
+  .wide figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); }
+
+  .statfig { margin-top: 2.4rem; background: var(--accent); color: var(--paper); padding: clamp(2rem, 6vw, 3.5rem); text-align: center; border-radius: 8px; }
+  .statfig span { display: block; font-size: clamp(2.4rem, 8vw, 4.4rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; }
+  .statfig figcaption { margin-top: .8rem; font-size: .9rem; opacity: .88; }
+
+  /* decision */
+  .decision-band { background: var(--paper-2); max-width: none; }
+  .decision-band > * { max-width: var(--measure); margin-inline: auto; }
+  .forks { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); margin-top: 1.6rem; }
+  @media (max-width: 680px) { .forks { grid-template-columns: 1fr; } }
+  .fork { padding-left: 1.1rem; }
+  .fork.took { border-left: 2.5px solid var(--ink); }
+  .fork.left { border-left: 2.5px dashed var(--line); }
+  .fork-k { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .6rem; }
+  .fork.took .fork-k { color: var(--ink); }
+  .fork.left .fork-k { color: var(--faint); }
+  .fork p:last-child { font-family: var(--read); }
+  .fork.left p:last-child { color: var(--faint); }
+  .cost { margin-top: 1.8rem; padding: 1.4rem 1.6rem; border: 1.5px solid var(--accent); border-radius: 4px; }
+  .cost-k { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: .6rem; }
+  .cost p:last-child { font-family: var(--read); }
+
+  /* next */
+  .next { margin-top: 1rem; }
+  .next li { border-bottom: 1px solid var(--line); }
+  .next a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; align-items: baseline; padding: 1rem 0; min-height: 44px; }
+  .next a:hover .nx-t { color: var(--accent); }
+  .nx-t { font-weight: 600; font-size: 1.05rem; }
+  .nx-m { font-size: .82rem; color: var(--faint); }
+</style>
+</Cut>
