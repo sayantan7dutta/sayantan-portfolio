@@ -34,27 +34,29 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
 <Cut
   title="About — Sayantan Dutta"
   description="Product designer for enterprise SaaS and AI, based in Southampton. Five years across industrial safety, API infrastructure, design operations and a voice-first AI companion."
-  navTone="light"
+  navTone="dark"
   active="about"
 >
 
-<header class="about-top">
-  <div class="at-copy">
-    <p class="sec-k">About</p>
-    <h1>I design the software people are handed, not the software they pick.</h1>
-    <p class="at-lead">
-      Five years across industrial safety, enterprise SaaS, design operations and
-      AI. Founding designer three times over. Based in {contact.base}, working
-      with distributed teams since 2020.
-    </p>
-    <div class="at-cta">
-      <a class="btn" href={`mailto:${contact.email}`} data-ab="about:email">Get in touch</a>
-      <a class="btn btn-ghost" href={contact.resume} data-ab="about:cv">CV (PDF)</a>
+<header class="pagehead">
+  <div class="pagehead-in about-top">
+    <div class="at-copy">
+      <p class="sec-k">About</p>
+      <h1>I design the software people are handed, not the software they pick.</h1>
+      <p class="lead">
+        Five years across industrial safety, enterprise SaaS, design operations and
+        AI. Founding designer three times over. Based in {contact.base}, working
+        with distributed teams since 2020.
+      </p>
+      <div class="at-cta">
+        <a class="btn btn-on-dark" href={`mailto:${contact.email}`} data-ab="about:email">Get in touch</a>
+        <a class="btn btn-ghost-dark" href={contact.resume} data-ab="about:cv">CV (PDF)</a>
+      </div>
     </div>
+    <figure class="at-photo">
+      <Image src={portrait} alt="Sayantan Dutta" widths={[520, 920]} sizes="(max-width: 900px) 70vw, 360px" />
+    </figure>
   </div>
-  <figure class="at-photo">
-    <Image src={portrait} alt="Sayantan Dutta" widths={[520, 920]} sizes="(max-width: 900px) 70vw, 360px" />
-  </figure>
 </header>
 
 <main id="main">
@@ -154,14 +156,11 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
 
 <style>
   .about-top {
-    max-width: var(--measure); margin: 0 auto;
-    padding: clamp(5rem, 11vw, 8rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
     gap: clamp(1.8rem, 5vw, 4rem); align-items: center;
   }
   @media (max-width: 900px) { .about-top { grid-template-columns: 1fr; } .at-photo { max-width: 300px; } }
-  .about-top h1 { font-size: clamp(2rem, 5.2vw, 3.3rem); margin: .8rem 0 1.2rem; max-width: 18ch; }
-  .at-lead { font-family: var(--read); color: var(--ink-2); max-width: 50ch; font-size: clamp(1rem, 2vw, 1.1rem); }
+  .about-top h1 { margin: .8rem 0 0; }
   .at-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; }
   .at-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; border-radius: 4px; }
 

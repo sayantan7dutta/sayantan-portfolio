@@ -57,9 +57,14 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     // scroll past it. Pages with a light top start solid.
     const nav = document.getElementById('nav');
     if (nav?.classList.contains('nav-dark')) {
-      const onScroll = () => nav.classList.toggle('solid', scrollY > innerHeight * 0.72);
+      // Measured off whichever dark block opens the page, so a tall cinematic
+      // hero and a short masthead both hand over at the right moment.
+      const head = document.querySelector('.open, .pagehead') as HTMLElement | null;
+      const trigger = () => (head ? head.offsetHeight - 64 : innerHeight * 0.7);
+      const onScroll = () => nav.classList.toggle('solid', scrollY > trigger());
       onScroll();
       addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll);
     }
   </script>
 
@@ -70,8 +75,11 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       --paper-2: #f1efe9;
       --ink: #14130f;
       --ink-2: #4d4a43;
-      --faint: #8b877e;
-      --line: #e3e0d8;
+      --faint: #6f6b63;          /* 5.0:1 on paper, 4.6:1 on paper-2 (was 3.4:1) */
+      --line: #e3e0d8;           /* hairlines only — never an interactive boundary */
+      --edge: #8c887f;           /* 3.4:1 on paper: buttons, inputs, chips */
+      --edge-dark: #6a6a67;      /* 3.6:1 on black */
+      --dim-dark: #8f8f8c;       /* 5.9:1 on black (was 3.8:1) */
       --accent: #15594a;
       --live: #1c7a5e;
       --display: 'Inter Tight', system-ui, sans-serif;
@@ -82,7 +90,10 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
 
     body { background: var(--paper); color: var(--ink); font-family: var(--display); line-height: 1.6; }
     .skip-link { background: var(--accent); color: #fff; }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    /* The green ring is only 2.4:1 on black, so dark surfaces get a light one. */
+    .pagehead :focus-visible, .open :focus-visible, .foot :focus-visible,
+    .end :focus-visible, .nav-dark:not(.solid) :focus-visible { outline-color: #f4f4f3; }
 
     h1, h2, h3 { letter-spacing: -.035em; line-height: 1.07; font-weight: 700; text-wrap: balance; }
     .sec-k { font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
@@ -94,9 +105,9 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     .btn:hover { background: var(--accent); }
     .btn-on-dark { background: #f4f4f3; color: #0a0a0a; }
     .btn-on-dark:hover { background: #f4f4f3; opacity: .85; }
-    .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--edge); }
     .btn-ghost:hover { background: transparent; border-color: var(--ink); }
-    .btn-ghost-dark { background: transparent; color: #f4f4f3; border: 1px solid #3a3a38; }
+    .btn-ghost-dark { background: transparent; color: #f4f4f3; border: 1.5px solid var(--edge-dark); }
     .btn-ghost-dark:hover { border-color: #f4f4f3; }
 
     /* ── nav ── */
@@ -110,18 +121,18 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     .nav-light { background: rgba(250,249,246,.9); backdrop-filter: blur(10px); border-bottom-color: var(--line); }
     .nav-dark { color: #f4f4f3; }
     .nav-dark.solid { background: rgba(10,10,10,.86); backdrop-filter: blur(10px); border-bottom-color: #232322; }
-    .nav-name { font-weight: 700; letter-spacing: -.02em; font-size: 1rem; }
+    .nav-name { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; letter-spacing: -.02em; font-size: 1rem; }
     .nav-links { display: flex; align-items: center; gap: .3rem; }
     .nav-links a {
-      display: inline-flex; align-items: center; min-height: 40px; padding: .4rem .7rem;
+      display: inline-flex; align-items: center; min-height: 44px; padding: .5rem .7rem;
       font-size: .9rem; font-weight: 500; border-radius: 2px;
     }
     .nav-links a:hover { color: var(--accent); }
     .nav-dark .nav-links a:hover { color: #fff; opacity: .8; }
     .nav-links a[aria-current] { color: var(--accent); font-weight: 700; }
     .nav-dark .nav-links a[aria-current] { color: #fff; }
-    .nav-cta { border: 1px solid var(--line); }
-    .nav-dark .nav-cta { border-color: #3a3a38; }
+    .nav-cta { border: 1.5px solid var(--edge); }
+    .nav-dark .nav-cta { border-color: var(--edge-dark); }
     @media (max-width: 560px) { .nav-cta { display: none; } .nav-links a { padding: .4rem .5rem; } }
 
     /* ── shared page furniture ── */
@@ -137,14 +148,34 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     }
     .st-live { color: var(--live); }
 
+    /* ── page masthead ──
+       Every page opens on the same black ground as the home, so the site
+       reads as one thing. The home's is a full-height hero; inner pages get
+       a shorter version of the same gesture. */
+    .pagehead {
+      background: var(--black); color: #f4f4f3;
+      padding: clamp(6rem, 13vw, 9rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
+    }
+    .pagehead-in { max-width: var(--measure); margin: 0 auto; }
+    .pagehead h1 { font-size: clamp(2rem, 5.2vw, 3.4rem); font-weight: 800; max-width: 20ch; }
+    .pagehead .lead { font-family: var(--read); font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: #a3a3a0; max-width: 58ch; margin-top: 1.2rem; }
+    .pagehead .sec-k { color: #6fae9b; }
+    .pagehead .crumb { font-size: .82rem; color: var(--dim-dark); margin-bottom: 1.3rem; }
+    .pagehead .crumb a { display: inline-block; padding: .35rem 0; font-weight: 600; color: #6fae9b; }
+    .pagehead .crumb a:hover { color: #f4f4f3; }
+    .pagehead .status-chip { color: #a3a3a0; }
+    .pagehead .st-live { color: #58d0a8; }
+    .pagehead .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; font-size: .82rem; color: #a3a3a0; }
+    .pagehead .meta-row .dot { color: var(--edge-dark); }
+
     /* ── footer ── */
     .foot { background: var(--black); color: #f4f4f3; padding: clamp(3rem, 8vw, 5rem) var(--pad); }
     .foot-in { max-width: var(--measure); margin: 0 auto; }
     .foot-name { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; letter-spacing: -.03em; }
     .foot-role { color: #a3a3a0; margin-top: .3rem; font-size: .95rem; }
     .foot-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.8rem; font-size: .92rem; }
-    .foot-links a { border-bottom: 1px solid #3a3a38; padding-bottom: 2px; }
+    .foot-links a { border-bottom: 1px solid var(--edge-dark); padding-bottom: 2px; display: inline-flex; align-items: center; min-height: 44px; }
     .foot-links a:hover { border-bottom-color: #f4f4f3; }
-    .foot-fine { margin-top: 2.2rem; font-size: .78rem; color: #6d6d6a; }
+    .foot-fine { margin-top: 2.2rem; font-size: .78rem; color: var(--dim-dark); }
   </style>
 </Variant>

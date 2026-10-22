@@ -201,14 +201,14 @@ const proof = [
   .proof { display: flex; flex-wrap: wrap; gap: 1.4rem 2.6rem; margin: 2.2rem 0 2.3rem; }
   .proof li { display: flex; flex-direction: column; }
   .proof b { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700; letter-spacing: -.04em; }
-  .proof span { font-size: .78rem; color: #6d6d6a; }
+  .proof span { font-size: .78rem; color: var(--dim-dark); }
   .open-cta { display: flex; flex-wrap: wrap; gap: .7rem; }
   .cue {
     position: absolute; z-index: 2; right: var(--pad); bottom: clamp(3.5rem, 8vw, 6rem);
     display: flex; align-items: center; gap: .6rem;
-    font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: #6d6d6a;
+    font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--dim-dark);
   }
-  .cue span { width: 34px; height: 1px; background: #6d6d6a; transform-origin: left; animation: sweep 2.4s ease-in-out infinite; }
+  .cue span { width: 34px; height: 1px; background: var(--dim-dark); transform-origin: left; animation: sweep 2.4s ease-in-out infinite; }
   @keyframes sweep { 0%,100% { transform: scaleX(.35); opacity: .5 } 50% { transform: scaleX(1); opacity: 1 } }
   @media (max-width: 760px) { .cue { display: none; } }
 
@@ -279,7 +279,7 @@ const proof = [
   .end h2 { font-size: clamp(1.8rem, 5vw, 3.2rem); max-width: 20ch; }
   .end > p { margin-top: 1rem; color: #a3a3a0; max-width: 48ch; font-family: var(--read); }
   .end-mail { margin-top: 2.2rem !important; font-size: clamp(1.1rem, 3.2vw, 1.9rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; font-family: var(--display) !important; color: #f4f4f3 !important; }
-  .end-mail a { border-bottom: 2px solid #3a3a38; }
+  .end-mail a { border-bottom: 2px solid var(--edge-dark); }
   .end-mail a:hover { border-bottom-color: #f4f4f3; }
 </style>
 </Cut>

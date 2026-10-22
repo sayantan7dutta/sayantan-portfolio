@@ -47,28 +47,40 @@ const decision = decisions.find((d) => d.slug === slug);
 const img = shots[slug] ?? {};
 
 const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
+
+/** Screenshots carry meaning, so they get real alternatives, not alt="". */
+const trioAlts = [
+  'miiGenie listening, with a typed fallback available',
+  'The My Day screen, showing the routine for the day',
+  'The family carer view, showing recent activity',
+];
 ---
 
 <Cut
   title={`${project.short} — Sayantan Dutta`}
   description={data.lead}
-  navTone="light"
+  navTone="dark"
   active="work"
 >
 
+<main id="main">
 <article>
   <!-- ═══ HEADER: scannable before any prose ════════════════════════ -->
-  <header class="case-top">
-    <p class="crumb"><a href="/v/cut#work" data-ab="case:back">Work</a> <span aria-hidden="true">/</span> {project.short}</p>
-    <p class="case-meta">
-      <span class={`status-chip st-${project.status.toLowerCase()}`}>{project.status}</span>
-      <span>{project.sector}</span>
-      <span class="dot" aria-hidden="true">·</span>
-      <span>{project.period}</span>
-    </p>
-    <h1>{project.title}</h1>
-    <p class="case-lead">{data.lead}</p>
+  <header class="pagehead">
+    <div class="pagehead-in">
+      <p class="crumb"><a href="/v/cut#work" data-ab="case:back">Work</a> <span aria-hidden="true">/</span> {project.short}</p>
+      <p class="meta-row">
+        <span class={`status-chip st-${project.status.toLowerCase()}`}>{project.status}</span>
+        <span>{project.sector}</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span>{project.period}</span>
+      </p>
+      <h1>{project.title}</h1>
+      <p class="lead">{data.lead}</p>
+    </div>
+  </header>
 
+  <div class="case-facts">
     <dl class="glance">
       {data.glance.map((g) => <div><dt>{g.k}</dt><dd>{g.v}</dd></div>)}
     </dl>
@@ -76,7 +88,7 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
     <ul class="scope">
       {data.scope.map((s) => <li>{s}</li>)}
     </ul>
-  </header>
+  </div>
 
   <!-- ═══ SECTIONS ══════════════════════════════════════════════════ -->
   {data.sections.map((sec) => (
@@ -103,15 +115,15 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
       {sec.shot === 'trio' && img.trio && (
         <div class="trio">
-          {img.trio.map((t: any) => (
-            <figure><div class="plate"><Image src={t} alt="" widths={[300, 600]} sizes="220px" loading="lazy" /></div></figure>
+          {img.trio.map((t: any, i: number) => (
+            <figure><div class="plate"><Image src={t} alt={trioAlts[i] ?? ''} widths={[300, 600]} sizes="220px" loading="lazy" /></div></figure>
           ))}
         </div>
       )}
 
       {(sec.shot === 'wide' || sec.shot === 'wide2') && img[sec.shot] && (
         <figure class="wide">
-          <Image src={img[sec.shot]} alt={sec.caption ?? ''} widths={[760, 1400]} sizes="(max-width: 1100px) 92vw, 1000px" loading="lazy" />
+          <Image src={img[sec.shot]} alt="" widths={[760, 1400]} sizes="(max-width: 1100px) 92vw, 1000px" loading="lazy" />
           {sec.caption && <figcaption>{sec.caption}</figcaption>}
         </figure>
       )}
@@ -166,17 +178,11 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
     </ul>
   </section>
 </article>
+</main>
 
 <style>
-  .case-top { max-width: var(--measure); margin: 0 auto; padding: clamp(5rem, 11vw, 8rem) var(--pad) clamp(2rem, 5vw, 3rem); }
-  .crumb { font-size: .82rem; color: var(--faint); margin-bottom: 1.4rem; }
-  .crumb a { font-weight: 600; color: var(--accent); }
-  .case-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; font-size: .82rem; color: var(--faint); }
-  .dot { color: var(--line); }
-  .case-top h1 { font-size: clamp(2rem, 5.2vw, 3.4rem); margin: 1.1rem 0 1.2rem; max-width: 20ch; }
-  .case-lead { font-family: var(--read); font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: var(--ink-2); max-width: 58ch; }
-
-  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.2rem; margin: 2.4rem 0; padding: 1.5rem 0; border-block: 1px solid var(--line); }
+  .case-facts { max-width: var(--measure); margin: 0 auto; padding: clamp(2rem, 5vw, 3rem) var(--pad) 0; }
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.2rem; margin: 0 0 2rem; padding-bottom: 1.6rem; border-bottom: 1px solid var(--line); }
   .glance dt { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
   .glance dd { font-size: .92rem; margin-top: .2rem; }
 
