@@ -24,8 +24,9 @@ const capabilities = [
 ];
 
 /** The answers that are about how I work rather than about one project. */
+const DUPLICATES_THE_LETTER = 'What kind of designer are you, in one answer?';
 const personal = interview.filter(
-  (qa) => qa.a.trim().length > 0 && !qa.link
+  (qa) => qa.a.trim().length > 0 && !qa.link && qa.q !== DUPLICATES_THE_LETTER
 );
 
 const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 'Webflow'];
@@ -67,6 +68,7 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
       <p class="sec-k">In my own words</p>
       <h2>Why this work, and not the other kind</h2>
     </div>
+    <div class="letter-grid">
     <div class="letter">
       <p>
         Most of what I have worked on, people did not choose. A safety engineer
@@ -91,6 +93,19 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
       </p>
       <p class="sign">Sayantan Dutta</p>
       <p class="sign-role">Product designer · {contact.base}</p>
+    </div>
+
+    <aside class="letter-side">
+      <figure class="ls-photo">
+        <Image src={portraitAlt} alt="Sayantan Dutta" widths={[480, 860]} sizes="(max-width: 900px) 70vw, 300px" />
+      </figure>
+      <dl class="ls-facts">
+        <div><dt>Based</dt><dd>{contact.base}</dd></div>
+        <div><dt>Now</dt><dd>Founding product designer, dAIs Genie</dd></div>
+        <div><dt>Education</dt><dd>MA Design Management, University of Southampton</dd></div>
+        <div><dt>Working remotely since</dt><dd>2020</dd></div>
+      </dl>
+    </aside>
     </div>
   </section>
 
@@ -143,14 +158,9 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
 
   <!-- ═══ CLOSE ═════════════════════════════════════════════════════ -->
   <section class="band about-end">
-    <figure class="ae-photo">
-      <Image src={portraitAlt} alt="Sayantan Dutta" widths={[480, 860]} sizes="(max-width: 820px) 70vw, 320px" loading="lazy" />
-    </figure>
-    <div>
-      <h2>Working on something people have to use?</h2>
-      <p class="sec-lede">That is the work I am best at. Tell me what you are weighing up.</p>
-      <p class="ae-mail"><a href={`mailto:${contact.email}`} data-ab="about-end:email">{contact.email}</a></p>
-    </div>
+    <h2>Working on something people have to use?</h2>
+    <p class="sec-lede">That is the work I am best at. Tell me what you are weighing up.</p>
+    <p class="ae-mail"><a href={`mailto:${contact.email}`} data-ab="about-end:email">{contact.email}</a></p>
   </section>
 </main>
 
@@ -175,7 +185,7 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   .sign-role { margin-top: .1rem !important; font-size: .82rem; color: var(--faint) !important; font-family: var(--display) !important; }
 
   .band-talk { background: var(--paper-2); max-width: none; }
-  .band-talk > * { max-width: var(--measure); margin-inline: auto; }
+  .band-talk > * { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
   .qa { max-width: 62rem; margin-inline: auto; }
   .qa li { padding: clamp(1.6rem, 4vw, 2.2rem) 0; border-top: 1px solid var(--line); }
   .qa li:first-child { border-top: 0; padding-top: 0; }
@@ -184,10 +194,10 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   .q::before { content: ''; display: block; width: 24px; height: 3px; background: var(--accent); margin-bottom: .8rem; }
   .a { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); max-width: 64ch; }
 
-  .caps > div { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: .6rem 1.6rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
-  .caps dt { font-weight: 600; }
-  .caps dd { font-family: var(--read); color: var(--ink-2); }
-  @media (max-width: 640px) { .caps > div { grid-template-columns: 1fr; gap: .2rem; } }
+  .caps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .caps > div { background: var(--paper); padding: clamp(1.1rem, 2.5vw, 1.6rem); }
+  .caps dt { font-weight: 700; margin-bottom: .35rem; }
+  .caps dd { font-family: var(--read); color: var(--ink-2); font-size: .95rem; }
   .tools { margin-top: 1.6rem; font-size: .9rem; color: var(--ink-2); }
   .tools span { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-right: .6rem; }
 
@@ -198,9 +208,15 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   .rc-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
   @media (max-width: 620px) { .record thead { display: none; } .record tr { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--line); } .record td { border: 0; padding: .1rem 0; } }
 
-  .about-end { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: clamp(1.8rem, 5vw, 3.5rem); align-items: center; }
-  @media (max-width: 820px) { .about-end { grid-template-columns: 1fr; } .ae-photo { max-width: 260px; } }
-  .ae-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; }
+  .letter-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: clamp(2rem, 6vw, 4.5rem); align-items: start; }
+  @media (max-width: 900px) { .letter-grid { grid-template-columns: 1fr; } .letter-side { max-width: 380px; } }
+  .letter-side { position: sticky; top: 6rem; }
+  @media (max-width: 900px) { .letter-side { position: static; } }
+  .ls-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 15%; border-radius: 4px; }
+  .ls-facts { margin-top: 1.6rem; display: grid; gap: 1rem; }
+  .ls-facts dt { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
+  .ls-facts dd { font-size: .9rem; margin-top: .15rem; }
+
   .about-end h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 18ch; }
   .ae-mail { margin-top: 1.6rem; font-size: clamp(1.1rem, 3vw, 1.6rem); font-weight: 700; letter-spacing: -.03em; word-break: break-word; }
   .ae-mail a { border-bottom: 2.5px solid var(--accent); }

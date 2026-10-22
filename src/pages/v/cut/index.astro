@@ -248,7 +248,7 @@ const proof = [
 
   /* ── 3 · conversation ── */
   .band-talk { background: var(--paper-2); max-width: none; }
-  .band-talk > * { max-width: var(--measure); margin-inline: auto; }
+  .band-talk > * { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
   .qa { max-width: 62rem; margin-inline: auto; display: grid; gap: 0; }
   .qa li { padding: clamp(1.6rem, 4vw, 2.4rem) 0; border-top: 1px solid var(--line); }
   .qa li:first-child { border-top: 0; padding-top: 0; }
@@ -275,7 +275,7 @@ const proof = [
 
   /* ── closing ── */
   .end { background: var(--black); color: #f4f4f3; padding: clamp(4rem, 10vw, 7rem) var(--pad); }
-  .end > * { max-width: var(--measure); margin-inline: auto; }
+  .end > * { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
   .end h2 { font-size: clamp(1.8rem, 5vw, 3.2rem); max-width: 20ch; }
   .end > p { margin-top: 1rem; color: #a3a3a0; max-width: 48ch; font-family: var(--read); }
   .end-mail { margin-top: 2.2rem !important; font-size: clamp(1.1rem, 3.2vw, 1.9rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; font-family: var(--display) !important; color: #f4f4f3 !important; }

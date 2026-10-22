@@ -156,7 +156,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       background: var(--black); color: #f4f4f3;
       padding: clamp(6rem, 13vw, 9rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
     }
-    .pagehead-in { max-width: var(--measure); margin: 0 auto; }
+    .pagehead-in { max-width: calc(var(--measure) - var(--pad) * 2); margin: 0 auto; }
     .pagehead h1 { font-size: clamp(2rem, 5.2vw, 3.4rem); font-weight: 800; max-width: 20ch; }
     .pagehead .lead { font-family: var(--read); font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: #a3a3a0; max-width: 58ch; margin-top: 1.2rem; }
     .pagehead .sec-k { color: #6fae9b; }
@@ -170,7 +170,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
 
     /* ── footer ── */
     .foot { background: var(--black); color: #f4f4f3; padding: clamp(3rem, 8vw, 5rem) var(--pad); }
-    .foot-in { max-width: var(--measure); margin: 0 auto; }
+    .foot-in { max-width: calc(var(--measure) - var(--pad) * 2); margin: 0 auto; }
     .foot-name { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; letter-spacing: -.03em; }
     .foot-role { color: #a3a3a0; margin-top: .3rem; font-size: .95rem; }
     .foot-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.8rem; font-size: .92rem; }
