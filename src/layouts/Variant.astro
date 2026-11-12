@@ -99,6 +99,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
   <a href="#main" class="skip-link">Skip to content</a>
   <slot />
 
+  {import.meta.env.DEV && (
   <nav class="ab-switch" aria-label="Design variant">
     <span>Version</span>
     <a href="/?ab=1" data-ab="switch:control">Editorial</a>
@@ -114,6 +115,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
     <a href="/v/drawing-set?ab=1" data-ab="switch:drawing-set">Drawing set</a>
     <a href="/lab" data-ab="switch:lab">Compare ↗</a>
   </nav>
+  )}
 
   <script is:inline>
     (function () {

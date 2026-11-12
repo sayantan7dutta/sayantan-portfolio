@@ -119,7 +119,12 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       border-bottom: 1px solid transparent;
     }
     .nav-light { background: rgba(250,249,246,.9); backdrop-filter: blur(10px); border-bottom-color: var(--line); }
-    .nav-dark { color: #f4f4f3; }
+    .nav-dark {
+      color: #f4f4f3;
+      /* Always-on scrim. The white text must never depend on JS, or on
+         the hero image being dark where the nav happens to sit. */
+      background: linear-gradient(to bottom, rgba(10,10,10,.92), rgba(10,10,10,.55) 60%, rgba(10,10,10,0));
+    }
     .nav-dark.solid { background: rgba(10,10,10,.86); backdrop-filter: blur(10px); border-bottom-color: #232322; }
     .nav-name { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; letter-spacing: -.02em; font-size: 1rem; }
     .nav-links { display: flex; align-items: center; gap: .3rem; }
@@ -147,6 +152,15 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); border-radius: 2px;
     }
     .st-live { color: var(--live); }
+
+    /* Safety net: if a light-ground button ever lands on a dark block again,
+       it stays readable instead of disappearing. */
+    .open .btn:not(.btn-on-dark):not(.btn-ghost-dark),
+    .pagehead .btn:not(.btn-on-dark):not(.btn-ghost-dark),
+    .end .btn:not(.btn-on-dark):not(.btn-ghost-dark),
+    .foot .btn:not(.btn-on-dark):not(.btn-ghost-dark) {
+      background: #f4f4f3; color: #0a0a0a; border-color: #f4f4f3;
+    }
 
     /* ── page masthead ──
        Every page opens on the same black ground as the home, so the site
