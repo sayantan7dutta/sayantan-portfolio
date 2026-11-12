@@ -6,6 +6,19 @@
  * No figures appear here that are not already published on the site.
  */
 
+/** Structured blocks, so a section can be more than paragraphs. */
+export type Block =
+  /** Numbered principle cards: 01 / title / body. */
+  | { kind: 'cards'; items: { t: string; b: string }[] }
+  /** A stage-by-stage table: what hurt, and what the design did about it. */
+  | { kind: 'journey'; cols: [string, string, string]; rows: [string, string, string][] }
+  /** Research personas, grouped by role. */
+  | { kind: 'personas'; items: { role: string; age: string; name: string; note: string }[] }
+  /** A plain comparison table. */
+  | { kind: 'table'; cols: string[]; rows: string[][] }
+  /** Before / after as two labelled columns of text. */
+  | { kind: 'compare'; before: { h: string; items: string[] }; after: { h: string; items: string[] } };
+
 export interface CaseSection {
   kicker: string;
   heading: string;
@@ -15,6 +28,8 @@ export interface CaseSection {
   caption?: string;
   /** Rendered as a pulled line rather than body copy. */
   pull?: string;
+  /** Structured content under the prose. */
+  block?: Block;
 }
 
 export interface CutCase {
@@ -64,11 +79,51 @@ export const cutCases: CutCase[] = [
         shot: 'beforeAfter',
       },
       {
+        kicker: 'What I built first',
+        heading: 'A design function, not a set of screens',
+        body: [],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'A visual language with a temperature', b: 'Warm cream surfaces, deep teal actions, generous type. Calm over clever, familiarity over fashion.' },
+            { t: 'An accessibility baseline, not an afterthought', b: 'WCAG AA contrast, 48dp minimum touch targets, large-font resilience, and copy written for reading ease.' },
+            { t: 'A component library the team builds from', b: 'Every flow specified with its edge states in Figma, so what ships is what was designed.' },
+          ],
+        },
+      },
+      {
         kicker: 'Research',
         heading: 'Five people the product has to work for',
         body: [
           'Grounded in 50+ interviews and conversations with seniors and carers across Hampshire, with MVP priorities set through co-design sessions and pilot onboarding now underway. The personas are not demographics. They are relationships to independence: each one wants to stay capable, and fears the moment technology proves they aren’t.',
         ],
+        block: {
+          kind: 'personas',
+          items: [
+            { role: 'Senior', age: '70–75', name: 'Living alone, away from family', note: 'Wants to run her own life: medication on time, paperwork in order, family a tap away. Anxious that technology will make her feel stupid.' },
+            { role: 'Senior', age: '75–85', name: 'Recently moved, network lost', note: 'New town, old habits gone. Wants to rebuild a routine and a social circle without depending on the family he moved closer to.' },
+            { role: 'Senior', age: '70–80', name: 'Prefers their own company', note: 'Independent by choice. No interest in community groups; wants appointments, documents and health admin handled without fuss.' },
+            { role: 'Carer', age: '45–55', name: 'The busy family carer', note: 'Sandwich generation. Helps parents with life admin from a distance while raising children. Needs visibility without surveillance.' },
+            { role: 'Carer', age: '60–66', name: 'The working caregiver', note: 'Caring for a parent while still working full-time. The app has to be self-explanatory, because she has no spare hours to be tech support.' },
+          ],
+        },
+      },
+      {
+        kicker: 'The senior journey',
+        heading: 'Six stages, and what the design does about each',
+        body: [],
+        block: {
+          kind: 'journey',
+          cols: ['Stage', 'What hurts', 'What the design does'],
+          rows: [
+            ['Awareness', 'Hard to gauge whether a tech brand can be trusted at all.', 'A warm, human identity, and a carer-led introduction path so the first contact comes from family, not an advert.'],
+            ['Consideration', 'Comparing apps is exhausting and time-consuming.', 'One clear promise, practical daily help, instead of a feature list.'],
+            ['Trial', 'Fear of being harassed for feedback or trapped by a card on file.', 'A one-month trial on phone-number registration alone. Feedback is gathered in context, never by ambush.'],
+            ['Purchase', 'Working out what the app costs, and when, is genuinely confusing.', 'The subscription page states the trial end date and terms in plain sentences before any commitment.'],
+            ['Service', 'Subscription tiers written for marketers, not for seniors.', 'Two tiers only, each explained in words rather than a comparison matrix.'],
+            ['Retention', 'Deciding whether the app deserves a place in their life.', 'The app earns it through routine: reminders that fire, documents that surface, a day that feels held together.'],
+          ],
+        },
       },
       {
         kicker: 'The principles it produced',
@@ -78,6 +133,14 @@ export const cutCases: CutCase[] = [
           'The second surface is the family carer: pairing, check-ins and visibility designed as reassurance rather than surveillance. The product is deliberately framed as supportive everyday companionship, with hard guardrails. It is not a therapist and never pretends to be a relationship.',
         ],
         shot: 'trio',
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Privacy comes first', b: 'Trust is the biggest barrier to adoption. Older adults need to feel in control of their data, supported by transparency, non-intrusive design, and a trusted, family-involved onboarding.' },
+            { t: 'Benefits must be obvious', b: 'Adoption improves when the value is simple and immediate. Real-life use cases help users see exactly how the product fits their day, with no learning curve to climb first.' },
+            { t: 'Technology supports connection, never replaces it', b: 'People want tools that strengthen relationships, not substitute for them. Every feature is pointed at communication and community, never at keeping someone on a screen.' },
+          ],
+        },
       },
     ],
     reflection: {
@@ -130,6 +193,14 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide',
         caption: 'Scenario summary — every deviation, its risk rating and its tracked action in one table',
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Lifecycle-anchored navigation', b: 'Navigation and page structure map directly onto the safety assessment lifecycle: identify risks, evaluate operability, track mitigation.' },
+            { t: 'Compliance evidence as a by-product', b: 'The record a study has to produce falls out of doing the work, rather than being assembled in a scramble at the end.' },
+            { t: 'Cognitive load as the measure', b: 'Never simplification for its own sake. Stripping out friction so users focus on the safety thinking instead of fighting the tooling.' },
+          ],
+        },
       },
       {
         kicker: 'Outcome',
@@ -194,6 +265,31 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide2',
         caption: 'Design detail and component specification',
+        block: {
+          kind: 'compare',
+          before: {
+            h: 'Before — three separate islands',
+            items: [
+              'API Console: custom nav, dense tables, no pattern docs',
+              'API Portal: different colour usage, unique button styles',
+              'API Marketplace: inconsistent spacing, its own icon set',
+              'Shared elements: none, every decision made locally',
+              'Documentation: none, designers held it in their heads',
+              'New-designer onboarding: start from scratch',
+            ],
+          },
+          after: {
+            h: 'After — one shared foundation',
+            items: [
+              'Shared token system: colour, spacing and type across all three',
+              'One component library, built on Ericsson’s design system',
+              'A documented path for proposing and approving changes',
+              'Ownership assigned for every shared pattern',
+              'A Figma guide that survived a change of tooling',
+              'New designers onboard without reverse-engineering decisions',
+            ],
+          },
+        },
       },
       {
         kicker: 'The role nobody was filling',
@@ -201,6 +297,15 @@ export const cutCases: CutCase[] = [
         body: [
           'The team lacked a dedicated business analyst. As the most experienced person on the project, I took on the work of translating between Ericsson’s product owners and our design and engineering team. Product owners came with large, genuinely good feature ideas that were beyond what the team could deliver within the timeline and technical constraints of that version. This happened repeatedly across three years.',
         ],
+        block: {
+          kind: 'journey',
+          cols: ['When', 'Title', 'What actually changed'],
+          rows: [
+            ['Nov 2020', 'Product Designer', 'Designing screens for one product.'],
+            ['Nov 2021', 'Lead Product Designer', 'Making design decisions that applied across all three products at once, and translating between the product owner, the tech lead and the design team.'],
+            ['Dec 2023', 'Towards design operations', 'Unblocking other designers and then stepping back. Building and governing the system rather than only working inside it.'],
+          ],
+        },
       },
       {
         kicker: 'Outcome',
@@ -258,8 +363,16 @@ export const cutCases: CutCase[] = [
         heading: 'From scattered to structured',
         body: [
           'The first fix was the one everything else depended on: a single, navigable file architecture in Teams and OneDrive. Numbered folders, consistent naming, a read-only archive for legacy work, and cross-linked documents so a file could be found from more than one path.',
-          'Then templates, standardised across three formats: interview guide, insight deck, and a three-slide maximum stakeholder presentation that leads with business impact.',
+          'Then templates, standardised across three formats.',
         ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Interview guide', b: 'Standardised opening and consent framing, modular question blocks by research goal, probe suggestions per section, consistent time allocation, and debrief prompts.' },
+            { t: 'Insight deck', b: 'Branded template, executive summary on slide one, one evidence-backed insight per slide, severity and frequency scoring, recommended next actions at the close.' },
+            { t: 'Stakeholder presentation', b: 'Three slides maximum for leadership reviews. Business impact framed first, data visualised rather than tabulated.' },
+          ],
+        },
       },
       {
         kicker: 'The part that mattered most',

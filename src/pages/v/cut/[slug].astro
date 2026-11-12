@@ -128,6 +128,56 @@ const trioAlts = [
         </figure>
       )}
 
+      {sec.block?.kind === 'cards' && (
+        <ol class="cards">
+          {sec.block.items.map((c, i) => (
+            <li>
+              <span class="card-n">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{c.t}</h3>
+              <p>{c.b}</p>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {sec.block?.kind === 'personas' && (
+        <ul class="personas">
+          {sec.block.items.map((pr) => (
+            <li>
+              <p class="pr-top"><span class="pr-role">{pr.role}</span><span class="pr-age">{pr.age}</span></p>
+              <h3>{pr.name}</h3>
+              <p class="pr-note">{pr.note}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {sec.block?.kind === 'journey' && (
+        <div class="tbl-scroll">
+          <table class="tbl">
+            <thead><tr>{sec.block.cols.map((c) => <th scope="col">{c}</th>)}</tr></thead>
+            <tbody>
+              {sec.block.rows.map((r) => (
+                <tr><th scope="row">{r[0]}</th><td>{r[1]}</td><td>{r[2]}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {sec.block?.kind === 'compare' && (
+        <div class="compare">
+          <div class="cmp cmp-before">
+            <h3>{sec.block.before.h}</h3>
+            <ul>{sec.block.before.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+          <div class="cmp cmp-after">
+            <h3>{sec.block.after.h}</h3>
+            <ul>{sec.block.after.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        </div>
+      )}
+
       {sec.shot === 'figure' && (
         <figure class="statfig">
           <span>30–40%</span>
@@ -217,6 +267,46 @@ const trioAlts = [
   .statfig { margin-top: 2.4rem; background: var(--accent); color: var(--paper); padding: clamp(2rem, 6vw, 3.5rem); text-align: center; border-radius: 8px; }
   .statfig span { display: block; font-size: clamp(2.4rem, 8vw, 4.4rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; }
   .statfig figcaption { margin-top: .8rem; font-size: .9rem; opacity: .88; }
+
+  /* ── numbered cards ── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 2.2rem; }
+  .cards li { background: var(--paper); padding: clamp(1.2rem, 2.6vw, 1.7rem); }
+  .card-n { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); }
+  .cards h3 { font-size: 1.02rem; font-weight: 700; margin: .5rem 0 .5rem; letter-spacing: -.015em; }
+  .cards p { font-family: var(--read); font-size: .92rem; color: var(--ink-2); }
+
+  /* ── personas ── */
+  .personas { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(.9rem, 2vw, 1.3rem); margin-top: 2.2rem; }
+  .personas li { border: 1px solid var(--line); border-top: 3px solid var(--accent); padding: clamp(1.1rem, 2.4vw, 1.5rem); background: var(--paper); }
+  .pr-top { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; }
+  .pr-role { font-size: .6rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .pr-age { font-size: .74rem; color: var(--faint); }
+  .personas h3 { font-size: .98rem; font-weight: 700; margin: .6rem 0 .45rem; letter-spacing: -.015em; }
+  .pr-note { font-family: var(--read); font-size: .88rem; color: var(--ink-2); }
+
+  /* ── stage table ── */
+  .tbl-scroll { overflow-x: auto; margin-top: 2.2rem; }
+  .tbl { width: 100%; border-collapse: collapse; min-width: 640px; }
+  .tbl th, .tbl td { text-align: left; vertical-align: top; padding: .95rem .9rem; border-bottom: 1px solid var(--line); }
+  .tbl thead th { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
+  .tbl tbody th { font-weight: 700; white-space: nowrap; color: var(--accent); width: 1%; }
+  .tbl td { font-family: var(--read); font-size: .94rem; color: var(--ink-2); }
+  .tbl td:last-child { color: var(--ink); }
+
+  /* ── before / after columns ── */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.5vw, 2rem); margin-top: 2.2rem; }
+  @media (max-width: 720px) { .compare { grid-template-columns: 1fr; } }
+  .cmp { padding: clamp(1.1rem, 2.4vw, 1.6rem); border: 1px solid var(--line); }
+  .cmp-before { background: var(--paper-2); }
+  .cmp-after { background: var(--paper); border-color: var(--accent); }
+  .cmp h3 { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: .9rem; }
+  .cmp-before h3 { color: var(--faint); }
+  .cmp-after h3 { color: var(--accent); }
+  .cmp li { font-size: .9rem; padding: .45rem 0 .45rem 1.1rem; position: relative; border-bottom: 1px solid var(--line); }
+  .cmp li:last-child { border-bottom: 0; }
+  .cmp li::before { content: ''; position: absolute; left: 0; top: .95em; width: 5px; height: 5px; border-radius: 50%; background: var(--faint); }
+  .cmp-after li::before { background: var(--accent); }
+  .cmp-before li { color: var(--faint); }
 
   /* decision */
   .decision-band { background: var(--paper-2); max-width: none; }

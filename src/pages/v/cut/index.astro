@@ -171,9 +171,11 @@ const proof = [
 
   <!-- ═══ 5 · CONTACT ══════════════════════════════════════════════ -->
   <section class="end">
-    <h2>Working on something people have to use, not something they choose to?</h2>
-    <p>That is the work I am best at. Tell me what you are weighing up.</p>
-    <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
+    <div class="end-in">
+      <h2>Working on something people have to use, not something they choose to?</h2>
+      <p>That is the work I am best at. Tell me what you are weighing up.</p>
+      <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
+    </div>
   </section>
 </main>
 
@@ -275,9 +277,9 @@ const proof = [
 
   /* ── closing ── */
   .end { background: var(--black); color: #f4f4f3; padding: clamp(4rem, 10vw, 7rem) var(--pad); }
-  .end > * { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
+  .end-in { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
   .end h2 { font-size: clamp(1.8rem, 5vw, 3.2rem); max-width: 20ch; }
-  .end > p { margin-top: 1rem; color: #a3a3a0; max-width: 48ch; font-family: var(--read); }
+  .end p { margin-top: 1rem; color: #a3a3a0; max-width: 48ch; font-family: var(--read); }
   .end-mail { margin-top: 2.2rem !important; font-size: clamp(1.1rem, 3.2vw, 1.9rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; font-family: var(--display) !important; color: #f4f4f3 !important; }
   .end-mail a { border-bottom: 2px solid var(--edge-dark); }
   .end-mail a:hover { border-bottom-color: #f4f4f3; }
