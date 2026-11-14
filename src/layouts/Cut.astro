@@ -14,6 +14,7 @@
  * That is the only way to land on the same left and right edge as a `.band`.
  */
 import Variant from './Variant.astro';
+import Cursor from '../components/Cursor.astro';
 import { contact } from '../lib/variants';
 
 interface Props {
@@ -70,6 +71,8 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       <p class="foot-fine">© {new Date().getFullYear()} Sayantan Dutta</p>
     </div>
   </footer>
+
+  <Cursor />
 
   <script>
     // The nav sits over a dark hero on the home page and goes solid once you
@@ -347,6 +350,26 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     /* --edge-dark is a 3.6:1 boundary colour, which is fine for a border and
        not for a glyph. Separators are text. */
     .pagehead .meta-row .dot { color: var(--dim-dark); }
+
+    /* ── the cursor, carried over from the main site ──
+       A white dot in difference blend: it inverts against the black hero, the
+       paper body and the photographs alike, so it never has to work out which
+       surface it is over. The native cursor stays on; this is an addition to
+       it, not a replacement for it. Gated on `html.anim`, which the layout
+       only sets when JS runs and the visitor has not asked for less motion,
+       so the rAF loop can never animate against someone's preference. */
+    .cursor {
+      position: fixed; top: 0; left: 0; z-index: 10000;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #fff; mix-blend-mode: difference;
+      pointer-events: none; transform: translate(-50%, -50%);
+      transition: width var(--quick) var(--ease), height var(--quick) var(--ease),
+                  background var(--quick) var(--ease), border-color var(--quick) var(--ease);
+    }
+    .cursor.hovering { width: 38px; height: 38px; background: transparent; border: 1.5px solid #fff; }
+    html:not(.anim) .cursor { display: none; }
+    @media (hover: none) { .cursor { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .cursor { display: none !important; } }
 
     /* ── footer ── */
     .foot { background: var(--black); color: #f4f4f3; padding: clamp(3rem, 8vw, 5rem) var(--pad); }

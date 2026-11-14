@@ -63,7 +63,7 @@ const trioAlts = [
 ---
 
 <Cut
-  title={`${project.short} — Sayantan Dutta`}
+  title={`${project.short}, Sayantan Dutta`}
   description={data.lead}
   navTone="dark"
   active="work"
@@ -77,7 +77,8 @@ const trioAlts = [
       <p class="crumb"><a href="/v/cut#work" data-ab="case:back"><span aria-hidden="true">←</span> Work</a> <span class="sep" aria-hidden="true">/</span> {project.short}</p>
       <p class="meta-row">
         <span class={`status-chip st-${project.status.toLowerCase()}`}>{project.status}</span>
-        <span>{project.sector}</span>
+        <span class="kind-chip">{project.kind}</span>
+        <span>{project.field}</span>
         <span class="dot" aria-hidden="true">·</span>
         <span>{project.period}</span>
       </p>
@@ -195,7 +196,7 @@ const trioAlts = [
 
       {sec.shot === 'figure' && (
         <figure class="statfig" data-reveal>
-          <span>30–40%</span>
+          <span>30 to 40%</span>
           <figcaption>less rework across six digital products, for a team of more than twenty</figcaption>
         </figure>
       )}
@@ -247,7 +248,7 @@ const trioAlts = [
         <li style={`--d:${i * 70}ms`}>
           <a href={`/v/cut/${o.slug}`} data-ab={`next:${o.slug}`}>
             <span class="nx-t">{o.short}</span>
-            <span class="nx-m">{o.sector} · {o.period}</span>
+            <span class="nx-m">{o.field} · {o.period}</span>
             <span class="nx-go" aria-hidden="true">→</span>
           </a>
         </li>
@@ -259,6 +260,12 @@ const trioAlts = [
 
 <style>
   .crumb .sep { margin: 0 .2rem; }
+  /* The discipline tag, sized to match the status chip beside it. */
+  .kind-chip {
+    font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    padding: .2rem .5rem; border-radius: 2px;
+    background: rgba(244,244,243,.13); color: #e8e8e5;
+  }
   /* The back arrow leans the way it is pointing, not the way everything else does. */
   .crumb a:hover > span, .crumb a:focus-visible > span { transform: translateX(-3px); }
 

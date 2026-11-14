@@ -19,6 +19,10 @@ export interface VariantProject {
   org: string;
   role: string;
   sector: string;
+  /** Tag next to the project: what kind of design work it was. */
+  kind: string;
+  /** Tag next to the project: the industry it was built for. */
+  field: string;
   period: string;
   status: Status;
   summary: string;
@@ -36,7 +40,9 @@ export const projects: VariantProject[] = [
     org: 'dAIs Genie · miiGenie',
     role: 'Founding Product Designer',
     sector: 'AI Companion · iOS & Android',
-    period: '2026 — now',
+    kind: 'Mobile Product',
+    field: 'Health Tech',
+    period: '2026 to now',
     status: 'LIVE',
     summary:
       'Founding and sole designer on miiGenie, a voice-first companion for older adults living independently, with a second view built for the family member checking in. Three people on the product team, reporting to the founders.',
@@ -51,6 +57,8 @@ export const projects: VariantProject[] = [
     org: 'Self-initiated',
     role: 'Product Design',
     sector: 'Concept · Premium Fintech',
+    kind: 'Mobile Product',
+    field: 'Fintech',
     period: '2025',
     status: 'CONCEPT',
     summary:
@@ -66,7 +74,9 @@ export const projects: VariantProject[] = [
     org: 'Soter Safety Consulting',
     role: 'Founding Product Designer',
     sector: 'B2B SaaS · UK',
-    period: 'Jun — Aug 2025',
+    kind: 'B2B SaaS',
+    field: 'Industrial Safety',
+    period: 'Jun to Aug 2025',
     status: 'SHIPPED',
     summary:
       'Sole designer for HAZOP Edge, a platform that simplifies hazard and operability studies for safety professionals. From first domain research through to MVP delivery, alongside a parallel rebuild of the company website.',
@@ -81,7 +91,9 @@ export const projects: VariantProject[] = [
     org: 'TCS · Ericsson',
     role: 'Product Designer → Lead',
     sector: 'B2B SaaS · IT',
-    period: '2020 — 2023',
+    kind: 'B2B SaaS',
+    field: 'IT & Telecom',
+    period: '2020 to 2023',
     status: 'SHIPPED',
     summary:
       "Led product design and the design system across Ericsson’s three-product API vertical, a B2B SaaS suite centred on the API Console, growing from product designer to design lead across a three-year engagement.",
@@ -96,7 +108,9 @@ export const projects: VariantProject[] = [
     org: 'TCS · Sherwin-Williams',
     role: 'Design Ops Lead',
     sector: 'Design Ops',
-    period: '2023 — 2024',
+    kind: 'Design Ops',
+    field: 'Manufacturing',
+    period: '2023 to 2024',
     status: 'SHIPPED',
     summary:
       'Rebuilt the shared infrastructure for a research and design team of more than 20, across six digital products: the file architecture, the research templates, and a proper research-to-design handoff.',
@@ -111,6 +125,8 @@ export const projects: VariantProject[] = [
     org: 'Rodd Design × WSA',
     role: 'Project Lead',
     sector: 'Speculative · Foresight Design',
+    kind: 'Service Design',
+    field: 'Health & Social Care',
     period: '2025',
     status: 'EXHIBITED',
     summary:
@@ -123,13 +139,13 @@ export const projects: VariantProject[] = [
 /** Career log, oldest first — same entries as the About page timeline. */
 export const log = [
   { stamp: '2020', event: 'Service Design Intern · Pensaar Design', kind: 'Internship' },
-  { stamp: '2020-21', event: 'Product Designer · TCS (Ericsson)', kind: 'Full-time' },
-  { stamp: '2021-23', event: 'Lead Product Designer · TCS (Ericsson)', kind: 'Full-time' },
-  { stamp: '2023-24', event: 'Design Operations Lead · TCS (Sherwin-Williams)', kind: 'Full-time' },
-  { stamp: '2024-25', event: 'MA Design Management · University of Southampton', kind: 'Postgrad' },
-  { stamp: 'Dec 24 — Jun 25', event: 'Founding Product Designer · SparkSoft Ltd', kind: 'Contract · UK' },
-  { stamp: 'Jun — Aug 25', event: 'Founding Product Designer · Soter Safety Consulting', kind: 'Contract · UK' },
-  { stamp: '2026 — now', event: 'Founding Product Designer · dAIs Genie (miiGenie)', kind: 'Contract · UK' },
+  { stamp: '2020 to 21', event: 'Product Designer · TCS (Ericsson)', kind: 'Full-time' },
+  { stamp: '2021 to 23', event: 'Lead Product Designer · TCS (Ericsson)', kind: 'Full-time' },
+  { stamp: '2023 to 24', event: 'Design Operations Lead · TCS (Sherwin-Williams)', kind: 'Full-time' },
+  { stamp: '2024 to 25', event: 'MA Design Management · University of Southampton', kind: 'Postgrad' },
+  { stamp: 'Dec 24 to Jun 25', event: 'Founding Product Designer · SparkSoft Ltd', kind: 'Contract · UK' },
+  { stamp: 'Jun to Aug 25', event: 'Founding Product Designer · Soter Safety Consulting', kind: 'Contract · UK' },
+  { stamp: '2026 to now', event: 'Founding Product Designer · dAIs Genie (miiGenie)', kind: 'Contract · UK' },
 ];
 
 /** Disciplines, plotted on the control-room competency grid. */
@@ -142,6 +158,23 @@ export const disciplines = [
   { name: 'Accessibility (WCAG)', depth: 4, reach: 3 },
   { name: 'Service design', depth: 3, reach: 4 },
   { name: 'Foresight / speculative', depth: 3, reach: 2 },
+];
+
+/**
+ * Selected clients, the same set and the same logo files the main site uses.
+ * `h` is the optical height in px: these marks are drawn at different weights,
+ * so a single height makes the light ones disappear next to the heavy ones.
+ * `w` is that height at the file's own aspect ratio, so a lazily loaded logo
+ * cannot change the width of a strip that is already sliding.
+ */
+export const clients = [
+  { name: 'Ericsson', logo: '/images/clients/ericsson.png', w: 46, h: 40 },
+  { name: 'McAfee', logo: '/images/clients/mcafee.png', w: 138, h: 27 },
+  { name: 'Sherwin-Williams', logo: '/images/clients/sherwin-williams.png', w: 116, h: 33 },
+  { name: 'ITC', logo: '/images/clients/itc.png', w: 40, h: 48 },
+  { name: 'Soter Safety Consulting', logo: '/images/clients/soter-safety.png', w: 212, h: 38 },
+  { name: 'Pensaar Design', logo: '/images/clients/pensaar.png', w: 86, h: 50 },
+  { name: 'CGAP', logo: '/images/clients/cgap.png', w: 76, h: 29 },
 ];
 
 export const contact = {

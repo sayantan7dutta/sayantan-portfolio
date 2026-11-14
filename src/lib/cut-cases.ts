@@ -100,11 +100,11 @@ export const cutCases: CutCase[] = [
         block: {
           kind: 'personas',
           items: [
-            { role: 'Senior', age: '70–75', name: 'Living alone, away from family', note: 'Wants to run her own life: medication on time, paperwork in order, family a tap away. Anxious that technology will make her feel stupid.' },
-            { role: 'Senior', age: '75–85', name: 'Recently moved, network lost', note: 'New town, old habits gone. Wants to rebuild a routine and a social circle without depending on the family he moved closer to.' },
-            { role: 'Senior', age: '70–80', name: 'Prefers their own company', note: 'Independent by choice. No interest in community groups; wants appointments, documents and health admin handled without fuss.' },
-            { role: 'Carer', age: '45–55', name: 'The busy family carer', note: 'Sandwich generation. Helps parents with life admin from a distance while raising children. Needs visibility without surveillance.' },
-            { role: 'Carer', age: '60–66', name: 'The working caregiver', note: 'Caring for a parent while still working full-time. The app has to be self-explanatory, because she has no spare hours to be tech support.' },
+            { role: 'Senior', age: '70 to 75', name: 'Living alone, away from family', note: 'Wants to run her own life: medication on time, paperwork in order, family a tap away. Anxious that technology will make her feel stupid.' },
+            { role: 'Senior', age: '75 to 85', name: 'Recently moved, network lost', note: 'New town, old habits gone. Wants to rebuild a routine and a social circle without depending on the family he moved closer to.' },
+            { role: 'Senior', age: '70 to 80', name: 'Prefers their own company', note: 'Independent by choice. No interest in community groups; wants appointments, documents and health admin handled without fuss.' },
+            { role: 'Carer', age: '45 to 55', name: 'The busy family carer', note: 'Sandwich generation. Helps parents with life admin from a distance while raising children. Needs visibility without surveillance.' },
+            { role: 'Carer', age: '60 to 66', name: 'The working caregiver', note: 'Caring for a parent while still working full-time. The app has to be self-explanatory, because she has no spare hours to be tech support.' },
           ],
         },
       },
@@ -129,7 +129,7 @@ export const cutCases: CutCase[] = [
         kicker: 'The principles it produced',
         heading: 'Voice-first, never voice-only',
         body: [
-          'miiGenie leads with the one interface older adults already master: talking. Every core job — reminders, finding a document, recording how the day went, calling for help — can be done by speaking. Every voice step has a typed fallback, because dignity means never being stuck.',
+          'miiGenie leads with the one interface older adults already master: talking. Every core job can be done by speaking: reminders, finding a document, recording how the day went, calling for help. Every voice step has a typed fallback, because dignity means never being stuck.',
           'The second surface is the family carer: pairing, check-ins and visibility designed as reassurance rather than surveillance. The product is deliberately framed as supportive everyday companionship, with hard guardrails. It is not a therapist and never pretends to be a relationship.',
         ],
         shot: 'trio',
@@ -158,7 +158,7 @@ export const cutCases: CutCase[] = [
       { k: 'Client', v: 'Soter Safety Consulting' },
       { k: 'Role', v: 'Founding Product Designer' },
       { k: 'Field', v: 'B2B SaaS · Industrial safety · UK' },
-      { k: 'Period', v: 'June — August 2025' },
+      { k: 'Period', v: 'June to August 2025' },
       { k: 'Status', v: 'MVP delivered' },
     ],
     scope: [
@@ -172,7 +172,7 @@ export const cutCases: CutCase[] = [
         kicker: 'The problem',
         heading: 'Complexity was the workflow, not a bug in it',
         body: [
-          'Industrial hazard and operability studies run on dense, technical workflows. The people doing them — process engineers, safety managers, risk analysts — needed a system that could carry rigorous, compliance-heavy work without burying them in convoluted interfaces.',
+          'Industrial hazard and operability studies run on dense, technical workflows. The people doing them, process engineers and safety managers and risk analysts, needed a system that could carry rigorous, compliance-heavy work without burying them in convoluted interfaces.',
           'The existing tools were built by engineers, for engineers. Dense, unintuitive, and poorly suited to the cross-functional work a HAZOP study actually involves. Teams fell back on spreadsheets and Word documents.',
         ],
       },
@@ -188,11 +188,11 @@ export const cutCases: CutCase[] = [
         kicker: 'The design',
         heading: 'Designing for trust in a compliance environment',
         body: [
-          'The core principle was reducing cognitive load. Never simplification for its own sake — stripping out friction so users could focus on the safety thinking instead of fighting the tooling.',
+          'The core principle was reducing cognitive load. It was never simplification for its own sake. The point was stripping out friction so users could focus on the safety thinking instead of fighting the tooling.',
           'Navigation and page structure map directly onto the safety assessment lifecycle: identify risks, evaluate operability, track mitigation. The Scenario Summary puts every deviation, its risk rating and its tracked action in one scannable table.',
         ],
         shot: 'wide',
-        caption: 'Scenario summary — every deviation, its risk rating and its tracked action in one table',
+        caption: 'Scenario summary: every deviation, its risk rating and its tracked action in one table',
         block: {
           kind: 'cards',
           items: [
@@ -207,7 +207,7 @@ export const cutCases: CutCase[] = [
         heading: 'A safety assessment that moves through the organisation cleanly',
         body: [
           'The change was operational, not cosmetic. Studies that lived in scattered spreadsheets now move through one accountable process: clear ownership at each step, duplication and reporting rework removed, and compliance evidence produced as a by-product of the work rather than a scramble at the end.',
-          'It maps onto how safety professionals already think. It did not try to replace the safety thinking — that part was never the problem.',
+          'It maps onto how safety professionals already think. It did not try to replace the safety thinking, which was never the problem.',
         ],
         shot: 'wide2',
         caption: 'Analytics across sites and studies',
@@ -229,7 +229,7 @@ export const cutCases: CutCase[] = [
       { k: 'Client', v: 'TCS · Ericsson' },
       { k: 'Role', v: 'Product Designer → Lead' },
       { k: 'Field', v: 'B2B SaaS · Telecoms' },
-      { k: 'Period', v: '2020 — 2023' },
+      { k: 'Period', v: '2020 to 2023' },
       { k: 'Status', v: 'Shipped' },
     ],
     scope: [
@@ -268,7 +268,7 @@ export const cutCases: CutCase[] = [
         block: {
           kind: 'compare',
           before: {
-            h: 'Before — three separate islands',
+            h: 'Before: three separate islands',
             items: [
               'API Console: custom nav, dense tables, no pattern docs',
               'API Portal: different colour usage, unique button styles',
@@ -279,7 +279,7 @@ export const cutCases: CutCase[] = [
             ],
           },
           after: {
-            h: 'After — one shared foundation',
+            h: 'After: one shared foundation',
             items: [
               'Shared token system: colour, spacing and type across all three',
               'One component library, built on Ericsson’s design system',
@@ -319,7 +319,7 @@ export const cutCases: CutCase[] = [
       heading: 'What I’d do differently, and what this made me realise',
       body: [
         'I built a lot of the system myself before sharing it. In hindsight, getting designers to co-create components from the start would have created faster adoption and stronger ownership. The system was good; the rollout could have been more collaborative.',
-        'The moments that mattered most were not the screens I designed. They were the conversations I facilitated — getting a product owner and a tech lead to a shared view of what was possible in a release mattered more than any individual design decision.',
+        'The moments that mattered most were not the screens I designed. They were the conversations I facilitated. Getting a product owner and a tech lead to a shared view of what was possible in a release mattered more than any individual design decision.',
         'By the time I left, I was spending more time on systems, process and cross-functional alignment than on hands-on design. That led directly to the Sherwin-Williams design operations engagement. I had already been doing the job before it had the title.',
       ],
     },
@@ -333,7 +333,7 @@ export const cutCases: CutCase[] = [
       { k: 'Role', v: 'Design Operations Lead' },
       { k: 'Field', v: 'Design operations' },
       { k: 'Team', v: '20+ researchers and designers' },
-      { k: 'Period', v: '2023 — 2024' },
+      { k: 'Period', v: '2023 to 2024' },
       { k: 'Status', v: 'Shipped' },
     ],
     scope: [
@@ -388,7 +388,7 @@ export const cutCases: CutCase[] = [
       heading: 'What I finished, what remained, and what I learned',
       body: [
         'Completed: the file architecture, the three research templates, the researcher-to-designer handoff, a design critique framework, and cross-linking so documents could be found from more than one path.',
-        'In pipeline for the next phase: designer-side infrastructure — Figma library governance, component ownership and version control, and cross-product design consistency.',
+        'In pipeline for the next phase: designer-side infrastructure: Figma library governance, component ownership and version control, and consistency across the products.',
         'Each improvement was validated with the team before moving to the next. The feedback was immediate and specific, because people could see what changed and why it mattered.',
       ],
     },
@@ -433,7 +433,7 @@ export const cutCases: CutCase[] = [
         kicker: 'The rule',
         heading: 'Every feature had to neutralise a specific anxiety',
         body: [
-          'Timing — “am I sending at a bad rate right now?” — neutralised by plain-language rate alerts shown with the chart, so the user decides rather than the algorithm. Opacity — “did it arrive, was it enough?” — neutralised by shared vaults where both sides see the same balance and contributions.',
+          'Timing, as in “am I sending at a bad rate right now?”, is neutralised by plain-language rate alerts shown with the chart, so the user decides rather than the algorithm. Opacity, as in “did it arrive, was it enough?”, is neutralised by shared vaults where both sides see the same balance and contributions.',
         ],
         shot: 'wide2',
         caption: 'Smart transfer, with the rate decision left to the sender',
@@ -450,7 +450,7 @@ export const cutCases: CutCase[] = [
       heading: 'What I’d measure if this were built',
       body: [
         'This is a concept, so there are no live results to report, and I am not going to put invented percentages on a product no one has used. What I can be specific about is the bet each feature makes and the metric I would test it against: send-flow completion before and after plain-language rate triggers, and inbound “where is my transfer?” contacts before and after shared visibility.',
-        'Working on a consumer product after several years of enterprise work exposed how differently the two approach trust. In enterprise UX, trust comes from predictability and compliance signals. In consumer fintech it is emotional — whether the product feels like it is on your side. The hardest design problem was not the feature set. It was tone.',
+        'Working on a consumer product after several years of enterprise work exposed how differently the two approach trust. In enterprise UX, trust comes from predictability and compliance signals. In consumer fintech it is emotional, a question of whether the product feels like it is on your side. The hardest design problem was not the feature set. It was tone.',
       ],
     },
   },
