@@ -5,6 +5,12 @@
  * Structure follows the hiring research: role, scope and status are scannable
  * before any prose, a status chip answers "is it live?", and where
  * src/lib/decisions.ts carries a trade-off it is given its own block.
+ *
+ * Layout: each section is a two-column spread — kicker and heading on the
+ * left, the reading column on the right — so a long page keeps its measure
+ * without leaving a third of every screen empty. Figures, tables and card
+ * blocks sit outside that grid and run the full band, which is what gives
+ * the page its rhythm.
  */
 import type { GetStaticPaths } from 'astro';
 import { Image } from 'astro:assets';
@@ -68,7 +74,7 @@ const trioAlts = [
   <!-- ═══ HEADER: scannable before any prose ════════════════════════ -->
   <header class="pagehead">
     <div class="pagehead-in">
-      <p class="crumb"><a href="/v/cut#work" data-ab="case:back">Work</a> <span aria-hidden="true">/</span> {project.short}</p>
+      <p class="crumb"><a href="/v/cut#work" data-ab="case:back"><span aria-hidden="true">←</span> Work</a> <span class="sep" aria-hidden="true">/</span> {project.short}</p>
       <p class="meta-row">
         <span class={`status-chip st-${project.status.toLowerCase()}`}>{project.status}</span>
         <span>{project.sector}</span>
@@ -93,43 +99,52 @@ const trioAlts = [
   <!-- ═══ SECTIONS ══════════════════════════════════════════════════ -->
   {data.sections.map((sec) => (
     <section class="band">
-      <div class="case-sec">
-        <p class="sec-k">{sec.kicker}</p>
-        <h2>{sec.heading}</h2>
-        {sec.body.map((p) => <p class="case-p">{p}</p>)}
-        {sec.pull && <p class="case-pull">{sec.pull}</p>}
+      <div class="case-sec" data-reveal>
+        <div class="cs-head">
+          <p class="sec-k">{sec.kicker}</p>
+          <h2>{sec.heading}</h2>
+        </div>
+        <div class="cs-body">
+          {sec.body.map((p) => <p class="case-p">{p}</p>)}
+          {sec.pull && <p class="case-pull">{sec.pull}</p>}
+        </div>
       </div>
 
       {sec.shot === 'beforeAfter' && img.before && (
-        <div class="ba">
+        <div class="ba" data-reveal>
           <figure>
-            <div class="plate dim"><Image src={img.before} alt="The home screen before the redesign" widths={[320, 640]} sizes="260px" /></div>
+            <div class="plate dim"><Image src={img.before} alt="The home screen before the redesign" widths={[320, 640]} sizes="280px" /></div>
             <figcaption><b>Before.</b> Dark tiles, little warmth, no hierarchy guiding the eye to the main voice action.</figcaption>
           </figure>
           <figure>
-            <div class="plate"><Image src={img.after} alt="The home screen after the redesign" widths={[320, 640]} sizes="260px" /></div>
+            <div class="plate"><Image src={img.after} alt="The home screen after the redesign" widths={[320, 640]} sizes="280px" /></div>
             <figcaption><b>After.</b> Warm cream and deep teal, large type, one clear voice action.</figcaption>
           </figure>
         </div>
       )}
 
       {sec.shot === 'trio' && img.trio && (
-        <div class="trio">
+        <div class="trio" data-reveal>
           {img.trio.map((t: any, i: number) => (
-            <figure><div class="plate"><Image src={t} alt={trioAlts[i] ?? ''} widths={[300, 600]} sizes="220px" loading="lazy" /></div></figure>
+            <figure style={`--d:${i * 80}ms`}><div class="plate"><Image src={t} alt={trioAlts[i] ?? ''} widths={[320, 640]} sizes="250px" loading="lazy" /></div></figure>
           ))}
         </div>
       )}
 
       {(sec.shot === 'wide' || sec.shot === 'wide2') && img[sec.shot] && (
-        <figure class="wide">
-          <Image src={img[sec.shot]} alt="" widths={[760, 1400]} sizes="(max-width: 1100px) 92vw, 1000px" loading="lazy" />
+        <figure class="wide" data-reveal>
+          <div class="wide-frame">
+              {/* With a caption the figure already describes itself, so the image
+                stays out of the screen reader's way; without one it needs to
+                say at least what it is. */}
+            <Image src={img[sec.shot]} alt={sec.caption ? '' : `A screen from ${project.short}`} widths={[820, 1600]} sizes="(max-width: 1100px) 92vw, 1060px" loading="lazy" />
+          </div>
           {sec.caption && <figcaption>{sec.caption}</figcaption>}
         </figure>
       )}
 
       {sec.block?.kind === 'cards' && (
-        <ol class="cards">
+        <ol class="cards" data-reveal>
           {sec.block.items.map((c, i) => (
             <li>
               <span class="card-n">{String(i + 1).padStart(2, '0')}</span>
@@ -141,7 +156,7 @@ const trioAlts = [
       )}
 
       {sec.block?.kind === 'personas' && (
-        <ul class="personas">
+        <ul class="personas" data-reveal>
           {sec.block.items.map((pr) => (
             <li>
               <p class="pr-top"><span class="pr-role">{pr.role}</span><span class="pr-age">{pr.age}</span></p>
@@ -153,7 +168,7 @@ const trioAlts = [
       )}
 
       {sec.block?.kind === 'journey' && (
-        <div class="tbl-scroll">
+        <div class="tbl-scroll" data-reveal tabindex="0" role="region" aria-label={sec.heading}>
           <table class="tbl">
             <thead><tr>{sec.block.cols.map((c) => <th scope="col">{c}</th>)}</tr></thead>
             <tbody>
@@ -166,7 +181,7 @@ const trioAlts = [
       )}
 
       {sec.block?.kind === 'compare' && (
-        <div class="compare">
+        <div class="compare" data-reveal>
           <div class="cmp cmp-before">
             <h3>{sec.block.before.h}</h3>
             <ul>{sec.block.before.items.map((i) => <li>{i}</li>)}</ul>
@@ -179,7 +194,7 @@ const trioAlts = [
       )}
 
       {sec.shot === 'figure' && (
-        <figure class="statfig">
+        <figure class="statfig" data-reveal>
           <span>30–40%</span>
           <figcaption>less rework across six digital products, for a team of more than twenty</figcaption>
         </figure>
@@ -190,38 +205,50 @@ const trioAlts = [
   <!-- ═══ THE DECISION ══════════════════════════════════════════════ -->
   {decision && (
     <section class="band decision-band">
-      <div class="case-sec">
-        <p class="sec-k">The decision it turned on</p>
-        <h2>{decision.question}</h2>
-        <div class="forks">
-          <div class="fork took"><p class="fork-k">What I did</p><p>{decision.took}</p></div>
-          <div class="fork left"><p class="fork-k">What I didn’t</p><p>{decision.left}</p></div>
+      <div class="case-sec solo" data-reveal>
+        <div class="cs-head">
+          <p class="sec-k">The decision it turned on</p>
+          <h2>{decision.question}</h2>
         </div>
-        {decision.cost && (
-          <div class="cost"><p class="cost-k">What it cost</p><p>{decision.cost}</p></div>
-        )}
+        <div class="cs-body">
+          <div class="forks">
+            <div class="fork took"><p class="fork-k">What I did</p><p>{decision.took}</p></div>
+            <div class="fork left"><p class="fork-k">What I didn’t</p><p>{decision.left}</p></div>
+          </div>
+          {decision.cost && (
+            <div class="cost"><p class="cost-k">What it cost</p><p>{decision.cost}</p></div>
+          )}
+        </div>
       </div>
     </section>
   )}
 
   <!-- ═══ REFLECTION ════════════════════════════════════════════════ -->
   <section class="band">
-    <div class="case-sec">
-      <p class="sec-k">Reflection</p>
-      <h2>{data.reflection.heading}</h2>
-      {data.reflection.body.map((p) => <p class="case-p">{p}</p>)}
+    <div class="case-sec" data-reveal>
+      <div class="cs-head">
+        <p class="sec-k">Reflection</p>
+        <h2>{data.reflection.heading}</h2>
+      </div>
+      <div class="cs-body">
+        {data.reflection.body.map((p) => <p class="case-p">{p}</p>)}
+      </div>
     </div>
   </section>
 
   <!-- ═══ NEXT ══════════════════════════════════════════════════════ -->
   <section class="band">
-    <p class="sec-k">Next</p>
-    <ul class="next">
-      {others.map((o) => (
-        <li>
+    <div class="band-head" data-reveal>
+      <p class="sec-k">Next</p>
+      <h2>Three more to read</h2>
+    </div>
+    <ul class="next" data-reveal>
+      {others.map((o, i) => (
+        <li style={`--d:${i * 70}ms`}>
           <a href={`/v/cut/${o.slug}`} data-ab={`next:${o.slug}`}>
             <span class="nx-t">{o.short}</span>
             <span class="nx-m">{o.sector} · {o.period}</span>
+            <span class="nx-go" aria-hidden="true">→</span>
           </a>
         </li>
       ))}
@@ -231,17 +258,29 @@ const trioAlts = [
 </main>
 
 <style>
+  .crumb .sep { margin: 0 .2rem; }
+  /* The back arrow leans the way it is pointing, not the way everything else does. */
+  .crumb a:hover > span, .crumb a:focus-visible > span { transform: translateX(-3px); }
+
+  /* ── at a glance ── */
   .case-facts { max-width: var(--measure); margin: 0 auto; padding: clamp(2rem, 5vw, 3rem) var(--pad) 0; }
-  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.2rem; margin: 0 0 2rem; padding-bottom: 1.6rem; border-bottom: 1px solid var(--line); }
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.2rem; margin: 0 0 clamp(1.4rem, 3vw, 2rem); padding-bottom: clamp(1.2rem, 3vw, 1.6rem); border-bottom: 1px solid var(--line); }
   .glance dt { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
   .glance dd { font-size: .92rem; margin-top: .2rem; }
 
-  .scope { display: grid; gap: .6rem; }
+  /* Two columns of scope on wide screens: it is a list of facts, not prose,
+     so it gains nothing from running the whole width in one file. */
+  .scope { display: grid; gap: .6rem clamp(1.5rem, 4vw, 3.5rem); }
+  @media (min-width: 900px) { .scope { grid-template-columns: 1fr 1fr; } }
   .scope li { position: relative; padding-left: 1.4rem; color: var(--ink-2); font-size: .95rem; }
   .scope li::before { content: ''; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
 
-  .case-sec { max-width: 64rem; }
-  .case-sec h2 { font-size: clamp(1.45rem, 3.6vw, 2.2rem); margin: .6rem 0 1.2rem; max-width: 24ch; }
+  /* ── the two-column spread ── */
+  .case-sec { display: grid; grid-template-columns: minmax(0, 23rem) minmax(0, 1fr); gap: clamp(1.2rem, 4vw, 3.5rem); align-items: start; }
+  .case-sec.solo { grid-template-columns: 1fr; }
+  @media (max-width: 900px) { .case-sec { grid-template-columns: 1fr; } }
+  .cs-head h2 { font-size: clamp(1.45rem, 3.6vw, 2.2rem); margin: .6rem 0 0; max-width: 22ch; }
+  @media (max-width: 900px) { .cs-head { margin-bottom: 1.2rem; } }
   .case-p { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); max-width: 64ch; }
   .case-p + .case-p { margin-top: 1rem; }
   .case-pull {
@@ -251,33 +290,42 @@ const trioAlts = [
   }
 
   /* plates */
-  .plate { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; box-shadow: 0 24px 46px -32px rgba(0,0,0,.5); }
+  .plate { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; box-shadow: 0 24px 46px -32px rgba(0,0,0,.5); transition: box-shadow var(--slow) var(--ease), transform var(--slow) var(--ease); }
   .plate img { width: 100%; display: block; aspect-ratio: 788 / 1778; object-fit: cover; object-position: top center; }
+  .plate:hover { transform: translateY(-5px); box-shadow: 0 34px 56px -30px rgba(0,0,0,.55); }
   .dim { filter: saturate(.45) brightness(.9); }
-  .ba { display: grid; grid-template-columns: repeat(2, minmax(0, 260px)); gap: clamp(1.4rem, 4vw, 3rem); margin-top: 2.4rem; }
-  .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 220px)); gap: clamp(1rem, 3vw, 2rem); margin-top: 2.4rem; }
+  .ba { display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); gap: clamp(1.4rem, 4vw, 3rem); margin-top: clamp(2rem, 5vw, 3rem); }
+  .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 250px)); gap: clamp(1rem, 3vw, 2rem); margin-top: clamp(2rem, 5vw, 3rem); }
   @media (max-width: 720px) { .ba, .trio { grid-template-columns: 1fr; max-width: 280px; } }
-  .ba figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); }
+  .ba figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); max-width: 34ch; }
   .ba figcaption b { color: var(--ink); font-weight: 700; }
 
-  .wide { margin-top: 2.4rem; }
-  .wide img { width: 100%; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 28px 54px -36px rgba(0,0,0,.45); }
-  .wide figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); }
+  .wide { margin-top: clamp(2rem, 5vw, 3rem); }
+  .wide-frame { overflow: hidden; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 28px 54px -36px rgba(0,0,0,.45); }
+  .wide-frame img { width: 100%; transition: transform 1.2s var(--ease); }
+  .wide-frame:hover img { transform: scale(1.025); }
+  .wide figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); max-width: 62ch; }
 
-  .statfig { margin-top: 2.4rem; background: var(--accent); color: var(--paper); padding: clamp(2rem, 6vw, 3.5rem); text-align: center; border-radius: 8px; }
+  .statfig { margin-top: clamp(2rem, 5vw, 3rem); background: var(--accent); color: var(--paper); padding: clamp(2rem, 6vw, 3.5rem); text-align: center; border-radius: 8px; }
   .statfig span { display: block; font-size: clamp(2.4rem, 8vw, 4.4rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; }
   .statfig figcaption { margin-top: .8rem; font-size: .9rem; opacity: .88; }
 
   /* ── numbered cards ── */
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 2.2rem; }
-  .cards li { background: var(--paper); padding: clamp(1.2rem, 2.6vw, 1.7rem); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: clamp(2rem, 5vw, 2.6rem); }
+  .cards li { background: var(--paper); padding: clamp(1.2rem, 2.6vw, 1.7rem); transition: background var(--quick) var(--ease); }
+  .cards li:hover { background: #fff; }
   .card-n { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); }
   .cards h3 { font-size: 1.02rem; font-weight: 700; margin: .5rem 0 .5rem; letter-spacing: -.015em; }
   .cards p { font-family: var(--read); font-size: .92rem; color: var(--ink-2); }
 
   /* ── personas ── */
-  .personas { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(.9rem, 2vw, 1.3rem); margin-top: 2.2rem; }
-  .personas li { border: 1px solid var(--line); border-top: 3px solid var(--accent); padding: clamp(1.1rem, 2.4vw, 1.5rem); background: var(--paper); }
+  .personas { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(.9rem, 2vw, 1.3rem); margin-top: clamp(2rem, 5vw, 2.6rem); }
+  .personas li {
+    border: 1px solid var(--line); border-top: 3px solid var(--accent);
+    padding: clamp(1.1rem, 2.4vw, 1.5rem); background: var(--paper);
+    transition: box-shadow var(--quick) var(--ease), transform var(--quick) var(--ease);
+  }
+  .personas li:hover { transform: translateY(-3px); box-shadow: 0 18px 30px -22px rgba(0,0,0,.4); }
   .pr-top { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; }
   .pr-role { font-size: .6rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
   .pr-age { font-size: .74rem; color: var(--faint); }
@@ -285,16 +333,21 @@ const trioAlts = [
   .pr-note { font-family: var(--read); font-size: .88rem; color: var(--ink-2); }
 
   /* ── stage table ── */
-  .tbl-scroll { overflow-x: auto; margin-top: 2.2rem; }
-  .tbl { width: 100%; border-collapse: collapse; min-width: 640px; }
+  /* Focusable, because on a narrow screen this is the only way to reach the
+     right-hand columns without a mouse. */
+  .tbl-scroll { overflow-x: auto; margin-top: clamp(2rem, 5vw, 2.6rem); }
+  .tbl { width: 100%; border-collapse: collapse; min-width: 680px; }
   .tbl th, .tbl td { text-align: left; vertical-align: top; padding: .95rem .9rem; border-bottom: 1px solid var(--line); }
+  .tbl th:first-child, .tbl td:first-child { padding-left: 0; }
   .tbl thead th { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
+  .tbl tbody tr { transition: background var(--quick) var(--ease); }
+  .tbl tbody tr:hover { background: var(--paper-2); }
   .tbl tbody th { font-weight: 700; white-space: nowrap; color: var(--accent); width: 1%; }
   .tbl td { font-family: var(--read); font-size: .94rem; color: var(--ink-2); }
   .tbl td:last-child { color: var(--ink); }
 
   /* ── before / after columns ── */
-  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.5vw, 2rem); margin-top: 2.2rem; }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.5vw, 2rem); margin-top: clamp(2rem, 5vw, 2.6rem); }
   @media (max-width: 720px) { .compare { grid-template-columns: 1fr; } }
   .cmp { padding: clamp(1.1rem, 2.4vw, 1.6rem); border: 1px solid var(--line); }
   .cmp-before { background: var(--paper-2); }
@@ -310,27 +363,41 @@ const trioAlts = [
 
   /* decision */
   .decision-band { background: var(--paper-2); max-width: none; }
-  .decision-band > * { max-width: var(--measure); margin-inline: auto; }
-  .forks { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); margin-top: 1.6rem; }
+  /* Same inner width as a normal .band, so the left AND right edges line up
+     with every other section. `var(--measure)` alone was 2 × --pad too wide. */
+  .decision-band > * { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
+  .solo .cs-body { margin-top: clamp(1.2rem, 3vw, 1.8rem); }
+  .forks { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); }
   @media (max-width: 680px) { .forks { grid-template-columns: 1fr; } }
   .fork { padding-left: 1.1rem; }
   .fork.took { border-left: 2.5px solid var(--ink); }
-  .fork.left { border-left: 2.5px dashed var(--line); }
+  .fork.left { border-left: 2.5px dashed var(--edge); }
   .fork-k { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .6rem; }
   .fork.took .fork-k { color: var(--ink); }
   .fork.left .fork-k { color: var(--faint); }
   .fork p:last-child { font-family: var(--read); }
   .fork.left p:last-child { color: var(--faint); }
-  .cost { margin-top: 1.8rem; padding: 1.4rem 1.6rem; border: 1.5px solid var(--accent); border-radius: 4px; }
+  .cost { margin-top: 1.8rem; padding: 1.4rem 1.6rem; border: 1.5px solid var(--accent); border-radius: 4px; max-width: 64ch; }
   .cost-k { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: .6rem; }
   .cost p:last-child { font-family: var(--read); }
 
-  /* next */
-  .next { margin-top: 1rem; }
-  .next li { border-bottom: 1px solid var(--line); }
-  .next a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; align-items: baseline; padding: 1rem 0; min-height: 44px; }
+  /* ── next: three tiles across the band rather than three stacked rows ── */
+  .next { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  @media (max-width: 760px) { .next { grid-template-columns: 1fr; } }
+  .next li { background: var(--paper); transition: background var(--quick) var(--ease); }
+  .next li:hover { background: #fff; }
+  .next a {
+    display: flex; flex-direction: column; gap: .35rem; min-height: 9.5rem;
+    padding: clamp(1.1rem, 2.6vw, 1.6rem);
+  }
+  .nx-t { font-weight: 700; font-size: clamp(1.05rem, 2.4vw, 1.3rem); letter-spacing: -.02em; transition: color var(--quick) var(--ease); }
   .next a:hover .nx-t { color: var(--accent); }
-  .nx-t { font-weight: 600; font-size: 1.05rem; }
-  .nx-m { font-size: .82rem; color: var(--faint); }
+  .nx-m { font-size: .8rem; color: var(--faint); }
+  .nx-go { margin-top: auto; padding-top: .8rem; font-size: 1.1rem; color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plate:hover, .personas li:hover { transform: none; }
+    .wide-frame:hover img { transform: none; }
+  }
 </style>
 </Cut>

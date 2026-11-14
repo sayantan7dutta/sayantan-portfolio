@@ -5,6 +5,13 @@
  * Every page in /v/cut/ uses this: one nav, one footer, one set of tokens.
  * The styles are global on purpose so case studies can use the same classes
  * as the home page without each file restating the system.
+ *
+ * Alignment contract — read this before adding a full-bleed section.
+ * Normal content sits in a `.band`: max-width `--measure`, padding `--pad`.
+ * A section that needs an edge-to-edge background instead sets
+ * `max-width: none` and gives its inner wrapper
+ * `max-width: calc(var(--measure) - var(--pad) * 2)` with `margin-inline: auto`.
+ * That is the only way to land on the same left and right edge as a `.band`.
  */
 import Variant from './Variant.astro';
 import { contact } from '../lib/variants';
@@ -28,6 +35,16 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
   fonts={fonts}
   themeColor={navTone === 'dark' ? '#0a0a0a' : '#faf9f6'}
 >
+  <!-- Opt into the scroll reveals before the page below is parsed, so nothing
+       ever paints at full opacity and then jumps back to hidden. Anyone with
+       reduced motion on, or without JS, simply never gets the hidden state. -->
+  <script is:inline>
+    try {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+        document.documentElement.classList.add('anim');
+    } catch (e) {}
+  </script>
+
   <header class={`nav nav-${navTone}`} id="nav">
     <a class="nav-name" href="/v/cut" data-ab="nav:home">Sayantan&nbsp;Dutta</a>
     <nav class="nav-links" aria-label="Main">
@@ -41,11 +58,13 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
 
   <footer class="foot">
     <div class="foot-in">
-      <p class="foot-name">Sayantan Dutta</p>
-      <p class="foot-role">Product designer, enterprise SaaS &amp; AI · {contact.base}</p>
+      <div class="foot-id">
+        <p class="foot-name">Sayantan Dutta</p>
+        <p class="foot-role">Product designer, enterprise SaaS &amp; AI · {contact.base}</p>
+      </div>
       <ul class="foot-links">
         <li><a href={`mailto:${contact.email}`} data-ab="foot:email">{contact.email}</a></li>
-        <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="foot:linkedin">LinkedIn ↗</a></li>
+        <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="foot:linkedin">LinkedIn <span aria-hidden="true">↗</span></a></li>
         <li><a href={contact.resume} data-ab="foot:cv">CV (PDF)</a></li>
       </ul>
       <p class="foot-fine">© {new Date().getFullYear()} Sayantan Dutta</p>
@@ -66,6 +85,46 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       addEventListener('scroll', onScroll, { passive: true });
       addEventListener('resize', onScroll);
     }
+
+    // Scroll reveals. Only ever runs when the inline script above decided the
+    // visitor wants motion, so the no-JS and reduced-motion paths show
+    // everything immediately and this can never hide content for good.
+    //
+    // Deliberately a scroll check rather than an IntersectionObserver: an
+    // observer reports nothing while the document sits in a frame that is
+    // itself off-screen, which is enough to leave a whole page invisible.
+    // Reading a rect on a rAF-throttled scroll is cheap at this many elements
+    // and has no state that can get stuck.
+    if (document.documentElement.classList.contains('anim')) {
+      let pending = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+
+      const check = () => {
+        const limit = innerHeight * 0.94;
+        pending = pending.filter((el) => {
+          if (el.getBoundingClientRect().top >= limit) return true;
+          el.classList.add('in');
+          return false;
+        });
+        if (!pending.length) {
+          removeEventListener('scroll', check);
+          removeEventListener('resize', check);
+          document.removeEventListener('visibilitychange', check);
+        }
+      };
+
+      // No requestAnimationFrame throttle on purpose: rAF is paused while the
+      // page is in a background tab or an off-screen frame, and a reveal that
+      // never fires is content the visitor never sees. A handful of rect
+      // reads per scroll event, on a list that empties as it goes, is cheaper
+      // than that risk. The listeners remove themselves once it is done.
+      check();
+      addEventListener('scroll', check, { passive: true });
+      addEventListener('resize', check);
+      document.addEventListener('visibilitychange', check);
+      // Late web fonts and images move every offset on the page.
+      addEventListener('load', check);
+      setTimeout(check, 1500);
+    }
   </script>
 
   <style is:global>
@@ -85,8 +144,18 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       --display: 'Inter Tight', system-ui, sans-serif;
       --read: 'Literata', Georgia, serif;
       --pad: clamp(1.2rem, 5vw, 4.5rem);
-      --measure: 1180px;
+      --measure: 1240px;
+      /* One easing and one rhythm for everything that moves, so the whole
+         site feels like it was tuned by the same hand. */
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --quick: .22s;
+      --slow: .66s;
+      --nav-h: 4.4rem;
     }
+
+    html { scroll-behavior: smooth; }
+    /* Anchored headings must clear the fixed nav instead of hiding under it. */
+    :target, [id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
 
     body { background: var(--paper); color: var(--ink); font-family: var(--display); line-height: 1.6; }
     .skip-link { background: var(--accent); color: #fff; }
@@ -98,24 +167,40 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     h1, h2, h3 { letter-spacing: -.035em; line-height: 1.07; font-weight: 700; text-wrap: balance; }
     .sec-k { font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
 
+    /* ── motion primitives ── */
+    [data-reveal] { transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease); transition-delay: var(--d, 0ms); }
+    html.anim [data-reveal] { opacity: 0; transform: translateY(16px); }
+    html.anim [data-reveal].in { opacity: 1; transform: none; }
+
+    /* Any arrow or chevron inside a link leans into the direction of travel. */
+    a > span[aria-hidden='true'] { display: inline-block; transition: transform var(--quick) var(--ease); }
+    a:hover > span[aria-hidden='true'], a:focus-visible > span[aria-hidden='true'] { transform: translateX(3px); }
+
     .btn {
       display: inline-flex; align-items: center; min-height: 48px; padding: .8rem 1.5rem;
       background: var(--ink); color: var(--paper); font-weight: 600; font-size: .95rem; border-radius: 2px;
+      transition: background var(--quick) var(--ease), border-color var(--quick) var(--ease),
+                  color var(--quick) var(--ease), transform var(--quick) var(--ease), opacity var(--quick) var(--ease);
     }
     .btn:hover { background: var(--accent); }
+    /* Press feedback within a frame, and no layout shift: scale only. */
+    .btn:active { transform: scale(.97); }
     .btn-on-dark { background: #f4f4f3; color: #0a0a0a; }
-    .btn-on-dark:hover { background: #f4f4f3; opacity: .85; }
+    .btn-on-dark:hover { background: #f4f4f3; opacity: .82; }
     .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--edge); }
     .btn-ghost:hover { background: transparent; border-color: var(--ink); }
     .btn-ghost-dark { background: transparent; color: #f4f4f3; border: 1.5px solid var(--edge-dark); }
-    .btn-ghost-dark:hover { border-color: #f4f4f3; }
+    .btn-ghost-dark:hover { border-color: #f4f4f3; background: rgba(244,244,243,.08); }
 
     /* ── nav ── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 400;
       display: flex; align-items: center; justify-content: space-between; gap: 1.2rem;
-      padding: .9rem var(--pad);
-      transition: background .3s, border-color .3s, color .3s;
+      /* Full-bleed bar, but the name and links land on the same left and
+         right edge as every band below. */
+      padding-block: .9rem;
+      padding-inline: max(var(--pad), calc((100% - var(--measure)) / 2 + var(--pad)));
+      transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
       border-bottom: 1px solid transparent;
     }
     .nav-light { background: rgba(250,249,246,.9); backdrop-filter: blur(10px); border-bottom-color: var(--line); }
@@ -129,29 +214,108 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     .nav-name { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; letter-spacing: -.02em; font-size: 1rem; }
     .nav-links { display: flex; align-items: center; gap: .3rem; }
     .nav-links a {
+      position: relative;
       display: inline-flex; align-items: center; min-height: 44px; padding: .5rem .7rem;
       font-size: .9rem; font-weight: 500; border-radius: 2px;
+      transition: color var(--quick) var(--ease), opacity var(--quick) var(--ease), background var(--quick) var(--ease);
     }
+    /* The rule under the current page grows out from the middle rather than
+       appearing, so moving between pages reads as one continuous object. */
+    .nav-links a:not(.nav-cta)::after {
+      content: ''; position: absolute; left: .7rem; right: .7rem; bottom: .55rem; height: 1.5px;
+      background: currentColor; transform: scaleX(0); transform-origin: center;
+      transition: transform var(--quick) var(--ease);
+    }
+    .nav-links a:not(.nav-cta):hover::after,
+    .nav-links a[aria-current]:not(.nav-cta)::after { transform: scaleX(1); }
     .nav-links a:hover { color: var(--accent); }
-    .nav-dark .nav-links a:hover { color: #fff; opacity: .8; }
+    .nav-dark .nav-links a:hover { color: #fff; }
     .nav-links a[aria-current] { color: var(--accent); font-weight: 700; }
     .nav-dark .nav-links a[aria-current] { color: #fff; }
     .nav-cta { border: 1.5px solid var(--edge); }
+    .nav-cta:hover { border-color: var(--accent); background: rgba(21,89,74,.07); }
     .nav-dark .nav-cta { border-color: var(--edge-dark); }
-    @media (max-width: 560px) { .nav-cta { display: none; } .nav-links a { padding: .4rem .5rem; } }
+    .nav-dark .nav-cta:hover { border-color: #f4f4f3; background: rgba(244,244,243,.1); }
+    /* `.nav-links a.nav-cta`, not `.nav-cta`: the base rule is `.nav-links a`,
+       which outranks a bare class and kept the button on screen at phone
+       widths, where it wrapped onto two lines. */
+    @media (max-width: 560px) {
+      .nav-links a.nav-cta { display: none; }
+      .nav-links a { padding: .4rem .5rem; }
+      .nav-links a:not(.nav-cta)::after { left: .5rem; right: .5rem; }
+    }
 
     /* ── shared page furniture ── */
     .band { max-width: var(--measure); margin: 0 auto; padding: clamp(3rem, 8vw, 5.5rem) var(--pad); }
     .band + .band { border-top: 1px solid var(--line); }
-    .band-head { max-width: 46rem; margin-bottom: clamp(2rem, 5vw, 3.2rem); }
-    .band-head h2 { font-size: clamp(1.7rem, 4.2vw, 2.6rem); margin: .6rem 0 .9rem; }
-    .sec-lede { font-family: var(--read); color: var(--ink-2); max-width: 54ch; font-size: clamp(1rem, 2vw, 1.06rem); }
+
+    /* Section head: title column left, supporting line right, both flush with
+       the band's own edges. The rule underneath spans the full measure, which
+       is what makes the alignment legible rather than merely correct. */
+    .band-head {
+      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: clamp(1rem, 4vw, 3.5rem);
+      margin-bottom: clamp(2rem, 5vw, 3.2rem);
+      padding-bottom: clamp(1.1rem, 2.6vw, 1.7rem);
+      border-bottom: 1px solid var(--line);
+    }
+    .band-head > * { grid-column: 1; }
+    .band-head h2 { font-size: clamp(1.7rem, 4.2vw, 2.6rem); margin: .6rem 0 0; }
+    /* `span 2` and not `1 / -1`: with no explicit rows there is no -1 line to
+       reach, so the lede would quietly sit in row one instead of dropping to
+       the baseline of the heading. */
+    .band-head .sec-lede { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
+    .sec-lede { font-family: var(--read); color: var(--ink-2); max-width: 46ch; font-size: clamp(1rem, 2vw, 1.06rem); }
+    @media (max-width: 860px) {
+      .band-head { grid-template-columns: 1fr; }
+      .band-head .sec-lede { grid-column: 1; grid-row: auto; margin-top: .9rem; }
+    }
 
     .status-chip {
       font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
       padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); border-radius: 2px;
     }
     .st-live { color: var(--live); }
+
+    /* ── the interview blocks, shared by home and about ── */
+    .band-talk { background: var(--paper-2); max-width: none; }
+    .band-talk > * { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
+    /* No `margin-inline: auto` here on purpose: an auto-centred narrower list
+       inside a wider band lands on its own left edge, a few pixels off the
+       heading above it. Flush left is the whole point. */
+    .qa { display: grid; gap: 0; }
+    .qa li { padding: clamp(1.6rem, 4vw, 2.4rem) 0; border-top: 1px solid var(--line); }
+    .qa li:first-child { border-top: 0; padding-top: 0; }
+    .q-n { font-size: .74rem; font-weight: 600; color: var(--faint); letter-spacing: .1em; }
+    .q { font-size: clamp(1.15rem, 2.8vw, 1.5rem); font-weight: 600; margin: .5rem 0 .9rem; max-width: 28ch; }
+    .q::before { content: ''; display: block; width: 24px; height: 3px; background: var(--accent); margin-bottom: .8rem; }
+    .a { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); max-width: 64ch; }
+    /* Wide screens read the question and the answer side by side; the answer
+       keeps its own measure, so nothing gets harder to read as it gets wider. */
+    @media (min-width: 1000px) {
+      .qa li { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); }
+      .q-n, .q { grid-column: 1; }
+      .q { margin-bottom: 0; }
+      .a, .a-link { grid-column: 2; }
+      .a-link { margin-top: .9rem; }
+    }
+    .a-link a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; font-size: .88rem; font-weight: 600; color: var(--accent); border-bottom: 1.5px solid transparent; transition: border-color var(--quick) var(--ease); }
+    .a-link a:hover { border-bottom-color: var(--accent); }
+
+    /* ── the record table, shared by home and about ── */
+    .record { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .record th, .record td { text-align: left; padding: .72rem .6rem; border-bottom: 1px solid var(--line); }
+    .record th:first-child, .record td:first-child { padding-left: 0; }
+    .record thead th { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
+    .record tbody tr { transition: background var(--quick) var(--ease); }
+    .record tbody tr:hover { background: var(--paper-2); }
+    .rc-when { white-space: nowrap; font-weight: 600; color: var(--accent); }
+    .rc-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
+    @media (max-width: 620px) {
+      .record thead { display: none; }
+      .record tr { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--line); }
+      .record td { border: 0; padding: .1rem 0; }
+    }
 
     /* Safety net: if a light-ground button ever lands on a dark block again,
        it stays readable instead of disappearing. */
@@ -175,21 +339,36 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     .pagehead .lead { font-family: var(--read); font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: #a3a3a0; max-width: 58ch; margin-top: 1.2rem; }
     .pagehead .sec-k { color: #6fae9b; }
     .pagehead .crumb { font-size: .82rem; color: var(--dim-dark); margin-bottom: 1.3rem; }
-    .pagehead .crumb a { display: inline-block; padding: .35rem 0; font-weight: 600; color: #6fae9b; }
+    .pagehead .crumb a { display: inline-block; padding: .35rem 0; font-weight: 600; color: #6fae9b; transition: color var(--quick) var(--ease); }
     .pagehead .crumb a:hover { color: #f4f4f3; }
     .pagehead .status-chip { color: #a3a3a0; }
     .pagehead .st-live { color: #58d0a8; }
     .pagehead .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; font-size: .82rem; color: #a3a3a0; }
-    .pagehead .meta-row .dot { color: var(--edge-dark); }
+    /* --edge-dark is a 3.6:1 boundary colour, which is fine for a border and
+       not for a glyph. Separators are text. */
+    .pagehead .meta-row .dot { color: var(--dim-dark); }
 
     /* ── footer ── */
     .foot { background: var(--black); color: #f4f4f3; padding: clamp(3rem, 8vw, 5rem) var(--pad); }
-    .foot-in { max-width: calc(var(--measure) - var(--pad) * 2); margin: 0 auto; }
+    .foot-in {
+      max-width: calc(var(--measure) - var(--pad) * 2); margin: 0 auto;
+      /* Same right-hand column width as the closing block above it, so the
+         two stacked right columns share one edge. */
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+      gap: clamp(1.6rem, 4vw, 3rem); align-items: start;
+    }
+    @media (max-width: 760px) { .foot-in { grid-template-columns: 1fr; } }
     .foot-name { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; letter-spacing: -.03em; }
     .foot-role { color: #a3a3a0; margin-top: .3rem; font-size: .95rem; }
-    .foot-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.8rem; font-size: .92rem; }
-    .foot-links a { border-bottom: 1px solid var(--edge-dark); padding-bottom: 2px; display: inline-flex; align-items: center; min-height: 44px; }
+    .foot-links { display: grid; gap: .1rem; font-size: .92rem; }
+    @media (max-width: 760px) { .foot-links { margin-top: .4rem; } }
+    .foot-links a {
+      display: inline-flex; align-items: center; gap: .4rem; min-height: 44px;
+      border-bottom: 1px solid transparent; padding-bottom: 2px;
+      transition: border-color var(--quick) var(--ease), color var(--quick) var(--ease);
+    }
     .foot-links a:hover { border-bottom-color: #f4f4f3; }
-    .foot-fine { margin-top: 2.2rem; font-size: .78rem; color: var(--dim-dark); }
+    .foot-fine { margin-top: 2.2rem; font-size: .78rem; color: var(--dim-dark); grid-column: 1; }
+    @media (min-width: 761px) { .foot-fine { grid-column: 1 / -1; } }
   </style>
 </Variant>

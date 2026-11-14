@@ -64,12 +64,16 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
 
   <!-- ═══ THE LETTER ════════════════════════════════════════════════ -->
   <section class="band">
-    <div class="band-head">
+    <div class="band-head" data-reveal>
       <p class="sec-k">In my own words</p>
       <h2>Why this work, and not the other kind</h2>
+      <p class="sec-lede">
+        The short version of how five years in enterprise and industrial
+        software changed what I think good design is for.
+      </p>
     </div>
     <div class="letter-grid">
-    <div class="letter">
+    <div class="letter" data-reveal>
       <p>
         Most of what I have worked on, people did not choose. A safety engineer
         running a hazard study, a developer wiring up an API, a woman of
@@ -95,9 +99,9 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
       <p class="sign-role">Product designer · {contact.base}</p>
     </div>
 
-    <aside class="letter-side">
+    <aside class="letter-side" data-reveal style="--d:110ms">
       <figure class="ls-photo">
-        <Image src={portraitAlt} alt="Sayantan Dutta" widths={[480, 860]} sizes="(max-width: 900px) 70vw, 300px" />
+        <Image src={portraitAlt} alt="Sayantan Dutta" widths={[480, 860]} sizes="(max-width: 900px) 70vw, 320px" />
       </figure>
       <dl class="ls-facts">
         <div><dt>Based</dt><dd>{contact.base}</dd></div>
@@ -112,13 +116,16 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   <!-- ═══ Q&A ══════════════════════════════════════════════════════ -->
   {personal.length > 0 && (
     <section class="band band-talk">
-      <div class="band-head">
+      <div class="band-head" data-reveal>
         <p class="sec-k">In conversation</p>
         <h2>How I work</h2>
+        <p class="sec-lede">
+          The questions that usually come up once the portfolio is out of the way.
+        </p>
       </div>
       <ol class="qa">
         {personal.map((qa, i) => (
-          <li>
+          <li data-reveal style={`--d:${Math.min(i, 3) * 60}ms`}>
             <p class="q-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
             <h3 class="q">{qa.q}</h3>
             <p class="a">{qa.a}</p>
@@ -130,23 +137,30 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
 
   <!-- ═══ CAPABILITIES ══════════════════════════════════════════════ -->
   <section class="band">
-    <div class="band-head">
+    <div class="band-head" data-reveal>
       <p class="sec-k">Capabilities</p>
       <h2>What I actually do</h2>
+      <p class="sec-lede">
+        Six things, each one something I have been accountable for on a shipped
+        product rather than a line on a skills list.
+      </p>
     </div>
-    <dl class="caps">
+    <dl class="caps" data-reveal>
       {capabilities.map((c) => <div><dt>{c.k}</dt><dd>{c.v}</dd></div>)}
     </dl>
-    <p class="tools"><span>Tools</span> {tools.join(' · ')}</p>
+    <p class="tools" data-reveal><span>Tools</span> {tools.join(' · ')}</p>
   </section>
 
   <!-- ═══ RECORD ════════════════════════════════════════════════════ -->
   <section class="band">
-    <div class="band-head">
+    <div class="band-head" data-reveal>
       <p class="sec-k">Record</p>
       <h2>Where I have been</h2>
+      <p class="sec-lede">
+        Every role in order, with the basis each one ran on.
+      </p>
     </div>
-    <table class="record">
+    <table class="record" data-reveal>
       <thead><tr><th scope="col">Period</th><th scope="col">Engagement</th><th scope="col">Basis</th></tr></thead>
       <tbody>
         {log.slice().reverse().map((l) => (
@@ -158,15 +172,20 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
 
   <!-- ═══ CLOSE ═════════════════════════════════════════════════════ -->
   <section class="band about-end">
-    <h2>Working on something people have to use?</h2>
-    <p class="sec-lede">That is the work I am best at. Tell me what you are weighing up.</p>
-    <p class="ae-mail"><a href={`mailto:${contact.email}`} data-ab="about-end:email">{contact.email}</a></p>
+    <div class="ae-copy" data-reveal>
+      <h2>Working on something people have to use?</h2>
+      <p class="sec-lede">That is the work I am best at. Tell me what you are weighing up.</p>
+    </div>
+    <div class="ae-side" data-reveal style="--d:110ms">
+      <p class="ae-k">Email</p>
+      <p class="ae-mail"><a href={`mailto:${contact.email}`} data-ab="about-end:email">{contact.email}</a></p>
+    </div>
   </section>
 </main>
 
 <style>
   .about-top {
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
     gap: clamp(1.8rem, 5vw, 4rem); align-items: center;
   }
   @media (max-width: 900px) { .about-top { grid-template-columns: 1fr; } .at-photo { max-width: 300px; } }
@@ -174,6 +193,9 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   .at-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; }
   .at-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; border-radius: 4px; }
 
+  /* ── the letter ── */
+  .letter-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); gap: clamp(2rem, 6vw, 4.5rem); align-items: start; }
+  @media (max-width: 900px) { .letter-grid { grid-template-columns: 1fr; } .letter-side { max-width: 380px; } }
   .letter { max-width: 62ch; }
   .letter p { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); }
   .letter p + p { margin-top: 1rem; }
@@ -184,42 +206,34 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   .sign { margin-top: 2rem !important; font-family: var(--display) !important; font-size: 1.3rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink) !important; }
   .sign-role { margin-top: .1rem !important; font-size: .82rem; color: var(--faint) !important; font-family: var(--display) !important; }
 
-  .band-talk { background: var(--paper-2); max-width: none; }
-  .band-talk > * { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
-  .qa { max-width: 62rem; margin-inline: auto; }
-  .qa li { padding: clamp(1.6rem, 4vw, 2.2rem) 0; border-top: 1px solid var(--line); }
-  .qa li:first-child { border-top: 0; padding-top: 0; }
-  .q-n { font-size: .74rem; font-weight: 600; color: var(--faint); letter-spacing: .1em; }
-  .q { font-size: clamp(1.15rem, 2.8vw, 1.5rem); font-weight: 600; margin: .5rem 0 .9rem; max-width: 28ch; }
-  .q::before { content: ''; display: block; width: 24px; height: 3px; background: var(--accent); margin-bottom: .8rem; }
-  .a { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); max-width: 64ch; }
+  .letter-side { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
+  @media (max-width: 900px) { .letter-side { position: static; } }
+  .ls-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 15%; border-radius: 4px; }
+  .ls-facts { margin-top: 1.6rem; display: grid; gap: 1rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .ls-facts dt { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
+  .ls-facts dd { font-size: .9rem; margin-top: .15rem; }
 
-  .caps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .caps > div { background: var(--paper); padding: clamp(1.1rem, 2.5vw, 1.6rem); }
+  /* ── capabilities ── */
+  .caps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .caps > div { background: var(--paper); padding: clamp(1.1rem, 2.5vw, 1.6rem); transition: background var(--quick) var(--ease); }
+  .caps > div:hover { background: #fff; }
   .caps dt { font-weight: 700; margin-bottom: .35rem; }
   .caps dd { font-family: var(--read); color: var(--ink-2); font-size: .95rem; }
   .tools { margin-top: 1.6rem; font-size: .9rem; color: var(--ink-2); }
   .tools span { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-right: .6rem; }
 
-  .record { width: 100%; border-collapse: collapse; font-size: .9rem; }
-  .record th, .record td { text-align: left; padding: .72rem .6rem; border-bottom: 1px solid var(--line); }
-  .record thead th { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
-  .rc-when { white-space: nowrap; font-weight: 600; color: var(--accent); }
-  .rc-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
-  @media (max-width: 620px) { .record thead { display: none; } .record tr { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--line); } .record td { border: 0; padding: .1rem 0; } }
-
-  .letter-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: clamp(2rem, 6vw, 4.5rem); align-items: start; }
-  @media (max-width: 900px) { .letter-grid { grid-template-columns: 1fr; } .letter-side { max-width: 380px; } }
-  .letter-side { position: sticky; top: 6rem; }
-  @media (max-width: 900px) { .letter-side { position: static; } }
-  .ls-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 15%; border-radius: 4px; }
-  .ls-facts { margin-top: 1.6rem; display: grid; gap: 1rem; }
-  .ls-facts dt { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
-  .ls-facts dd { font-size: .9rem; margin-top: .15rem; }
-
-  .about-end h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 18ch; }
-  .ae-mail { margin-top: 1.6rem; font-size: clamp(1.1rem, 3vw, 1.6rem); font-weight: 700; letter-spacing: -.03em; word-break: break-word; }
-  .ae-mail a { border-bottom: 2.5px solid var(--accent); }
+  /* ── close ── */
+  .about-end {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 22rem);
+    gap: clamp(2rem, 6vw, 4rem); align-items: end;
+  }
+  @media (max-width: 860px) { .about-end { grid-template-columns: 1fr; align-items: start; } }
+  .about-end h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 20ch; }
+  .about-end .sec-lede { margin-top: 1rem; }
+  .ae-side { padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .ae-k { font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .ae-mail { margin-top: .6rem; font-size: clamp(1.05rem, 2.4vw, 1.5rem); font-weight: 700; letter-spacing: -.03em; word-break: break-word; }
+  .ae-mail a { display: inline-block; padding-block: .35rem; border-bottom: 2.5px solid var(--accent); transition: color var(--quick) var(--ease); }
   .ae-mail a:hover { color: var(--accent); }
 </style>
 </Cut>
