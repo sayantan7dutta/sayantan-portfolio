@@ -78,7 +78,7 @@ const trioAlts = [
       <p class="meta-row">
         <span class={`status-chip st-${project.status.toLowerCase()}`}>{project.status}</span>
         <span class="kind-chip">{project.kind}</span>
-        <span>{project.field}</span>
+        <span class="field-chip">{project.field}</span>
         <span class="dot" aria-hidden="true">·</span>
         <span>{project.period}</span>
       </p>
@@ -261,11 +261,14 @@ const trioAlts = [
 <style>
   .crumb .sep { margin: 0 .2rem; }
   /* The discipline tag, sized to match the status chip beside it. */
-  .kind-chip {
+  .kind-chip, .field-chip {
     font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
     padding: .2rem .5rem; border-radius: 2px;
-    background: rgba(244,244,243,.13); color: #e8e8e5;
   }
+  .kind-chip { background: rgba(244,244,243,.13); color: #e8e8e5; }
+  /* Same accent the masthead's kicker uses, so the industry reads as the
+     highlighted fact here too. */
+  .field-chip { background: rgba(111,174,155,.15); color: #6fae9b; }
   /* The back arrow leans the way it is pointing, not the way everything else does. */
   .crumb a:hover > span, .crumb a:focus-visible > span { transform: translateX(-3px); }
 

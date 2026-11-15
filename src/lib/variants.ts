@@ -125,7 +125,7 @@ export const projects: VariantProject[] = [
     org: 'Self-initiated',
     role: 'Product Design',
     sector: 'Concept · Premium Fintech',
-    kind: 'B2C Fintech',
+    kind: 'B2C Mobile App',
     field: 'Fintech',
     period: '2025',
     status: 'CONCEPT',

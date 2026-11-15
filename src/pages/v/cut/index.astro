@@ -100,13 +100,13 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
               <span class="w-n">{w.n}</span>
               <span class={`w-status st-${w.status.toLowerCase()}`}>{w.status}</span>
               <span class="w-kind">{w.kind}</span>
+              <span class="w-field">{w.field}</span>
             </div>
             <h3>{w.title}</h3>
 
             <dl class="w-meta">
               <div><dt>Client</dt><dd>{w.org}</dd></div>
               <div><dt>Role</dt><dd>{w.role}</dd></div>
-              <div><dt>Field</dt><dd>{w.field}</dd></div>
               <div><dt>Period</dt><dd>{w.period}</dd></div>
             </dl>
 
@@ -318,14 +318,19 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   .work li:first-child { border-top: 0; padding-top: 0; }
   @media (max-width: 900px) { .work li { grid-template-columns: 1fr; } .w-plate { max-width: 400px; } }
 
-  .w-top { display: flex; align-items: center; gap: .8rem; margin-bottom: .7rem; }
+  .w-top { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin-bottom: .7rem; }
   .w-n { font-size: .82rem; font-weight: 700; color: var(--faint); letter-spacing: .06em; }
   .w-status { font-size: .62rem; font-weight: 700; letter-spacing: .14em; padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); border-radius: 2px; }
   .st-live { color: var(--live); }
-  .w-kind {
+  /* Two tags, same box: what kind of work it was, then the industry it was
+     built for. The industry is the one a reader is scanning for, so it takes
+     the accent and the kind sits back in neutral. */
+  .w-kind, .w-field {
     font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-    padding: .2rem .5rem; border-radius: 2px; background: var(--paper-2); color: var(--ink-2);
+    padding: .2rem .5rem; border-radius: 2px;
   }
+  .w-kind { background: var(--paper-2); color: var(--ink-2); }
+  .w-field { background: rgba(21, 89, 74, .1); color: var(--accent); }
   .work h3 { font-size: clamp(1.25rem, 3vw, 1.9rem); max-width: 22ch; }
 
   .w-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: .9rem; margin: 1.2rem 0; padding: .95rem 0; border-block: 1px solid var(--line); }
