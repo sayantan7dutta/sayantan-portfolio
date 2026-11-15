@@ -185,6 +185,47 @@ export const clients = [
   { name: 'CGAP', logo: '/images/clients/cgap.png', w: 76, h: 29 },
 ];
 
+/**
+ * The tool grid and the skill chips, mirroring src/pages/about.astro.
+ * Logos live in /public/images/tools and carry their own brand colour, which
+ * the grid greys out until you hover a tile.
+ */
+export const tools = [
+  { name: 'Figma', file: 'figma.svg' },
+  { name: 'FigJam', file: 'figma.svg' },
+  { name: 'Miro', file: 'miro.svg' },
+  { name: 'Adobe CC', file: 'adobe.svg' },
+  { name: 'Framer', file: 'framer.svg' },
+  { name: 'Webflow', file: 'webflow.svg' },
+  { name: 'Notion', file: 'notion.svg' },
+  { name: 'Linear', file: 'linear.svg' },
+  { name: 'Jira', file: 'jira.svg' },
+  { name: 'Trello', file: 'trello.svg' },
+  { name: 'ServiceNow', file: 'servicenow.svg' },
+  { name: 'Loom', file: 'loom.svg' },
+  { name: 'GitHub', file: 'github.svg' },
+  { name: 'Claude', file: 'claude.svg' },
+];
+
+export const skillGroups = [
+  {
+    label: 'Product design',
+    items: ['End-to-end design', 'Discovery & framing', 'Jobs to Be Done', 'User flows', 'Journey mapping', 'Wireframing', 'Hi-fi prototyping', 'Interaction design'],
+  },
+  {
+    label: 'Research & validation',
+    items: ['User research', 'Usability testing', 'A/B testing', 'Analytics-informed design', 'Insight synthesis', 'Heuristic evaluation'],
+  },
+  {
+    label: 'Systems & craft',
+    items: ['Design systems', 'Component libraries', 'Responsive & mobile-first', 'Accessibility (WCAG)', 'UX copywriting', 'Design tokens'],
+  },
+  {
+    label: 'Delivery & collaboration',
+    items: ['Product trio (PM · Eng · Design)', 'Agile / Scrum', 'Roadmap input', 'Stakeholder facilitation', 'Design critiques', 'Async remote'],
+  },
+];
+
 export const contact = {
   email: 'sayantan7dutta@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sayantandutta7/',

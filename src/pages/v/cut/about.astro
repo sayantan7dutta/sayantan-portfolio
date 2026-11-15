@@ -9,7 +9,7 @@
 import { Image } from 'astro:assets';
 import Cut from '../../../layouts/Cut.astro';
 import CutIcon from '../../../components/CutIcon.astro';
-import { log, contact } from '../../../lib/variants';
+import { log, contact, tools, skillGroups } from '../../../lib/variants';
 import { interview } from '../../../lib/interview';
 
 import heroPortrait from '../../../assets/sayantan.jpg';
@@ -29,8 +29,6 @@ const DUPLICATES_THE_LETTER = 'What kind of designer are you, in one answer?';
 const personal = interview.filter(
   (qa) => qa.a.trim().length > 0 && !qa.link && qa.q !== DUPLICATES_THE_LETTER
 );
-
-const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 'Webflow'];
 ---
 
 <Cut
@@ -157,7 +155,40 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
     <dl class="caps" data-reveal>
       {capabilities.map((c) => <div><dt>{c.k}</dt><dd>{c.v}</dd></div>)}
     </dl>
-    <p class="tools" data-reveal><span>Tools</span> {tools.join(' · ')}</p>
+  </section>
+
+  <!-- ═══ TOOLS AND SKILLS ══════════════════════════════════════════ -->
+  <section class="band">
+    <div class="band-head" data-reveal>
+      <p class="sec-k">Tools and skills</p>
+      <h2>What I work with</h2>
+      <p class="sec-lede">
+        The stack I am fluent in, and the practices underneath it.
+      </p>
+    </div>
+
+    <!-- `role="list"` because the reset strips the bullets, and Safari drops
+         list semantics with them. The marks are decorative; the name is the
+         accessible content. -->
+    <ul class="tool-grid" role="list" aria-label="Tools I work with" data-reveal>
+      {tools.map((t) => (
+        <li class="tool-tile">
+          <img src={`/images/tools/${t.file}`} alt="" aria-hidden="true" width="28" height="28" loading="lazy" />
+          <span>{t.name}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="skill-stack" data-reveal style="--d:90ms">
+      {skillGroups.map((g) => (
+        <div class="skill-row">
+          <p class="skill-row-lbl">{g.label}</p>
+          <ul class="skill-chips" role="list">
+            {g.items.map((sk) => <li>{sk}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
   </section>
 
   <!-- ═══ RECORD ════════════════════════════════════════════════════ -->
@@ -264,8 +295,55 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   .caps > div:hover { background: #fff; }
   .caps dt { font-weight: 700; margin-bottom: .35rem; }
   .caps dd { font-family: var(--read); color: var(--ink-2); font-size: .95rem; }
-  .tools { margin-top: 1.6rem; font-size: .9rem; color: var(--ink-2); }
-  .tools span { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-right: .6rem; }
+  /* ── tools and skills ──
+     The main site's grid, rebuilt on paper. The logos ship with their own
+     brand colour, so they sit grey until a tile is hovered and only then
+     come up in full, which keeps fourteen marks from shouting at once. */
+  .tool-grid {
+    /* 140px floor puts exactly seven across the band, so fourteen tools make
+       two full rows rather than a thin strip with a short tail. */
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: .6rem; margin-bottom: clamp(2.2rem, 5vw, 3.2rem);
+  }
+  /* At 320 the band is 282px, two tiles at the 140 floor need 290, and the
+     grid falls to a single column fourteen rows deep. Drop the floor just
+     for the narrowest phones so it stays two across. */
+  @media (max-width: 360px) {
+    .tool-grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+  }
+  .tool-tile {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem;
+    padding: 1.4rem .5rem 1rem; border: 1px solid var(--line); border-radius: 2px;
+    background: var(--paper-2);
+    transition: border-color var(--quick) var(--ease), background var(--quick) var(--ease), transform var(--quick) var(--ease);
+  }
+  .tool-tile img {
+    width: 28px; height: 28px; object-fit: contain;
+    filter: grayscale(1) opacity(.5);
+    transition: filter var(--quick) var(--ease), transform var(--quick) var(--ease);
+  }
+  .tool-tile span {
+    font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--faint); text-align: center; transition: color var(--quick) var(--ease);
+  }
+  .tool-tile:hover { border-color: var(--edge); background: #fff; transform: translateY(-2px); }
+  .tool-tile:hover img { filter: none; transform: scale(1.06); }
+  .tool-tile:hover span { color: var(--ink); }
+
+  .skill-stack { display: grid; gap: clamp(1.3rem, 3vw, 1.8rem); }
+  .skill-row-lbl { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-bottom: .7rem; }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+  .skill-chips li {
+    font-size: .82rem; line-height: 1.2; color: var(--ink-2);
+    border: 1px solid var(--line); border-radius: 2px; padding: .5rem .75rem; background: var(--paper-2);
+    transition: border-color var(--quick) var(--ease), color var(--quick) var(--ease), background var(--quick) var(--ease);
+  }
+  .skill-chips li:hover { border-color: var(--accent); color: var(--ink); background: #fff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tool-tile:hover { transform: none; }
+    .tool-tile:hover img { transform: none; }
+  }
 
   /* ── close ── */
   .about-end {
