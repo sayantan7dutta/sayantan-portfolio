@@ -65,8 +65,8 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
     <p class="supra">Sayantan Dutta · Product designer · {contact.base}</p>
     <h1><span>I design the enterprise software </span><span>people can’t opt out of using.</span></h1>
     <p class="logline">
-      Industrial safety, API infrastructure, and a voice-first AI companion.
-      Five years, six products, founding designer on three of them.
+      Industrial safety, enterprise SaaS, design operations and AI. I work on
+      the high-stakes workflows, the ones where getting it wrong isn’t an option.
     </p>
 
     <div class="open-cta">
@@ -271,7 +271,9 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
      why the first span keeps its trailing space. */
   .open h1 span { display: block; }
   @media (max-width: 680px) { .open h1 span { display: inline; } }
-  .logline { font-size: clamp(1rem, 2.1vw, 1.18rem); color: #a3a3a0; max-width: 44ch; }
+  /* 46ch, not the usual 44: at 44 the last line is a single word at desktop
+     sizes. `pretty` keeps that true at the widths in between. */
+  .logline { font-size: clamp(1rem, 2.1vw, 1.18rem); color: #a3a3a0; max-width: 46ch; text-wrap: pretty; }
 
   /* With the numbers gone the logline carries straight into the buttons, so
      it gets the rule that used to sit above the row and the space it held. */
