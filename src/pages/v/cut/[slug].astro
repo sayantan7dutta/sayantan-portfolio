@@ -145,10 +145,9 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
       {(sec.shot === 'wide' || sec.shot === 'wide2') && img[sec.shot] && (
         <figure class="wide" data-reveal>
           <div class="wide-frame">
-              {/* With a caption the figure already describes itself, so the image
-                stays out of the screen reader's way; without one it needs to
-                say at least what it is. */}
-            <Image src={img[sec.shot]} alt={sec.caption ? '' : `A screen from ${project.short}`} widths={[820, 1600]} sizes="(max-width: 1100px) 92vw, 1060px" loading="lazy" />
+              {/* The caption labels the screen; the alt says what is on it.
+                  They are not interchangeable, so the figure carries both. */}
+            <Image src={img[sec.shot]} alt={sec.alt ?? `A screen from ${project.short}`} widths={[820, 1600]} sizes="(max-width: 1100px) 92vw, 1060px" loading="lazy" />
           </div>
           {sec.caption && <figcaption>{sec.caption}</figcaption>}
         </figure>

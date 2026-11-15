@@ -26,6 +26,9 @@ export interface CaseSection {
   /** Key into the image map in the case study page. */
   shot?: string;
   caption?: string;
+  /** Alt for a `wide` shot. Same reasoning as `alts`: the caption labels the
+      screen, it does not describe what is on it. */
+  alt?: string;
   /** One caption per phone, for the `trio`, `pair` and `solo` shots. */
   caps?: string[];
   /**
@@ -249,6 +252,7 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide',
         caption: 'Scenario summary: every deviation, its risk rating and its tracked action in one table',
+        alt: 'The Scenario Summary table: every deviation a row with its causes, consequences and safeguards, then low, high and medium ratings against asset, environment and safety, and the tracked action beside it.',
         block: {
           kind: 'cards',
           items: [
@@ -267,6 +271,7 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide2',
         caption: 'Analytics across sites and studies',
+        alt: 'The analytics dashboard: action completion at 29 per cent, donut and bar breakdowns of 38 actions and their approvals, then site risk as a donut of 42 and a stacked bar for each of twelve nodes.',
       },
     ],
     reflection: {
@@ -304,6 +309,7 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide',
         caption: 'The API Console dashboard',
+        alt: 'The API Console dashboard: 140 requests listed with family, version, lifecycle stage and status, and a panel for one of them carrying its details, review actions and a request to delivery chart.',
       },
       {
         kicker: 'The problem',
@@ -320,7 +326,8 @@ export const cutCases: CutCase[] = [
           'The components were the visible half. The half that actually scaled was the operating model around them: ownership of shared patterns, a path for proposing changes, and enough governance that three teams could move at their own pace and still ship something that felt like one product.',
         ],
         shot: 'wide2',
-        caption: 'Design detail and component specification',
+        caption: 'The design step, where the solution and its integration are recorded',
+        alt: 'The high level design step: a two stage plan and design tracker above fields for API layer, solution overview and design considerations, with upload areas for an integration landscape and a sequence diagram.',
         block: {
           kind: 'compare',
           before: {
@@ -484,6 +491,7 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide',
         caption: 'The shared family vault',
+        alt: 'Mom’s Vault: a £450 balance split across healthcare, groceries and utility bills, each on its own slider, with a note that allocating to pockets lets shared bills be prioritised automatically.',
       },
       {
         kicker: 'The rule',
@@ -493,6 +501,7 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide2',
         caption: 'Smart transfer, with the rate decision left to the sender',
+        alt: 'Smart Transfer: a rule to send £500 when the pound to rupee rate reaches 106.50, today’s rate shown at 105.12, and a breakdown with no fee, no markup and ₹53,250 guaranteed to arrive.',
       },
       {
         kicker: 'The system',
@@ -536,6 +545,7 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide',
         caption: 'Two generations, one shared need',
+        alt: 'Three generations around a kitchen table in the evening, with an illustrated vine threaded through the room.',
       },
       {
         kicker: 'The reframe',
@@ -552,6 +562,7 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'wide2',
         caption: 'Daily routines in the 2065 home',
+        alt: 'An illustrated green shoot drawn sharply in the foreground of a communal interior that is left out of focus.',
       },
       {
         kicker: 'Outcome',
