@@ -27,6 +27,9 @@ import mgCarer from '../../../assets/work/miigenie/carer-home.png';
 import mgOnboarding from '../../../assets/work/miigenie/onboarding.png';
 import mgError from '../../../assets/work/miigenie/error-state.png';
 import mgConnect from '../../../assets/work/miigenie/connect.png';
+import mgSiteHero from '../../../assets/work/miigenie/site-hero.jpg';
+import mgSiteHow from '../../../assets/work/miigenie/site-how.jpg';
+import mgSiteTrial from '../../../assets/work/miigenie/site-trial.jpg';
 import hzScenario from '../../../assets/work/hazop/scenario-summary.jpg';
 import hzAnalytics from '../../../assets/work/hazop/analytics-dashboard.jpg';
 import soProducts from '../../../assets/work/soter-software/products.jpg';
@@ -45,6 +48,8 @@ const shots: Record<string, Record<string, any>> = {
     trio: [mgOnboarding, mgListening, mgError],
     pair: [mgConnect, mgCarer],
     solo: [mgMyDay],
+    /* The marketing site, in browser shape rather than phone shape. */
+    web: [mgSiteHero, mgSiteHow, mgSiteTrial],
   },
   hazop: { wide: hzScenario, wide2: hzAnalytics, wide3: soProducts },
   'api-lifecycle': { wide: apDashboard, wide2: apDetails },
@@ -130,12 +135,12 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
       {/* One, two or three phones, each with its own caption. The caption is
           the accessible description, so the image steps out of the way. */}
-      {['trio', 'pair', 'solo'].includes(sec.shot ?? '') && img[sec.shot!] && (
-        <div class="trio" data-reveal style={`--n:${img[sec.shot!].length}`}>
+      {['trio', 'pair', 'solo', 'web'].includes(sec.shot ?? '') && img[sec.shot!] && (
+        <div class={sec.shot === 'web' ? 'trio webrow' : 'trio'} data-reveal style={`--n:${img[sec.shot!].length}`}>
           {img[sec.shot!].map((t: any, i: number) => (
             <figure style={`--d:${i * 80}ms`}>
               <div class="plate">
-                <Image src={t} alt={sec.alts?.[i] ?? `A screen from ${project.short}`} widths={[320, 640]} sizes="250px" loading="lazy" />
+                <Image src={t} alt={sec.alts?.[i] ?? `A screen from ${project.short}`} widths={sec.shot === 'web' ? [400, 800] : [320, 640]} sizes={sec.shot === 'web' ? '330px' : '250px'} loading="lazy" />
               </div>
               {sec.caps?.[i] && <figcaption>{sec.caps[i]}</figcaption>}
             </figure>
@@ -319,6 +324,16 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
      not sit in a three-wide grid with a hole on the end. */
   .trio { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 250px)); gap: clamp(1rem, 3vw, 2rem); margin-top: clamp(2rem, 5vw, 3rem); }
   .trio figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); }
+  /* Browser shape, not phone shape: the plate keeps the capture's own ratio
+     and a smaller radius, and the columns are wider because a page needs
+     more room than a screen does. */
+  /* Browser shape, not phone shape. The ratio lives on the plate rather than
+     the image: these captures are not all the same height, and an `auto`
+     ratio on a lazy image reserves nothing, so the row shifted as each one
+     arrived. A fixed plate gives three matching tiles and no shift. */
+  .webrow { grid-template-columns: repeat(var(--n, 3), minmax(0, 330px)); }
+  .webrow .plate { border-radius: 6px; aspect-ratio: 16 / 10; }
+  .webrow .plate img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: top center; }
   @media (max-width: 720px) { .ba, .trio { grid-template-columns: 1fr; max-width: 280px; } }
   .ba figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); max-width: 34ch; }
   .ba figcaption b { color: var(--ink); font-weight: 700; }

@@ -200,6 +200,26 @@ export const cutCases: CutCase[] = [
           ],
         },
       },
+      {
+        kicker: 'The other surface',
+        heading: 'The site that has to earn the trial',
+        body: [
+          'The app is the product, but nobody meets it first. miigenie.com is where a family carer decides whether this is worth their parent’s time, and it carries a harder job than the app does: credible to the carer, unthreatening to the person being worried about.',
+          'Six pages, each answering one question somebody actually arrives with. What is this. How does it work. Who is behind it. Who is it for. Can I try it. Can I work here. The home page states the pilot stage in the banner rather than implying a finished product, and puts the privacy position above the fold instead of in a footer link.',
+          'Features are written as jobs, not capabilities: file the bills and letters, set the medication timer, find a tradesperson somebody has already vetted. The trial page is the clearest of them, because an older adult deciding whether to hand over a month of their life needs the offer and the catch on the same screen.',
+        ],
+        shot: 'web',
+        caps: [
+          'The opening: the promise, the pilot stage stated plainly, and the privacy position above the fold',
+          'How it works, as three steps in plain English before any screenshot of the app',
+          'The trial page: who it is for and what you get, side by side, with the data promise underneath',
+        ],
+        alts: [
+          'The miigenie.com home page: “Just say it. miiGenie takes care of it.” beside a photograph of an older woman at a table, with a pilot-stage banner above and voice-first, carer sync and UK GDPR named underneath.',
+          'The how it works page: three numbered steps, speak naturally, miiGenie handles the task, and calm reassurance, above a section inviting the visitor to explore the app itself.',
+          'The early access page: two columns headed who it is for and what you get, listing older adults, family carers and community members against a free month, setup help and influence over features.',
+        ],
+      },
     ],
     reflection: {
       heading: 'Design-complete, entering production',
