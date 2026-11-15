@@ -51,7 +51,7 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   <div class="pagehead-in ah-in">
     <div class="at-copy">
       <p class="sec-k">About</p>
-      <h1>I make genuinely difficult systems feel obvious.</h1>
+      <h1>I work best where complexity meets clarity, making difficult systems seamless.</h1>
       <p class="lead">
         Five years across industrial safety, enterprise SaaS, design operations and
         AI. Founding designer three times over. Based in {contact.base}, working
@@ -219,7 +219,11 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
       linear-gradient(to right, var(--black) 0%, rgba(10,10,10,.56) 46%, transparent 78%);
   }
   .ah-in { position: relative; z-index: 2; width: 100%; }
-  .at-copy h1 { margin: .9rem 0 0; max-width: none; text-wrap: balance; }
+  /* 14.5em, not the container: left to the full width this breaks into two
+     lines, the second 1007px against a 625px lede under it, which is the
+     same hanging shape the home page had. Three lines of 690, 508 and 651
+     sit with the lede instead. `em` so the count holds as the type scales. */
+  .at-copy h1 { margin: .9rem 0 0; max-width: 14.5em; text-wrap: balance; }
   .at-cta {
     display: flex; flex-wrap: wrap; gap: .7rem;
     margin-top: 2.2rem; padding-top: 1.8rem;
