@@ -233,15 +233,29 @@ export const certs = [
   { title: 'Member, UX Design Courses', issuer: 'Interaction Design Foundation', logo: 'idf.svg' },
 ];
 
-/** Awards and community, straight off the CV. Wording is the CV's. */
+/**
+ * Awards and community, off the CV. The CV abbreviates the communities to
+ * FOF and FAUX; written out and linked here, because a chip a reader can
+ * click is worth more than one they have to already know.
+ */
 export const recognition = [
   {
     label: 'Awards',
-    items: ['TCS Service & Commitment Award', 'TCS Best Team Award', 'TCS Star Team Award (x2)', 'University Gold Medallist'],
+    items: [
+      { name: 'TCS Service & Commitment Award' },
+      { name: 'TCS Best Team Award' },
+      { name: 'TCS Star Team Award (x2)' },
+      { name: 'University Gold Medallist' },
+    ],
   },
   {
     label: 'Community',
-    items: ['Speaker, IDF Southampton webinar (Sep 2026)', 'Active member, London UX design community', 'FOF member', 'FAUX member'],
+    items: [
+      { name: 'Speaker, IDF Southampton webinar (Sep 2026)' },
+      { name: 'Friends of Figma, London', url: 'https://friends.figma.com/london/' },
+      { name: 'Food and UX (FAUX)', url: 'https://www.foodandux.com/' },
+      { name: 'IDF London local group', url: 'https://ixdf.org/local-group/europe/united-kingdom/london' },
+    ],
   },
 ];
 

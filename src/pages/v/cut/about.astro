@@ -243,7 +243,13 @@ const personal = interview.filter(
         <div class="skill-row">
           <p class="skill-row-lbl">{g.label}</p>
           <ul class="skill-chips" role="list">
-            {g.items.map((i) => <li>{i}</li>)}
+            {g.items.map((i) => (
+              <li>
+                {i.url
+                  ? <a class="chip-link" href={i.url} target="_blank" rel="noopener">{i.name} <span aria-hidden="true">↗</span></a>
+                  : i.name}
+              </li>
+            ))}
           </ul>
         </div>
       ))}
@@ -473,17 +479,21 @@ const personal = interview.filter(
   .now-sub { font-size: .85rem; color: var(--ink-2); margin-top: .25rem; }
 
   .pod-list { display: flex; flex-wrap: wrap; gap: .45rem; }
-  /* These are links, so the chip has to clear the 44px target floor that the
-     non-interactive skill chips do not. */
-  .pod-list a {
+  /* A chip that is a link has to clear the 44px target floor the static
+     skill chips do not, so it carries its own padding rather than the
+     chip's. Shared by the community row and the podcasts. */
+  .chip-link, .pod-list a {
     display: inline-flex; align-items: center; gap: .45rem; min-height: 44px;
     font-size: .82rem; color: var(--ink-2);
     border: 1px solid var(--line); border-radius: 2px; padding: .4rem .75rem; background: var(--paper-2);
     transition: border-color var(--quick) var(--ease), color var(--quick) var(--ease), background var(--quick) var(--ease);
   }
-  .pod-list a:hover { border-color: var(--accent); color: var(--ink); background: #fff; }
+  .chip-link:hover, .pod-list a:hover { border-color: var(--accent); color: var(--ink); background: #fff; }
   :global(.pod-mark) { width: 15px; height: 15px; color: var(--accent); }
-  .pod-list a > span { font-size: .78rem; color: var(--faint); }
+  .chip-link > span, .pod-list a > span { font-size: .78rem; color: var(--faint); }
+  /* The row mixes linked and plain chips, so the plain ones drop their own
+     box when a link is inside and the two line up on one baseline. */
+  .skill-chips li:has(.chip-link) { padding: 0; border: 0; background: none; }
 
   @media (prefers-reduced-motion: reduce) {
     .tool-tile:hover, .hobby-tile:hover { transform: none; }
