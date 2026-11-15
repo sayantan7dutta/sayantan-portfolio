@@ -137,16 +137,24 @@ export const projects: VariantProject[] = [
 ];
 
 /** Career log, oldest first — same entries as the About page timeline. */
-export const log = [
-  { stamp: '2020', event: 'Service Design Intern · Pensaar Design', kind: 'Internship' },
-  { stamp: '2020 to 21', event: 'Product Designer · TCS (Ericsson)', kind: 'Full-time' },
-  { stamp: '2021 to 23', event: 'Lead Product Designer · TCS (Ericsson)', kind: 'Full-time' },
-  { stamp: '2023 to 24', event: 'Design Operations Lead · TCS (Sherwin-Williams)', kind: 'Full-time' },
-  { stamp: '2024 to 25', event: 'MA Design Management · University of Southampton', kind: 'Postgrad' },
-  { stamp: 'Dec 24 to Jun 25', event: 'Founding Product Designer · SparkSoft Ltd', kind: 'Contract · UK' },
-  { stamp: 'Jun to Aug 25', event: 'Founding Product Designer · Soter Safety Consulting', kind: 'Contract · UK' },
-  { stamp: '2026 to now', event: 'Founding Product Designer · dAIs Genie (miiGenie)', kind: 'Contract · UK' },
+const engagements = [
+  { stamp: '2020', role: 'Service Design Intern', org: 'Pensaar Design', kind: 'Internship' },
+  { stamp: '2020 to 21', role: 'Product Designer', org: 'TCS (Ericsson)', kind: 'Full-time' },
+  { stamp: '2021 to 23', role: 'Lead Product Designer', org: 'TCS (Ericsson)', kind: 'Full-time' },
+  { stamp: '2023 to 24', role: 'Design Operations Lead', org: 'TCS (Sherwin-Williams)', kind: 'Full-time' },
+  { stamp: '2024 to 25', role: 'MA Design Management', org: 'University of Southampton', kind: 'Postgrad' },
+  { stamp: 'Dec 24 to Jun 25', role: 'Founding Product Designer', org: 'SparkSoft Ltd', kind: 'Contract · UK' },
+  { stamp: 'Jun to Aug 25', role: 'Founding Product Designer', org: 'Soter Safety Consulting', kind: 'Contract · UK' },
+  { stamp: '2026 to now', role: 'Founding Product Designer', org: 'dAIs Genie (miiGenie)', kind: 'Contract · UK' },
 ];
+
+/**
+ * Role and company are separate fields so a table can give each its own
+ * column. `event` is derived rather than typed out, because eight other
+ * variants print the two as one line and one of them splits it back apart
+ * on the middot — leaving it hand-written is how the two drift.
+ */
+export const log = engagements.map((e) => ({ ...e, event: `${e.role} · ${e.org}` }));
 
 /** Disciplines, plotted on the control-room competency grid. */
 export const disciplines = [

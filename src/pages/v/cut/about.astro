@@ -49,9 +49,22 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
         AI. Founding designer three times over. Based in {contact.base}, working
         with distributed teams since 2020.
       </p>
+      <!-- Three ways out, one of them primary. Email is the ask; LinkedIn and
+           the CV are both "check me" routes, so they read as a matched pair
+           beside it rather than competing with it. -->
       <div class="at-cta">
-        <a class="btn btn-on-dark" href={`mailto:${contact.email}`} data-ab="about:email">Get in touch</a>
-        <a class="btn btn-ghost-dark" href={contact.resume} data-ab="about:cv">CV (PDF)</a>
+        <a class="btn btn-on-dark" href={`mailto:${contact.email}`} data-ab="about:email">
+          <svg class="bi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6.5 9 6.5 9-6.5"/></svg>
+          Get in touch
+        </a>
+        <a class="btn btn-ghost-dark" href={contact.linkedin} target="_blank" rel="me noopener" data-ab="about:linkedin">
+          <svg class="bi bi-brand" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn-ghost-dark" href={contact.resume} data-ab="about:cv">
+          <svg class="bi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5v11"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M4 18.5h16"/></svg>
+          CV (PDF)
+        </a>
       </div>
     </div>
     <figure class="at-photo">
@@ -161,10 +174,15 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
       </p>
     </div>
     <table class="record" data-reveal>
-      <thead><tr><th scope="col">Period</th><th scope="col">Engagement</th><th scope="col">Basis</th></tr></thead>
+      <thead><tr><th scope="col">Period</th><th scope="col">Role</th><th scope="col">Company</th><th scope="col">Basis</th></tr></thead>
       <tbody>
         {log.slice().reverse().map((l) => (
-          <tr><td class="rc-when">{l.stamp}</td><td>{l.event}</td><td class="rc-kind">{l.kind}</td></tr>
+          <tr>
+            <td class="rc-when">{l.stamp}</td>
+            <td class="rc-role">{l.role}</td>
+            <td class="rc-org">{l.org}</td>
+            <td class="rc-kind">{l.kind}</td>
+          </tr>
         ))}
       </tbody>
     </table>

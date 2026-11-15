@@ -180,7 +180,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     a:hover > span[aria-hidden='true'], a:focus-visible > span[aria-hidden='true'] { transform: translateX(3px); }
 
     .btn {
-      display: inline-flex; align-items: center; min-height: 48px; padding: .8rem 1.5rem;
+      display: inline-flex; align-items: center; gap: .55rem; min-height: 48px; padding: .8rem 1.5rem;
       background: var(--ink); color: var(--paper); font-weight: 600; font-size: .95rem; border-radius: 2px;
       transition: background var(--quick) var(--ease), border-color var(--quick) var(--ease),
                   color var(--quick) var(--ease), transform var(--quick) var(--ease), opacity var(--quick) var(--ease);
@@ -188,6 +188,11 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     .btn:hover { background: var(--accent); }
     /* Press feedback within a frame, and no layout shift: scale only. */
     .btn:active { transform: scale(.97); }
+    /* Icons ride on the text colour, so one rule covers both button grounds.
+       The brand mark is solid where the others are stroked, so it is set a
+       shade smaller to keep the optical weight of the row even. */
+    .bi { width: 17px; height: 17px; flex: 0 0 auto; }
+    .bi-brand { width: 15px; height: 15px; }
     .btn-on-dark { background: #f4f4f3; color: #0a0a0a; }
     .btn-on-dark:hover { background: #f4f4f3; opacity: .82; }
     .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--edge); }
@@ -313,11 +318,18 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     .record tbody tr { transition: background var(--quick) var(--ease); }
     .record tbody tr:hover { background: var(--paper-2); }
     .rc-when { white-space: nowrap; font-weight: 600; color: var(--accent); }
+    /* Role and company get a column each. The role is the thing being
+       scanned, so it carries the weight and the company sits in body ink. */
+    .rc-role { font-weight: 600; }
+    .rc-org { color: var(--ink-2); }
     .rc-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
-    @media (max-width: 620px) {
+    /* Four columns need more room than three before they start breaking
+       words, hence 760 rather than the 620 this used to collapse at. */
+    @media (max-width: 760px) {
       .record thead { display: none; }
-      .record tr { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--line); }
+      .record tr { display: grid; padding: .7rem 0; border-bottom: 1px solid var(--line); }
       .record td { border: 0; padding: .1rem 0; }
+      .rc-when { order: -1; font-size: .8rem; }
     }
 
     /* Safety net: if a light-ground button ever lands on a dark block again,

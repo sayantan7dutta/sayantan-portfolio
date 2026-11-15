@@ -221,10 +221,15 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
       </p>
     </div>
     <table class="record" data-reveal>
-      <thead><tr><th scope="col">Period</th><th scope="col">Engagement</th><th scope="col">Basis</th></tr></thead>
+      <thead><tr><th scope="col">Period</th><th scope="col">Role</th><th scope="col">Company</th><th scope="col">Basis</th></tr></thead>
       <tbody>
         {log.slice().reverse().map((l) => (
-          <tr><td class="rc-when">{l.stamp}</td><td>{l.event}</td><td class="rc-kind">{l.kind}</td></tr>
+          <tr>
+            <td class="rc-when">{l.stamp}</td>
+            <td class="rc-role">{l.role}</td>
+            <td class="rc-org">{l.org}</td>
+            <td class="rc-kind">{l.kind}</td>
+          </tr>
         ))}
       </tbody>
     </table>
