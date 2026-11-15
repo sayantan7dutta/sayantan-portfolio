@@ -176,7 +176,16 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
       </p>
     </div>
     <!-- The second set is a duplicate for the loop only, so it is hidden from
-         screen readers and the whole strip carries one group label. -->
+         screen readers and the whole strip carries one group label.
+         WCAG 2.2.2: moving content that runs past five seconds needs a way to
+         stop it. Hovering pauses it too, but a hover is not a mechanism a
+         keyboard can reach, so the button is the actual answer. It ships
+         hidden and JS reveals it, because JS is also what starts the drift. -->
+    <p class="mq-head">
+      <button type="button" class="mq-toggle" aria-label="Pause the client logo animation" hidden>
+        <span class="mq-ico" aria-hidden="true"></span><span class="mq-word">Pause</span>
+      </button>
+    </p>
     <div class="marquee" role="group" aria-label="Selected client logos" data-reveal>
       <ul class="mq-track">
         {clients.map((c) => (
@@ -223,7 +232,13 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
         Every role in order, with the basis each one ran on.
       </p>
     </div>
-    <table class="record" data-reveal>
+    <!-- A real table all the way down. It used to restyle `tr` to a grid at
+         phone widths, which drops the row and cell roles and leaves four
+         unlabelled values in a column; a data table is exempt from 1.4.10
+         reflow, so scrolling it inside a focusable labelled region keeps the
+         headers attached and stays keyboard reachable. -->
+    <div class="tbl-scroll" tabindex="0" role="region" aria-label="Career record" data-reveal>
+    <table class="record">
       <thead><tr><th scope="col">Period</th><th scope="col">Role</th><th scope="col">Company</th><th scope="col">Basis</th></tr></thead>
       <tbody>
         {log.slice().reverse().map((l) => (
@@ -236,6 +251,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
         ))}
       </tbody>
     </table>
+    </div>
   </section>
 
   <!-- ═══ 6 · CONTACT ══════════════════════════════════════════════ -->
@@ -269,11 +285,24 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
       linear-gradient(to top, var(--black) 4%, rgba(10,10,10,.88) 32%, rgba(10,10,10,.42) 68%, rgba(10,10,10,.6) 100%),
       linear-gradient(to right, var(--black) 0%, rgba(10,10,10,.56) 46%, transparent 78%);
   }
+  /* A phone crops the photograph tight and pushes the lede onto a brighter
+     part of it: #a3a3a0 measured 3.3:1 there against 7.2:1 at desktop. The
+     horizontal wash does nothing in a narrow frame, so below 560 it gives
+     way to a heavier vertical one. */
+  @media (max-width: 560px) {
+    .open::after {
+      background: linear-gradient(to top, var(--black) 8%, rgba(10,10,10,.94) 52%, rgba(10,10,10,.5) 100%);
+    }
+  }
   .open-in {
     position: relative; z-index: 2;
     width: 100%; max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto;
   }
-  .supra { font-size: .74rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #a3a3a0; }
+  /* This line sits over the photograph, and the phone crop puts it against a
+     brighter part of it than the desktop one does. #a3a3a0 measured 4.49:1
+     at 1440 and 3.1:1 at 375; #e4e4e1 clears AA at every width with room,
+     and stays a step quieter than the headline's #f4f4f3. */
+  .supra { font-size: .74rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #e4e4e1; }
   .open h1 { font-size: clamp(1.9rem, 6.2vw, 4.8rem); font-weight: 800; margin: 1.1rem 0 1.3rem; }
   /* The two lines are a deliberate break on anything wide enough to hold the
      longer of them. Below that they rejoin and wrap on their own, which is
@@ -300,7 +329,10 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
     display: flex; align-items: center; gap: .6rem;
     font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--dim-dark);
   }
-  .cue span { width: 34px; height: 1px; background: var(--dim-dark); transform-origin: left; animation: sweep 2.4s ease-in-out infinite; }
+  /* Two passes, not forever: 4.8s keeps it under the five seconds at which
+     moving content needs a control of its own, and it has done its job by
+     then anyway. */
+  .cue span { width: 34px; height: 1px; background: var(--dim-dark); transform-origin: left; animation: sweep 2.4s ease-in-out 2; }
   @keyframes sweep { 0%,100% { transform: scaleX(.35); opacity: .5 } 50% { transform: scaleX(1); opacity: 1 } }
   @media (max-width: 860px) { .cue { display: none; } }
 
@@ -422,19 +454,43 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   @media (max-width: 900px) { .phone { margin-left: 0; width: min(212px, 70%); } }
 
   /* ── selected clients ── */
-  .marquee { position: relative; overflow: hidden; }
+  .marquee { position: relative; overflow: hidden; padding-top: .2rem; }
   .marquee::before, .marquee::after {
     content: ''; position: absolute; top: 0; bottom: 0; width: clamp(2rem, 6vw, 4.5rem);
     pointer-events: none; z-index: 2;
   }
   .marquee::before { left: 0; background: linear-gradient(90deg, var(--paper), rgba(250,249,246,0)); }
   .marquee::after { right: 0; background: linear-gradient(270deg, var(--paper), rgba(250,249,246,0)); }
+  /* Static and complete by default: all seven marks visible, duplicate set
+     gone. The sliding single row is the enhancement, and it only exists when
+     JS has decided the visitor wants motion. No JS or reduced motion means
+     nothing moves and there is nothing to pause. */
   .mq-track {
-    display: flex; align-items: center; width: max-content;
-    gap: clamp(2.5rem, 5.5vw, 4.5rem); padding-right: clamp(2.5rem, 5.5vw, 4.5rem);
+    display: flex; align-items: center; flex-wrap: wrap; justify-content: center;
+    gap: clamp(2.5rem, 5.5vw, 4.5rem); row-gap: 1.8rem;
+  }
+  .mq-dupe { display: none; }
+  :global(html.anim) .mq-track {
+    flex-wrap: nowrap; justify-content: flex-start; width: max-content;
+    padding-right: clamp(2.5rem, 5.5vw, 4.5rem);
     animation: drift 45s linear infinite;
   }
-  .marquee:hover .mq-track { animation-play-state: paused; }
+  :global(html.anim) .mq-dupe { display: block; }
+  :global(html.anim) .mq-track.is-paused,
+  .marquee:hover :global(html.anim) .mq-track { animation-play-state: paused; }
+  :global(html.anim) .marquee:hover .mq-track { animation-play-state: paused; }
+
+  .mq-head { display: flex; justify-content: flex-end; margin-bottom: .7rem; min-height: 44px; }
+  .mq-toggle {
+    display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: .4rem .7rem;
+    font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-2); border: 1px solid var(--line); border-radius: 2px; background: var(--paper);
+    transition: border-color var(--quick) var(--ease), color var(--quick) var(--ease);
+  }
+  .mq-toggle:hover { border-color: var(--accent); color: var(--ink); }
+  .mq-ico { width: 9px; height: 11px; background: currentColor;
+    clip-path: polygon(0 0, 33% 0, 33% 100%, 0 100%, 0 0, 67% 0, 100% 0, 100% 100%, 67% 100%); }
+  .mq-toggle[aria-pressed='true'] .mq-ico { clip-path: polygon(0 0, 100% 50%, 0 100%); }
   /* Height comes from the inline style, which outranks the reset's
      `img { height: auto }`; the width/height attributes give the browser the
      ratio, so a logo that is still loading already occupies its final width
@@ -447,10 +503,9 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
     .open-bg img { animation: none; transform: none; }
     .cue span { animation: none; }
     .work li:hover .shot, .work li:focus-within .shot { transform: none; }
-    /* A stopped marquee would leave most of the logos parked off screen, so
-       the strip becomes a static wrapped row and the duplicate set goes. */
-    .mq-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; row-gap: 1.8rem; padding-right: 0; }
-    .mq-dupe { display: none; }
+    /* Belt and braces: `html.anim` already withholds the drift when the
+       visitor has asked for less motion. */
+    .mq-track { animation: none; }
   }
 
   /* ── closing ── */
@@ -471,4 +526,22 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   .end-mail a { display: inline-block; padding-block: .35rem; border-bottom: 2px solid var(--edge-dark); transition: border-color var(--quick) var(--ease); }
   .end-mail a:hover { border-bottom-color: #f4f4f3; }
 </style>
+
+<script>
+  // The drift only runs under `html.anim`, so the control only appears there.
+  if (document.documentElement.classList.contains('anim')) {
+    const btn = document.querySelector<HTMLButtonElement>('.mq-toggle');
+    const track = document.querySelector<HTMLElement>('.mq-track');
+    if (btn && track) {
+      btn.hidden = false;
+      btn.setAttribute('aria-pressed', 'false');
+      btn.addEventListener('click', () => {
+        const paused = track.classList.toggle('is-paused');
+        btn.setAttribute('aria-pressed', String(paused));
+        btn.setAttribute('aria-label', paused ? 'Play the client logo animation' : 'Pause the client logo animation');
+        btn.querySelector('.mq-word')!.textContent = paused ? 'Play' : 'Pause';
+      });
+    }
+  }
+</script>
 </Cut>

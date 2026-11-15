@@ -202,7 +202,13 @@ const personal = interview.filter(
         Every role in order, with the basis each one ran on.
       </p>
     </div>
-    <table class="record" data-reveal>
+    <!-- A real table all the way down. It used to restyle `tr` to a grid at
+         phone widths, which drops the row and cell roles and leaves four
+         unlabelled values in a column; a data table is exempt from 1.4.10
+         reflow, so scrolling it inside a focusable labelled region keeps the
+         headers attached and stays keyboard reachable. -->
+    <div class="tbl-scroll" tabindex="0" role="region" aria-label="Career record" data-reveal>
+    <table class="record">
       <thead><tr><th scope="col">Period</th><th scope="col">Role</th><th scope="col">Company</th><th scope="col">Basis</th></tr></thead>
       <tbody>
         {log.slice().reverse().map((l) => (
@@ -215,6 +221,7 @@ const personal = interview.filter(
         ))}
       </tbody>
     </table>
+    </div>
   </section>
 
   <!-- ═══ CERTIFICATIONS AND RECOGNITION ════════════════════════════ -->
@@ -339,6 +346,15 @@ const personal = interview.filter(
     background:
       linear-gradient(to top, var(--black) 4%, rgba(10,10,10,.88) 32%, rgba(10,10,10,.42) 68%, rgba(10,10,10,.6) 100%),
       linear-gradient(to right, var(--black) 0%, rgba(10,10,10,.56) 46%, transparent 78%);
+  }
+  /* A phone crops the photograph tight and pushes the lede onto a brighter
+     part of it: #a3a3a0 measured 3.3:1 there against 7.2:1 at desktop. The
+     horizontal wash does nothing in a narrow frame, so below 560 it gives
+     way to a heavier vertical one. */
+  @media (max-width: 560px) {
+    .pagehead.ph-full::after {
+      background: linear-gradient(to top, var(--black) 8%, rgba(10,10,10,.94) 52%, rgba(10,10,10,.5) 100%);
+    }
   }
   .ah-in { position: relative; z-index: 2; width: 100%; }
   /* 14.5em, not the container: left to the full width this breaks into two

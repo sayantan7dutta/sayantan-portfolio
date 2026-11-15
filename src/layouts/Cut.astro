@@ -323,14 +323,11 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     .rc-role { font-weight: 600; }
     .rc-org { color: var(--ink-2); }
     .rc-kind { font-size: .78rem; color: var(--faint); white-space: nowrap; }
-    /* Four columns need more room than three before they start breaking
-       words, hence 760 rather than the 620 this used to collapse at. */
-    @media (max-width: 760px) {
-      .record thead { display: none; }
-      .record tr { display: grid; padding: .7rem 0; border-bottom: 1px solid var(--line); }
-      .record td { border: 0; padding: .1rem 0; }
-      .rc-when { order: -1; font-size: .8rem; }
-    }
+    /* The table scrolls rather than restacking, so it keeps its headers.
+       `min-width` is what forces the scroll instead of crushing the columns. */
+    .tbl-scroll { overflow-x: auto; }
+    .tbl-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    @media (max-width: 760px) { .record { min-width: 34rem; } }
 
     /* Safety net: if a light-ground button ever lands on a dark block again,
        it stays readable instead of disappearing. */
