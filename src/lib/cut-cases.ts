@@ -28,6 +28,13 @@ export interface CaseSection {
   caption?: string;
   /** One caption per phone, for the `trio`, `pair` and `solo` shots. */
   caps?: string[];
+  /**
+   * One alt per phone. Separate from `caps` on purpose: a caption here makes
+   * an argument about the screen, which is not the same as describing it, so
+   * leaning on it as the text alternative hands a screen reader the claim
+   * and withholds the evidence.
+   */
+  alts?: string[];
   /** Rendered as a pulled line rather than body copy. */
   pull?: string;
   /** Structured content under the prose. */
@@ -140,6 +147,11 @@ export const cutCases: CutCase[] = [
           'No countdown anxiety: speak naturally, the app waits until you are done',
           'Failure forgives: practical tips, try again, or switch to typing, never a dead end',
         ],
+        alts: [
+          'Onboarding, step two of four, asking which town you live in, with the spoken answer “Southampton” shown above a typed alternative and a continue button.',
+          'The listening state: a waveform, the line “speak naturally, I’ll wait until you’re done”, and a tap to stop button. No timer.',
+          'A failed voice attempt reading “Sorry, I didn’t catch that”, with three suggestions, a button to try speaking again, and a link to type instead.',
+        ],
         block: {
           kind: 'cards',
           items: [
@@ -161,6 +173,10 @@ export const cutCases: CutCase[] = [
           'Pairing is a moment of trust, not a configuration step: one big code, one scan',
           'The carer feed: what matters since you last looked, in plain sentences',
         ],
+        alts: [
+          'The pairing screen: a large connection code to share, a QR code option, and a separate field for entering a code received from someone else.',
+          'The carer view, listing recent activity as sentences: a missed evening medication twelve minutes late, and a check-in reading “Margaret shared I’m OK”.',
+        ],
       },
       {
         kicker: 'What it helps with',
@@ -169,7 +185,8 @@ export const cutCases: CutCase[] = [
           'Underneath the voice layer, miiGenie does four practical things. Each was designed with the same forgiving pattern: real help, presented simply enough that a tired 75-year-old can act on it the first time, every time.',
         ],
         shot: 'solo',
-        caps: ['My Day: the four jobs as one morning, not four menus'],
+        caps: ['My Day: two questions, three large answers each, and a voice note. Nothing to type.'],
+        alts: ['The My Day reflection screen: “when is it?” answered by morning, midday or evening, “how are you feeling?” by good, okay or not great, then a voice note of up to 180 seconds.'],
         block: {
           kind: 'cards',
           items: [

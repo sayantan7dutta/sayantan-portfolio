@@ -134,7 +134,7 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
           {img[sec.shot!].map((t: any, i: number) => (
             <figure style={`--d:${i * 80}ms`}>
               <div class="plate">
-                <Image src={t} alt={sec.caps?.[i] ? '' : `A screen from ${project.short}`} widths={[320, 640]} sizes="250px" loading="lazy" />
+                <Image src={t} alt={sec.alts?.[i] ?? `A screen from ${project.short}`} widths={[320, 640]} sizes="250px" loading="lazy" />
               </div>
               {sec.caps?.[i] && <figcaption>{sec.caps[i]}</figcaption>}
             </figure>
