@@ -179,7 +179,7 @@ export const clients = [
 
 export const contact = {
   email: 'sayantan7dutta@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/sayantan7dutta/',
+  linkedin: 'https://www.linkedin.com/in/sayantandutta7/',
   resume: '/resume.pdf',
   base: 'Southampton, UK',
 };
