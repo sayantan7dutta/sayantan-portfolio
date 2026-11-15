@@ -26,6 +26,8 @@ export interface CaseSection {
   /** Key into the image map in the case study page. */
   shot?: string;
   caption?: string;
+  /** One caption per phone, for the `trio`, `pair` and `solo` shots. */
+  caps?: string[];
   /** Rendered as a pulled line rather than body copy. */
   pull?: string;
   /** Structured content under the prose. */
@@ -133,6 +135,11 @@ export const cutCases: CutCase[] = [
           'The second surface is the family carer: pairing, check-ins and visibility designed as reassurance rather than surveillance. The product is deliberately framed as supportive everyday companionship, with hard guardrails. It is not a therapist and never pretends to be a relationship.',
         ],
         shot: 'trio',
+        caps: [
+          'Onboarding is a conversation: four spoken questions, each with a typed fallback',
+          'No countdown anxiety: speak naturally, the app waits until you are done',
+          'Failure forgives: practical tips, try again, or switch to typing, never a dead end',
+        ],
         block: {
           kind: 'cards',
           items: [
@@ -142,11 +149,43 @@ export const cutCases: CutCase[] = [
           ],
         },
       },
+      {
+        kicker: 'The second surface',
+        heading: 'Reassurance for the carer, without surveillance of the senior',
+        body: [
+          'The carer side is its own product surface: pairing by a short code or QR, a feed of check-ins and missed medications, and profile management for the senior they support.',
+          'The design line I held throughout: the senior is the user, the carer is the safety net. Visibility is framed as “Margaret shared I’m OK”, never as monitoring.',
+        ],
+        shot: 'pair',
+        caps: [
+          'Pairing is a moment of trust, not a configuration step: one big code, one scan',
+          'The carer feed: what matters since you last looked, in plain sentences',
+        ],
+      },
+      {
+        kicker: 'What it helps with',
+        heading: 'Four everyday jobs, one calm surface',
+        body: [
+          'Underneath the voice layer, miiGenie does four practical things. Each was designed with the same forgiving pattern: real help, presented simply enough that a tired 75-year-old can act on it the first time, every time.',
+        ],
+        shot: 'solo',
+        caps: ['My Day: the four jobs as one morning, not four menus'],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Remind', b: 'Appointments, medication, routines, and gentle daily prompts.' },
+            { t: 'Organise', b: 'Important information and documents in one accessible place. “Find my gas bill from January” works by voice.' },
+            { t: 'Connect', b: 'Family check-ins, reassurance, and easier communication, both ways.' },
+            { t: 'Support', b: 'Access to trusted local services and practical help around the home.' },
+          ],
+        },
+      },
     ],
     reflection: {
       heading: 'Design-complete, entering production',
       body: [
-        'This is a live engagement, written from inside the work. The MVP is design-complete and entering production; a fuller case study with pilot results will follow once the first users are in. What is here is already true: the research, the system, and the decisions.',
+        'MVP 1.1 is design-complete, and the build is being brought up to the approved system for a production release, followed by a pilot with first users. The next chapter of this case study writes itself from there: onboarding completion, voice success rates, and whether the trial-to-subscription moment reads as honestly as it was designed to.',
+        'The job is only half screens. The other half is building the company’s relationship to design: specs engineers can implement without guessing, a review rhythm that catches drift before it ships, and the patience to explain why an emoji is not an icon. A design system nobody follows is a portfolio piece; one the team builds from is infrastructure.',
       ],
     },
   },

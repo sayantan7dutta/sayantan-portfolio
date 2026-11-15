@@ -24,6 +24,9 @@ import mgAfter from '../../../assets/work/miigenie/home.png';
 import mgListening from '../../../assets/work/miigenie/listening.png';
 import mgMyDay from '../../../assets/work/miigenie/my-day.png';
 import mgCarer from '../../../assets/work/miigenie/carer-home.png';
+import mgOnboarding from '../../../assets/work/miigenie/onboarding.png';
+import mgError from '../../../assets/work/miigenie/error-state.png';
+import mgConnect from '../../../assets/work/miigenie/connect.png';
 import hzScenario from '../../../assets/work/hazop/scenario-summary.jpg';
 import hzAnalytics from '../../../assets/work/hazop/analytics-dashboard.jpg';
 import apDashboard from '../../../assets/work/api-lifecycle/dashboard.png';
@@ -35,7 +38,13 @@ import amRoutines from '../../../assets/work/amble/routines.jpg';
 
 /** Per-case image slots, keyed by the `shot` names used in cut-cases.ts. */
 const shots: Record<string, Record<string, any>> = {
-  miigenie: { trio: [mgListening, mgMyDay, mgCarer], before: mgBefore, after: mgAfter },
+  miigenie: {
+    before: mgBefore, after: mgAfter,
+    /* The voice loop as it is actually used: start, speak, get it wrong. */
+    trio: [mgOnboarding, mgListening, mgError],
+    pair: [mgConnect, mgCarer],
+    solo: [mgMyDay],
+  },
   hazop: { wide: hzScenario, wide2: hzAnalytics },
   'api-lifecycle': { wide: apDashboard, wide2: apDetails },
   kinvault: { wide: kvVault, wide2: kvTransfer },
@@ -54,12 +63,6 @@ const img = shots[slug] ?? {};
 
 const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
-/** Screenshots carry meaning, so they get real alternatives, not alt="". */
-const trioAlts = [
-  'miiGenie listening, with a typed fallback available',
-  'The My Day screen, showing the routine for the day',
-  'The family carer view, showing recent activity',
-];
 ---
 
 <Cut
@@ -124,10 +127,17 @@ const trioAlts = [
         </div>
       )}
 
-      {sec.shot === 'trio' && img.trio && (
-        <div class="trio" data-reveal>
-          {img.trio.map((t: any, i: number) => (
-            <figure style={`--d:${i * 80}ms`}><div class="plate"><Image src={t} alt={trioAlts[i] ?? ''} widths={[320, 640]} sizes="250px" loading="lazy" /></div></figure>
+      {/* One, two or three phones, each with its own caption. The caption is
+          the accessible description, so the image steps out of the way. */}
+      {['trio', 'pair', 'solo'].includes(sec.shot ?? '') && img[sec.shot!] && (
+        <div class="trio" data-reveal style={`--n:${img[sec.shot!].length}`}>
+          {img[sec.shot!].map((t: any, i: number) => (
+            <figure style={`--d:${i * 80}ms`}>
+              <div class="plate">
+                <Image src={t} alt={sec.caps?.[i] ? '' : `A screen from ${project.short}`} widths={[320, 640]} sizes="250px" loading="lazy" />
+              </div>
+              {sec.caps?.[i] && <figcaption>{sec.caps[i]}</figcaption>}
+            </figure>
           ))}
         </div>
       )}
@@ -305,7 +315,10 @@ const trioAlts = [
   .plate:hover { transform: translateY(-5px); box-shadow: 0 34px 56px -30px rgba(0,0,0,.55); }
   .dim { filter: saturate(.45) brightness(.9); }
   .ba { display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); gap: clamp(1.4rem, 4vw, 3rem); margin-top: clamp(2rem, 5vw, 3rem); }
-  .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 250px)); gap: clamp(1rem, 3vw, 2rem); margin-top: clamp(2rem, 5vw, 3rem); }
+  /* Column count comes from how many phones the section has, so a pair does
+     not sit in a three-wide grid with a hole on the end. */
+  .trio { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 250px)); gap: clamp(1rem, 3vw, 2rem); margin-top: clamp(2rem, 5vw, 3rem); }
+  .trio figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); }
   @media (max-width: 720px) { .ba, .trio { grid-template-columns: 1fr; max-width: 280px; } }
   .ba figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); max-width: 34ch; }
   .ba figcaption b { color: var(--ink); font-weight: 700; }
