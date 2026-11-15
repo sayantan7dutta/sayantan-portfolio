@@ -273,6 +273,36 @@ export const cutCases: CutCase[] = [
         caption: 'Analytics across sites and studies',
         alt: 'The analytics dashboard: action completion at 29 per cent, donut and bar breakdowns of 38 actions and their approvals, then site risk as a donut of 42 and a stacked bar for each of twelve nodes.',
       },
+      {
+        kicker: 'What I owned',
+        heading: 'UX strategy from domain research through MVP delivery',
+        body: [
+          'I owned the UX strategy across the whole project, translating dense technical requirements into something accessible. A scalable design system and a navigation structure anchored to the HAZOP lifecycle meant the MVP earned trust quickly, with safety professionals who had never had a tool built for this work.',
+          'The platform reduced manual data entry, standardised compliance reporting, and laid a foundation the engineering team could build on without reintroducing inconsistency.',
+        ],
+      },
+      {
+        kicker: 'The parallel engagement',
+        heading: 'Rebuilding the company website at the same time',
+        body: [
+          'Alongside the MVP I rebuilt Soter Software’s own website, migrating it off WordPress and into Wix. Same company, two outputs at once: a product platform their customers could trust, and a marketing site that could represent the company behind it.',
+          'The old site read like a brochure. Its information architecture did not match how engineering buyers evaluate process-safety software, so visitors bounced before they understood the product, and every content change needed a developer, so marketing could not keep up with the roadmap.',
+          'I rebuilt it around six sections, each answering one question a buyer actually arrives with, and organised the products page by the four people who touch a study. I hand-built every page in Wix, so the team was left with a site they can update without a developer.',
+        ],
+        shot: 'wide3',
+        caption: 'Products, organised by the four people who touch a study',
+        alt: 'The rebuilt products page, with HAZOP Edge described separately for facilitators and scribes, team members, project managers and senior management.',
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Facilitators and scribes', b: 'Set up workshops, document decisions, cut manual rework.' },
+            { t: 'Team members', b: 'Access studies, collaborate live, see risks in context.' },
+            { t: 'Project managers', b: 'Real-time dashboards, bottleneck visibility, consolidated insights.' },
+            { t: 'Senior management', b: 'Risk trend visibility, data-driven decisions, compliance evidence.' },
+          ],
+        },
+        pull: 'Wix was not the fashionable choice and was not meant to be. Soter’s team is small and fast, and needed a surface they could run themselves. A custom build would have looked better in a portfolio and worked worse in the business. Choosing the boring tool was the design decision.',
+      },
     ],
     reflection: {
       heading: 'What this project taught me',
@@ -446,6 +476,28 @@ export const cutCases: CutCase[] = [
         ],
         shot: 'figure',
       },
+      {
+        kicker: 'The templates',
+        heading: 'Standardised across three formats',
+        body: [
+          'Each researcher had their own format. Senior stakeholders were receiving decks of thirty or more slides with no summary, no structure and no clear ask. Three templates replaced that.',
+        ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Interview guide', b: 'A standardised opening and consent framing, modular question blocks by research goal, probe suggestions for each section, consistent time per block, and debrief prompts at the end.' },
+            { t: 'Insight deck', b: 'A branded template with the executive summary on slide one, one evidence-backed insight per slide, severity and frequency scoring, and recommended actions at the close.' },
+            { t: 'Stakeholder presentation', b: 'Three slides maximum for leadership reviews. Business impact first, data visualised rather than listed, a clear ask or decision required, and an appendix for anyone who wants the detail.' },
+          ],
+        },
+      },
+      {
+        kicker: 'How it landed',
+        heading: 'The team noticed the difference immediately',
+        body: [
+          'Each improvement was validated with the team before moving to the next. The feedback was immediate and specific, because people could see what had changed and why it mattered.',
+        ],
+      },
     ],
     reflection: {
       heading: 'What I finished, what remained, and what I learned',
@@ -497,11 +549,19 @@ export const cutCases: CutCase[] = [
         kicker: 'The rule',
         heading: 'Every feature had to neutralise a specific anxiety',
         body: [
-          'Timing, as in “am I sending at a bad rate right now?”, is neutralised by plain-language rate alerts shown with the chart, so the user decides rather than the algorithm. Opacity, as in “did it arrive, was it enough?”, is neutralised by shared vaults where both sides see the same balance and contributions.',
+          'The concept resolved to one rule. Every feature had to neutralise a specific anxiety in the transfer relationship, not just add functionality.',
         ],
         shot: 'wide2',
         caption: 'Smart transfer, with the rate decision left to the sender',
         alt: 'Smart Transfer: a rule to send £500 when the pound to rupee rate reaches 106.50, today’s rate shown at 105.12, and a breakdown with no fee, no markup and ₹53,250 guaranteed to arrive.',
+        block: {
+          kind: 'cards',
+          items: [
+            { t: '“Am I sending at a bad rate right now?”', b: 'AI rate triggers. Plain-language alerts, like “best rate in 14 days”, shown with the rate chart, so the user decides rather than the algorithm.' },
+            { t: '“Did it arrive? Was it enough?”', b: 'Shared vaults. Both sides see the same balance, contributors and live transfer status, so no message is needed to confirm an arrival.' },
+            { t: '“Will the money reach the actual bill?”', b: 'Direct bill payment. Pay the utility directly, so the sender sees the bill cleared rather than just that money was sent.' },
+          ],
+        },
       },
       {
         kicker: 'The system',
@@ -541,34 +601,108 @@ export const cutCases: CutCase[] = [
         kicker: 'The problem',
         heading: 'Technology for ageing is built to monitor, not to care',
         body: [
-          'Most products aimed at older adults are designed around observation: sensors, alerts, dashboards for somebody else. The brief asked what care could look like in 2065 if it were designed around the person living it rather than the person checking on them.',
+          'Most technology designed for later life focuses on efficiency and surveillance. It tracks, reminds, and alerts. For the people using it, that often feels intrusive and faintly medical, a constant signal that they are being managed rather than supported.',
+          'The research literature has been moving the other way for years, towards empathetic, multisensory, human-centred environments. Yet the products on the shelf still treat an ageing person as a system to be optimised.',
         ],
         shot: 'wide',
         caption: 'Two generations, one shared need',
         alt: 'Three generations around a kitchen table in the evening, with an illustrated vine threaded through the room.',
       },
       {
-        kicker: 'The reframe',
+        kicker: 'The brief',
         heading: 'Design the care service, not the device',
         body: [
-          'Independence is held by a whole system, not a device. Once the team stopped designing an object and started designing a service, the work opened up: what the home does, what the household does, and what the wider network does around them.',
+          'Rodd Design Studio set the team a foresight brief through the Winchester School of Art’s Global Smart Lab: explore how an ageing society might live, and be cared for, in 2065.',
+          'The forty-year horizon freed the work from today’s devices and let us design at the level of the whole care service: the relationships between an older person and their family, carers, healthcare providers, and community, and how a future service could hold all of them together without making the person at its centre feel managed.',
         ],
       },
       {
-        kicker: 'Leading it',
+        kicker: 'The service ecosystem',
+        heading: 'Independence is held by a whole system, not a device',
+        body: [
+          'Treating this as a service, not a gadget, meant mapping everyone who shapes whether an older person stays independent at home, and designing Amble to support those relationships rather than replace them.',
+        ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Older adults', b: 'The person at the centre. Independence and dignity, never the feeling of being managed.' },
+            { t: 'Families', b: 'Reassurance and connection from a distance, without tipping into surveillance.' },
+            { t: 'Carers', b: 'A lighter coordination load and clearer signals about what actually needs attention.' },
+            { t: 'Healthcare providers', b: 'Earlier, gentler signals that surface needs before they become crises.' },
+            { t: 'Local authorities', b: 'Prevention that helps people stay out of formal care for longer.' },
+            { t: 'Communities', b: 'Belonging and participation as part of care, not an afterthought to it.' },
+            { t: 'Technology providers', b: 'Infrastructure that stays in the background and earns its place quietly.' },
+          ],
+        },
+      },
+      {
+        kicker: 'Research',
+        heading: 'Two generations, one shared need',
+        body: [
+          'We adopted a research-through-design methodology, combining speculative design with a literature review and primary research. Setting the concept forty years out was a deliberate device. It moved conversations away from “what gadget would you buy” and towards “what should later life feel like”, which is where the useful insight lives.',
+          'Two groups of younger adults aged 20 to 40 in Winchester, who would actually be the ageing population of 2065, and a gathering of fifteen older adults aged 50 to 80 in Southampton, reached through local churches and community groups. The older-adult session was run as a relaxed afternoon with refreshments and a reminiscence game, not a clinical interview, so people spoke openly about retirement, care, and technology.',
+          'They described later life very differently, but they asked design for the same thing: support that does not demand attention.',
+        ],
+        pull: '“Plants can give emotional support in a way that animals or humans can’t.” And, from another participant: “I still like to do my own shopping. I want to go. I don’t like having a delivery.”',
+      },
+      {
+        kicker: 'My role',
         heading: 'Leading a multidisciplinary team through ambiguity',
         body: [
-          'Seven months with no product to point at and no users who exist yet. Two ideas were built and set aside before the system took its final shape. Leading that meant holding the ambiguity open long enough for the team to find the real question, without letting it run indefinitely.',
+          'I was project lead for a team of four designers and researchers, working to a real client brief over seven months. On a speculative project the hardest thing to hold is the frame. With no product to anchor decisions, a foresight project can drift into either science fiction or a thinly disguised version of the present.',
+          'My job was to keep the team honest: every imaginative leap had to trace back to a research insight or a piece of evidence. I set the research approach, ran the synthesis, steered two significant changes of direction, and shaped how the final concept was communicated and exhibited.',
         ],
         shot: 'wide2',
         caption: 'Daily routines in the 2065 home',
         alt: 'An illustrated green shoot drawn sharply in the foreground of a communal interior that is left out of focus.',
       },
       {
+        kicker: 'What we set aside',
+        heading: 'Two ideas we built and set aside',
+        body: [
+          'The plant system was not the first answer. It was the third. The two concepts the team built and abandoned were not wasted work, they were how we found the real brief.',
+        ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Interactive Brain Gym', b: 'Memory preservation and cognitive exercises, designed with dementia in mind. Solving for one condition narrowed the brief to a clinical problem, and the research kept pointing somewhere broader: emotional wellbeing, not just memory.' },
+            { t: 'Home Companion Robot', b: 'A device to track, nudge, detect and assist across the home. It worked on paper and felt wrong in practice. A robot is another screen, another thing demanding attention, the opposite of the calm the research asked for.' },
+            { t: 'Amble', b: 'A living, bioengineered plant system. A plant is already emotionally legible. It does not demand interaction, it shares the space. That let us design support that is ambient, sensory, and quiet.' },
+          ],
+        },
+      },
+      {
+        kicker: 'The concept',
+        heading: 'Amble: a living system with five domains',
+        body: [
+          'Amble is a bioengineered plant system that coexists with the people it supports. It senses, adapts, and responds through light, scent, sound, and growth, rather than screens and notifications.',
+        ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Core intelligent functions', b: 'Decentralised ambient intelligence. The system self-regulates its own maintenance and adjusts the home environment, with no central controller and no command to issue.' },
+            { t: 'Domestic utility', b: 'Quiet help with everyday tasks: supply monitoring, composting, laundry support, and modular rearrangement of the space as needs change over time.' },
+            { t: 'Emotional and sensory support', b: 'Mood detection met with response: aromatherapy, sound feedback, bioluminescence, and “mood blooming”, the plant co-regulating alongside the person.' },
+            { t: 'Personalisation and adaptation', b: 'The system grows with its resident. Its form and rhythm evolve to match an individual lifestyle and routine, rather than imposing one.' },
+            { t: 'Wearable extension', b: 'A portable, air-filtering module that absorbs pollutants and tracks air quality, carrying Amble’s presence beyond the walls of the home.' },
+          ],
+        },
+      },
+      {
+        kicker: 'The brand',
+        heading: 'A brand that feels alive, not engineered',
+        body: [
+          'The brand had one job: convince people that Amble is a living companion, not a gadget. Every decision, from the typeface to the tone of voice, was grounded in research on how older adults read, trust, and feel at ease.',
+          'A Playfair Display wordmark, lowercase for approachability, with a flower growing from the “a” and a leaf sprouting from the “e”. Playfair is paired with the geometric sans Poppins, and the pairing was evidence-led: studies show older adults read serif type more comfortably at larger sizes, and that typefaces themselves carry personality, in this case sincerity and calm. The palette is muted earth tones, chosen for the calm familiarity research links to older adults’ preferences.',
+          'Amble’s voice speaks as a presence, not an assistant: warm, calm and mindful, helpful but never insistent. Let your home grow with you.',
+        ],
+      },
+      {
         kicker: 'Outcome',
         heading: 'From research project to public exhibition',
         body: [
-          'Amble resolved into a living system with five domains, woven into the home, with a brand that feels alive rather than engineered. It was exhibited at the London Design Festival.',
+          'Amble was shown to the public as part of “Tender Interbeing: The Future of Design with Empathy” at the London Design Festival in September 2025, alongside industry.',
+          'Translating seven months of research into an exhibition was a design problem of its own: two posters carrying the full argument, the concept, the evidence and the rationale, condensed to what a visitor can absorb in a single pass.',
         ],
       },
     ],

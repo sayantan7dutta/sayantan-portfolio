@@ -29,6 +29,7 @@ import mgError from '../../../assets/work/miigenie/error-state.png';
 import mgConnect from '../../../assets/work/miigenie/connect.png';
 import hzScenario from '../../../assets/work/hazop/scenario-summary.jpg';
 import hzAnalytics from '../../../assets/work/hazop/analytics-dashboard.jpg';
+import soProducts from '../../../assets/work/soter-software/products.jpg';
 import apDashboard from '../../../assets/work/api-lifecycle/dashboard.png';
 import apDetails from '../../../assets/work/api-lifecycle/design-details.png';
 import kvVault from '../../../assets/work/kinvault/vault.jpg';
@@ -45,7 +46,7 @@ const shots: Record<string, Record<string, any>> = {
     pair: [mgConnect, mgCarer],
     solo: [mgMyDay],
   },
-  hazop: { wide: hzScenario, wide2: hzAnalytics },
+  hazop: { wide: hzScenario, wide2: hzAnalytics, wide3: soProducts },
   'api-lifecycle': { wide: apDashboard, wide2: apDetails },
   kinvault: { wide: kvVault, wide2: kvTransfer },
   amble: { wide: amFamily, wide2: amRoutines },
@@ -142,7 +143,7 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
         </div>
       )}
 
-      {(sec.shot === 'wide' || sec.shot === 'wide2') && img[sec.shot] && (
+      {(sec.shot === 'wide' || sec.shot === 'wide2' || sec.shot === 'wide3') && img[sec.shot] && (
         <figure class="wide" data-reveal>
           <div class="wide-frame">
               {/* The caption labels the screen; the alt says what is on it.
