@@ -251,10 +251,10 @@ export const recognition = [
   {
     label: 'Community',
     items: [
-      { name: 'Speaker, IDF Southampton webinar (Sep 2026)' },
+      { name: 'Speaker, IxDF Southampton webinar (Sep 2026)', url: 'https://ixdf.org/local-group/europe/united-kingdom/southampton' },
       { name: 'Friends of Figma, London', url: 'https://friends.figma.com/london/' },
       { name: 'Food and UX (FAUX)', url: 'https://www.foodandux.com/' },
-      { name: 'IDF London local group', url: 'https://ixdf.org/local-group/europe/united-kingdom/london' },
+      { name: 'IxDF London local group', url: 'https://ixdf.org/local-group/europe/united-kingdom/london' },
     ],
   },
 ];
