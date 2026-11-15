@@ -63,7 +63,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
 
   <div class="open-in">
     <p class="supra">Sayantan Dutta · Product designer · {contact.base}</p>
-    <h1><span>Turning complex </span><span>enterprise systems </span><span>into interfaces that build trust.</span></h1>
+    <h1><span>Turning complex </span><span>enterprise systems </span><span>into interfaces.</span></h1>
     <p class="logline">
       Five years across industrial safety, enterprise SaaS, and design
       operations. I work on the high-stakes workflows, the ones where getting
@@ -275,6 +275,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   /* 46ch, not the usual 44: at 44 the last line is a single word at desktop
      sizes. `pretty` keeps that true at the widths in between. */
   .logline { font-size: clamp(1rem, 2.1vw, 1.18rem); color: #a3a3a0; max-width: 46ch; text-wrap: pretty; }
+  @media (min-width: 900px) { .logline { text-wrap: balance; } }
 
   /* With the numbers gone the logline carries straight into the buttons, so
      it gets the rule that used to sit above the row and the space it held. */
