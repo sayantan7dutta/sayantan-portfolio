@@ -14,6 +14,7 @@
  * One type system holds both: Inter Tight for display, Literata for reading.
  */
 import Cut from '../../../layouts/Cut.astro';
+import CutIcon from '../../../components/CutIcon.astro';
 import { Image } from 'astro:assets';
 import { projects, log, contact, clients } from '../../../lib/variants';
 import { interview } from '../../../lib/interview';
@@ -71,8 +72,10 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
     </p>
 
     <div class="open-cta">
-      <a class="btn btn-on-dark" href="#work" data-ab="open:work">See the work</a>
-      <a class="btn btn-ghost-dark" href={`mailto:${contact.email}`} data-ab="open:email">Get in touch</a>
+      <a class="btn btn-on-dark" href="#work" data-ab="open:work"><CutIcon name="arrow" />See the work</a>
+      <a class="btn btn-ghost-dark" href={`mailto:${contact.email}`} data-ab="open:email"><CutIcon name="mail" />Get in touch</a>
+      <a class="btn btn-ghost-dark" href={contact.linkedin} target="_blank" rel="me noopener" data-ab="open:linkedin"><CutIcon name="linkedin" />LinkedIn</a>
+      <a class="btn btn-ghost-dark" href={contact.resume} data-ab="open:cv"><CutIcon name="download" />CV (PDF)</a>
     </div>
   </div>
 

@@ -1,0 +1,32 @@
+---
+/**
+ * The handful of marks the Director's Cut buttons use.
+ *
+ * One component rather than inline SVG, because the same four now appear on
+ * both the home hero and the About masthead, and two copies of a path is how
+ * they end up drawn at different weights.
+ *
+ * Sizing lives with `.bi` in Cut.astro so a button controls its own icon.
+ * Everything inherits `currentColor`, so one set works on paper and on black.
+ */
+interface Props {
+  name: 'mail' | 'linkedin' | 'download' | 'arrow';
+}
+const { name } = Astro.props;
+
+/** The brand mark is solid where the others are stroked, so it is set a shade
+    smaller to keep the optical weight of a button row even. */
+const cls = name === 'linkedin' ? 'bi bi-brand' : 'bi';
+---
+
+{name === 'linkedin' ? (
+  <svg class={cls} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+  </svg>
+) : (
+  <svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    {name === 'mail' && <><rect x="2.5" y="4.5" width="19" height="15" rx="2" /><path d="m3 6.5 9 6.5 9-6.5" /></>}
+    {name === 'download' && <><path d="M12 3.5v11" /><path d="m7.5 10.5 4.5 4.5 4.5-4.5" /><path d="M4 18.5h16" /></>}
+    {name === 'arrow' && <><path d="M4 12h15" /><path d="m13 6 6 6-6 6" /></>}
+  </svg>
+)}

@@ -8,11 +8,12 @@
  */
 import { Image } from 'astro:assets';
 import Cut from '../../../layouts/Cut.astro';
+import CutIcon from '../../../components/CutIcon.astro';
 import { log, contact } from '../../../lib/variants';
 import { interview } from '../../../lib/interview';
 
-import portrait from '../../../assets/sayantan-studio.jpg';
-import portraitAlt from '../../../assets/sayantan.jpg';
+import heroPortrait from '../../../assets/sayantan.jpg';
+import sidePortrait from '../../../assets/sayantan-studio.jpg';
 
 const capabilities = [
   { k: 'Product design', v: 'End to end, discovery through delivery. Flows, journeys, prototypes, interaction detail.' },
@@ -39,8 +40,15 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
   active="about"
 >
 
-<header class="pagehead">
-  <div class="pagehead-in about-top">
+<!-- Keeps the `pagehead` class: the layout's nav script measures whichever
+     dark block opens the page by it, and the page's type and focus rings hang
+     off it too. `ph-full` is what turns it into the home page's full frame. -->
+<header class="pagehead ph-full">
+  <figure class="ah-bg" aria-hidden="true">
+    <Image src={heroPortrait} alt="" widths={[900, 1600]} sizes="100vw" loading="eager" />
+  </figure>
+
+  <div class="pagehead-in ah-in">
     <div class="at-copy">
       <p class="sec-k">About</p>
       <h1>I design the software people are handed, not the software they pick.</h1>
@@ -53,23 +61,11 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
            the CV are both "check me" routes, so they read as a matched pair
            beside it rather than competing with it. -->
       <div class="at-cta">
-        <a class="btn btn-on-dark" href={`mailto:${contact.email}`} data-ab="about:email">
-          <svg class="bi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6.5 9 6.5 9-6.5"/></svg>
-          Get in touch
-        </a>
-        <a class="btn btn-ghost-dark" href={contact.linkedin} target="_blank" rel="me noopener" data-ab="about:linkedin">
-          <svg class="bi bi-brand" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-          LinkedIn
-        </a>
-        <a class="btn btn-ghost-dark" href={contact.resume} data-ab="about:cv">
-          <svg class="bi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5v11"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M4 18.5h16"/></svg>
-          CV (PDF)
-        </a>
+        <a class="btn btn-on-dark" href={`mailto:${contact.email}`} data-ab="about:email"><CutIcon name="mail" />Get in touch</a>
+        <a class="btn btn-ghost-dark" href={contact.linkedin} target="_blank" rel="me noopener" data-ab="about:linkedin"><CutIcon name="linkedin" />LinkedIn</a>
+        <a class="btn btn-ghost-dark" href={contact.resume} data-ab="about:cv"><CutIcon name="download" />CV (PDF)</a>
       </div>
     </div>
-    <figure class="at-photo">
-      <Image src={portrait} alt="Sayantan Dutta" widths={[520, 920]} sizes="(max-width: 900px) 70vw, 360px" />
-    </figure>
   </div>
 </header>
 
@@ -114,7 +110,7 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
 
     <aside class="letter-side" data-reveal style="--d:110ms">
       <figure class="ls-photo">
-        <Image src={portraitAlt} alt="Sayantan Dutta" widths={[480, 860]} sizes="(max-width: 900px) 70vw, 320px" />
+        <Image src={sidePortrait} alt="Sayantan Dutta" widths={[480, 860]} sizes="(max-width: 900px) 70vw, 320px" />
       </figure>
       <dl class="ls-facts">
         <div><dt>Based</dt><dd>{contact.base}</dd></div>
@@ -202,14 +198,41 @@ const tools = ['Figma', 'FigJam', 'Miro', 'Notion', 'Jira', 'Linear', 'Framer', 
 </main>
 
 <style>
-  .about-top {
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
-    gap: clamp(1.8rem, 5vw, 4rem); align-items: center;
+  /* ── the masthead, built as the home page's hero ──
+     Full frame, photograph behind, copy and buttons sitting on the floor of
+     it. The scrim is the home page's, so the two pages open the same way. */
+  .pagehead.ph-full {
+    position: relative; overflow: hidden;
+    min-height: 100svh; display: flex; align-items: flex-end;
+    padding: clamp(3rem, 10vw, 7rem) var(--pad) clamp(3.5rem, 8vw, 6rem);
   }
-  @media (max-width: 900px) { .about-top { grid-template-columns: 1fr; } .at-photo { max-width: 300px; } }
-  .about-top h1 { margin: .8rem 0 0; }
-  .at-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; }
-  .at-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; border-radius: 4px; }
+  .ah-bg { position: absolute; inset: 0; z-index: 0; }
+  .ah-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 28%; animation: push 26s ease-out forwards; }
+  /* A tall frame crops a landscape source hard, which drops the face right
+     behind the headline. Lift it so the copy lands on the shoulders. */
+  @media (max-width: 760px) { .ah-bg img { object-position: 56% 13%; } }
+  @keyframes push { from { transform: scale(1.1); } to { transform: none; } }
+  .pagehead.ph-full::after {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(to top, var(--black) 4%, rgba(10,10,10,.88) 32%, rgba(10,10,10,.42) 68%, rgba(10,10,10,.6) 100%),
+      linear-gradient(to right, var(--black) 0%, rgba(10,10,10,.56) 46%, transparent 78%);
+  }
+  .ah-in { position: relative; z-index: 2; width: 100%; }
+  .at-copy h1 { margin: .9rem 0 0; }
+  .at-cta {
+    display: flex; flex-wrap: wrap; gap: .7rem;
+    margin-top: 2.2rem; padding-top: 1.8rem;
+    border-top: 1px solid rgba(244,244,243,.18); max-width: 52rem;
+  }
+
+  /* Same opening as the home page, in reading order. */
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  :global(html.anim) .at-copy .sec-k { animation: rise .7s var(--ease) both .06s; }
+  :global(html.anim) .at-copy h1 { animation: rise .85s var(--ease) both .18s; }
+  :global(html.anim) .at-copy .lead { animation: rise .7s var(--ease) both .4s; }
+  :global(html.anim) .at-cta { animation: rise .7s var(--ease) both .52s; }
+  @media (prefers-reduced-motion: reduce) { .ah-bg img { animation: none; transform: none; } }
 
   /* ── the letter ── */
   .letter-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); gap: clamp(2rem, 6vw, 4.5rem); align-items: start; }
