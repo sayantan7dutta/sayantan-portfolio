@@ -9,7 +9,7 @@
 import { Image } from 'astro:assets';
 import Cut from '../../../layouts/Cut.astro';
 import CutIcon from '../../../components/CutIcon.astro';
-import { log, contact, tools, skillGroups } from '../../../lib/variants';
+import { log, contact, tools, skillGroups, certs, recognition, hobbies, nowItems, podcasts } from '../../../lib/variants';
 import { interview } from '../../../lib/interview';
 
 import heroPortrait from '../../../assets/sayantan.jpg';
@@ -22,6 +22,8 @@ const capabilities = [
   { k: 'Research', v: 'Domain immersion, interviews, synthesis, usability testing, heuristic evaluation.' },
   { k: 'Design operations', v: 'File architecture, shared templates, and a research-to-design handoff a team of twenty actually used.' },
   { k: 'Accessibility', v: 'WCAG AA as a starting constraint rather than a pass at the end.' },
+  { k: 'Stakeholder facilitation', v: 'Getting a product owner and a tech lead to a shared view of what a release can hold. At Ericsson that mattered more than any single screen.' },
+  { k: 'Zero to one', v: 'Founding designer three times over. Taking a product from no design function at all to a shipped, documented system.' },
 ];
 
 /** The answers that are about how I work rather than about one project. */
@@ -215,6 +217,89 @@ const personal = interview.filter(
     </table>
   </section>
 
+  <!-- ═══ CERTIFICATIONS AND RECOGNITION ════════════════════════════ -->
+  <section class="band">
+    <div class="band-head" data-reveal>
+      <p class="sec-k">Certifications and recognition</p>
+      <h2>On the record elsewhere</h2>
+      <p class="sec-lede">
+        The programmes I have finished, what I was given for the work, and
+        where I show up outside a job.
+      </p>
+    </div>
+
+    <ul class="cert-grid" role="list" data-reveal>
+      {certs.map((c) => (
+        <li class="cert-card">
+          <img src={`/images/certs/${c.logo}`} alt="" aria-hidden="true" width="26" height="26" loading="lazy" />
+          <p class="cert-title">{c.title}</p>
+          <p class="cert-issuer">{c.issuer}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="skill-stack" data-reveal style="--d:90ms">
+      {recognition.map((g) => (
+        <div class="skill-row">
+          <p class="skill-row-lbl">{g.label}</p>
+          <ul class="skill-chips" role="list">
+            {g.items.map((i) => <li>{i}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ OUTSIDE OF WORK ═══════════════════════════════════════════ -->
+  <section class="band">
+    <div class="band-head" data-reveal>
+      <p class="sec-k">Outside of work</p>
+      <h2>The rest of it</h2>
+      <p class="sec-lede">
+        A curious person, happiest in the mountains, on a beach, or wandering
+        somewhere new. Recently started learning the basics of German. Always
+        looking for a good mocha, never the flat white.
+      </p>
+    </div>
+
+    <ul class="hobby-grid" role="list" aria-label="Interests" data-reveal>
+      {hobbies.map((h) => (
+        <li class="hobby-tile">
+          <CutIcon name={h.icon} cls="hb-mark" />
+          <span>{h.name}</span>
+        </li>
+      ))}
+    </ul>
+
+    <ul class="now-grid" role="list" data-reveal style="--d:90ms">
+      {nowItems.map((n) => (
+        <li class="now-card">
+          <span class="now-mark" aria-hidden="true"><CutIcon name={n.icon} cls="hb-mark" /></span>
+          <div>
+            <p class="now-cat">{n.cat}</p>
+            <p class="now-title">{n.title}</p>
+            <p class="now-sub">{n.sub}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="pods" data-reveal style="--d:140ms">
+      <p class="skill-row-lbl">Podcasts in rotation</p>
+      <ul class="pod-list" role="list">
+        {podcasts.map((pod) => (
+          <li>
+            <a href={pod.url} target="_blank" rel="noopener">
+              <CutIcon name="mic" cls="hb-mark pod-mark" />
+              {pod.name}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <!-- ═══ CLOSE ═════════════════════════════════════════════════════ -->
   <section class="band about-end">
     <div class="ae-copy" data-reveal>
@@ -340,8 +425,68 @@ const personal = interview.filter(
   }
   .skill-chips li:hover { border-color: var(--accent); color: var(--ink); background: #fff; }
 
+  /* ── certifications ── */
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: .6rem; margin-bottom: clamp(2.2rem, 5vw, 3.2rem);
+  }
+  .cert-card {
+    padding: clamp(1.1rem, 2.5vw, 1.5rem); border: 1px solid var(--line); border-radius: 2px;
+    background: var(--paper-2); transition: background var(--quick) var(--ease), border-color var(--quick) var(--ease);
+  }
+  .cert-card:hover { background: #fff; border-color: var(--edge); }
+  .cert-card img { width: 26px; height: 26px; object-fit: contain; margin-bottom: .9rem; filter: grayscale(1) opacity(.55); transition: filter var(--quick) var(--ease); }
+  .cert-card:hover img { filter: none; }
+  .cert-title { font-weight: 700; font-size: .98rem; }
+  .cert-issuer { margin-top: .25rem; font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+
+  /* ── outside of work ── */
+  .hobby-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: .6rem; margin-bottom: clamp(1.8rem, 4vw, 2.6rem);
+  }
+  /* Eight tiles want four and four, not seven and a straggler, so the column
+     count is fixed once there is room for it rather than left to auto-fill. */
+  @media (min-width: 900px) { .hobby-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 360px) { .hobby-grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); } }
+  .hobby-tile {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem;
+    padding: 1.4rem .5rem 1rem; border: 1px solid var(--line); border-radius: 2px; background: var(--paper-2);
+    transition: border-color var(--quick) var(--ease), background var(--quick) var(--ease), transform var(--quick) var(--ease);
+  }
+  .hobby-tile:hover { border-color: var(--edge); background: #fff; transform: translateY(-2px); }
+  .hobby-tile span { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); text-align: center; }
+  .hobby-tile:hover span { color: var(--ink); }
+  :global(.hb-mark) { width: 22px; height: 22px; color: var(--ink-2); }
+
+  .now-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: .6rem; margin-bottom: clamp(1.8rem, 4vw, 2.6rem);
+  }
+  .now-card {
+    display: flex; gap: .9rem; align-items: flex-start;
+    padding: clamp(1.1rem, 2.5vw, 1.4rem); border: 1px solid var(--line); border-radius: 2px; background: var(--paper-2);
+  }
+  .now-mark { display: grid; place-items: center; flex: 0 0 auto; width: 38px; height: 38px; border-radius: 2px; background: var(--paper); }
+  .now-cat { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .now-title { font-family: var(--read); font-size: 1.08rem; margin-top: .3rem; }
+  .now-sub { font-size: .85rem; color: var(--ink-2); margin-top: .25rem; }
+
+  .pod-list { display: flex; flex-wrap: wrap; gap: .45rem; }
+  /* These are links, so the chip has to clear the 44px target floor that the
+     non-interactive skill chips do not. */
+  .pod-list a {
+    display: inline-flex; align-items: center; gap: .45rem; min-height: 44px;
+    font-size: .82rem; color: var(--ink-2);
+    border: 1px solid var(--line); border-radius: 2px; padding: .4rem .75rem; background: var(--paper-2);
+    transition: border-color var(--quick) var(--ease), color var(--quick) var(--ease), background var(--quick) var(--ease);
+  }
+  .pod-list a:hover { border-color: var(--accent); color: var(--ink); background: #fff; }
+  :global(.pod-mark) { width: 15px; height: 15px; color: var(--accent); }
+  .pod-list a > span { font-size: .78rem; color: var(--faint); }
+
   @media (prefers-reduced-motion: reduce) {
-    .tool-tile:hover { transform: none; }
+    .tool-tile:hover, .hobby-tile:hover { transform: none; }
     .tool-tile:hover img { transform: none; }
   }
 

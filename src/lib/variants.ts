@@ -226,6 +226,52 @@ export const skillGroups = [
   },
 ];
 
+/** Certifications, as the main site's about page lists them. */
+export const certs = [
+  { title: 'McKinsey Forward Program', issuer: 'McKinsey & Company', logo: 'mckinsey.svg' },
+  { title: 'UX Design Certificate', issuer: 'Google, via Coursera', logo: 'google.svg' },
+  { title: 'Member, UX Design Courses', issuer: 'Interaction Design Foundation', logo: 'idf.svg' },
+];
+
+/** Awards and community, straight off the CV. Wording is the CV's. */
+export const recognition = [
+  {
+    label: 'Awards',
+    items: ['TCS Service & Commitment Award', 'TCS Best Team Award', 'TCS Star Team Award (x2)', 'University Gold Medallist'],
+  },
+  {
+    label: 'Community',
+    items: ['Speaker, IDF Southampton webinar (Sep 2026)', 'Active member, London UX design community', 'FOF member', 'FAUX member'],
+  },
+];
+
+/** Outside of work. `icon` is a CutIcon name. */
+export const hobbies = [
+  { icon: 'badminton', name: 'Badminton' },
+  { icon: 'football', name: 'Football' },
+  { icon: 'frisbee', name: 'Frisbee' },
+  { icon: 'mocha', name: 'Mocha' },
+  { icon: 'mountain', name: 'Trekking' },
+  { icon: 'beach', name: 'Beaches' },
+  { icon: 'music', name: 'Music' },
+  { icon: 'film', name: 'Films' },
+] as const;
+
+/** Meant to read as current. Change them whenever they stop being true. */
+export const nowItems = [
+  { cat: 'Watching', title: 'Vision Quest', sub: 'Marvel, 2026. Ready for Avengers Doomsday.', icon: 'film' },
+  { cat: 'Cheering for', title: 'FC Barcelona, always', sub: 'Ready for the Champions League', icon: 'football' },
+] as const;
+
+export const podcasts = [
+  { name: 'Design as Leverage', url: 'https://open.spotify.com/episode/6ecf3EZgjKQgaDQiaOZdWA?si=d00511d8929a45bf' },
+  { name: 'What the UX', url: 'https://open.spotify.com/show/06zCSfjnln033zHotlqvZq?si=b393798010064a30' },
+  { name: 'Design Life', url: 'https://open.spotify.com/show/60VdDbOqh5NAqa82JRsZRq?si=ce81b00394a443d8' },
+  { name: 'Blueprint of a Designer', url: 'https://open.spotify.com/show/4bUmQl8pJdDD85QLujojqy?si=542c62dd956c4349' },
+  { name: 'UX Research Club', url: 'https://open.spotify.com/show/32oJnhH9fSOcFW984CIDfQ?si=1cc3bc0c78df45b3' },
+  { name: 'Brave UX', url: 'https://open.spotify.com/show/7j2ocni6A00fzgHkj6TtCK?si=2cedcc89d6264434' },
+];
+
 export const contact = {
   email: 'sayantan7dutta@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sayantandutta7/',

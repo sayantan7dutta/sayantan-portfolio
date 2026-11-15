@@ -1,32 +1,45 @@
 ---
 /**
- * The handful of marks the Director's Cut buttons use.
+ * The marks the Director's Cut uses, in one place.
  *
- * One component rather than inline SVG, because the same four now appear on
- * both the home hero and the About masthead, and two copies of a path is how
- * they end up drawn at different weights.
+ * One component rather than inline SVG, because the same glyphs now appear on
+ * the home hero, the About buttons, the hobby tiles and the Now cards, and
+ * two copies of a path is how they end up drawn at different weights.
  *
- * Sizing lives with `.bi` in Cut.astro so a button controls its own icon.
- * Everything inherits `currentColor`, so one set works on paper and on black.
+ * Everything inherits `currentColor`. Size comes from the caller: `.bi` in
+ * Cut.astro for buttons, or whatever the tile sets.
  */
+/** mail, linkedin, download, arrow, badminton, football, frisbee, mocha,
+    mountain, beach, music, film, mic. */
 interface Props {
-  name: 'mail' | 'linkedin' | 'download' | 'arrow';
+  name: string;
+  /** Buttons want the shared `.bi` sizing; tiles size their own. */
+  cls?: string;
 }
-const { name } = Astro.props;
+const { name, cls } = Astro.props;
 
 /** The brand mark is solid where the others are stroked, so it is set a shade
     smaller to keep the optical weight of a button row even. */
-const cls = name === 'linkedin' ? 'bi bi-brand' : 'bi';
+const klass = cls ?? (name === 'linkedin' ? 'bi bi-brand' : 'bi');
 ---
 
 {name === 'linkedin' ? (
-  <svg class={cls} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+  <svg class={klass} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
     <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
   </svg>
 ) : (
-  <svg class={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <svg class={klass} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={name === 'mail' || name === 'download' || name === 'arrow' ? 1.9 : 1.4} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     {name === 'mail' && <><rect x="2.5" y="4.5" width="19" height="15" rx="2" /><path d="m3 6.5 9 6.5 9-6.5" /></>}
     {name === 'download' && <><path d="M12 3.5v11" /><path d="m7.5 10.5 4.5 4.5 4.5-4.5" /><path d="M4 18.5h16" /></>}
     {name === 'arrow' && <><path d="M4 12h15" /><path d="m13 6 6 6-6 6" /></>}
+    {name === 'badminton' && <><circle cx="12" cy="5.5" r="2.2" /><path d="M9.8 6.5 5 21M14.2 6.5 19 21M11 7.5 8 21M13 7.5l3 13.5M12 7.5V21" /></>}
+    {name === 'football' && <><circle cx="12" cy="12" r="9" /><polygon points="12,7.5 15.7,10.2 14.3,14.5 9.7,14.5 8.3,10.2" /><path d="M12 3v4.5M3.5 9.2 8.3 10.2M20.5 9.2l-4.8 1M6 19.5l3.7-5M18 19.5l-3.7-5" /></>}
+    {name === 'frisbee' && <><ellipse cx="12" cy="11" rx="9" ry="3.5" /><path d="M3 11c0 2 4 3.5 9 3.5s9-1.5 9-3.5" /><ellipse cx="12" cy="11" rx="4" ry="1.5" opacity=".5" /></>}
+    {name === 'mocha' && <><path d="M17 8h1a4 4 0 1 1 0 8h-1" /><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" /><path d="M6 2v2M10 2v2M14 2v2" /></>}
+    {name === 'mountain' && <><path d="m8 3 4 8 3-3 6 13H2L8 3z" /><path d="m10.5 7.7 1.5-1.7" opacity=".4" /></>}
+    {name === 'beach' && <><path d="M12 4c-2 0-4 1.4-5 3.5C9 6.8 11 7 12 7s3-.2 5-.5C16 4.4 14 3 12 3" /><path d="M12 3v6" /><path d="M9 8.5c-1.5 1.5-2 4.5-1 6.5l4-4" /><path d="M15 8.5c1.5 1.5 2 4.5 1 6.5l-4-4" /><path d="M12 9v12" /><path d="M3 21c2-.7 4-1 6-1 1.5 0 3 .3 3 1 0-.7 1.5-1 3-1 2 0 4 .3 6 1" /></>}
+    {name === 'music' && <><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></>}
+    {name === 'film' && <><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4" /></>}
+    {name === 'mic' && <><rect x="9" y="2.5" width="6" height="11" rx="3" /><path d="M5.5 11a6.5 6.5 0 0 0 13 0" /><path d="M12 17.5V21" /></>}
   </svg>
 )}
