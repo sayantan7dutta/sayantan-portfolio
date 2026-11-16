@@ -301,7 +301,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
         >
           {img[sec.shot!].map((t: any, i: number) => (
             <figure style={`--d:${i * 80}ms`}>
-              <div class="plate">
+              <div class="plate" style={`--ar:${t.width} / ${t.height}`}>
                 <Image src={t} alt={sec.alts?.[i] ?? `A screen from ${project.short}`} widths={sec.shot === 'trio' || sec.shot === 'pair' || sec.shot === 'solo' ? [320, 640] : [420, 840]} sizes={sec.shot === 'web' ? '330px' : sec.shot === 'posters' ? '500px' : '260px'} loading="lazy" />
               </div>
               {sec.caps?.[i] && <figcaption>{sec.caps[i]}</figcaption>}
@@ -675,13 +675,18 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   /* Landscape rows: browser captures, concept scenes and exhibition posters.
      The ratio lives on the plate so a lazy image reserves its space and a set
      of mixed-height sources still lines up. */
-  .landrow .plate { border-radius: 6px; }
+  /* Each plate takes its own source's ratio. A fixed ratio per row was
+     chosen to stop lazy images shifting the layout, and it does, but it also
+     crops to fill: Amble's laundry and air-filter are portrait photographs
+     and a 16/9 plate was throwing away 58% and 55% of them, and HAZOP's
+     dashboards lost a fifth. `--ar` comes from the file at build time, so the
+     space is still reserved ahead of the image and nothing is cut. */
+  .landrow .plate { border-radius: 6px; aspect-ratio: var(--ar); }
   .landrow .plate img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: center; }
+  .landrow { align-items: start; }
   .row-web { grid-template-columns: repeat(var(--n, 3), minmax(0, 330px)); }
-  .row-web .plate { aspect-ratio: 16 / 10; }
   .row-web .plate img { object-position: top center; }
   .row-scenes { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 820px; }
-  .row-scenes .plate { aspect-ratio: 16 / 9; }
   /* The plate's phone ratio is the default because most captures here are
      phone screens, but Ericsson's pair are 1800x1036 desktop captures. Poured
      into a 788x1778 window and cropped to fill, a whole console UI came out
@@ -689,9 +694,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
      landscape plate, decided from the file rather than named per case, so the
      next landscape screenshot added cannot reintroduce this. */
   .row-wide-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 880px; }
-  .row-wide-pair .plate { aspect-ratio: 16 / 9; }
   .row-posters { grid-template-columns: repeat(2, minmax(0, 320px)); }
-  .row-posters .plate { aspect-ratio: 3 / 4; }
   @media (max-width: 620px) { .row-scenes, .row-posters { grid-template-columns: 1fr; max-width: 320px; } }
 
   /* Partner marks: greyed until hovered, like the tool grid on About. */
