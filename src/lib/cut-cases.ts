@@ -276,6 +276,22 @@ export const cutCases: CutCase[] = [
         ],
       },
       {
+        kicker: 'Solution',
+        heading: 'UX strategy from domain research through MVP delivery',
+        body: [
+          'I owned the UX strategy across the whole project, translating dense technical requirements into something accessible. A scalable design system and a navigation structure anchored to the HAZOP lifecycle meant the MVP earned trust quickly, with safety professionals who had never had a tool built for this work.',
+          'The platform reduced manual data entry, standardised compliance reporting, and laid a foundation the engineering team could build on without reintroducing inconsistency.',
+        ],
+        block: {
+          kind: 'stats',
+          items: [
+            { n: '50%', l: 'Decrease in time spent on manual data entry' },
+            { n: '40%', l: 'Reduction in reporting errors compared to spreadsheets' },
+            { n: '35%', l: 'Faster overall completion of hazard studies' },
+          ],
+        },
+      },
+      {
         kicker: 'Approach',
         heading: 'How I approached a domain I’d never worked in before',
         body: [
@@ -312,22 +328,6 @@ export const cutCases: CutCase[] = [
         shot: 'wide2',
         caption: 'Analytics across sites and studies',
         alt: 'The analytics dashboard: action completion at 29 per cent, donut and bar breakdowns of 38 actions and their approvals, then site risk as a donut of 42 and a stacked bar for each of twelve nodes.',
-      },
-      {
-        kicker: 'What I owned',
-        heading: 'UX strategy from domain research through MVP delivery',
-        body: [
-          'I owned the UX strategy across the whole project, translating dense technical requirements into something accessible. A scalable design system and a navigation structure anchored to the HAZOP lifecycle meant the MVP earned trust quickly, with safety professionals who had never had a tool built for this work.',
-          'The platform reduced manual data entry, standardised compliance reporting, and laid a foundation the engineering team could build on without reintroducing inconsistency.',
-        ],
-        block: {
-          kind: 'stats',
-          items: [
-            { n: '50%', l: 'Decrease in time spent on manual data entry' },
-            { n: '40%', l: 'Reduction in reporting errors compared to spreadsheets' },
-            { n: '35%', l: 'Faster overall completion of hazard studies' },
-          ],
-        },
       },
       {
         kicker: 'The parallel engagement',
@@ -414,6 +414,13 @@ export const cutCases: CutCase[] = [
         shot: 'wide2',
         caption: 'The design step, where the solution and its integration are recorded',
         alt: 'The high level design step: a two stage plan and design tracker above fields for API layer, solution overview and design considerations, with upload areas for an integration landscape and a sequence diagram.',
+      },
+      {
+        kicker: 'Before / after',
+        heading: 'From three islands to one system',
+        body: [
+          'The clearest way to describe what changed is to put the two states next to each other. Nothing in the left column was anyone’s fault: three teams, three timelines, and no shared place to put a decision.',
+        ],
         block: {
           kind: 'compare',
           before: {
@@ -547,15 +554,6 @@ export const cutCases: CutCase[] = [
         },
       },
       {
-        kicker: 'The part that mattered most',
-        heading: 'Connecting research to design',
-        body: [
-          'The most valuable infrastructure was not a folder or a template. It was a process: a five-step handoff that made research insights part of the design workflow rather than a parallel activity.',
-          'Before it, research findings were delivered to stakeholders and then effectively lost. Designers had no consistent access to what had been learned, so they started from scratch, sometimes contradicting decisions research had already informed.',
-        ],
-        shot: 'figure',
-      },
-      {
         kicker: 'The templates',
         heading: 'Standardised across three formats',
         body: [
@@ -569,6 +567,15 @@ export const cutCases: CutCase[] = [
             { t: 'Stakeholder presentation', b: 'Three slides maximum for leadership reviews. Business impact first, data visualised rather than listed, a clear ask or decision required, and an appendix for anyone who wants the detail.' },
           ],
         },
+      },
+      {
+        kicker: 'The part that mattered most',
+        heading: 'Connecting research to design',
+        body: [
+          'The most valuable infrastructure was not a folder or a template. It was a process: a five-step handoff that made research insights part of the design workflow rather than a parallel activity.',
+          'Before it, research findings were delivered to stakeholders and then effectively lost. Designers had no consistent access to what had been learned, so they started from scratch, sometimes contradicting decisions research had already informed.',
+        ],
+        shot: 'figure',
       },
       {
         kicker: 'How it landed',
@@ -651,13 +658,6 @@ export const cutCases: CutCase[] = [
         },
       },
       {
-        kicker: 'The system',
-        heading: 'A visual system built to feel permanent',
-        body: [
-          'The creative direction, “The Financial Atelier”, pairs a deep heritage navy with a pearl surface and an emerald accent for growth. Generous whitespace and vault-grade security cues make a fast app feel as considered and trustworthy as a private bank.',
-        ],
-      },
-      {
         kicker: 'Design process',
         heading: 'Research-led, prototype-validated',
         body: [
@@ -673,6 +673,13 @@ export const cutCases: CutCase[] = [
           'The review screen: sending £500 to Mom at 106.50 rupees to the pound, zero fee, and ₹53,250 shown as what the recipient gets, above a confirm and send button.',
           'The transfer status screen: initiated, arriving in about two hours, with three steps showing funds secured, conversion in progress and deposit pending, plus a reference and a share receipt button.',
           'The pay a bill abroad screen: categories for electricity, mobile, healthcare and tuition, popular providers, and ₹12,500 shown as £116.82 with no fee and instant arrival.',
+        ],
+      },
+      {
+        kicker: 'The system',
+        heading: 'A visual system built to feel permanent',
+        body: [
+          'The creative direction, “The Financial Atelier”, pairs a deep heritage navy with a pearl surface and an emerald accent for growth. Generous whitespace and vault-grade security cues make a fast app feel as considered and trustworthy as a private bank.',
         ],
       },
       {
@@ -760,31 +767,6 @@ export const cutCases: CutCase[] = [
         },
       },
       {
-        kicker: 'Research',
-        heading: 'Two generations, one shared need',
-        body: [
-          'We adopted a research-through-design methodology, combining speculative design with a literature review and primary research. Setting the concept forty years out was a deliberate device. It moved conversations away from “what gadget would you buy” and towards “what should later life feel like”, which is where the useful insight lives.',
-          'Two groups of younger adults aged 20 to 40 in Winchester, who would actually be the ageing population of 2065, and a gathering of fifteen older adults aged 50 to 80 in Southampton, reached through local churches and community groups. The older-adult session was run as a relaxed afternoon with refreshments and a reminiscence game, not a clinical interview, so people spoke openly about retirement, care, and technology.',
-          'They described later life very differently, but they asked design for the same thing: support that does not demand attention.',
-        ],
-        pull: '“Plants can give emotional support in a way that animals or humans can’t.” And, from another participant: “I still like to do my own shopping. I want to go. I don’t like having a delivery.”',
-      },
-      {
-        kicker: 'Design process',
-        heading: 'Research-through-design, end to end',
-        body: [
-          'I led the synthesis, triangulating what participants told us against an evidence base spanning environmental psychology, synthetic biology and inclusive design. Where a focus-group insight and a research finding agreed, we had a firm design principle. Where they diverged, we had a question worth designing into the concept.',
-        ],
-        block: {
-          kind: 'cards',
-          items: [
-            { t: 'Anchored in 2065', b: 'Speculative design combined with a literature review and primary research. Setting the concept forty years out moved conversations away from “what gadget would you buy” and towards “what should later life feel like”, which is where the useful insight lives.' },
-            { t: 'Focus groups across two generations', b: 'Two groups of younger adults aged 20 to 40 in Winchester, and fifteen older adults aged 50 to 80 in Southampton reached through churches and community groups, run as a relaxed afternoon rather than a clinical interview.' },
-            { t: 'From insight to five domains', b: 'Each domain answered a specific, evidenced need rather than showcasing a technology. The test for every feature was the same: does this support independence, or quietly undermine it.' },
-          ],
-        },
-      },
-      {
         kicker: 'My role',
         heading: 'Leading a multidisciplinary team through ambiguity',
         body: [
@@ -809,6 +791,31 @@ export const cutCases: CutCase[] = [
             { t: 'Amble', b: 'A living, bioengineered plant system. A plant is already emotionally legible. It does not demand interaction, it shares the space. That let us design support that is ambient, sensory, and quiet.' },
           ],
         },
+      },
+      {
+        kicker: 'Design process',
+        heading: 'Research-through-design, end to end',
+        body: [
+          'I led the synthesis, triangulating what participants told us against an evidence base spanning environmental psychology, synthetic biology and inclusive design. Where a focus-group insight and a research finding agreed, we had a firm design principle. Where they diverged, we had a question worth designing into the concept.',
+        ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Anchored in 2065', b: 'Speculative design combined with a literature review and primary research. Setting the concept forty years out moved conversations away from “what gadget would you buy” and towards “what should later life feel like”, which is where the useful insight lives.' },
+            { t: 'Focus groups across two generations', b: 'Two groups of younger adults aged 20 to 40 in Winchester, and fifteen older adults aged 50 to 80 in Southampton reached through churches and community groups, run as a relaxed afternoon rather than a clinical interview.' },
+            { t: 'From insight to five domains', b: 'Each domain answered a specific, evidenced need rather than showcasing a technology. The test for every feature was the same: does this support independence, or quietly undermine it.' },
+          ],
+        },
+      },
+      {
+        kicker: 'Research',
+        heading: 'Two generations, one shared need',
+        body: [
+          'We adopted a research-through-design methodology, combining speculative design with a literature review and primary research. Setting the concept forty years out was a deliberate device. It moved conversations away from “what gadget would you buy” and towards “what should later life feel like”, which is where the useful insight lives.',
+          'Two groups of younger adults aged 20 to 40 in Winchester, who would actually be the ageing population of 2065, and a gathering of fifteen older adults aged 50 to 80 in Southampton, reached through local churches and community groups. The older-adult session was run as a relaxed afternoon with refreshments and a reminiscence game, not a clinical interview, so people spoke openly about retirement, care, and technology.',
+          'They described later life very differently, but they asked design for the same thing: support that does not demand attention.',
+        ],
+        pull: '“Plants can give emotional support in a way that animals or humans can’t.” And, from another participant: “I still like to do my own shopping. I want to go. I don’t like having a delivery.”',
       },
       {
         kicker: 'The concept',
