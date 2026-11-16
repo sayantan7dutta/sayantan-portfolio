@@ -436,30 +436,51 @@ export const cutCases: CutCase[] = [
         kicker: 'Context',
         heading: 'Three interconnected products. One design ecosystem.',
         body: [
+          'This is enterprise client work for Ericsson, shown for portfolio review. The focus throughout is the system, the process and the leadership, not the screens.',
           'The vertical began as an internal B2B tool for Ericsson’s own developers. Stakeholder research identified a market gap: the product could be sold externally, to enterprise API clients. The scope shifted, and the design had to scale to match.',
           'All three products shared components, interaction patterns and user flows. A change in one had downstream effects on the others.',
         ],
-        shot: 'wide',
-        caption: 'The API Console dashboard',
-        alt: 'The API Console dashboard: 140 requests listed with family, version, lifecycle stage and status, and a panel for one of them carrying its details, review actions and a request to delivery chart.',
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'API Console, the core product', b: 'The primary creation environment where developers built, configured and managed APIs. The most complex product in the vertical, and the hub everything else depended on.' },
+            { t: 'API Portal, the developer gateway', b: 'The external-facing interface where developers discovered APIs, accessed documentation and onboarded. First point of contact for anyone entering the ecosystem.' },
+            { t: 'API Marketplace, the commerce layer', b: 'Where APIs could be listed, discovered and accessed by external enterprise clients. This is what enabled the commercial pivot from internal tool to sellable product.' },
+          ],
+        },
       },
       {
         kicker: 'The problem',
         heading: 'Three products, zero visual consistency',
-        body: [
-          'Each product had been designed independently. The same actions looked and behaved differently across Console, Portal and Marketplace, so users moving between them had to relearn basic interactions.',
-          'Ericsson’s main design system existed but had not been applied systematically to the API vertical. Some components followed it, others diverged, and there was no clear ownership.',
-        ],
+        body: [],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'No shared design language', b: 'Each product had been designed independently. The same actions looked and behaved differently across Console, Portal and Marketplace, so users moving between them had to relearn basic interactions.' },
+            { t: 'Ericsson’s system, applied inconsistently', b: 'The main Ericsson design system existed but had not been applied systematically to this vertical. Some components followed it, others diverged, and there was no clear ownership.' },
+            { t: 'No foundation for scale', b: 'With the external pivot the product had to be shown to enterprise clients. Inconsistency that was tolerable internally became a credibility problem externally.' },
+            { t: 'Adobe XD with no governance', b: 'Files existed but with no structured component library, no naming conventions and no documentation. Every designer made local decisions without a shared reference.' },
+          ],
+        },
       },
       {
-        kicker: 'The system',
+        kicker: 'What I built',
         heading: 'A shared way of working, not just a set of components',
         body: [
           'The components were the visible half. The half that actually scaled was the operating model around them: ownership of shared patterns, a path for proposing changes, and enough governance that three teams could move at their own pace and still ship something that felt like one product.',
+          'Figma became available near the end of my tenure. I restructured the file architecture and wrote a handoff guide so the transition would not lose what had been built.',
         ],
-        shot: 'wide2',
-        caption: 'The design step, where the solution and its integration are recorded',
-        alt: 'The high level design step: a two stage plan and design tracker above fields for API layer, solution overview and design considerations, with upload areas for an integration landscape and a sequence diagram.',
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Foundations', b: 'Colour tokens aligned to the Ericsson brand, a typography scale tuned for UI density, a 4pt spacing system, an iconography set for API concepts, and elevation and shadow standards.' },
+            { t: 'Components, 10 to 15 core', b: 'Data tables for API responses, navigation patterns across products, form elements and validation states, status indicators and badges, code and syntax blocks, modal and overlay patterns, empty states and error handling.' },
+            { t: 'Governance', b: 'Naming conventions, version logic from base to variant, the XD library structure, the Figma transition handoff guide, component logic documentation, and an ownership and update protocol.' },
+          ],
+        },
+        shot: 'wide',
+        caption: 'API Console: the most component-dense surface in the vertical, and the proving ground for the system',
+        alt: 'The API Console dashboard: 140 requests listed with family, version, lifecycle stage and status, and a panel for one of them carrying its details, review actions and a request to delivery chart.',
       },
       {
         kicker: 'Before / after',
@@ -477,52 +498,80 @@ export const cutCases: CutCase[] = [
               'API Marketplace: inconsistent spacing, its own icon set',
               'Shared elements: none, every decision made locally',
               'Documentation: none, designers held it in their heads',
-              'New-designer onboarding: start from scratch',
+              'New-designer onboarding: start from scratch and reverse-engineer decisions',
             ],
           },
           after: {
             h: 'After: one shared foundation',
             items: [
               'Shared token system: colour, spacing and type across all three',
-              'One component library, built on Ericsson’s design system',
-              'A documented path for proposing and approving changes',
-              'Ownership assigned for every shared pattern',
-              'A Figma guide that survived a change of tooling',
-              'New designers onboard without reverse-engineering decisions',
+              '10 to 15 core components, built once and used everywhere with documented variants',
+              'Consistent interactions: the same action is the same pattern, whichever product you are in',
+              'A component library in XD as a single source of truth, linked across product files',
+              'A Figma handoff guide documenting component logic for a smooth transition',
+              'New designers open the library, read the docs and start contributing',
             ],
           },
         },
       },
       {
-        kicker: 'The role nobody was filling',
+        kicker: 'The BA bridge',
         heading: 'No business analyst on the team, so I became one',
         body: [
-          'The team lacked a dedicated business analyst. As the most experienced person on the project, I took on the work of translating between Ericsson’s product owners and our design and engineering team. Product owners came with large, genuinely good feature ideas that were beyond what the team could deliver within the timeline and technical constraints of that version. This happened repeatedly across three years.',
+          'The team lacked a dedicated business analyst. As the most experienced person on the project, I took on the work of translating between Ericsson’s product owners and our design and engineering team. This happened repeatedly across the three-year engagement.',
+          'It required requirements gathering, workshop facilitation, and the ability to hold a position under pressure while keeping both sides feeling heard. It was design leadership, not design craft.',
         ],
         block: {
           kind: 'journey',
-          cols: ['When', 'Title', 'What actually changed'],
+          cols: ['The tension', 'My role', 'The outcome'],
           rows: [
-            ['Nov 2020', 'Product Designer', 'Designing screens for one product.'],
-            ['Nov 2021', 'Lead Product Designer', 'Making design decisions that applied across all three products at once, and translating between the product owner, the tech lead and the design team.'],
-            ['Dec 2023', 'Towards design operations', 'Unblocking other designers and then stepping back. Building and governing the system rather than only working inside it.'],
+            ['Product owners came with large feature ideas. Genuinely good thinking, but beyond what the team could deliver within the timeline, budget and technical constraints of that version.', 'Acknowledge the idea properly rather than dismiss it, take it to the tech lead, pressure-test what was actually buildable, and come back with a version both sides could accept.', 'The team delivered an agreed set for the current version. I created concepts for the fuller vision and logged them in the roadmap. The product owner left satisfied, and the idea was parked responsibly rather than killed.'],
           ],
         },
+        shot: 'pair',
+        caps: [
+          'Guided multi-step workflows: the kind of scope negotiated release by release',
+          'Access and governance surfaces, with shared patterns reused across all three products',
+        ],
+        alts: [
+          'The high level design step: a two stage plan and design tracker above fields for API layer, solution overview and design considerations, with upload areas for an integration landscape and a sequence diagram.',
+          'A collaborator and access management surface, built from the same shared patterns as the rest of the vertical.',
+        ],
       },
       {
         kicker: 'Leadership',
         heading: 'From doing the work to making it possible for others',
         body: [
-          'The shift over three years was from producing the design to making it possible for other people to produce it: owning the system rather than the screens, and the decisions rather than the deliverables.',
-          'By the end I was spending more time on systems, process and cross-functional alignment than on hands-on design. That led directly to the Sherwin-Williams design operations engagement. I had already been doing the job before it had the title.',
+          'Product Designer from November 2020, Lead Product Designer from November 2021, and into design operations by the end of 2023. The title changed twice; what actually changed was the altitude of the work.',
         ],
+        block: {
+          kind: 'journey',
+          cols: ['From', 'To', 'What that meant'],
+          rows: [
+            ['Designing screens for one product', 'Making design decisions that applied across all three at once', 'Every call had downstream effects, so the thinking had to start at the system.'],
+            ['Executing briefs from the product owner', 'Translating between the product owner, the tech lead and the design team', 'Bridging all three, because nobody else was doing it.'],
+            ['Solving design problems myself', 'Unblocking other designers when they were stuck, then stepping back', 'Resisting the urge to take the pen.'],
+            ['Working within the system', 'Building and governing the system so others could work within it', 'The work that outlasted me.'],
+          ],
+        },
       },
       {
-        kicker: 'Outcome',
+        kicker: 'Impact',
         heading: 'Three teams shipping consistently, with no bottleneck in the middle',
-        body: [
-          'Every version delivered what was committed, and disagreements were resolved before they became blockers. The design system gave the product credibility with enterprise clients as it pivoted to external B2B. Three inconsistent tools became one coherent platform, documented so the work survived both new designers and a change of tooling.',
-        ],
+        body: [],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Shipped on agreed scope', b: 'Every version delivered what was committed, and disagreements were resolved before they became blockers.' },
+            { t: 'External pivot supported', b: 'The design system gave the product credibility with enterprise clients. Three inconsistent tools became one coherent platform.' },
+            { t: 'Built to outlast the team', b: 'Documented so new designers could onboard without losing what had been established. The Figma guide meant the work survived the tooling change.' },
+          ],
+        },
+      },
+      {
+        kicker: 'The numbers',
+        heading: 'Where it got to',
+        body: [],
         block: {
           kind: 'stats',
           items: [
@@ -538,7 +587,7 @@ export const cutCases: CutCase[] = [
       body: [
         'I built a lot of the system myself before sharing it. In hindsight, getting designers to co-create components from the start would have created faster adoption and stronger ownership. The system was good; the rollout could have been more collaborative.',
         'The moments that mattered most were not the screens I designed. They were the conversations I facilitated. Getting a product owner and a tech lead to a shared view of what was possible in a release mattered more than any individual design decision.',
-        'By the time I left, I was spending more time on systems, process and cross-functional alignment than on hands-on design. That led directly to the Sherwin-Williams design operations engagement. I had already been doing the job before it had the title.',
+        'By the time I left this engagement I was spending more time on systems, processes and cross-functional alignment than on hands-on design. That transition felt natural, and it led directly to the Sherwin-Williams design operations engagement. I had already been doing the job before it had the title.',
       ],
     },
   },
@@ -565,16 +614,34 @@ export const cutCases: CutCase[] = [
         kicker: 'Context',
         heading: 'One of America’s largest paint brands, and a complex digital portfolio',
         body: [
+          'All client work is under NDA. The file-architecture and process diagrams here are reconstructed from memory. The structure and the thinking are accurate; specific file names and content are illustrative.',
           'Sherwin-Williams runs one of the largest digital portfolios in the paint industry: consumer colour tools, contractor apps, e-commerce and internal coatings systems. The research and design team supporting all of it had grown faster than its infrastructure.',
         ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'ColorSnap Visualizer', b: 'Web and mobile colour tool for homeowners.' },
+            { t: 'Color Expert App', b: 'AI-powered paint recommendation tool.' },
+            { t: 'PRO+ App', b: 'Contractor toolkit for professional painters.' },
+            { t: 'Paint Stores e-commerce', b: 'The main consumer shopping platform.' },
+            { t: 'Contractor and dealer portals', b: 'B2B account management tools.' },
+            { t: 'Specification and coatings tools', b: 'Internal, for the Performance Coatings Group.' },
+          ],
+        },
       },
       {
         kicker: 'The problem',
         heading: 'A team of 20+ with almost no shared infrastructure',
-        body: [
-          'Research and design assets lived in personal OneDrive folders and scattered Teams channels. Folders existed, but were inconsistent, unlabelled and constantly duplicated.',
-          'Designers and researchers regularly redid work that already existed, only to find out afterwards that the asset was there all along. The rework was the symptom. The broken structure was the cause.',
-        ],
+        body: [],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Files existed, but nobody could find them', b: 'Research and design assets lived in personal OneDrive folders and scattered Teams channels. Folders existed, but were inconsistent, unlabelled and constantly duplicated.' },
+            { t: 'Duplication was the default', b: 'Designers and researchers regularly redid work that already existed, only to find out afterwards that the asset was there all along. The rework was the symptom. The broken structure was the cause.' },
+            { t: 'Decks were made and abandoned', b: 'Research presentations had no consistent format and no connected home. Once delivered to a stakeholder they disappeared into personal folders and were never referenced again.' },
+            { t: 'Research rarely reached design', b: 'There was no handoff process. Insights sat in researcher files, and designers started work without access to what had already been learned.' },
+          ],
+        },
       },
       {
         kicker: 'Approach',
@@ -582,22 +649,22 @@ export const cutCases: CutCase[] = [
         body: [
           'I interviewed researchers and designers separately before proposing any solution. The order mattered: diagnosis first, then structure, then iteration with the team in the loop.',
         ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Interview both sides', b: 'Separate sessions with researchers and designers to surface real friction without cross-contamination or bias. As someone who had worked both sides I knew the questions to ask, and I spoke to more than one person in each group so no single perspective skewed the findings.' },
+            { t: 'Map the pain, not just the symptoms', b: 'The duplication and rework were symptoms. The real problem was inaccessible structure and no shared language between disciplines. Naming that distinction changed what we chose to fix.' },
+            { t: 'Pressure-test with the Design Ops Manager', b: 'Brought findings back to the manager, challenged assumptions, and agreed what to prioritise: research infrastructure first, then the designer side. Sequencing the work mattered as much as the work itself.' },
+            { t: 'Fix iteratively, get feedback fast', b: 'Each improvement was tested with the team immediately. If it did not land, it was revised. The 30 to 40 per cent efficiency gain came from accumulated small wins, each validated before moving on.' },
+          ],
+        },
       },
       {
         kicker: 'What I built',
         heading: 'From scattered to structured',
         body: [
-          'The first fix was the one everything else depended on: a single, navigable file architecture in Teams and OneDrive. Numbered folders, consistent naming, a read-only archive for legacy work, and cross-linked documents so a file could be found from more than one path.',
-          'Then templates, standardised across three formats.',
+          'The first fix was the one everything else depended on: a single, navigable file architecture in Teams and OneDrive. Numbered folders, consistent naming, a read-only archive for legacy work, and cross-linked documents so a file could be found from more than one direction.',
         ],
-        block: {
-          kind: 'cards',
-          items: [
-            { t: 'Interview guide', b: 'Standardised opening and consent framing, modular question blocks by research goal, probe suggestions per section, consistent time allocation, and debrief prompts.' },
-            { t: 'Insight deck', b: 'Branded template, executive summary on slide one, one evidence-backed insight per slide, severity and frequency scoring, recommended next actions at the close.' },
-            { t: 'Stakeholder presentation', b: 'Three slides maximum for leadership reviews. Business impact framed first, data visualised rather than tabulated.' },
-          ],
-        },
       },
       {
         kicker: 'The templates',
@@ -608,9 +675,9 @@ export const cutCases: CutCase[] = [
         block: {
           kind: 'cards',
           items: [
-            { t: 'Interview guide', b: 'A standardised opening and consent framing, modular question blocks by research goal, probe suggestions for each section, consistent time per block, and debrief prompts at the end.' },
-            { t: 'Insight deck', b: 'A branded template with the executive summary on slide one, one evidence-backed insight per slide, severity and frequency scoring, and recommended actions at the close.' },
-            { t: 'Stakeholder presentation', b: 'Three slides maximum for leadership reviews. Business impact first, data visualised rather than listed, a clear ask or decision required, and an appendix for anyone who wants the detail.' },
+            { t: 'Interview guide', b: 'A standardised opening and consent framing, modular question blocks by research goal, probe suggestions for each section, consistent time per block, and debrief and follow-up prompts.' },
+            { t: 'Insight deck', b: 'A branded template with the executive summary on slide one, one evidence-backed insight per slide, severity and frequency scoring, and recommended next actions at the close.' },
+            { t: 'Stakeholder presentation', b: 'Three slides maximum for leadership reviews. Business impact framing first, data visualised rather than listed, a clear ask or decision required, and an appendix for anyone who wants the detail.' },
           ],
         },
       },
@@ -621,7 +688,17 @@ export const cutCases: CutCase[] = [
           'The most valuable infrastructure was not a folder or a template. It was a process: a five-step handoff that made research insights part of the design workflow rather than a parallel activity.',
           'Before it, research findings were delivered to stakeholders and then effectively lost. Designers had no consistent access to what had been learned, so they started from scratch, sometimes contradicting decisions research had already informed.',
         ],
-        shot: 'figure',
+        block: {
+          kind: 'journey',
+          cols: ['Step', 'What happens', 'Why it holds'],
+          rows: [
+            ['Research conducted', 'Interviews, usability tests and surveys, run by the research team.', 'The raw material, owned by the people closest to it.'],
+            ['Synthesis and insight deck', 'Findings written up in the standardised insight format, linked to source files.', 'One format means a reader knows where to look.'],
+            ['Handoff session', 'The researcher walks designers through the findings directly.', 'Not a document tossed over a wall.'],
+            ['Design takes over', 'Insights referenced in Figma annotations.', 'The rationale travels with the design.'],
+            ['Design critique', 'A structured crit checks decisions back against the research that informed them.', 'The loop closes instead of trailing off.'],
+          ],
+        },
       },
       {
         kicker: 'How it landed',
@@ -638,13 +715,39 @@ export const cutCases: CutCase[] = [
           ],
         },
       },
+      {
+        kicker: 'What shipped, what did not',
+        heading: 'Finished, and left in the pipeline',
+        body: [],
+        block: {
+          kind: 'compare',
+          before: {
+            h: 'Completed',
+            items: [
+              'Full file architecture rebuilt in Teams and OneDrive',
+              'Research templates standardised: interview, insight, stakeholder',
+              'Researcher-to-designer handoff process established',
+              'Design critique framework introduced',
+              'Cross-linking of documents for easy navigation',
+              'Research infrastructure working consistently across the team',
+            ],
+          },
+          after: {
+            h: 'In pipeline, next phase',
+            items: [
+              'Designer-side file infrastructure: Figma library governance',
+              'Component ownership and version-control process',
+              'Cross-product design consistency review',
+              'Onboarding documentation for new team members',
+            ],
+          },
+        },
+      },
     ],
     reflection: {
       heading: 'What I finished, what remained, and what I learned',
       body: [
-        'Completed: the file architecture, the three research templates, the researcher-to-designer handoff, a design critique framework, and cross-linking so documents could be found from more than one path.',
-        'In pipeline for the next phase: designer-side infrastructure: Figma library governance, component ownership and version control, and consistency across the products.',
-        'Each improvement was validated with the team before moving to the next. The feedback was immediate and specific, because people could see what changed and why it mattered.',
+        'Design ops problems are rarely about tools or templates. They are about trust and habit. The file architecture was broken partly because nobody had taken responsibility for it, and creating structure also meant creating ownership. That took as much facilitation as it did design.',
       ],
     },
   },
@@ -670,20 +773,47 @@ export const cutCases: CutCase[] = [
         kicker: 'The problem',
         heading: 'Remittances are transactional. Families aren’t.',
         body: [
-          'Cross-border remittances are a high-frequency, high-trust activity for millions of diaspora families, yet most transfer apps treat them as simple one-way transactions. There is no shared context, no family visibility, no way to save towards a shared goal, no way to pay a bill directly for someone you are supporting from another country.',
-          'The result is anxiety at the point of transfer, uncertainty at the receiving end, and no sense of a relationship underneath the money.',
+          'A self-initiated concept project, not a client engagement. I built it to explore product thinking in premium consumer fintech, a domain distinct from my enterprise work.',
+          'Cross-border remittances are a high-frequency, high-trust activity for millions of diaspora families, yet most transfer apps treat them as simple one-way transactions. There is no shared context, no family visibility, and no way to save towards a shared goal.',
+          'The result: anxiety at the point of transfer, uncertainty at the receiving end, and no mechanism for building the kind of shared financial trust families actually operate on. And there is a positioning gap. The apps that move money fast feel disposable. The institutions that feel permanent enough to trust with family money, the heritage banks, are slow, opaque and built for individuals rather than families.',
         ],
       },
       {
         kicker: 'The concept',
         heading: 'A Digital Vault-Atelier: vault-grade trust, made for families',
         body: [
-          'KinVault Heritage reframes the transfer as a relationship. Its north star is the Digital Vault-Atelier: the security and permanence of a private vault, delivered with the bespoke, considered craft of a studio.',
-          'Families connect through a trusted person-to-person rail, then operate shared vaults both sides can see and contribute to. Three capabilities sit on top: AI-driven rate triggers that take the anxiety out of timing, direct bill payment, and progress both sides can watch.',
+          'KinVault Heritage reframes the transfer as a relationship. Its north star is the Digital Vault-Atelier: the security and permanence of a private vault, delivered with the bespoke, considered craft of a studio. Families connect through Kin-Link, a trusted pairing between sender and recipient.',
+          'Three capabilities sit on top: AI-driven rate triggers that take the anxiety out of timing, direct bill payment so a sender can settle a utility without the money being redirected, and real-time status both ends can watch.',
         ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Shared vaults', b: 'Progress indicators, contributor visibility and activity history. Both sides of the relationship see the same vault state, which removes the need for a message to confirm anything.' },
+            { t: 'AI rate triggers', b: 'Rate alerts in plain language. Not “GBP/INR hit 106.50” but “the best rate in the last 14 days, good time to send”. Simple, user-controlled, and explained rather than announced.' },
+            { t: 'Direct bill payment', b: 'Pay a utility provider directly, not just a bank account. The sender sees confirmation that the electricity bill was cleared, not just that money was sent.' },
+            { t: 'Real-time status', b: 'Tracking with an estimated arrival, a fee breakdown shown at the decision point rather than buried in confirmation, and a rate lock so the figure quoted is the figure that lands.' },
+          ],
+        },
+        pull: 'Closer than a vault. Connected like kin.',
         shot: 'wide',
-        caption: 'The shared family vault',
+        caption: 'Shared vault: funds allocated to named family goals',
         alt: 'Mom’s Vault: a £450 balance split across healthcare, groceries and utility bills, each on its own slider, with a note that allocating to pockets lets shared bills be prioritised automatically.',
+      },
+      {
+        kicker: 'Design process',
+        heading: 'Research-led, prototype-validated',
+        body: [
+          'Four stages, each one narrowing the brief rather than decorating it.',
+        ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Informal interviews with six diaspora users', b: 'People who regularly send money internationally. Common themes: anxiety about exchange rates and feeling caught at a bad one, frustration that recipients cannot see transfer status without asking, and a wish to save towards shared goals like house repairs or school fees rather than sending ad-hoc amounts.' },
+            { t: 'Competitive audit: Wise, Remitly, WorldRemit', b: 'All three treat a transfer as a transactional event with no persistent relationship layer. Rate alerts exist in Wise, but they are basic threshold notifications with no context, no control and no explanation of why the rate matters for this particular transfer. None offer shared savings or direct bill payment as a category.' },
+            { t: 'Concept framing', b: 'Three design targets from the research, rate anxiety, opacity anxiety and misdirection anxiety, each paired to a feature that neutralises it. A fourth, positioning insight shaped the brand: families want a money tool that feels permanent and considered, not disposable.' },
+            { t: 'High-fidelity prototype and self-testing', b: 'An interactive Figma prototype covering vault creation, smart transfer with a rate trigger, and bill payment, validated with three of the original interview participants. The key finding: the AI rate trigger felt too smart without enough explanation of how it decided to fire.' },
+          ],
+        },
       },
       {
         kicker: 'The rule',
@@ -691,29 +821,20 @@ export const cutCases: CutCase[] = [
         body: [
           'The concept resolved to one rule. Every feature had to neutralise a specific anxiety in the transfer relationship, not just add functionality.',
         ],
-        shot: 'wide2',
-        caption: 'Smart transfer, with the rate decision left to the sender',
-        alt: 'Smart Transfer: a rule to send £500 when the pound to rupee rate reaches 106.50, today’s rate shown at 105.12, and a breakdown with no fee, no markup and ₹53,250 guaranteed to arrive.',
         block: {
-          kind: 'cards',
-          items: [
-            { t: '“Am I sending at a bad rate right now?”', b: 'AI rate triggers. Plain-language alerts, like “best rate in 14 days”, shown with the rate chart, so the user decides rather than the algorithm.' },
-            { t: '“Did it arrive? Was it enough?”', b: 'Shared vaults. Both sides see the same balance, contributors and live transfer status, so no message is needed to confirm an arrival.' },
-            { t: '“Will the money reach the actual bill?”', b: 'Direct bill payment. Pay the utility directly, so the sender sees the bill cleared rather than just that money was sent.' },
+          kind: 'journey',
+          cols: ['The anxiety', 'In the user’s words', 'Neutralised by'],
+          rows: [
+            ['01 Timing', '“Am I sending at a bad rate right now?”', 'AI rate triggers. Plain-language alerts, like “best rate in 14 days”, shown with the rate chart, so the user decides rather than the algorithm.'],
+            ['02 Opacity', '“Did it arrive? Was it enough?”', 'Shared vaults. Both sides see the same balance, contributors and live transfer status, so no message is needed to confirm an arrival.'],
+            ['03 Misdirection', '“Will the money reach the actual bill?”', 'Direct bill payment. Pay the utility directly, so the sender sees the bill cleared rather than just that money was sent.'],
           ],
         },
-      },
-      {
-        kicker: 'Design process',
-        heading: 'Research-led, prototype-validated',
-        body: [
-          'The high-fidelity prototype carried the core send-money journey end to end, from the family dashboard through to a tracked transfer and a bill paid directly at the other end. Each screen had to answer the anxiety that sits at that step rather than simply move the flow along.',
-        ],
         shot: 'trio',
         caps: [
-          'Review: the rate, the fee and what actually lands, before anything is sent',
-          'Status: where the money is, in plain steps, so nobody has to ask',
-          'Paying the bill directly, so the sender sees it cleared rather than just sent',
+          'Review and rate lock: the fee breakdown shown at the decision point, not buried in confirmation',
+          'Transfer status: every step visible at both ends of the transfer',
+          'Bill Pay Abroad: pay a utility directly, not a bank account',
         ],
         alts: [
           'The review screen: sending £500 to Mom at 106.50 rupees to the pound, zero fee, and ₹53,250 shown as what the recipient gets, above a confirm and send button.',
@@ -725,8 +846,11 @@ export const cutCases: CutCase[] = [
         kicker: 'The system',
         heading: 'A visual system built to feel permanent',
         body: [
-          'The creative direction, “The Financial Atelier”, pairs a deep heritage navy with a pearl surface and an emerald accent for growth. Generous whitespace and vault-grade security cues make a fast app feel as considered and trustworthy as a private bank.',
+          'The creative direction, “The Financial Atelier”, pairs a deep heritage navy with a pearl surface and an emerald accent for growth. Manrope keeps the type quietly geometric and modern. Generous whitespace and vault-grade security cues make a fast app feel like a considered one.',
         ],
+        shot: 'wide2',
+        caption: 'Smart transfer, with the rate decision left to the sender',
+        alt: 'Smart Transfer: a rule to send £500 when the pound to rupee rate reaches 106.50, today’s rate shown at 105.12, and a breakdown with no fee, no markup and ₹53,250 guaranteed to arrive.',
       },
       {
         kicker: 'What I would measure',
@@ -861,7 +985,26 @@ export const cutCases: CutCase[] = [
           'Two groups of younger adults aged 20 to 40 in Winchester, who would actually be the ageing population of 2065, and a gathering of fifteen older adults aged 50 to 80 in Southampton, reached through local churches and community groups. The older-adult session was run as a relaxed afternoon with refreshments and a reminiscence game, not a clinical interview, so people spoke openly about retirement, care, and technology.',
           'They described later life very differently, but they asked design for the same thing: support that does not demand attention.',
         ],
-        pull: '“Plants can give emotional support in a way that animals or humans can’t.” And, from another participant: “I still like to do my own shopping. I want to go. I don’t like having a delivery.”',
+        block: {
+          kind: 'compare',
+          before: {
+            h: 'Younger adults, 20 to 40',
+            items: [
+              'They pictured later life as a time to explore, learn and travel, not decline, while accepting they would likely face reduced mobility or chronic health conditions.',
+              'They were openly frustrated with today’s assistant technology. Alexa and phone-based AI were described as prompt-based and transactional, passive tools that demand constant input to be useful.',
+              'They wanted intelligence that is ambient and sensory, adapting quietly instead of waiting to be asked, and they responded to Amble being a real plant rather than a device.',
+            ],
+          },
+          after: {
+            h: 'Older adults, 50 to 80',
+            items: [
+              'Many described retirement as involuntary, brought on by illness or burnout, and spoke about the loss of identity and structure that followed.',
+              'They held tightly to small acts of independence, shopping, gardening, birdwatching, as markers of dignity and a connection to the outside world.',
+              'Their message to assistive technology was clear: support the routine, never replace it. A system that does everything for you takes something away.',
+            ],
+          },
+        },
+        pull: '“Plants can give emotional support in a way that animals or humans can’t.” “I retired through ill health, so I didn’t have a choice. It was taken away from me.” “I still like to do my own shopping. I want to go. I don’t like having a delivery.”',
       },
       {
         kicker: 'The concept',
@@ -908,12 +1051,25 @@ export const cutCases: CutCase[] = [
           'A Playfair Display wordmark, lowercase for approachability, with a flower growing from the “a” and a leaf sprouting from the “e”. Playfair is paired with the geometric sans Poppins, and the pairing was evidence-led: studies show older adults read serif type more comfortably at larger sizes, and that typefaces themselves carry personality, in this case sincerity and calm. The palette is muted earth tones, chosen for the calm familiarity research links to older adults’ preferences.',
           'Amble’s voice speaks as a presence, not an assistant: warm, calm and mindful, helpful but never insistent. Let your home grow with you.',
         ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Empathy', b: 'Trust built through warmth and approachability.' },
+            { t: 'Regeneration', b: 'Systems that grow, adapt and replenish.' },
+            { t: 'Sensory intelligence', b: 'Communicating through light, scent and sound.' },
+            { t: 'Seamlessness', b: 'Intelligence felt, not noticed.' },
+            { t: 'Decentralisation', b: 'Support distributed gently across the space.' },
+            { t: 'Inclusivity', b: 'Designed for the full range of later-life needs.' },
+          ],
+        },
+        pull: 'The palette runs parchment, pale dogwood, yellow green, chamoisee and coffee: muted earth tones, chosen for the calm familiarity research links to older adults’ preferences.',
       },
       {
         kicker: 'Outcome',
         heading: 'From research project to public exhibition',
         body: [
-          'Amble was shown to the public as part of “Tender Interbeing: The Future of Design with Empathy” at the London Design Festival in September 2025, alongside industry.',
+          'Amble was shown to the public as part of “Tender Interbeing: The Future of Design with Empathy” at the London Design Festival in September 2025, at the White City Warehouse in London W12, alongside industry.',
+          'A seven-month research project, selected for one of the world’s leading design festivals and exhibited alongside industry.',
           'Translating seven months of research into an exhibition was a design problem of its own: two posters carrying the full argument, the concept, the evidence and the rationale, condensed to what a visitor can absorb in a single pass.',
         ],
         shot: 'posters',
@@ -936,7 +1092,8 @@ export const cutCases: CutCase[] = [
     reflection: {
       heading: 'What leading a foresight project taught me',
       body: [
-        'Seven months on something that cannot be built yet, for people who are not old yet. Strange brief. Foresight work makes you argue about what a thing is for before you are allowed to draw it, and I still think about that when I am scoping ordinary projects.',
+        'The discipline of speculative design is not imagination, it is restraint. The easy version of this brief is a beautiful film about plants in 2065. The useful version traces every idea back to evidence. As project lead, most of my work was holding that line, asking the team repeatedly which research insight a given feature actually answered. The concept is bold, but nothing in it is invented for effect.',
+        'Leading a multidisciplinary team through ambiguity was the real lesson. For seven months there was no screen to review, no flow to test, no obvious sign of progress. Keeping four people aligned and confident without those anchors meant being clear about the questions we were answering, even as the answers kept changing. Two of our concepts were abandoned. Naming that as progress rather than failure was part of the job.',
       ],
     },
   },

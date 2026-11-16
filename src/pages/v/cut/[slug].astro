@@ -38,6 +38,7 @@ import hzRisk from '../../../assets/work/hazop/risk-matrix.jpg';
 import hzSites from '../../../assets/work/hazop/sites-dashboard.jpg';
 import apDashboard from '../../../assets/work/api-lifecycle/dashboard.png';
 import apDetails from '../../../assets/work/api-lifecycle/design-details.png';
+import apCollab from '../../../assets/work/api-lifecycle/collaborator.png';
 import kvVault from '../../../assets/work/kinvault/vault.jpg';
 import kvTransfer from '../../../assets/work/kinvault/smart-transfer.jpg';
 import kvReview from '../../../assets/work/kinvault/review.jpg';
@@ -68,7 +69,7 @@ const shots: Record<string, Record<string, any>> = {
     web: [mgSiteHero, mgSiteHow, mgSiteTrial],
   },
   hazop: { wide: hzScenario, scenes: [hzRisk, hzSites, hzAnalytics], web: [soHero, soProducts, soKnowledge] },
-  'api-lifecycle': { wide: apDashboard, wide2: apDetails },
+  'api-lifecycle': { wide: apDashboard, pair: [apDetails, apCollab] },
   kinvault: { wide: kvVault, wide2: kvTransfer, trio: [kvReview, kvStatus, kvBillPay] },
   amble: {
     wide: amFamily, wide2: amRoutines,
