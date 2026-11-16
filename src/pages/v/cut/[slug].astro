@@ -506,9 +506,13 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
      them well enough without it. */
   .ph-copy .period { color: #8a8a86; }
   .ph-art { grid-column: mid / full-end; min-width: 0; }
-  /* Sherwin's panel is made of sentences, so its column stops where the page
-     content stops instead of running out to the edge. */
-  .ph-art:has(.hero-ops) { grid-column: mid / content-end; }
+  /* Two kinds of art stop at the content edge rather than running out to the
+     edge of the page. Sherwin's panel is made of sentences. The laptop holds
+     a dashboard, and running a dashboard off the page cuts away the columns
+     and charts that are the reason it is being shown at all: losing the right
+     edge of a phone costs nothing, losing the right third of an analytics
+     view costs the point. Both are sized to sit whole beside the title. */
+  .ph-art:has(.hero-ops), .ph-art:has(.hero-laptop) { grid-column: mid / content-end; }
 
   /* Insurance: if a case ever has no hero art, the copy still needs the
      centred measure the removed `.pagehead-in` used to give it. */
@@ -521,7 +525,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
      as a margin, which is the boxed look we are leaving behind. A negative
      right margin pushes the art past the page edge at every width, and the
      header clips it. */
-  .hero-phones, .hero-laptop, .hero-flat { margin-right: calc(-1 * clamp(1.5rem, 5vw, 5rem)); }
+  .hero-phones, .hero-flat { margin-right: calc(-1 * clamp(1.5rem, 5vw, 5rem)); }
 
   /* phones: the middle one lifted, as on the main site */
   .hero-phones { display: flex; align-items: flex-end; gap: clamp(.45rem, 1.2vw, .9rem); }
@@ -571,13 +575,15 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
       row-gap: clamp(2rem, 6vw, 3rem);
     }
     .ph-copy, .ph-art { grid-column: content-start / content-end; }
-    /* `mid` and `content-end` are the same line in this grid, so the desktop
-       rule for the ops panel would resolve to a column of zero width. */
-    .ph-art:has(.hero-ops) { grid-column: content-start / content-end; }
+    /* This grid has no `mid` line at all, so any desktop rule naming it
+       creates an implicit column: the art lands outside the copy and overlaps
+       it, and the copy is squeezed to one word per line. Every `mid`-based
+       rule above has to be answered here. */
+    .ph-art:has(.hero-ops), .ph-art:has(.hero-laptop) { grid-column: content-start / content-end; }
 
     /* One image reads better running the full width of the phone than nudged
        a thumb's width off one side. */
-    .hero-laptop, .hero-flat { margin-inline: calc(-1 * var(--pad)); border-radius: 0; }
+    .hero-flat { margin-inline: calc(-1 * var(--pad)); border-radius: 0; }
 
     /* The phone row stays inside the page here. Run off the edge at this size
        and all that shows of the third phone is a white sliver, which reads as
