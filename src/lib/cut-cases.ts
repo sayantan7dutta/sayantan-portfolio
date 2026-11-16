@@ -288,14 +288,6 @@ export const cutCases: CutCase[] = [
           'I owned the UX strategy across the whole project, translating dense technical requirements into something accessible. A scalable design system and a navigation structure anchored to the HAZOP lifecycle meant the MVP earned trust quickly, with safety professionals who had never had a tool built for this work.',
           'The platform reduced manual data entry, standardised compliance reporting, and laid a foundation the engineering team could build on without reintroducing inconsistency.',
         ],
-        block: {
-          kind: 'stats',
-          items: [
-            { n: '50%', l: 'Decrease in time spent on manual data entry' },
-            { n: '40%', l: 'Reduction in reporting errors compared to spreadsheets' },
-            { n: '35%', l: 'Faster overall completion of hazard studies' },
-          ],
-        },
       },
       {
         kicker: 'Design process',
@@ -377,6 +369,14 @@ export const cutCases: CutCase[] = [
           'The change was operational, not cosmetic. Studies that lived in scattered spreadsheets now move through one accountable process: clear ownership at each step, duplication and reporting rework removed, and compliance evidence produced as a by-product of the work rather than a scramble at the end.',
           'It maps onto how safety professionals already think. It did not try to replace the safety thinking, which was never the problem.',
         ],
+        block: {
+          kind: 'stats',
+          items: [
+            { n: '50%', l: 'Decrease in time spent on manual data entry' },
+            { n: '40%', l: 'Reduction in reporting errors compared to spreadsheets' },
+            { n: '35%', l: 'Faster overall completion of hazard studies' },
+          ],
+        },
       },
       {
         kicker: 'Parallel engagement',

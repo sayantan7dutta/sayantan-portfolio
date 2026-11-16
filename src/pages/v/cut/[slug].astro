@@ -17,7 +17,6 @@ import { Image } from 'astro:assets';
 import Cut from '../../../layouts/Cut.astro';
 import { projects } from '../../../lib/variants';
 import { cutCases } from '../../../lib/cut-cases';
-import { decisions } from '../../../lib/decisions';
 
 import mgBefore from '../../../assets/work/miigenie/before-home.png';
 import mgAfter from '../../../assets/work/miigenie/home.png';
@@ -86,7 +85,6 @@ export const getStaticPaths = (() =>
 const { slug } = Astro.params;
 const data = cutCases.find((c) => c.slug === slug)!;
 const project = projects.find((p) => p.slug === slug)!;
-const decision = decisions.find((d) => d.slug === slug);
 const img = shots[slug] ?? {};
 
 const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
@@ -316,27 +314,6 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
       )}
     </section>
   ))}
-
-  <!-- ═══ THE DECISION ══════════════════════════════════════════════ -->
-  {decision && (
-    <section class="band decision-band">
-      <div class="case-sec solo" data-reveal>
-        <div class="cs-head">
-          <p class="sec-k">The decision it turned on</p>
-          <h2>{decision.question}</h2>
-        </div>
-        <div class="cs-body">
-          <div class="forks">
-            <div class="fork took"><p class="fork-k">What I did</p><p>{decision.took}</p></div>
-            <div class="fork left"><p class="fork-k">What I didn’t</p><p>{decision.left}</p></div>
-          </div>
-          {decision.cost && (
-            <div class="cost"><p class="cost-k">What it cost</p><p>{decision.cost}</p></div>
-          )}
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- ═══ REFLECTION ════════════════════════════════════════════════ -->
   <section class="band">
@@ -589,26 +566,6 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .cmp li::before { content: ''; position: absolute; left: 0; top: .95em; width: 5px; height: 5px; border-radius: 50%; background: var(--faint); }
   .cmp-after li::before { background: var(--accent); }
   .cmp-before li { color: var(--faint); }
-
-  /* decision */
-  .decision-band { background: var(--paper-2); max-width: none; }
-  /* Same inner width as a normal .band, so the left AND right edges line up
-     with every other section. `var(--measure)` alone was 2 × --pad too wide. */
-  .decision-band > * { max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto; }
-  .solo .cs-body { margin-top: clamp(1.2rem, 3vw, 1.8rem); }
-  .forks { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); }
-  @media (max-width: 680px) { .forks { grid-template-columns: 1fr; } }
-  .fork { padding-left: 1.1rem; }
-  .fork.took { border-left: 2.5px solid var(--ink); }
-  .fork.left { border-left: 2.5px dashed var(--edge); }
-  .fork-k { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .6rem; }
-  .fork.took .fork-k { color: var(--ink); }
-  .fork.left .fork-k { color: var(--faint); }
-  .fork p:last-child { font-family: var(--read); }
-  .fork.left p:last-child { color: var(--faint); }
-  .cost { margin-top: 1.8rem; padding: 1.4rem 1.6rem; border: 1.5px solid var(--accent); border-radius: 4px; max-width: 64ch; }
-  .cost-k { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: .6rem; }
-  .cost p:last-child { font-family: var(--read); }
 
   /* ── next: three tiles across the band rather than three stacked rows ── */
   .next { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
