@@ -270,6 +270,20 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
         </div>
       </div>
 
+      {/* An ordered list, because it is a progression and the order carries
+          the meaning. The dates are the list content; the rail behind them is
+          drawn and hidden from assistive tech. */}
+      {sec.rail && (
+        <ol class="rail" data-reveal>
+          {sec.rail.map((n, i) => (
+            <li class={i === sec.rail!.length - 1 ? 'rail-now' : ''}>
+              <span class="rail-d">{n.d}</span>
+              <span class="rail-r">{n.r}</span>
+            </li>
+          ))}
+        </ol>
+      )}
+
       {sec.shot === 'beforeAfter' && img.before && (
         <div class="ba" data-reveal>
           <figure>
@@ -808,7 +822,50 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .tbl thead th { font-size: var(--micro); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
   .tbl tbody tr { transition: background var(--quick) var(--ease); }
   .tbl tbody tr:hover { background: var(--paper-2); }
-  .tbl tbody th { font-weight: 700; white-space: nowrap; color: var(--accent); width: 1%; }
+  /* `white-space: nowrap` with `width: 1%` suits a short row label, and the
+     row header here is a whole sentence. Nowrap forced that sentence onto one
+     line, which pushed the table to 1571px inside a 1096px scroller: 43% of
+     it unreachable unless you knew to drag sideways, and the other two cells
+     wrapped into a 701px-tall column of mostly empty paper. A short label
+     still sits on one line on its own, because nothing makes it wrap. */
+  .tbl tbody th { font-weight: 700; color: var(--accent); max-width: 22rem; }
+  /* Auto table layout hands the narrowest column to whichever cell can wrap
+     hardest, which left a sentence running down a 105px ribbon beside two
+     comfortable ones. A floor on the first column keeps prose readable; a
+     short label is unaffected, having nothing to wrap. */
+  .tbl th:first-child { min-width: 13rem; }
+
+  /* ── the rail ──
+     Three titles across three years is a shape. The condensed version listed
+     them in a sentence, which reads as a fact rather than a climb, so the
+     main site's dated rail is back. The last node is filled, being where the
+     work got to. */
+  .rail {
+    position: relative; display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(.8rem, 2vw, 1.4rem); margin-top: clamp(2rem, 5vw, 2.6rem);
+  }
+  .rail::before {
+    content: ''; position: absolute; top: 5px; left: 8%; right: 8%;
+    height: 1px; background: var(--line);
+  }
+  .rail li { position: relative; padding-top: 1.6rem; }
+  .rail li::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--paper); border: 1px solid var(--faint);
+  }
+  .rail .rail-now::before { background: var(--accent); border-color: var(--accent); }
+  .rail-d {
+    display: block; margin-bottom: .4rem; font-size: var(--micro); font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+  }
+  .rail-r { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  /* Stacked, the horizontal rail would run across nothing, so it goes. */
+  @media (max-width: 620px) {
+    .rail { grid-template-columns: 1fr; gap: 1.3rem; }
+    .rail::before { display: none; }
+  }
+  @media (max-width: 760px) { .tbl th:first-child { min-width: 9rem; } }
   .tbl td { font-family: var(--read); font-size: .94rem; color: var(--ink-2); }
   .tbl td:last-child { color: var(--ink); }
 

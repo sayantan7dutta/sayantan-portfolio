@@ -30,6 +30,10 @@ export interface CaseSection {
   kicker: string;
   heading: string;
   body: string[];
+  /** A dated progression on a rail. Three titles across three years is a
+      shape, and a sentence listing them is not: the main site drew it and the
+      condensed version flattened it back into prose. */
+  rail?: { d: string; r: string }[];
   /** Key into the image map in the case study page. */
   shot?: string;
   caption?: string;
@@ -567,7 +571,12 @@ export const cutCases: CutCase[] = [
         kicker: 'Leadership',
         heading: 'From doing the work to making it possible for others',
         body: [
-          'Product Designer from November 2020, Lead Product Designer from November 2021, and into design operations by the end of 2023. The title changed twice; what actually changed was the altitude of the work.',
+          'The title changed twice across the three years. What actually changed was the altitude of the work.',
+        ],
+        rail: [
+          { d: 'Nov 2020', r: 'Product Designer' },
+          { d: 'Nov 2021', r: 'Lead Product Designer' },
+          { d: 'Dec 2023', r: 'Design Operations' },
         ],
         block: {
           kind: 'journey',
