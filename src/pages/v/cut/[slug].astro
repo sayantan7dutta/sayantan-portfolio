@@ -43,6 +43,7 @@ import kvTransfer from '../../../assets/work/kinvault/smart-transfer.jpg';
 import kvReview from '../../../assets/work/kinvault/review.jpg';
 import kvStatus from '../../../assets/work/kinvault/transfer-status.jpg';
 import kvBillPay from '../../../assets/work/kinvault/bill-pay.jpg';
+import kvDashboard from '../../../assets/work/kinvault/dashboard.jpg';
 import amFamily from '../../../assets/work/amble/family.jpg';
 import amRoutines from '../../../assets/work/amble/routines.jpg';
 import amFuture from '../../../assets/work/amble/future.jpg';
@@ -79,6 +80,69 @@ const shots: Record<string, Record<string, any>> = {
   'sherwin-williams': {},
 };
 
+/**
+ * The opening image, one per case.
+ *
+ * The page used to open on a plain black band, which is a lot of nothing
+ * before the first idea. It now opens the way the main site's cases do, with
+ * the work itself beside the title.
+ *
+ * The device vocabulary is the home page's and deliberately so: phone work in
+ * a phone, desktop work in a laptop, photography flat, and Sherwin in the
+ * stats panel it gets everywhere else, having no UI to screenshot. Keeping
+ * the two in step matters more than sharing the code, since the hero sits on
+ * black and bleeds off the page while the home plates sit in light cards.
+ */
+type HeroArt = {
+  device: 'phones' | 'laptop' | 'flat' | 'ops';
+  img?: any;
+  imgs?: any[];
+  label?: string;
+  alt?: string;
+  alts?: string[];
+};
+const heroArt: Record<string, HeroArt> = {
+  miigenie: {
+    device: 'phones',
+    imgs: [mgOnboarding, mgAfter, mgCarer],
+    alts: [
+      'The miiGenie onboarding screen',
+      'The miiGenie home screen, with one large voice action',
+      'The carer view, showing how the day went',
+    ],
+  },
+  kinvault: {
+    device: 'phones',
+    /* review 2.27, vault 2.58, dashboard 2.43 tall-to-wide. Picked to stand
+       at roughly the same height: bill-pay is 3.18 and left the third phone
+       a hundred pixels above the first. */
+    imgs: [kvReview, kvVault, kvDashboard],
+    alts: [
+      'The KinVault transfer review screen',
+      'The KinVault vault, holding a family\u2019s documents',
+      'The KinVault dashboard',
+    ],
+  },
+  hazop: {
+    device: 'laptop',
+    img: hzAnalytics,
+    label: 'HAZOP Edge',
+    alt: 'The HAZOP Edge analytics dashboard',
+  },
+  'api-lifecycle': {
+    device: 'laptop',
+    img: apDashboard,
+    label: 'API Console',
+    alt: 'The Ericsson API Console dashboard',
+  },
+  amble: {
+    device: 'flat',
+    img: amFamily,
+    alt: 'Amble, a bioengineered plant system growing through a 2065 home',
+  },
+  'sherwin-williams': { device: 'ops' },
+};
+
 export const getStaticPaths = (() =>
   cutCases.map((c) => ({ params: { slug: c.slug } }))) satisfies GetStaticPaths;
 
@@ -86,6 +150,7 @@ const { slug } = Astro.params;
 const data = cutCases.find((c) => c.slug === slug)!;
 const project = projects.find((p) => p.slug === slug)!;
 const img = shots[slug] ?? {};
+const art = heroArt[slug];
 
 const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
@@ -119,19 +184,66 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
 <main id="main">
 <article>
   <!-- ═══ HEADER: scannable before any prose ════════════════════════ -->
-  <header class="pagehead">
-    <div class="pagehead-in">
+  <header class={`pagehead ${art ? 'ph-split' : ''}`}>
+    <div class="ph-copy">
       <p class="crumb"><a href="/v/cut#work" data-ab="case:back"><span aria-hidden="true">←</span> Work</a> <span class="sep" aria-hidden="true">/</span> {project.short}</p>
       <p class="meta-row">
         <span class={`status-chip st-${project.status.toLowerCase()}`}>{project.status}</span>
         <span class="kind-chip">{project.kind}</span>
         <span class="field-chip">{project.field}</span>
-        <span class="dot" aria-hidden="true">·</span>
-        <span>{project.period}</span>
+        <span class="period">{project.period}</span>
       </p>
       <h1>{project.title}</h1>
       <p class="lead">{data.lead}</p>
     </div>
+
+    {art && (
+      <div class="ph-art">
+        {art.device === 'phones' && (
+          <div class="hero-phones">
+            {art.imgs!.map((t: any, i: number) => (
+              <div class={`hero-phone hp-${i}`}>
+                <div class="hero-phone-screen">
+                  <Image src={t} alt={art.alts?.[i] ?? ''} widths={[320, 640]} sizes="190px" loading="eager" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {art.device === 'laptop' && (
+          <div class="hero-laptop">
+            <div class="hl-screen">
+              <div class="hl-bar">
+                <span class="hl-label">{art.label}</span>
+                <span class="hl-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              </div>
+              <div class="hl-view">
+                <Image src={art.img} alt={art.alt ?? ''} widths={[640, 1280]} sizes="(max-width: 900px) 92vw, 560px" loading="eager" />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {art.device === 'flat' && (
+          <div class="hero-flat">
+            <Image src={art.img} alt={art.alt ?? ''} widths={[640, 1280]} sizes="(max-width: 900px) 100vw, 560px" loading="eager" />
+          </div>
+        )}
+
+        {art.device === 'ops' && (
+          <div class="hero-ops">
+            <p class="hops-band">Design Operations · Sherwin-Williams</p>
+            <dl class="hops-stats">
+              <div><dt>30 to 40%</dt><dd>less rework</dd></div>
+              <div><dt>20+</dt><dd>people supported</dd></div>
+              <div><dt>6</dt><dd>digital products</dd></div>
+            </dl>
+            <p class="hops-foot">File architecture, shared research templates, and a five-step handoff.</p>
+          </div>
+        )}
+      </div>
+    )}
   </header>
 
   <div class="case-facts">
@@ -350,6 +462,117 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
 </main>
 
 <style>
+  /* ── the opening ───────────────────────────────────────────────────
+     The case used to begin on an empty black band: a screen of nothing
+     before the first idea. It now begins on the work, the way the main
+     site's cases do. Copy keeps the black ground, so the headline contrast
+     is unchanged; the image sits beside it and runs off the right edge of
+     the page instead of sitting in a box.
+
+     The grid names its lines so the copy lands on exactly the same left
+     edge as every `.band` below it, while the art can span from the middle
+     of the measure out to the page edge. Doing it with named lines rather
+     than `100vw` keeps it right when a scrollbar is present, which `100vw`
+     famously is not. */
+  .pagehead.ph-split {
+    display: grid;
+    align-items: center;
+    column-gap: clamp(1.4rem, 3.5vw, 3rem);
+    padding: clamp(5rem, 11vw, 7.5rem) 0 clamp(3rem, 7vw, 4.5rem);
+    grid-template-columns:
+      [full-start] minmax(var(--pad), 1fr)
+      [content-start] minmax(0, calc((var(--measure) - var(--pad) * 2) * 0.54))
+      [mid] minmax(0, calc((var(--measure) - var(--pad) * 2) * 0.46))
+      [content-end] minmax(var(--pad), 1fr) [full-end];
+    overflow: hidden;
+  }
+  .ph-copy { grid-column: content-start / mid; min-width: 0; }
+  /* The chips used to sit on one full-page line with a `·` before the dates.
+     In a half-width column the row wraps, and the separator was being left
+     hanging at the end of a line with nothing after it. The gap separates
+     them well enough without it. */
+  .ph-copy .period { color: #8a8a86; }
+  .ph-art { grid-column: mid / full-end; min-width: 0; }
+  /* Sherwin's panel is made of sentences, so its column stops where the page
+     content stops instead of running out to the edge. */
+  .ph-art:has(.hero-ops) { grid-column: mid / content-end; }
+
+  /* Insurance: if a case ever has no hero art, the copy still needs the
+     centred measure the removed `.pagehead-in` used to give it. */
+  .pagehead:not(.ph-split) .ph-copy {
+    max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto;
+  }
+
+  /* The bleed is deliberate rather than incidental. Sized to the column
+     alone, three phones happen to fit inside it at 1440 and the edge reads
+     as a margin, which is the boxed look we are leaving behind. A negative
+     right margin pushes the art past the page edge at every width, and the
+     header clips it. */
+  .hero-phones, .hero-laptop, .hero-flat { margin-right: calc(-1 * clamp(1.5rem, 5vw, 5rem)); }
+
+  /* phones: the middle one lifted, as on the main site */
+  .hero-phones { display: flex; align-items: flex-end; gap: clamp(.45rem, 1.2vw, .9rem); }
+  .hero-phone {
+    flex: 0 0 auto; width: clamp(118px, 14.5vw, 196px);
+    background: #151512; border-radius: clamp(16px, 2vw, 24px); padding: 5px;
+    box-shadow: 0 26px 54px -20px rgba(0, 0, 0, .8);
+  }
+  .hero-phone-screen { border-radius: clamp(12px, 1.6vw, 19px); overflow: hidden; background: #fff; }
+  .hero-phone img { display: block; width: 100%; height: auto; }
+  .hp-1 { margin-bottom: clamp(1rem, 3vw, 2.6rem); }
+
+  /* laptop: the same chrome the home page uses, at hero scale */
+  .hl-screen {
+    background: #151512; border: 1px solid #272724; border-radius: 9px;
+    overflow: hidden; box-shadow: 0 26px 54px -20px rgba(0, 0, 0, .8);
+  }
+  .hl-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .5rem .8rem; border-bottom: 1px solid #272724; background: #1b1b18;
+  }
+  .hl-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8a8a86; }
+  .hl-dots { display: flex; gap: .3rem; }
+  .hl-dots span { width: 7px; height: 7px; border-radius: 50%; background: #35352f; }
+  .hl-view { background: #fff; }
+  .hl-view img { display: block; width: 100%; height: auto; }
+
+  /* flat: a photograph needs no frame */
+  .hero-flat { border-radius: 8px; overflow: hidden; box-shadow: 0 26px 54px -20px rgba(0, 0, 0, .8); }
+  .hero-flat img { display: block; width: 100%; height: auto; }
+
+  /* ops: Sherwin has no UI to show, so it gets the panel it gets elsewhere.
+     This one does NOT bleed: clipping an image is an editorial decision,
+     clipping a sentence is a bug. */
+  .hero-ops { border: 1px solid #272724; border-radius: 8px; padding: clamp(1.2rem, 2.6vw, 1.8rem); background: #121210; }
+  .hops-band { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #6fae9b; }
+  .hops-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.6rem, 2vw, 1.2rem); margin: 1.1rem 0; }
+  .hops-stats dt { font-size: clamp(1.1rem, 2.4vw, 1.5rem); font-weight: 800; color: #f4f4f3; letter-spacing: -.02em; }
+  .hops-stats dd { font-size: .76rem; color: #a3a3a0; margin-top: .2rem; }
+  .hops-foot { font-family: var(--read); font-size: .86rem; color: #a3a3a0; }
+
+  /* Below the split, the art moves under the copy and keeps only its right
+     bleed, so the opening still reaches the edge of the page. */
+  @media (max-width: 900px) {
+    .pagehead.ph-split {
+      grid-template-columns: [full-start] var(--pad) [content-start] minmax(0, 1fr) [content-end] var(--pad) [full-end];
+      row-gap: clamp(2rem, 6vw, 3rem);
+    }
+    .ph-copy, .ph-art { grid-column: content-start / content-end; }
+    /* `mid` and `content-end` are the same line in this grid, so the desktop
+       rule for the ops panel would resolve to a column of zero width. */
+    .ph-art:has(.hero-ops) { grid-column: content-start / content-end; }
+
+    /* One image reads better running the full width of the phone than nudged
+       a thumb's width off one side. */
+    .hero-laptop, .hero-flat { margin-inline: calc(-1 * var(--pad)); border-radius: 0; }
+
+    /* The phone row stays inside the page here. Run off the edge at this size
+       and all that shows of the third phone is a white sliver, which reads as
+       a broken image rather than a deliberate crop. */
+    .hero-phones { margin-right: 0; justify-content: space-between; gap: .4rem; }
+    .hero-phone { width: auto; flex: 1 1 0; min-width: 0; }
+  }
+
   .crumb .sep { margin: 0 .2rem; }
   /* The discipline tag, sized to match the status chip beside it. */
   .kind-chip, .field-chip {
