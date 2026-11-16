@@ -34,6 +34,8 @@ import hzAnalytics from '../../../assets/work/hazop/analytics-dashboard.jpg';
 import soProducts from '../../../assets/work/soter-software/products.jpg';
 import soHero from '../../../assets/work/soter-software/hero.jpg';
 import soKnowledge from '../../../assets/work/soter-software/knowledge-centre.jpg';
+import hzRisk from '../../../assets/work/hazop/risk-matrix.jpg';
+import hzSites from '../../../assets/work/hazop/sites-dashboard.jpg';
 import apDashboard from '../../../assets/work/api-lifecycle/dashboard.png';
 import apDetails from '../../../assets/work/api-lifecycle/design-details.png';
 import kvVault from '../../../assets/work/kinvault/vault.jpg';
@@ -65,7 +67,7 @@ const shots: Record<string, Record<string, any>> = {
     /* The marketing site, in browser shape rather than phone shape. */
     web: [mgSiteHero, mgSiteHow, mgSiteTrial],
   },
-  hazop: { wide: hzScenario, wide2: hzAnalytics, web: [soHero, soProducts, soKnowledge] },
+  hazop: { wide: hzScenario, scenes: [hzRisk, hzSites, hzAnalytics], web: [soHero, soProducts, soKnowledge] },
   'api-lifecycle': { wide: apDashboard, wide2: apDetails },
   kinvault: { wide: kvVault, wide2: kvTransfer, trio: [kvReview, kvStatus, kvBillPay] },
   amble: {
