@@ -14,6 +14,8 @@ export type Block =
   | { kind: 'journey'; cols: [string, string, string]; rows: [string, string, string][] }
   /** Research personas, grouped by role. */
   | { kind: 'personas'; items: { role: string; age: string; name: string; note: string }[] }
+  /** The figures a case ends on. */
+  | { kind: 'stats'; items: { n: string; l: string }[] }
   /** A plain comparison table. */
   | { kind: 'table'; cols: string[]; rows: string[][] }
   /** Before / after as two labelled columns of text. */
@@ -105,7 +107,7 @@ export const cutCases: CutCase[] = [
       },
       {
         kicker: 'Research',
-        heading: 'Five people the product has to work for',
+        heading: 'Four people the product has to work for',
         body: [
           'Grounded in 50+ interviews and conversations with seniors and carers across Hampshire, with MVP priorities set through co-design sessions and pilot onboarding now underway. The personas are not demographics. They are relationships to independence: each one wants to stay capable, and fears the moment technology proves they aren’t.',
         ],
@@ -115,8 +117,7 @@ export const cutCases: CutCase[] = [
             { role: 'Senior', age: '70 to 75', name: 'Living alone, away from family', note: 'Wants to run her own life: medication on time, paperwork in order, family a tap away. Anxious that technology will make her feel stupid.' },
             { role: 'Senior', age: '75 to 85', name: 'Recently moved, network lost', note: 'New town, old habits gone. Wants to rebuild a routine and a social circle without depending on the family he moved closer to.' },
             { role: 'Senior', age: '70 to 80', name: 'Prefers their own company', note: 'Independent by choice. No interest in community groups; wants appointments, documents and health admin handled without fuss.' },
-            { role: 'Carer', age: '45 to 55', name: 'The busy family carer', note: 'Sandwich generation. Helps parents with life admin from a distance while raising children. Needs visibility without surveillance.' },
-            { role: 'Carer', age: '60 to 66', name: 'The working caregiver', note: 'Caring for a parent while still working full-time. The app has to be self-explanatory, because she has no spare hours to be tech support.' },
+            { role: 'Carer', age: '45 to 66', name: 'The carer who still has a job', note: 'Sandwich generation or still working full-time, helping a parent with life admin from a distance. Needs visibility without surveillance, and an app self-explanatory enough that she never has to be tech support.' },
           ],
         },
       },
@@ -139,7 +140,7 @@ export const cutCases: CutCase[] = [
       },
       {
         kicker: 'The principles it produced',
-        heading: 'Voice-first, never voice-only',
+        heading: 'Voice-first, never voice-only, and two users at once',
         body: [
           'miiGenie leads with the one interface older adults already master: talking. Every core job can be done by speaking: reminders, finding a document, recording how the day went, calling for help. Every voice step has a typed fallback, because dignity means never being stuck.',
           'The second surface is the family carer: pairing, check-ins and visibility designed as reassurance rather than surveillance. The product is deliberately framed as supportive everyday companionship, with hard guardrails. It is not a therapist and never pretends to be a relationship.',
@@ -187,9 +188,6 @@ export const cutCases: CutCase[] = [
         body: [
           'Underneath the voice layer, miiGenie does four practical things. Each was designed with the same forgiving pattern: real help, presented simply enough that a tired 75-year-old can act on it the first time, every time.',
         ],
-        shot: 'solo',
-        caps: ['My Day: two questions, three large answers each, and a voice note. Nothing to type.'],
-        alts: ['The My Day reflection screen: “when is it?” answered by morning, midday or evening, “how are you feeling?” by good, okay or not great, then a voice note of up to 180 seconds.'],
         block: {
           kind: 'cards',
           items: [
@@ -197,6 +195,21 @@ export const cutCases: CutCase[] = [
             { t: 'Organise', b: 'Important information and documents in one accessible place. “Find my gas bill from January” works by voice.' },
             { t: 'Connect', b: 'Family check-ins, reassurance, and easier communication, both ways.' },
             { t: 'Support', b: 'Access to trusted local services and practical help around the home.' },
+          ],
+        },
+      },
+      {
+        kicker: 'Where it stands',
+        heading: 'Design-complete, entering production',
+        body: [
+          'MVP 1.1 is design-complete, and the build is being brought up to the approved system for a production release, followed by a pilot with first users. The next chapter of this case study writes itself from there: onboarding completion, voice success rates, and whether the trial-to-subscription moment reads as honestly as it was designed to.',
+        ],
+        block: {
+          kind: 'stats',
+          items: [
+            { n: '50+', l: 'Interviews and conversations with seniors and carers across Hampshire, shaping the MVP' },
+            { n: '4', l: 'Core everyday jobs the app is built around: remind, organise, connect, support' },
+            { n: '2', l: 'Users designed as one product: seniors and their family carers' },
           ],
         },
       },
@@ -222,10 +235,10 @@ export const cutCases: CutCase[] = [
       },
     ],
     reflection: {
-      heading: 'Design-complete, entering production',
+      heading: 'What being a founding designer actually means',
       body: [
-        'MVP 1.1 is design-complete, and the build is being brought up to the approved system for a production release, followed by a pilot with first users. The next chapter of this case study writes itself from there: onboarding completion, voice success rates, and whether the trial-to-subscription moment reads as honestly as it was designed to.',
         'The job is only half screens. The other half is building the company’s relationship to design: specs engineers can implement without guessing, a review rhythm that catches drift before it ships, and the patience to explain why an emoji is not an icon. A design system nobody follows is a portfolio piece; one the team builds from is infrastructure.',
+        'Designing for older adults has sharpened every instinct I have. The disciplines it forces, one idea per screen, errors that forgive, copy a tired person can read, fallbacks for every modality, are not “senior design”. They are just good design, measured against the hardest grader there is.',
       ],
     },
   },
@@ -300,6 +313,14 @@ export const cutCases: CutCase[] = [
           'I owned the UX strategy across the whole project, translating dense technical requirements into something accessible. A scalable design system and a navigation structure anchored to the HAZOP lifecycle meant the MVP earned trust quickly, with safety professionals who had never had a tool built for this work.',
           'The platform reduced manual data entry, standardised compliance reporting, and laid a foundation the engineering team could build on without reintroducing inconsistency.',
         ],
+        block: {
+          kind: 'stats',
+          items: [
+            { n: '50%', l: 'Decrease in time spent on manual data entry' },
+            { n: '40%', l: 'Reduction in reporting errors compared to spreadsheets' },
+            { n: '35%', l: 'Faster overall completion of hazard studies' },
+          ],
+        },
       },
       {
         kicker: 'The parallel engagement',
@@ -426,6 +447,14 @@ export const cutCases: CutCase[] = [
         body: [
           'Every version delivered what was committed, and disagreements were resolved before they became blockers. The design system gave the product credibility with enterprise clients as it pivoted to external B2B. Three inconsistent tools became one coherent platform, documented so the work survived both new designers and a change of tooling.',
         ],
+        block: {
+          kind: 'stats',
+          items: [
+            { n: '3', l: 'Products unified on one design system' },
+            { n: '10-15', l: 'Core components built or adapted' },
+            { n: '3 yrs', l: 'Engagement bridged without business analyst support' },
+          ],
+        },
       },
     ],
     reflection: {
@@ -517,6 +546,14 @@ export const cutCases: CutCase[] = [
         body: [
           'Each improvement was validated with the team before moving to the next. The feedback was immediate and specific, because people could see what had changed and why it mattered.',
         ],
+        block: {
+          kind: 'stats',
+          items: [
+            { n: '30-40%', l: 'Reduction in rework and duplicated effort, the team’s own estimate' },
+            { n: '3 → 1', l: 'File versions to manage, collapsed from duplicates to a single source of truth' },
+            { n: '20+', l: 'Researchers and designers working from one shared system' },
+          ],
+        },
       },
     ],
     reflection: {
@@ -592,10 +629,12 @@ export const cutCases: CutCase[] = [
       },
     ],
     reflection: {
-      heading: 'What I’d measure if this were built',
+      heading: 'What this project taught me',
       body: [
-        'This is a concept, so there are no live results to report, and I am not going to put invented percentages on a product no one has used. What I can be specific about is the bet each feature makes and the metric I would test it against: send-flow completion before and after plain-language rate triggers, and inbound “where is my transfer?” contacts before and after shared visibility.',
-        'Working on a consumer product after several years of enterprise work exposed how differently the two approach trust. In enterprise UX, trust comes from predictability and compliance signals. In consumer fintech it is emotional, a question of whether the product feels like it is on your side. The hardest design problem was not the feature set. It was tone.',
+        'Working on a consumer product after several years of enterprise work exposed how differently the two approach trust. In enterprise UX, trust comes from predictability and compliance signals: users trust a system that behaves consistently inside a known framework. In consumer fintech it is emotional, a question of whether the product feels like it is on your side.',
+        'The hardest design problem was not the feature set. It was tone. Writing copy that felt warm and human while communicating exchange rates and fee structures accurately took several passes. The first version read like a banking app. The third read like a WhatsApp message. The one that shipped sits between them, warm enough to feel like family, exact enough to feel like a vault.',
+        'The AI rate trigger was the most interesting of them. The first prototype simply fired when a threshold was hit, which felt arbitrary and slightly creepy. The fix was transparency: showing the 14-day chart alongside the notification, so the user sees the context rather than being told what to do.',
+        'It confirmed something I suspected from enterprise work. The most important UX often sits in the moments just before and just after the primary action, the anxiety before a transfer and the uncertainty after. Most apps design the middle and neglect the edges.',
       ],
     },
   },
