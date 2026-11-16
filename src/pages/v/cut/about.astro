@@ -393,7 +393,7 @@ const personal = interview.filter(
   @media (max-width: 900px) { .letter-side { position: static; } }
   .ls-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 15%; border-radius: 4px; }
   .ls-facts { margin-top: 1.6rem; display: grid; gap: 1rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
-  .ls-facts dt { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
+  .ls-facts dt { font-size: var(--micro); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
   .ls-facts dd { font-size: .9rem; margin-top: .15rem; }
 
   /* ── capabilities ── */
@@ -430,7 +430,7 @@ const personal = interview.filter(
     transition: filter var(--quick) var(--ease), transform var(--quick) var(--ease);
   }
   .tool-tile span {
-    font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    font-size: var(--micro); font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
     color: var(--faint); text-align: center; transition: color var(--quick) var(--ease);
   }
   .tool-tile:hover { border-color: var(--edge); background: #fff; transform: translateY(-2px); }
@@ -438,7 +438,7 @@ const personal = interview.filter(
   .tool-tile:hover span { color: var(--ink); }
 
   .skill-stack { display: grid; gap: clamp(1.3rem, 3vw, 1.8rem); }
-  .skill-row-lbl { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-bottom: .7rem; }
+  .skill-row-lbl { font-size: var(--micro); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-bottom: .7rem; }
   .skill-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
   .skill-chips li {
     font-size: .82rem; line-height: 1.2; color: var(--ink-2);
@@ -460,7 +460,7 @@ const personal = interview.filter(
   .cert-card img { width: 26px; height: 26px; object-fit: contain; margin-bottom: .9rem; filter: grayscale(1) opacity(.55); transition: filter var(--quick) var(--ease); }
   .cert-card:hover img { filter: none; }
   .cert-title { font-weight: 700; font-size: .98rem; }
-  .cert-issuer { margin-top: .25rem; font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+  .cert-issuer { margin-top: .25rem; font-size: var(--micro); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
 
   /* ── outside of work ── */
   .hobby-grid {
@@ -477,7 +477,7 @@ const personal = interview.filter(
     transition: border-color var(--quick) var(--ease), background var(--quick) var(--ease), transform var(--quick) var(--ease);
   }
   .hobby-tile:hover { border-color: var(--edge); background: #fff; transform: translateY(-2px); }
-  .hobby-tile span { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); text-align: center; }
+  .hobby-tile span { font-size: var(--micro); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); text-align: center; }
   .hobby-tile:hover span { color: var(--ink); }
   :global(.hb-mark) { width: 22px; height: 22px; color: var(--ink-2); }
 
@@ -490,7 +490,7 @@ const personal = interview.filter(
     padding: clamp(1.1rem, 2.5vw, 1.4rem); border: 1px solid var(--line); border-radius: 2px; background: var(--paper-2);
   }
   .now-mark { display: grid; place-items: center; flex: 0 0 auto; width: 38px; height: 38px; border-radius: 2px; background: var(--paper); }
-  .now-cat { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .now-cat { font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
   .now-title { font-family: var(--read); font-size: 1.08rem; margin-top: .3rem; }
   .now-sub { font-size: .85rem; color: var(--ink-2); margin-top: .25rem; }
 
@@ -525,7 +525,7 @@ const personal = interview.filter(
   .about-end h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 20ch; }
   .about-end .sec-lede { margin-top: 1rem; }
   .ae-side { padding-top: 1.4rem; border-top: 1px solid var(--line); }
-  .ae-k { font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .ae-k { font-size: var(--micro); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
   .ae-mail { margin-top: .6rem; font-size: clamp(1.05rem, 2.4vw, 1.5rem); font-weight: 700; letter-spacing: -.03em; word-break: break-word; }
   .ae-mail a { display: inline-block; padding-block: .35rem; border-bottom: 2.5px solid var(--accent); transition: color var(--quick) var(--ease); }
   .ae-mail a:hover { color: var(--accent); }

@@ -148,6 +148,12 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       --read: 'Literata', Georgia, serif;
       --pad: clamp(1.2rem, 5vw, 4.5rem);
       --measure: 1240px;
+      /* The micro-label: kickers, chips, table headings, field names. Was a
+         hard-coded .62rem in twenty places, which is 9.9px, and these are all
+         uppercase with wide tracking so they read smaller again than that. At
+         .7rem they match `.sec-k`, the one micro-label that was always legible
+         on a phone. One token now, so the floor cannot drift back down. */
+      --micro: .7rem;
       /* One easing and one rhythm for everything that moves, so the whole
          site feels like it was tuned by the same hand. */
       --ease: cubic-bezier(.22, 1, .36, 1);
@@ -280,7 +286,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     }
 
     .status-chip {
-      font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
       padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); border-radius: 2px;
     }
     .st-live { color: var(--live); }
@@ -314,7 +320,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
     .record { width: 100%; border-collapse: collapse; font-size: .9rem; }
     .record th, .record td { text-align: left; padding: .72rem .6rem; border-bottom: 1px solid var(--line); }
     .record th:first-child, .record td:first-child { padding-left: 0; }
-    .record thead th { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
+    .record thead th { font-size: var(--micro); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
     .record tbody tr { transition: background var(--quick) var(--ease); }
     .record tbody tr:hover { background: var(--paper-2); }
     .rc-when { white-space: nowrap; font-weight: 600; color: var(--accent); }

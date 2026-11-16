@@ -327,7 +327,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
        with the content rather than floating off on its own. */
     right: max(var(--pad), calc((100vw - var(--measure)) / 2 + var(--pad)));
     display: flex; align-items: center; gap: .6rem;
-    font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--dim-dark);
+    font-size: var(--micro); letter-spacing: .2em; text-transform: uppercase; color: var(--dim-dark);
   }
   /* Two passes, not forever: 4.8s keeps it under the five seconds at which
      moving content needs a control of its own, and it has done its job by
@@ -360,13 +360,13 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
 
   .w-top { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin-bottom: .7rem; }
   .w-n { font-size: .82rem; font-weight: 700; color: var(--faint); letter-spacing: .06em; }
-  .w-status { font-size: .62rem; font-weight: 700; letter-spacing: .14em; padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); border-radius: 2px; }
+  .w-status { font-size: var(--micro); font-weight: 700; letter-spacing: .14em; padding: .2rem .5rem; border: 1px solid currentColor; color: var(--faint); border-radius: 2px; }
   .st-live { color: var(--live); }
   /* Two tags, same box: what kind of work it was, then the industry it was
      built for. The industry is the one a reader is scanning for, so it takes
      the accent and the kind sits back in neutral. */
   .w-kind, .w-field {
-    font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
     padding: .2rem .5rem; border-radius: 2px;
   }
   .w-kind { background: var(--paper-2); color: var(--ink-2); }
@@ -374,7 +374,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   .work h3 { font-size: clamp(1.25rem, 3vw, 1.9rem); max-width: 22ch; }
 
   .w-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: .9rem; margin: 1.2rem 0; padding: .95rem 0; border-block: 1px solid var(--line); }
-  .w-meta dt { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
+  .w-meta dt { font-size: var(--micro); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
   .w-meta dd { font-size: .88rem; margin-top: .15rem; }
 
   .w-sum { font-family: var(--read); color: var(--ink-2); max-width: 58ch; }
@@ -421,7 +421,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
     display: flex; align-items: center; justify-content: space-between; gap: .6rem;
     padding: .42rem .65rem; background: var(--paper-2); border-bottom: 1px solid var(--line);
   }
-  .lt-label { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .lt-label { font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
   .lt-dots { display: flex; gap: .3rem; }
   .lt-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--edge); opacity: .55; }
   .lt-view { overflow: hidden; }
@@ -442,7 +442,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   .ops { background: #0e0c0b; color: #f0ead6; border-radius: 6px; overflow: hidden; }
   .ops-band {
     background: #DA291C; color: #fff; padding: .5rem .9rem;
-    font-size: .62rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    font-size: var(--micro); font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
   }
   .ops-stats { display: grid; gap: .9rem; padding: 1.3rem .9rem 1rem; }
   .ops-stats > div { display: flex; align-items: baseline; gap: .6rem; padding-bottom: .9rem; border-bottom: 1px solid rgba(240,234,214,.1); }
@@ -483,7 +483,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   .mq-head { display: flex; justify-content: flex-end; margin-bottom: .7rem; min-height: 44px; }
   .mq-toggle {
     display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: .4rem .7rem;
-    font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    font-size: var(--micro); font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
     color: var(--ink-2); border: 1px solid var(--line); border-radius: 2px; background: var(--paper);
     transition: border-color var(--quick) var(--ease), color var(--quick) var(--ease);
   }
@@ -519,7 +519,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   .end h2 { font-size: clamp(1.8rem, 5vw, 3.2rem); max-width: 24ch; }
   .end-copy p { margin-top: 1rem; color: #a3a3a0; max-width: 48ch; font-family: var(--read); }
   .end-side { padding-top: 1.4rem; border-top: 1px solid rgba(244,244,243,.22); }
-  .end-k { font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--dim-dark); }
+  .end-k { font-size: var(--micro); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--dim-dark); }
   .end-mail { margin-top: .6rem; font-size: clamp(1.05rem, 2.4vw, 1.5rem); font-weight: 600; letter-spacing: -.03em; word-break: break-word; }
   /* inline-block + padding so the hit area clears the 24px minimum even
      at the smallest type size this link ever renders at. */

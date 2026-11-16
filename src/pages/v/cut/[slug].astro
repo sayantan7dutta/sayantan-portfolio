@@ -543,7 +543,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
     display: flex; align-items: center; justify-content: space-between;
     padding: .5rem .8rem; border-bottom: 1px solid #272724; background: #1b1b18;
   }
-  .hl-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8a8a86; }
+  .hl-label { font-size: var(--micro); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8a8a86; }
   .hl-dots { display: flex; gap: .3rem; }
   .hl-dots span { width: 7px; height: 7px; border-radius: 50%; background: #35352f; }
   .hl-view { background: #fff; }
@@ -557,7 +557,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
      This one does NOT bleed: clipping an image is an editorial decision,
      clipping a sentence is a bug. */
   .hero-ops { border: 1px solid #272724; border-radius: 8px; padding: clamp(1.2rem, 2.6vw, 1.8rem); background: #121210; }
-  .hops-band { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #6fae9b; }
+  .hops-band { font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #6fae9b; }
   .hops-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.6rem, 2vw, 1.2rem); margin: 1.1rem 0; }
   .hops-stats dt { font-size: clamp(1.1rem, 2.4vw, 1.5rem); font-weight: 800; color: #f4f4f3; letter-spacing: -.02em; }
   .hops-stats dd { font-size: .76rem; color: #a3a3a0; margin-top: .2rem; }
@@ -589,7 +589,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .crumb .sep { margin: 0 .2rem; }
   /* The discipline tag, sized to match the status chip beside it. */
   .kind-chip, .field-chip {
-    font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
     padding: .2rem .5rem; border-radius: 2px;
   }
   .kind-chip { background: rgba(244,244,243,.13); color: #e8e8e5; }
@@ -602,7 +602,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   /* ── at a glance ── */
   .case-facts { max-width: var(--measure); margin: 0 auto; padding: clamp(2rem, 5vw, 3rem) var(--pad) 0; }
   .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.2rem; margin: 0 0 clamp(1.4rem, 3vw, 2rem); padding-bottom: clamp(1.2rem, 3vw, 1.6rem); border-bottom: 1px solid var(--line); }
-  .glance dt { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
+  .glance dt { font-size: var(--micro); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); }
   .glance dd { font-size: .92rem; margin-top: .2rem; }
 
   /* Two columns of scope on wide screens: it is a list of facts, not prose,
@@ -638,7 +638,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .ba { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 1.8rem); margin-top: clamp(2rem, 5vw, 3rem); }
   .ba figure { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .ba-tag {
-    margin-bottom: .9rem; font-size: .66rem; font-weight: 700;
+    margin-bottom: .9rem; font-size: var(--micro); font-weight: 700;
     letter-spacing: .12em; text-transform: uppercase;
   }
   .ba-tag.is-before { color: var(--faint); }
@@ -737,16 +737,16 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .bp-scroll { overflow-x: auto; }
   .bp-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   .bp-grid { display: grid; grid-template-columns: 11rem repeat(var(--cols, 4), minmax(9.5rem, 1fr)); gap: .4rem; min-width: 46rem; }
-  .bp-corner { align-self: end; padding: .5rem .2rem; font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .bp-corner { align-self: end; padding: .5rem .2rem; font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
   .bp-stage { padding: .7rem .8rem; background: var(--paper-2); border-top: 2px solid var(--accent); font-weight: 700; font-size: .95rem; }
-  .bp-num { display: block; font-size: .62rem; font-weight: 700; letter-spacing: .12em; color: var(--accent); margin-bottom: .2rem; }
+  .bp-num { display: block; font-size: var(--micro); font-weight: 700; letter-spacing: .12em; color: var(--accent); margin-bottom: .2rem; }
   .bp-vis { grid-column: 1 / -1; margin: .5rem 0; padding-top: .5rem; border-top: 1px dashed var(--edge);
-    font-size: .6rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
+    font-size: var(--micro); font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
   .bp-layer { padding: .7rem .2rem; }
   .bp-layer b { display: block; font-family: var(--read); font-size: 1rem; }
-  .bp-layer span { font-size: .58rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
+  .bp-layer span { font-size: var(--micro); font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
   .bp-cell { padding: .7rem .8rem; background: var(--paper-2); border-left: 2px solid var(--line); font-size: .85rem; color: var(--ink-2); }
-  .bp figcaption { margin-top: .9rem; font-size: .62rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
+  .bp figcaption { margin-top: .9rem; font-size: var(--micro); font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
 
   /* The hairlines are drawn by each card, not by a line-coloured background
      showing through the gaps. A grid of five in threes has an unfilled sixth
@@ -784,7 +784,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   }
   .personas li:hover { transform: translateY(-3px); box-shadow: 0 18px 30px -22px rgba(0,0,0,.4); }
   .pr-top { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; }
-  .pr-role { font-size: .6rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .pr-role { font-size: var(--micro); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
   .pr-age { font-size: .74rem; color: var(--faint); }
   .personas h3 { font-size: .98rem; font-weight: 700; margin: .6rem 0 .45rem; letter-spacing: -.015em; }
   .pr-note { font-family: var(--read); font-size: .88rem; color: var(--ink-2); }
@@ -796,7 +796,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .tbl { width: 100%; border-collapse: collapse; min-width: 680px; }
   .tbl th, .tbl td { text-align: left; vertical-align: top; padding: .95rem .9rem; border-bottom: 1px solid var(--line); }
   .tbl th:first-child, .tbl td:first-child { padding-left: 0; }
-  .tbl thead th { font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
+  .tbl thead th { font-size: var(--micro); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); border-bottom: 1.5px solid var(--ink); }
   .tbl tbody tr { transition: background var(--quick) var(--ease); }
   .tbl tbody tr:hover { background: var(--paper-2); }
   .tbl tbody th { font-weight: 700; white-space: nowrap; color: var(--accent); width: 1%; }
@@ -809,7 +809,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .cmp { padding: clamp(1.1rem, 2.4vw, 1.6rem); border: 1px solid var(--line); }
   .cmp-before { background: var(--paper-2); }
   .cmp-after { background: var(--paper); border-color: var(--accent); }
-  .cmp h3 { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: .9rem; }
+  .cmp h3 { font-size: var(--micro); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: .9rem; }
   .cmp-before h3 { color: var(--faint); }
   .cmp-after h3 { color: var(--accent); }
   .cmp li { font-size: .9rem; padding: .45rem 0 .45rem 1.1rem; position: relative; border-bottom: 1px solid var(--line); }
