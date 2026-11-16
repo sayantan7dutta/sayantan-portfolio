@@ -14,6 +14,11 @@ export type Block =
   | { kind: 'journey'; cols: [string, string, string]; rows: [string, string, string][] }
   /** Research personas, grouped by role. */
   | { kind: 'personas'; items: { role: string; age: string; name: string; note: string }[] }
+  /** An ordered process: numbered rows rather than a grid with a hole in it. */
+  | { kind: 'steps'; items: { t: string; b: string }[] }
+  /** A service blueprint: the human and digital layers across a lifecycle. */
+  | { kind: 'blueprint'; axis: string; stages: string[]; caption?: string;
+      layers: { name: string; role: string; divider?: string; cells: string[] }[] }
   /** The figures a case ends on. */
   | { kind: 'stats'; items: { n: string; l: string }[] }
   /** A plain comparison table. */
@@ -300,13 +305,33 @@ export const cutCases: CutCase[] = [
           'Five stages, run in order, none of them skippable. The one I almost compressed under timeline pressure turned out to be the most valuable work on the project.',
         ],
         block: {
-          kind: 'cards',
+          kind: 'steps',
           items: [
             { t: 'Domain research and stakeholder interviews', b: 'In-depth interviews with safety professionals to understand the HAZOP study lifecycle, from identifying nodes through to tracking action items. The finding that shaped everything: safety engineers spent most of a study on data entry and format compliance, not on the safety analysis itself. The tool was meant to support the thinking, not replace it.' },
             { t: 'A service blueprint of the full system', b: 'I mapped the human and digital layers of a study: the facilitator, the scribe, the engineers, the compliance officer. A study runs on handoffs between people, so the platform had to support those handoffs, not only individual tasks. The blueprint shaped the information architecture directly.' },
             { t: 'Information architecture and user flows', b: 'Navigation structured around the four stages of a study, identify, assess, mitigate, report, so users always knew where they were and what came next. Progressive disclosure throughout: experienced engineers could go deep while new users were not overwhelmed on first entry.' },
             { t: 'A design system for compliance environments', b: 'Components, states, content patterns and accessibility standards, giving the engineering team a foundation to expand on without reintroducing inconsistency. The visual language stayed deliberately calm. In a compliance environment, trust comes from predictability, not delight.' },
             { t: 'Prototype, test, iterate', b: 'High-fidelity prototypes tested with safety professionals. The main usability insight: during long, multi-node studies, users needed to understand the system status at every step. I refined the progress indicators, state labels and confirmation patterns from that feedback.' },
+          ],
+        },
+      },
+      {
+        kicker: 'The domain',
+        heading: 'A HAZOP lifecycle, mapped end to end',
+        body: [
+          'Before any of the design, I had to be able to describe a hazard study the way the people running one would. This blueprint is that understanding written down: who does what at each stage, what the platform does underneath them, and what has to come out of it for a regulator.',
+          'It is the artefact that made the rest of the project possible. Every navigation decision, every default and every export in HAZOP Edge traces back to a cell in this grid.',
+        ],
+        block: {
+          kind: 'blueprint',
+          axis: 'HAZOP lifecycle →',
+          stages: ['Identify', 'Assess', 'Mitigate', 'Report'],
+          caption: 'Service blueprint: the human and digital layers of a single HAZOP study',
+          layers: [
+            { name: 'Facilitator & Scribe', role: 'Frontstage', cells: ['Lead the node walkthrough, capture deviations', 'Guide the risk-scoring discussion', 'Record agreed safeguards and actions', 'Review and sign off the completed study'] },
+            { name: 'Process Engineers', role: 'Frontstage', cells: ['Surface failure modes from domain knowledge', 'Judge severity and likelihood per scenario', 'Propose technical mitigations', 'Verify every action has a clear owner'] },
+            { name: 'HAZOP Edge', role: 'Digital layer', divider: 'Line of visibility · above, what people do · below, what the platform does', cells: ['Structured node and guideword entry', 'Risk matrix with live severity and probability scoring', 'Action tracker with owners and status', 'One-click, standardised compliance export'] },
+            { name: 'Compliance Output', role: 'Backstage', cells: ['Audit trail begins', 'Scores logged against safety standards', 'Action register kept current', 'Regulator-ready report, every time'] },
           ],
         },
       },
@@ -650,7 +675,7 @@ export const cutCases: CutCase[] = [
           'I interviewed researchers and designers separately before proposing any solution. The order mattered: diagnosis first, then structure, then iteration with the team in the loop.',
         ],
         block: {
-          kind: 'cards',
+          kind: 'steps',
           items: [
             { t: 'Interview both sides', b: 'Separate sessions with researchers and designers to surface real friction without cross-contamination or bias. As someone who had worked both sides I knew the questions to ask, and I spoke to more than one person in each group so no single perspective skewed the findings.' },
             { t: 'Map the pain, not just the symptoms', b: 'The duplication and rework were symptoms. The real problem was inaccessible structure and no shared language between disciplines. Naming that distinction changed what we chose to fix.' },
@@ -806,7 +831,7 @@ export const cutCases: CutCase[] = [
           'Four stages, each one narrowing the brief rather than decorating it.',
         ],
         block: {
-          kind: 'cards',
+          kind: 'steps',
           items: [
             { t: 'Informal interviews with six diaspora users', b: 'People who regularly send money internationally. Common themes: anxiety about exchange rates and feeling caught at a bad one, frustration that recipients cannot see transfer status without asking, and a wish to save towards shared goals like house repairs or school fees rather than sending ad-hoc amounts.' },
             { t: 'Competitive audit: Wise, Remitly, WorldRemit', b: 'All three treat a transfer as a transactional event with no persistent relationship layer. Rate alerts exist in Wise, but they are basic threshold notifications with no context, no control and no explanation of why the rate matters for this particular transfer. None offer shared savings or direct bill payment as a category.' },
@@ -969,7 +994,7 @@ export const cutCases: CutCase[] = [
           'I led the synthesis, triangulating what participants told us against an evidence base spanning environmental psychology, synthetic biology and inclusive design. Where a focus-group insight and a research finding agreed, we had a firm design principle. Where they diverged, we had a question worth designing into the concept.',
         ],
         block: {
-          kind: 'cards',
+          kind: 'steps',
           items: [
             { t: 'Anchored in 2065', b: 'Speculative design combined with a literature review and primary research. Setting the concept forty years out moved conversations away from “what gadget would you buy” and towards “what should later life feel like”, which is where the useful insight lives.' },
             { t: 'Focus groups across two generations', b: 'Two groups of younger adults aged 20 to 40 in Winchester, and fifteen older adults aged 50 to 80 in Southampton reached through churches and community groups, run as a relaxed afternoon rather than a clinical interview.' },

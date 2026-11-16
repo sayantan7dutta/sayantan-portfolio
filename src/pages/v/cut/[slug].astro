@@ -91,6 +91,24 @@ const img = shots[slug] ?? {};
 
 const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
+/**
+ * Column count for a card grid, chosen so the last row is never a single
+ * orphan. Prefer a count that divides exactly; otherwise the largest that
+ * leaves at least two on the final row. Five cards go three and two, not
+ * four and one.
+ */
+const colsFor = (n: number) =>
+  [4, 3, 2].find((c) => n % c === 0) ?? [4, 3, 2].find((c) => n % c >= 2) ?? 2;
+
+/**
+ * Below about 1000px every grid falls to two columns, which puts the orphan
+ * back on any odd count. Three or five cards stack instead: at that width a
+ * card is wide and short, so a column of them reads fine and a half-empty
+ * final row does not. Seven stay two across, since stacking all seven is the
+ * worse of the two.
+ */
+const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
+
 ---
 
 <Cut
@@ -184,7 +202,10 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
       )}
 
       {sec.block?.kind === 'cards' && (
-        <ol class={sec.block.items.length === 4 ? 'cards cards-4' : 'cards'} data-reveal>
+        <ol
+          class={`cards cards-c${colsFor(sec.block.items.length)} cards-m${midColsFor(sec.block.items.length)}`}
+          data-reveal
+        >
           {sec.block.items.map((c, i) => (
             <li>
               <span class="card-n">{String(i + 1).padStart(2, '0')}</span>
@@ -201,6 +222,44 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
             <li><Image src={logo} alt={sec.alts?.[i] ?? ''} widths={[200, 400]} sizes="150px" loading="lazy" /></li>
           ))}
         </ul>
+      )}
+
+      {/* A sequence reads as rows, not a grid: the steps are ordered, and a
+          grid leaves an empty cell whenever the count is not a multiple of
+          the column count. */}
+      {sec.block?.kind === 'steps' && (
+        <ol class="steps" data-reveal>
+          {sec.block.items.map((st, i) => (
+            <li>
+              <span class="step-n">{String(i + 1).padStart(2, '0')}</span>
+              <div class="step-body">
+                <h3>{st.t}</h3>
+                <p>{st.b}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {sec.block?.kind === 'blueprint' && (
+        <figure class="bp" data-reveal>
+          <div class="bp-scroll" tabindex="0" role="region" aria-label={`${project.short} service blueprint, scrolls horizontally`}>
+            <div class="bp-grid" style={`--cols:${sec.block.stages.length}`}>
+              <div class="bp-corner">{sec.block.axis}</div>
+              {sec.block.stages.map((st, i) => (
+                <div class="bp-stage"><span class="bp-num">{String(i + 1).padStart(2, '0')}</span>{st}</div>
+              ))}
+              {sec.block.layers.map((ly, li) => (
+                <>
+                  {ly.divider && <p class="bp-vis">{ly.divider}</p>}
+                  <div class="bp-layer"><b>{ly.name}</b><span>{ly.role}</span></div>
+                  {ly.cells.map((c) => <div class="bp-cell">{c}</div>)}
+                </>
+              ))}
+            </div>
+          </div>
+          {sec.block.caption && <figcaption>{sec.block.caption}</figcaption>}
+        </figure>
       )}
 
       {sec.block?.kind === 'stats' && (
@@ -433,21 +492,63 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
   .statfig figcaption { margin-top: .8rem; font-size: .9rem; opacity: .88; }
 
   /* ── numbered cards ── */
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: clamp(2rem, 5vw, 2.6rem); }
-  /* Four items auto-fit to three and a straggler between about 880 and 1180.
-     Pinning the count means the row is four or it is two by two, never an
-     orphan. */
-  .cards-4 { grid-template-columns: repeat(2, 1fr); }
-  @media (min-width: 1000px) { .cards-4 { grid-template-columns: repeat(4, 1fr); } }
-  @media (max-width: 520px) { .cards-4 { grid-template-columns: 1fr; } }
-  .cards li { background: var(--paper); padding: clamp(1.2rem, 2.6vw, 1.7rem); transition: background var(--quick) var(--ease); }
+  /* ── ordered steps ── */
+  .steps { margin-top: clamp(2rem, 5vw, 2.6rem); border-top: 1px solid var(--line); }
+  .steps li { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0 clamp(1rem, 3vw, 2rem);
+    padding: clamp(1.3rem, 3vw, 1.8rem) 0; border-bottom: 1px solid var(--line); }
+  .step-n { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); padding-top: .3rem; }
+  .steps h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -.015em; }
+  .steps p { font-family: var(--read); font-size: .95rem; color: var(--ink-2); margin-top: .5rem; max-width: 68ch; }
+  @media (max-width: 560px) { .steps li { grid-template-columns: 1fr; gap: .4rem; } .step-n { padding-top: 0; } }
+
+  /* ── service blueprint ──
+     A real grid, not a picture of one, so it reflows and reads aloud. It
+     scrolls sideways on narrow viewports, so the region is focusable and
+     named for anyone arriving by keyboard. */
+  .bp { margin-top: clamp(2rem, 5vw, 3rem); }
+  .bp-scroll { overflow-x: auto; }
+  .bp-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .bp-grid { display: grid; grid-template-columns: 11rem repeat(var(--cols, 4), minmax(9.5rem, 1fr)); gap: .4rem; min-width: 46rem; }
+  .bp-corner { align-self: end; padding: .5rem .2rem; font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .bp-stage { padding: .7rem .8rem; background: var(--paper-2); border-top: 2px solid var(--accent); font-weight: 700; font-size: .95rem; }
+  .bp-num { display: block; font-size: .62rem; font-weight: 700; letter-spacing: .12em; color: var(--accent); margin-bottom: .2rem; }
+  .bp-vis { grid-column: 1 / -1; margin: .5rem 0; padding-top: .5rem; border-top: 1px dashed var(--edge);
+    font-size: .6rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
+  .bp-layer { padding: .7rem .2rem; }
+  .bp-layer b { display: block; font-family: var(--read); font-size: 1rem; }
+  .bp-layer span { font-size: .58rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
+  .bp-cell { padding: .7rem .8rem; background: var(--paper-2); border-left: 2px solid var(--line); font-size: .85rem; color: var(--ink-2); }
+  .bp figcaption { margin-top: .9rem; font-size: .62rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
+
+  /* The hairlines are drawn by each card, not by a line-coloured background
+     showing through the gaps. A grid of five in threes has an unfilled sixth
+     cell, and under the old method that cell painted itself a solid block of
+     line colour: it read as a card that had failed to load. Drawn per card,
+     the leftover cell is simply the band behind it. */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; margin-top: clamp(2rem, 5vw, 2.6rem); }
+  /* Auto-fit decides the column count from available width, which is how a
+     five-card set ends up four and one. The count is pinned instead, chosen
+     in `colsFor` from how many cards there are. */
+  .cards-m1 { grid-template-columns: 1fr; }
+  .cards-m2 { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1000px) {
+    .cards-c2 { grid-template-columns: repeat(2, 1fr); }
+    .cards-c3 { grid-template-columns: repeat(3, 1fr); }
+    .cards-c4 { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 520px) { .cards-m1, .cards-m2 { grid-template-columns: 1fr; } }
+  .cards li { background: var(--paper); box-shadow: 0 0 0 1px var(--line); padding: clamp(1.2rem, 2.6vw, 1.7rem); transition: background var(--quick) var(--ease); }
   .cards li:hover { background: #fff; }
   .card-n { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); }
   .cards h3 { font-size: 1.02rem; font-weight: 700; margin: .5rem 0 .5rem; letter-spacing: -.015em; }
   .cards p { font-family: var(--read); font-size: .92rem; color: var(--ink-2); }
 
   /* ── personas ── */
-  .personas { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(.9rem, 2vw, 1.3rem); margin-top: clamp(2rem, 5vw, 2.6rem); }
+  /* Pinned rather than auto-fit: four profiles fitted three across between
+     about 700 and 1000px, leaving the fourth alone on its own row. */
+  .personas { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(.9rem, 2vw, 1.3rem); margin-top: clamp(2rem, 5vw, 2.6rem); }
+  @media (min-width: 1000px) { .personas { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 480px) { .personas { grid-template-columns: 1fr; } }
   .personas li {
     border: 1px solid var(--line); border-top: 3px solid var(--accent);
     padding: clamp(1.1rem, 2.4vw, 1.5rem); background: var(--paper);
