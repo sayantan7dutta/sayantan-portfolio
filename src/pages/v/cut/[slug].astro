@@ -32,12 +32,26 @@ import mgSiteTrial from '../../../assets/work/miigenie/site-trial.jpg';
 import hzScenario from '../../../assets/work/hazop/scenario-summary.jpg';
 import hzAnalytics from '../../../assets/work/hazop/analytics-dashboard.jpg';
 import soProducts from '../../../assets/work/soter-software/products.jpg';
+import soHero from '../../../assets/work/soter-software/hero.jpg';
+import soKnowledge from '../../../assets/work/soter-software/knowledge-centre.jpg';
 import apDashboard from '../../../assets/work/api-lifecycle/dashboard.png';
 import apDetails from '../../../assets/work/api-lifecycle/design-details.png';
 import kvVault from '../../../assets/work/kinvault/vault.jpg';
 import kvTransfer from '../../../assets/work/kinvault/smart-transfer.jpg';
+import kvReview from '../../../assets/work/kinvault/review.jpg';
+import kvStatus from '../../../assets/work/kinvault/transfer-status.jpg';
+import kvBillPay from '../../../assets/work/kinvault/bill-pay.jpg';
 import amFamily from '../../../assets/work/amble/family.jpg';
 import amRoutines from '../../../assets/work/amble/routines.jpg';
+import amFuture from '../../../assets/work/amble/future.jpg';
+import amBedroom from '../../../assets/work/amble/bedroom.jpg';
+import amLaundry from '../../../assets/work/amble/laundry.jpg';
+import amAirFilter from '../../../assets/work/amble/air-filter.jpg';
+import amPoster1 from '../../../assets/work/amble/poster-1.jpg';
+import amPoster2 from '../../../assets/work/amble/poster-2.jpg';
+import amRodd from '../../../assets/work/amble/rodd.png';
+import amWsa from '../../../assets/work/amble/wsa.png';
+import amUos from '../../../assets/work/amble/uos.png';
 
 /** Per-case image slots, keyed by the `shot` names used in cut-cases.ts. */
 const shots: Record<string, Record<string, any>> = {
@@ -51,10 +65,15 @@ const shots: Record<string, Record<string, any>> = {
     /* The marketing site, in browser shape rather than phone shape. */
     web: [mgSiteHero, mgSiteHow, mgSiteTrial],
   },
-  hazop: { wide: hzScenario, wide2: hzAnalytics, wide3: soProducts },
+  hazop: { wide: hzScenario, wide2: hzAnalytics, web: [soHero, soProducts, soKnowledge] },
   'api-lifecycle': { wide: apDashboard, wide2: apDetails },
-  kinvault: { wide: kvVault, wide2: kvTransfer },
-  amble: { wide: amFamily, wide2: amRoutines },
+  kinvault: { wide: kvVault, wide2: kvTransfer, trio: [kvReview, kvStatus, kvBillPay] },
+  amble: {
+    wide: amFamily, wide2: amRoutines,
+    scenes: [amFuture, amBedroom, amLaundry, amAirFilter],
+    posters: [amPoster1, amPoster2],
+    partners: [amRodd, amWsa, amUos],
+  },
   'sherwin-williams': {},
 };
 
@@ -137,12 +156,12 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
       {/* One, two or three phones, each with its own caption. The caption is
           the accessible description, so the image steps out of the way. */}
-      {['trio', 'pair', 'solo', 'web'].includes(sec.shot ?? '') && img[sec.shot!] && (
-        <div class={sec.shot === 'web' ? 'trio webrow' : 'trio'} data-reveal style={`--n:${img[sec.shot!].length}`}>
+      {['trio', 'pair', 'solo', 'web', 'scenes', 'posters'].includes(sec.shot ?? '') && img[sec.shot!] && (
+        <div class={`trio ${['web', 'scenes', 'posters'].includes(sec.shot!) ? 'landrow row-' + sec.shot : ''}`} data-reveal style={`--n:${img[sec.shot!].length}`}>
           {img[sec.shot!].map((t: any, i: number) => (
             <figure style={`--d:${i * 80}ms`}>
               <div class="plate">
-                <Image src={t} alt={sec.alts?.[i] ?? `A screen from ${project.short}`} widths={sec.shot === 'web' ? [400, 800] : [320, 640]} sizes={sec.shot === 'web' ? '330px' : '250px'} loading="lazy" />
+                <Image src={t} alt={sec.alts?.[i] ?? `A screen from ${project.short}`} widths={sec.shot === 'trio' || sec.shot === 'pair' || sec.shot === 'solo' ? [320, 640] : [420, 840]} sizes={sec.shot === 'web' ? '330px' : sec.shot === 'posters' ? '500px' : '260px'} loading="lazy" />
               </div>
               {sec.caps?.[i] && <figcaption>{sec.caps[i]}</figcaption>}
             </figure>
@@ -171,6 +190,14 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
             </li>
           ))}
         </ol>
+      )}
+
+      {sec.shot === 'partners' && img.partners && (
+        <ul class="partners" role="list" data-reveal aria-label="Project partners">
+          {img.partners.map((logo: any, i: number) => (
+            <li><Image src={logo} alt={sec.alts?.[i] ?? ''} widths={[200, 400]} sizes="150px" loading="lazy" /></li>
+          ))}
+        </ul>
       )}
 
       {sec.block?.kind === 'stats' && (
@@ -370,9 +397,24 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
      the image: these captures are not all the same height, and an `auto`
      ratio on a lazy image reserves nothing, so the row shifted as each one
      arrived. A fixed plate gives three matching tiles and no shift. */
-  .webrow { grid-template-columns: repeat(var(--n, 3), minmax(0, 330px)); }
-  .webrow .plate { border-radius: 6px; aspect-ratio: 16 / 10; }
-  .webrow .plate img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: top center; }
+  /* Landscape rows: browser captures, concept scenes and exhibition posters.
+     The ratio lives on the plate so a lazy image reserves its space and a set
+     of mixed-height sources still lines up. */
+  .landrow .plate { border-radius: 6px; }
+  .landrow .plate img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: center; }
+  .row-web { grid-template-columns: repeat(var(--n, 3), minmax(0, 330px)); }
+  .row-web .plate { aspect-ratio: 16 / 10; }
+  .row-web .plate img { object-position: top center; }
+  .row-scenes { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 820px; }
+  .row-scenes .plate { aspect-ratio: 16 / 9; }
+  .row-posters { grid-template-columns: repeat(2, minmax(0, 320px)); }
+  .row-posters .plate { aspect-ratio: 3 / 4; }
+  @media (max-width: 620px) { .row-scenes, .row-posters { grid-template-columns: 1fr; max-width: 320px; } }
+
+  /* Partner marks: greyed until hovered, like the tool grid on About. */
+  .partners { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(1.4rem, 4vw, 3rem); margin-top: clamp(2rem, 5vw, 2.6rem); }
+  .partners img { width: auto; max-width: 150px; max-height: 54px; object-fit: contain; filter: grayscale(1) opacity(.55); transition: filter var(--quick) var(--ease); }
+  .partners li:hover img { filter: none; }
   @media (max-width: 720px) { .ba, .trio { grid-template-columns: 1fr; max-width: 280px; } }
   .ba figcaption { margin-top: .8rem; font-size: .82rem; color: var(--faint); max-width: 34ch; }
   .ba figcaption b { color: var(--ink); font-weight: 700; }

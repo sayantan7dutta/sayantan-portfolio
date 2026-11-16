@@ -337,9 +337,17 @@ export const cutCases: CutCase[] = [
           'The old site read like a brochure. Its information architecture did not match how engineering buyers evaluate process-safety software, so visitors bounced before they understood the product, and every content change needed a developer, so marketing could not keep up with the roadmap.',
           'I rebuilt it around six sections, each answering one question a buyer actually arrives with, and organised the products page by the four people who touch a study. I hand-built every page in Wix, so the team was left with a site they can update without a developer.',
         ],
-        shot: 'wide3',
-        caption: 'Products, organised by the four people who touch a study',
-        alt: 'The rebuilt products page, with HAZOP Edge described separately for facilitators and scribes, team members, project managers and senior management.',
+        shot: 'web',
+        caps: [
+          'Home: clarity to prevent major accidents, positioned above the fold',
+          'Products: HAZOP Edge organised by the four people who touch a study',
+          'Knowledge Centre: a publishing surface owned by marketing, not engineering',
+        ],
+        alts: [
+          'The rebuilt Soter Software home page, leading on preventing major accidents rather than listing features.',
+          'The products page, with HAZOP Edge described separately for facilitators and scribes, team members, project managers and senior management.',
+          'The Knowledge Centre, a library of safety articles the marketing team can publish to without a developer.',
+        ],
         block: {
           kind: 'cards',
           items: [
@@ -449,6 +457,14 @@ export const cutCases: CutCase[] = [
         },
       },
       {
+        kicker: 'Leadership',
+        heading: 'From doing the work to making it possible for others',
+        body: [
+          'The shift over three years was from producing the design to making it possible for other people to produce it: owning the system rather than the screens, and the decisions rather than the deliverables.',
+          'By the end I was spending more time on systems, process and cross-functional alignment than on hands-on design. That led directly to the Sherwin-Williams design operations engagement. I had already been doing the job before it had the title.',
+        ],
+      },
+      {
         kicker: 'Outcome',
         heading: 'Three teams shipping consistently, with no bottleneck in the middle',
         body: [
@@ -494,6 +510,13 @@ export const cutCases: CutCase[] = [
     sections: [
       {
         kicker: 'Context',
+        heading: 'One of America’s largest paint brands, and a complex digital portfolio',
+        body: [
+          'Sherwin-Williams runs one of the largest digital portfolios in the paint industry: consumer colour tools, contractor apps, e-commerce and internal coatings systems. The research and design team supporting all of it had grown faster than its infrastructure.',
+        ],
+      },
+      {
+        kicker: 'The problem',
         heading: 'A team of 20+ with almost no shared infrastructure',
         body: [
           'Research and design assets lived in personal OneDrive folders and scattered Teams channels. Folders existed, but were inconsistent, unlabelled and constantly duplicated.',
@@ -634,6 +657,41 @@ export const cutCases: CutCase[] = [
           'The creative direction, “The Financial Atelier”, pairs a deep heritage navy with a pearl surface and an emerald accent for growth. Generous whitespace and vault-grade security cues make a fast app feel as considered and trustworthy as a private bank.',
         ],
       },
+      {
+        kicker: 'Design process',
+        heading: 'Research-led, prototype-validated',
+        body: [
+          'The high-fidelity prototype carried the core send-money journey end to end, from the family dashboard through to a tracked transfer and a bill paid directly at the other end. Each screen had to answer the anxiety that sits at that step rather than simply move the flow along.',
+        ],
+        shot: 'trio',
+        caps: [
+          'Review: the rate, the fee and what actually lands, before anything is sent',
+          'Status: where the money is, in plain steps, so nobody has to ask',
+          'Paying the bill directly, so the sender sees it cleared rather than just sent',
+        ],
+        alts: [
+          'The review screen: sending £500 to Mom at 106.50 rupees to the pound, zero fee, and ₹53,250 shown as what the recipient gets, above a confirm and send button.',
+          'The transfer status screen: initiated, arriving in about two hours, with three steps showing funds secured, conversion in progress and deposit pending, plus a reference and a share receipt button.',
+          'The pay a bill abroad screen: categories for electricity, mobile, healthcare and tuition, popular providers, and ₹12,500 shown as £116.82 with no fee and instant arrival.',
+        ],
+      },
+      {
+        kicker: 'What I would measure',
+        heading: 'The bet each feature makes, and the test for it',
+        body: [
+          'This is a concept, so there are no live results to report, and I am not going to put invented percentages on a product nobody has used. What I can be specific about is the bet each feature makes and the metric I would test it against.',
+        ],
+        block: {
+          kind: 'journey',
+          cols: ['Measure', 'The bet', 'The test'],
+          rows: [
+            ['Send-flow completion', 'Plain-language rate triggers remove the anxiety that makes people abandon a transfer.', 'Completion rate, before against after.'],
+            ['“Where is my transfer?” contacts', 'Shared visibility removes the need to ask.', 'Inbound status queries per hundred transfers.'],
+            ['30-day repeat transfers', 'The relationship layer brings people back.', 'Repeat rate against a transactional baseline.'],
+          ],
+        },
+        pull: 'The value of this project is the reasoning, not the numbers.',
+      },
     ],
     reflection: {
       heading: 'What this project taught me',
@@ -712,6 +770,21 @@ export const cutCases: CutCase[] = [
         pull: '“Plants can give emotional support in a way that animals or humans can’t.” And, from another participant: “I still like to do my own shopping. I want to go. I don’t like having a delivery.”',
       },
       {
+        kicker: 'Design process',
+        heading: 'Research-through-design, end to end',
+        body: [
+          'I led the synthesis, triangulating what participants told us against an evidence base spanning environmental psychology, synthetic biology and inclusive design. Where a focus-group insight and a research finding agreed, we had a firm design principle. Where they diverged, we had a question worth designing into the concept.',
+        ],
+        block: {
+          kind: 'cards',
+          items: [
+            { t: 'Anchored in 2065', b: 'Speculative design combined with a literature review and primary research. Setting the concept forty years out moved conversations away from “what gadget would you buy” and towards “what should later life feel like”, which is where the useful insight lives.' },
+            { t: 'Focus groups across two generations', b: 'Two groups of younger adults aged 20 to 40 in Winchester, and fifteen older adults aged 50 to 80 in Southampton reached through churches and community groups, run as a relaxed afternoon rather than a clinical interview.' },
+            { t: 'From insight to five domains', b: 'Each domain answered a specific, evidenced need rather than showcasing a technology. The test for every feature was the same: does this support independence, or quietly undermine it.' },
+          ],
+        },
+      },
+      {
         kicker: 'My role',
         heading: 'Leading a multidisciplinary team through ambiguity',
         body: [
@@ -755,6 +828,26 @@ export const cutCases: CutCase[] = [
         },
       },
       {
+        kicker: 'The concept, in scenes',
+        heading: 'Care, woven into the home',
+        body: [
+          'The team visualised Amble through a brand film and a set of concept scenes, hand-drawn growth layered over real domestic spaces. The illustration style was a deliberate choice: warm and sketched, never the cold render of a tech product.',
+        ],
+        shot: 'scenes',
+        caps: [
+          'The premise: by 2065, the way we live at home could look completely different',
+          'Bioluminescence and rhythmic light supporting rest and sleep',
+          'Domestic utility: quiet help with the everyday tasks people would rather not think about',
+          'The wearable extension: clean air and a sense of calm, carried beyond the home',
+        ],
+        alts: [
+          'A domestic interior with illustrated growth drawn through it, showing how different a home could look by 2065.',
+          'A bedroom lit by soft bioluminescence, the plant system supporting rest.',
+          'A utility space with the plant system drawn into it, handling everyday chores.',
+          'The wearable module, a portable air-filtering extension carried outside the home.',
+        ],
+      },
+      {
         kicker: 'The brand',
         heading: 'A brand that feels alive, not engineered',
         body: [
@@ -770,6 +863,21 @@ export const cutCases: CutCase[] = [
           'Amble was shown to the public as part of “Tender Interbeing: The Future of Design with Empathy” at the London Design Festival in September 2025, alongside industry.',
           'Translating seven months of research into an exhibition was a design problem of its own: two posters carrying the full argument, the concept, the evidence and the rationale, condensed to what a visitor can absorb in a single pass.',
         ],
+        shot: 'posters',
+        caps: ['Exhibition poster: the concept and brand overview', 'Exhibition poster: product features and the evidence base'],
+        alts: [
+          'The first exhibition poster, carrying the concept and the brand overview.',
+          'The second exhibition poster, carrying the product features and the evidence behind them.',
+        ],
+      },
+      {
+        kicker: 'Project partners',
+        heading: 'In partnership with',
+        body: [
+          'A Global Smart Lab live project at the Winchester School of Art, University of Southampton, with Rodd Design Studio. Team Gen2065: Nysargi Giridhar Karnam, Rhea D’Silva, Smiti Baraskar and Sayantan Dutta, supervised by Dr Shan Wang and Dr Angelina Pan, with creative guidance from Ben Davies.',
+        ],
+        shot: 'partners',
+        alts: ['Rodd Design Studio', 'Winchester School of Art', 'University of Southampton'],
       },
     ],
     reflection: {
