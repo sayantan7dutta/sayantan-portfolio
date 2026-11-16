@@ -124,13 +124,13 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
         <div class="ba" data-reveal>
           <figure>
             <p class="ba-tag is-before">Before · the build as I found it</p>
-            <div class="plate dim"><Image src={img.before} alt="The home screen before the redesign" widths={[320, 640]} sizes="280px" /></div>
-            <figcaption>Dark tiles, little warmth, and no hierarchy guiding the eye to the main voice action.</figcaption>
+            <div class="ba-shot"><Image src={img.before} alt="The home screen before the redesign" widths={[260, 520]} sizes="220px" /></div>
+            <figcaption>The screens worked, but flat and generic: dark tiles, little warmth, and no hierarchy guiding the eye to the main voice action</figcaption>
           </figure>
           <figure>
             <p class="ba-tag is-after">After · the designed system</p>
-            <div class="plate"><Image src={img.after} alt="The home screen after the redesign" widths={[320, 640]} sizes="280px" /></div>
-            <figcaption>Warm cream and deep teal, large type, and one clear voice action.</figcaption>
+            <div class="ba-shot"><Image src={img.after} alt="The home screen after the redesign" widths={[260, 520]} sizes="220px" /></div>
+            <figcaption>Warm cream and deep teal, large type, one clear voice action, help and reassurance held calmly at the foot</figcaption>
           </figure>
         </div>
       )}
@@ -162,7 +162,7 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
       )}
 
       {sec.block?.kind === 'cards' && (
-        <ol class="cards" data-reveal>
+        <ol class={sec.block.items.length === 4 ? 'cards cards-4' : 'cards'} data-reveal>
           {sec.block.items.map((c, i) => (
             <li>
               <span class="card-n">{String(i + 1).padStart(2, '0')}</span>
@@ -329,15 +329,26 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
   .plate img { width: 100%; display: block; aspect-ratio: 788 / 1778; object-fit: cover; object-position: top center; }
   .plate:hover { transform: translateY(-5px); box-shadow: 0 34px 56px -30px rgba(0,0,0,.55); }
   .dim { filter: saturate(.45) brightness(.9); }
-  .ba { display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); gap: clamp(1.4rem, 4vw, 3rem); margin-top: clamp(2rem, 5vw, 3rem); }
-  /* The two states are labelled above the phone, not left to a caption
-     underneath, so the comparison reads before either screen does. */
+  /* Two equal columns, each a padded card with the phone floated in the
+     middle of it at a little over half the width. The air around the screen
+     is the point: crowding them makes the comparison feel like evidence
+     rather than a before and an after. */
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 1.8rem); margin-top: clamp(2rem, 5vw, 3rem); }
+  .ba figure { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .ba-tag {
-    display: inline-block; margin-bottom: .7rem; padding: .25rem .6rem; border-radius: 2px;
-    font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: .9rem; font-size: .66rem; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
   }
-  .ba-tag.is-before { background: var(--paper-2); color: var(--ink-2); }
-  .ba-tag.is-after { background: rgba(21, 89, 74, .1); color: var(--accent); }
+  .ba-tag.is-before { color: var(--faint); }
+  .ba-tag.is-after { color: var(--accent); }
+  .ba-shot {
+    width: 100%; display: flex; justify-content: center;
+    padding: clamp(1.2rem, 3vw, 1.9rem) 0;
+    background: var(--paper-2); border: 1px solid var(--line); border-radius: 6px;
+  }
+  .ba-shot img { width: 58%; max-width: 220px; height: auto; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.28); }
+  .ba figcaption { margin-top: .9rem; max-width: 34ch; }
+  @media (max-width: 620px) { .ba { grid-template-columns: 1fr; } }
 
   /* The figures a case ends on. */
   .statrow {
@@ -378,6 +389,12 @@ const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
   /* ── numbered cards ── */
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: clamp(2rem, 5vw, 2.6rem); }
+  /* Four items auto-fit to three and a straggler between about 880 and 1180.
+     Pinning the count means the row is four or it is two by two, never an
+     orphan. */
+  .cards-4 { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1000px) { .cards-4 { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 520px) { .cards-4 { grid-template-columns: 1fr; } }
   .cards li { background: var(--paper); padding: clamp(1.2rem, 2.6vw, 1.7rem); transition: background var(--quick) var(--ease); }
   .cards li:hover { background: #fff; }
   .card-n { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); }

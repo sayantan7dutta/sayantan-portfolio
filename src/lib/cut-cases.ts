@@ -84,6 +84,14 @@ export const cutCases: CutCase[] = [
         pull: 'The existing “senior app” category mostly patronises: huge buttons wrapped around stripped-down features, designed as if ageing meant losing the right to a capable product.',
       },
       {
+        kicker: 'Approach',
+        heading: 'Voice-first, never voice-only, and two users at once',
+        body: [
+          'miiGenie leads with the one interface older adults already master: talking. Every core job can be done by speaking: reminders, finding a document, recording how the day went, calling for help. And every voice step has a typed fallback, because dignity means never being stuck.',
+          'The second design surface is the family carer: pairing, check-ins, and visibility designed as reassurance rather than surveillance. The product is deliberately framed as supportive everyday companionship, with hard guardrails: it is not a therapist and never pretends to be a relationship.',
+        ],
+      },
+      {
         kicker: 'Where it started',
         heading: 'The product I inherited worked. It didn’t speak.',
         body: [
@@ -139,11 +147,10 @@ export const cutCases: CutCase[] = [
         },
       },
       {
-        kicker: 'The principles it produced',
-        heading: 'Voice-first, never voice-only, and two users at once',
+        kicker: 'Voice interaction',
+        heading: 'Voice-first, never voice-only',
         body: [
-          'miiGenie leads with the one interface older adults already master: talking. Every core job can be done by speaking: reminders, finding a document, recording how the day went, calling for help. Every voice step has a typed fallback, because dignity means never being stuck.',
-          'The second surface is the family carer: pairing, check-ins and visibility designed as reassurance rather than surveillance. The product is deliberately framed as supportive everyday companionship, with hard guardrails. It is not a therapist and never pretends to be a relationship.',
+          'Voice is the interface older adults already know, but it is also the one that fails most publicly. So the voice loop is designed around patience and forgiveness: the app waits without a countdown, every voice step offers “type instead”, and a failed attempt produces help rather than a dead end.',
         ],
         shot: 'trio',
         caps: [
