@@ -41,6 +41,13 @@ export interface CaseSection {
    * evidence and the wordmark is the claim the prose is making about it, so
    * both belong on the page. Sits above the section's own block.
    */
+  /**
+   * What participants actually said, in their words. A research section can
+   * describe findings convincingly and still be something the designer could
+   * have invented; a quote with a source attached is the evidence that the
+   * room happened. Rendered after the section's block.
+   */
+  quotes?: { q: string; who: string }[];
   brand?: {
     logo?: boolean;
     logoCaption?: string;
@@ -74,6 +81,21 @@ export interface CutCase {
   glance: { k: string; v: string }[];
   scope: string[];
   sections: CaseSection[];
+  /**
+   * A credential worth meeting before the argument rather than after it.
+   * The main site puts this above the problem statement; the condensed
+   * version had it as three sentences in the closing section, which is the
+   * last place a reviewer skimming the top of the page will look.
+   */
+  exhibit?: {
+    tag: string;
+    festival: string;
+    lead: string;
+    /** Rendered in italic accent inside `lead`, split on this exact text. */
+    emphasis: string;
+    sub: string;
+    facts: { k: string; v: string }[];
+  };
   /** Closing reflection — the "what I learned" the old pages all end on. */
   reflection: { heading: string; body: string[] };
 }
@@ -930,6 +952,18 @@ export const cutCases: CutCase[] = [
 
   {
     slug: 'amble',
+    exhibit: {
+      tag: 'Exhibited',
+      festival: 'London Design Festival 2025',
+      lead: 'Amble was shown to the public as part of Tender Interbeing: The Future of Design with Empathy.',
+      emphasis: 'Tender Interbeing: The Future of Design with Empathy',
+      sub: 'A seven-month research project, selected for one of the world’s leading design festivals and exhibited alongside industry.',
+      facts: [
+        { k: 'Dates', v: '17–19 September 2025' },
+        { k: 'Venue', v: 'White City Warehouse, London W12' },
+        { k: 'Festival', v: 'London Design Festival' },
+      ],
+    },
     lead: 'Amble is a speculative bioengineered plant system for the 2065 home. Seven months of foresight research and design for Rodd Design Studio, exhibited at the London Design Festival.',
     glance: [
       { k: 'Client', v: 'Rodd Design × WSA' },
@@ -1023,7 +1057,14 @@ export const cutCases: CutCase[] = [
           items: [
             { t: 'Anchored in 2065', b: 'Speculative design combined with a literature review and primary research. Setting the concept forty years out moved conversations away from “what gadget would you buy” and towards “what should later life feel like”, which is where the useful insight lives.' },
             { t: 'Focus groups across two generations', b: 'Two groups of younger adults aged 20 to 40 in Winchester, and fifteen older adults aged 50 to 80 in Southampton reached through churches and community groups, run as a relaxed afternoon rather than a clinical interview.' },
+            /* The synthesis, the brand and the exhibition were cut from this
+               list and left to the sections that expand on them. That broke
+               the arc: the list is what the seven months looked like end to
+               end, and it stopped at the halfway point. */
+            { t: 'Synthesising lived experience against the evidence', b: 'I led the synthesis, triangulating what participants told us against an evidence base spanning environmental psychology, synthetic biology and inclusive design. Where a focus-group insight and a research finding agreed, we had a firm design principle. Where they diverged, we had a question worth designing into the concept.' },
             { t: 'From insight to five domains', b: 'Each domain answered a specific, evidenced need rather than showcasing a technology. The test for every feature was the same: does this support independence, or quietly undermine it.' },
+            { t: 'A brand that reads as living, not technical', b: 'Branding was treated as part of the design argument rather than decoration. Every choice, the serif wordmark, the earth-toned palette, the voice that speaks as a companion rather than an assistant, was made to convince people that Amble is a living presence and not another device.' },
+            { t: 'Exhibited at the London Design Festival', b: 'Translating seven months of research into a public exhibition forced a final round of editing: what does a visitor need to understand in ninety seconds?' },
           ],
         },
       },
@@ -1054,7 +1095,15 @@ export const cutCases: CutCase[] = [
             ],
           },
         },
-        pull: '“Plants can give emotional support in a way that animals or humans can’t.” “I retired through ill health, so I didn’t have a choice. It was taken away from me.” “I still like to do my own shopping. I want to go. I don’t like having a delivery.”',
+        /* These were one `pull`: three people's words run together into a
+           single paragraph with no attribution, so nobody could tell where
+           one voice ended and the next began, or which group said what.
+           Separated, and each given its source back. */
+        quotes: [
+          { q: 'Plants can give emotional support in a way that animals or humans can’t.', who: 'Focus group · younger adults' },
+          { q: 'I retired through ill health, so I didn’t have a choice. It was taken away from me.', who: 'Focus group · older adults' },
+          { q: 'I still like to do my own shopping. I want to go. I don’t like having a delivery.', who: 'Focus group · older adults' },
+        ],
       },
       {
         kicker: 'The concept',

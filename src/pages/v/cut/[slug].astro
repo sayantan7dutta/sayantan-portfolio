@@ -56,6 +56,7 @@ import amRodd from '../../../assets/work/amble/rodd.png';
 import amWsa from '../../../assets/work/amble/wsa.png';
 import amUos from '../../../assets/work/amble/uos.png';
 import amLogo from '../../../assets/work/amble/logo.png';
+import amLdf from '../../../assets/work/amble/ldf.png';
 /* The carousel's thumbnails are the home page's, deliberately: a visitor who
    saw a project on the home grid should meet the same picture here. */
 import thMiigenie from '../../../assets/work/miigenie/card-trio.png';
@@ -283,6 +284,32 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
     </ul>
   </div>
 
+  {/* Met before the argument rather than after it. A festival selection is
+      the one fact on this page a reviewer can check independently, and it
+      was three sentences in the closing section. */}
+  {data.exhibit && (
+    <div class="band exh-band">
+      <div class="exh" data-reveal>
+        <div class="exh-chip">
+          <Image src={amLdf} alt="" widths={[180, 360]} sizes="112px" loading="lazy" />
+        </div>
+        <div class="exh-body">
+          <p class="exh-top">
+            <span class="exh-tag">{data.exhibit.tag}</span>
+            <span class="exh-fest">{data.exhibit.festival}</span>
+          </p>
+          {/* On one line on purpose: a newline between these expressions is
+              rendered as a space, which put a gap before the full stop. */}
+          <p class="exh-lead">{data.exhibit.lead.split(data.exhibit.emphasis)[0]}<em>{data.exhibit.emphasis}</em>{data.exhibit.lead.split(data.exhibit.emphasis)[1]}</p>
+          <p class="exh-sub">{data.exhibit.sub}</p>
+          <dl class="exh-facts">
+            {data.exhibit.facts.map((f) => <div><dt>{f.k}</dt><dd>{f.v}</dd></div>)}
+          </dl>
+        </div>
+      </div>
+    </div>
+  )}
+
   <!-- ═══ SECTIONS ══════════════════════════════════════════════════ -->
   {data.sections.map((sec) => (
     <section class="band">
@@ -300,6 +327,20 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
       {/* An ordered list, because it is a progression and the order carries
           the meaning. The dates are the list content; the rail behind them is
           drawn and hidden from assistive tech. */}
+      {/* Participants in their own words, each with its source. */}
+      {sec.quotes && (
+        <ul class="qts" data-reveal style={`--n:${sec.quotes.length}`}>
+          {sec.quotes.map((q, i) => (
+            <li style={`--d:${i * 70}ms`}>
+              <blockquote>
+                <p>“{q.q}”</p>
+                <cite>{q.who}</cite>
+              </blockquote>
+            </li>
+          ))}
+        </ul>
+      )}
+
       {/* The brand, shown. The prose beside it names the wordmark and lists
           the palette, which asks the reader to picture five colours they
           cannot see; these are the colours. */}
@@ -954,6 +995,57 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
     text-transform: uppercase; color: var(--paper); background: var(--accent); border-radius: 3px;
   }
   .card-kept { box-shadow: 0 0 0 1px var(--accent); }
+
+  /* ── what people said ──
+     Three cards, not one paragraph. Each quote keeps its own box and its own
+     attribution, so a reader can tell where one voice stops and which group
+     it came from. */
+  .qts {
+    display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr));
+    gap: clamp(.9rem, 2vw, 1.3rem); margin-top: clamp(2rem, 5vw, 2.6rem);
+  }
+  @media (max-width: 900px) { .qts { grid-template-columns: 1fr; } }
+  .qts li { border: 1px solid var(--line); border-left: 2px solid var(--accent); border-radius: 3px; padding: clamp(1.1rem, 2.6vw, 1.5rem); background: var(--paper); }
+  .qts blockquote { margin: 0; }
+  .qts p { font-family: var(--read); font-style: italic; font-size: .98rem; color: var(--ink); }
+  .qts cite {
+    display: block; margin-top: .9rem; font-style: normal; font-size: var(--micro);
+    font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
+  }
+
+  /* ── the exhibition credential ──
+     A tinted panel rather than another run of paragraphs, because this is
+     the one claim on the page a reviewer can go and verify, and it should
+     be legible in a glance on the way past. */
+  .exh-band { padding-block: clamp(1.6rem, 4vw, 2.4rem) 0; }
+  .exh {
+    display: flex; gap: clamp(1.2rem, 3.5vw, 2.4rem); align-items: flex-start;
+    padding: clamp(1.4rem, 4vw, 2.2rem);
+    background: var(--paper-2); border: 1px solid var(--line); border-radius: 6px;
+  }
+  @media (max-width: 620px) { .exh { flex-direction: column; } }
+  .exh-chip { flex-shrink: 0; width: clamp(78px, 10vw, 104px); background: #fff; border-radius: 4px; padding: 10px; }
+  .exh-chip img { width: 100%; height: auto; display: block; }
+  .exh-body { flex: 1; min-width: 0; }
+  .exh-top { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .8rem; margin-bottom: .9rem; }
+  .exh-tag {
+    font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--edge); border-radius: 2px; padding: .22rem .5rem;
+  }
+  .exh-fest { font-size: var(--micro); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+  .exh-lead {
+    font-family: var(--read); font-size: clamp(1.15rem, 2.6vw, 1.75rem);
+    font-weight: 600; letter-spacing: -.015em; line-height: 1.28;
+  }
+  .exh-lead em { font-style: italic; color: var(--accent); }
+  .exh-sub { font-family: var(--read); font-size: .92rem; color: var(--ink-2); margin-top: .8rem; max-width: 60ch; }
+  .exh-facts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem;
+    margin-top: clamp(1.2rem, 3vw, 1.6rem); padding-top: clamp(1rem, 2.5vw, 1.3rem);
+    border-top: 1px solid var(--line);
+  }
+  .exh-facts dt { font-size: var(--micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .exh-facts dd { margin-top: .3rem; font-size: .92rem; }
 
   /* ── the brand, shown ── */
   .brand { display: grid; gap: clamp(1.6rem, 4vw, 2.4rem); margin-top: clamp(2rem, 5vw, 2.6rem); }
