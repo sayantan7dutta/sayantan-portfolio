@@ -23,8 +23,17 @@ interface Props {
   /** 'dark' lets a page's own hero own the top of the screen. */
   navTone?: 'dark' | 'light';
   active?: 'work' | 'about';
+  /**
+   * The page already ends on a contact block of its own, so the footer drops
+   * its link list and keeps the identification. Without this the home page
+   * printed the same email, LinkedIn and CV twice within about 140px of each
+   * other: once as the answer to the closing question, once as furniture.
+   * Every other page has no contact block, so the footer is the only place
+   * these live and it keeps them.
+   */
+  hasContact?: boolean;
 }
-const { title, description, navTone = 'light', active } = Astro.props;
+const { title, description, navTone = 'light', active, hasContact = false } = Astro.props;
 
 const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap';
 ---
@@ -57,17 +66,19 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
 
   <slot />
 
-  <footer class="foot">
+  <footer class={`foot ${hasContact ? 'foot-slim' : ''}`}>
     <div class="foot-in">
       <div class="foot-id">
         <p class="foot-name">Sayantan Dutta</p>
         <p class="foot-role">Product designer, enterprise SaaS &amp; AI · {contact.base}</p>
       </div>
-      <ul class="foot-links">
-        <li><a href={`mailto:${contact.email}`} data-ab="foot:email">{contact.email}</a></li>
-        <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="foot:linkedin">LinkedIn <span aria-hidden="true">↗</span></a></li>
-        <li><a href={contact.resume} data-ab="foot:cv">CV (PDF)</a></li>
-      </ul>
+      {!hasContact && (
+        <ul class="foot-links">
+          <li><a href={`mailto:${contact.email}`} data-ab="foot:email">{contact.email}</a></li>
+          <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="foot:linkedin">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          <li><a href={contact.resume} data-ab="foot:cv">CV (PDF)</a></li>
+        </ul>
+      )}
       <p class="foot-fine">© {new Date().getFullYear()} Sayantan Dutta</p>
     </div>
   </footer>
@@ -406,6 +417,13 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
       transition: border-color var(--quick) var(--ease), color var(--quick) var(--ease);
     }
     .foot-links a:hover { border-bottom-color: #f4f4f3; }
+    /* With the links gone the two-column grid still reserved an empty 22rem
+       on the right and the block still carried a full section's padding, for
+       what is now a name, a line of role and a copyright. It becomes a coda
+       rather than a section. */
+    .foot-slim { padding-block: clamp(2.2rem, 5vw, 3.2rem); }
+    .foot-slim .foot-in { grid-template-columns: 1fr; gap: 1.4rem; }
+    .foot-slim .foot-fine { margin-top: 0; }
     .foot-fine { margin-top: 2.2rem; font-size: .78rem; color: var(--dim-dark); grid-column: 1; }
     @media (min-width: 761px) { .foot-fine { grid-column: 1 / -1; } }
   </style>

@@ -57,6 +57,7 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   description="Product designer for enterprise SaaS and AI. Industrial safety, API infrastructure, design operations, and a voice-first AI companion. Six products, founding designer on three."
   navTone="dark"
   active="work"
+  hasContact
 >
 
 <!-- ═══ 1 · THE OPENING ════════════════════════════════════════════ -->
@@ -273,6 +274,13 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
       <div class="end-side" data-reveal style="--d:110ms">
         <p class="end-k">Email</p>
         <p class="end-mail"><a href={`mailto:${contact.email}`} data-ab="end:email">{contact.email}</a></p>
+        <!-- The ask is made here, so the ways of answering it belong here.
+             These sat only in the footer below, which left the strongest
+             moment on the page offering the fewest ways to act. -->
+        <ul class="end-more">
+          <li><a href={contact.linkedin} target="_blank" rel="me noopener" data-ab="end:linkedin">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          <li><a href={contact.resume} data-ab="end:cv">CV (PDF)</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -539,7 +547,11 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   }
 
   /* ── closing ── */
-  .end { background: var(--black); color: #f4f4f3; padding: clamp(4rem, 10vw, 7rem) var(--pad); }
+  /* The closing block and the footer are both black with nothing between
+     them, so they read as one region. A 7rem bottom padding stacked on the
+     footer's 5rem top padding put a hand's width of empty black through the
+     middle of it. The bottom tightens; the top keeps its air. */
+  .end { background: var(--black); color: #f4f4f3; padding: clamp(4rem, 10vw, 7rem) var(--pad) clamp(2.5rem, 5vw, 3.5rem); }
   .end-in {
     max-width: calc(var(--measure) - var(--pad) * 2); margin-inline: auto;
     display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 22rem);
@@ -555,6 +567,13 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
      at the smallest type size this link ever renders at. */
   .end-mail a { display: inline-block; padding-block: .35rem; border-bottom: 2px solid var(--edge-dark); transition: border-color var(--quick) var(--ease); }
   .end-mail a:hover { border-bottom-color: #f4f4f3; }
+  .end-more { display: flex; flex-wrap: wrap; gap: 0 1.6rem; margin-top: .3rem; font-size: .92rem; }
+  .end-more a {
+    display: inline-flex; align-items: center; gap: .35rem; min-height: 44px;
+    color: #a3a3a0; border-bottom: 1px solid transparent;
+    transition: color var(--quick) var(--ease), border-color var(--quick) var(--ease);
+  }
+  .end-more a:hover { color: #f4f4f3; border-bottom-color: #f4f4f3; }
 </style>
 
 <script>
