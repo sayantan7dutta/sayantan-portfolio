@@ -152,7 +152,10 @@ const project = projects.find((p) => p.slug === slug)!;
 const img = shots[slug] ?? {};
 const art = heroArt[slug];
 
-const others = projects.filter((p) => p.slug !== slug).slice(0, 3);
+/* Every other case, not the first three. Slicing to three left two of the
+   six reachable only by going back to the home page, which is a dead end at
+   the exact moment someone has finished reading and wants the next one. */
+const others = projects.filter((p) => p.slug !== slug);
 
 /**
  * Column count for a card grid, chosen so the last row is never a single
@@ -471,7 +474,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   <section class="band">
     <div class="band-head" data-reveal>
       <p class="sec-k">Next</p>
-      <h2>Three more to read</h2>
+      <h2>The rest of the work</h2>
     </div>
     <ul class="next" data-reveal>
       {others.map((o, i) => (
@@ -885,9 +888,14 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .cmp-before li { color: var(--faint); }
 
   /* ── next: three tiles across the band rather than three stacked rows ── */
-  .next { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  @media (max-width: 760px) { .next { grid-template-columns: 1fr; } }
-  .next li { background: var(--paper); transition: background var(--quick) var(--ease); }
+  /* Five tiles in three columns leaves a sixth cell empty, and the hairlines
+     used to be a line-coloured background showing through 1px gaps, so that
+     cell painted itself a solid block and read as a tile that failed to load.
+     Drawn per tile instead, the leftover cell is just the page. */
+  .next { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; }
+  @media (max-width: 1000px) { .next { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .next { grid-template-columns: 1fr; } }
+  .next li { background: var(--paper); box-shadow: 0 0 0 1px var(--line); transition: background var(--quick) var(--ease); }
   .next li:hover { background: #fff; }
   .next a {
     display: flex; flex-direction: column; gap: .35rem; min-height: 9.5rem;
