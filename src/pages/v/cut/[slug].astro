@@ -351,7 +351,9 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
             <ul>
               {sec.block.after.map((l) => (
                 l.folder
-                  ? <li class="ft-f"><span aria-hidden="true">▸</span> {l.folder}{l.tag && <span class="ft-tag">[{l.tag}]</span>}</li>
+                  /* The space before the tag is read out as well as drawn:
+                     without it a screen reader says "00_Templates[linked]". */
+                  ? <li class="ft-f"><span aria-hidden="true">▸</span> {l.folder}{l.tag && <span class="ft-tag">{' '}[{l.tag}]</span>}</li>
                   : <li class="ft-c"><span aria-hidden="true">└</span> {l.file}</li>
               ))}
             </ul>
