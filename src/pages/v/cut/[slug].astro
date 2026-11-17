@@ -327,6 +327,15 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
       {/* An ordered list, because it is a progression and the order carries
           the meaning. The dates are the list content; the rail behind them is
           drawn and hidden from assistive tech. */}
+      {/* Figures that size the situation, before the block they frame. */}
+      {sec.figures && (
+        <dl class="statrow is-context" data-reveal>
+          {sec.figures.map((f) => <div><dt>{f.n}</dt><dd>{f.l}</dd></div>)}
+        </dl>
+      )}
+
+      {sec.blockLead && <p class="block-lead" data-reveal>{sec.blockLead}</p>}
+
       {/* The mess, and the structure that replaced it. Sherwin has no UI to
           screenshot, so this is the one artefact on the page. */}
       {sec.block?.kind === 'filetree' && (
@@ -901,6 +910,18 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .statrow > div { background: var(--paper-2); padding: clamp(1.3rem, 3vw, 1.9rem); }
   .statrow dt { font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 800; letter-spacing: -.045em; line-height: 1; color: var(--accent); }
   .statrow dd { margin-top: .6rem; font-family: var(--read); font-size: .88rem; color: var(--ink-2); }
+  /* Context figures size a situation rather than report a result, so they
+     are set open on the page instead of boxed like an outcome. */
+  .statrow.is-context { background: none; border: 0; gap: clamp(1.4rem, 4vw, 2.6rem); }
+  .statrow.is-context > div { background: none; padding: 0; }
+  .statrow.is-context dd {
+    margin-top: .4rem; font-family: inherit; font-size: var(--micro); font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
+  }
+  .block-lead {
+    margin-top: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: -.8rem;
+    font-family: var(--read); font-size: .95rem; color: var(--ink-2);
+  }
   /* Column count comes from how many phones the section has, so a pair does
      not sit in a three-wide grid with a hole on the end. */
   .trio { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 250px)); gap: clamp(1rem, 3vw, 2rem); margin-top: clamp(2rem, 5vw, 3rem); }

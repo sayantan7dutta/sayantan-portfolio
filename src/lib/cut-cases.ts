@@ -55,6 +55,17 @@ export interface CaseSection {
    * room happened. Rendered after the section's block.
    */
   quotes?: { q: string; who: string }[];
+  /**
+   * Figures that size the situation, as opposed to `stats`, which reports
+   * what the work achieved. Sherwin's context needed the scale of the team
+   * before the problem lands: twenty-odd people with no shared
+   * infrastructure only means something once you know it is twenty-odd.
+   * Sits above the section's own block.
+   */
+  figures?: { n: string; l: string }[];
+  /** A short line introducing the block, where it is a list of things rather
+      than a continuation of the argument ("Products the team supported"). */
+  blockLead?: string;
   brand?: {
     logo?: boolean;
     logoCaption?: string;
@@ -693,6 +704,15 @@ export const cutCases: CutCase[] = [
           'All client work is under NDA. The file-architecture and process diagrams here are reconstructed from memory. The structure and the thinking are accurate; specific file names and content are illustrative.',
           'Sherwin-Williams runs one of the largest digital portfolios in the paint industry: consumer colour tools, contractor apps, e-commerce and internal coatings systems. The research and design team supporting all of it had grown faster than its infrastructure.',
         ],
+        /* The scale of the team, which the next section's "a team of 20+ with
+           almost no shared infrastructure" depends on. Without it the reader
+           reaches that line with no sense of how big the problem is. */
+        figures: [
+          { n: '5–7', l: 'UX researchers' },
+          { n: '10–15', l: 'Product designers' },
+          { n: '6+', l: 'Digital products supported' },
+        ],
+        blockLead: 'Products the team supported',
         block: {
           kind: 'cards',
           items: [
