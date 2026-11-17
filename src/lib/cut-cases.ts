@@ -9,7 +9,7 @@
 /** Structured blocks, so a section can be more than paragraphs. */
 export type Block =
   /** Numbered principle cards: 01 / title / body. */
-  | { kind: 'cards'; items: { t: string; b: string }[] }
+  | { kind: 'cards'; items: { t: string; b: string; tag?: string; kept?: boolean }[] }
   /** A stage-by-stage table: what hurt, and what the design did about it. */
   | { kind: 'journey'; cols: [string, string, string]; rows: [string, string, string][] }
   /** Research personas, grouped by role. */
@@ -34,6 +34,19 @@ export interface CaseSection {
       shape, and a sentence listing them is not: the main site drew it and the
       condensed version flattened it back into prose. */
   rail?: { d: string; r: string }[];
+  /**
+   * The brand, shown rather than described. A palette listed in a sentence
+   * ("parchment, pale dogwood, yellow green…") asks the reader to picture
+   * five colours they cannot see. On a designer's page the swatches are the
+   * evidence and the wordmark is the claim the prose is making about it, so
+   * both belong on the page. Sits above the section's own block.
+   */
+  brand?: {
+    logo?: boolean;
+    logoCaption?: string;
+    swatches?: { hex: string; name: string }[];
+    swatchCaption?: string;
+  };
   /** Key into the image map in the case study page. */
   shot?: string;
   caption?: string;
@@ -992,7 +1005,10 @@ export const cutCases: CutCase[] = [
           items: [
             { t: 'Interactive Brain Gym', b: 'Memory preservation and cognitive exercises, designed with dementia in mind. Solving for one condition narrowed the brief to a clinical problem, and the research kept pointing somewhere broader: emotional wellbeing, not just memory.' },
             { t: 'Home Companion Robot', b: 'A device to track, nudge, detect and assist across the home. It worked on paper and felt wrong in practice. A robot is another screen, another thing demanding attention, the opposite of the calm the research asked for.' },
-            { t: 'Amble', b: 'A living, bioengineered plant system. A plant is already emotionally legible. It does not demand interaction, it shares the space. That let us design support that is ambient, sensory, and quiet.' },
+            /* Marked, because the heading says two ideas were set aside and
+               this is the third card. Unlabelled it read as a third thing
+               abandoned, which left the section with no answer in it. */
+            { t: 'Amble', tag: 'Carried forward', kept: true, b: 'A living, bioengineered plant system. A plant is already emotionally legible. It does not demand interaction, it shares the space. That let us design support that is ambient, sensory, and quiet.' },
           ],
         },
       },
@@ -1080,10 +1096,27 @@ export const cutCases: CutCase[] = [
       {
         kicker: 'The brand',
         heading: 'A brand that feels alive, not engineered',
+        brand: {
+          logo: true,
+          logoCaption:
+            'A Playfair Display wordmark, lowercase for approachability. A flower grows from the “a” and a leaf sprouts from the “e”, marking Amble as both biological and intelligent.',
+          swatches: [
+            { hex: '#F0EAD2', name: 'Parchment' },
+            { hex: '#FFD1C3', name: 'Pale Dogwood' },
+            { hex: '#B6D366', name: 'Yellow Green' },
+            { hex: '#A98467', name: 'Chamoisee' },
+            { hex: '#654937', name: 'Coffee' },
+          ],
+          swatchCaption:
+            'Muted earth tones, chosen for the calm familiarity research links to older adults’ preferences.',
+        },
         body: [
           'The brand had one job: convince people that Amble is a living companion, not a gadget. Every decision, from the typeface to the tone of voice, was grounded in research on how older adults read, trust, and feel at ease.',
-          'A Playfair Display wordmark, lowercase for approachability, with a flower growing from the “a” and a leaf sprouting from the “e”. Playfair is paired with the geometric sans Poppins, and the pairing was evidence-led: studies show older adults read serif type more comfortably at larger sizes, and that typefaces themselves carry personality, in this case sincerity and calm. The palette is muted earth tones, chosen for the calm familiarity research links to older adults’ preferences.',
-          'Amble’s voice speaks as a presence, not an assistant: warm, calm and mindful, helpful but never insistent. Let your home grow with you.',
+          /* The wordmark and the palette are shown below, so this no longer
+             describes them. What it keeps is the part a picture cannot
+             carry: why those typefaces, on what evidence. */
+          'Playfair Display is paired with the geometric sans Poppins, and the pairing was evidence-led: studies show older adults read serif type more comfortably at larger sizes, and that typefaces themselves carry personality, in this case sincerity and calm.',
+          'The voice follows the same rule. Amble speaks as a presence rather than an assistant: warm, calm and mindful, helpful but never insistent, offering reassurance in moments of uncertainty without ever overwhelming the person it is speaking to.',
         ],
         block: {
           kind: 'cards',
@@ -1096,7 +1129,9 @@ export const cutCases: CutCase[] = [
             { t: 'Inclusivity', b: 'Designed for the full range of later-life needs.' },
           ],
         },
-        pull: 'The palette runs parchment, pale dogwood, yellow green, chamoisee and coffee: muted earth tones, chosen for the calm familiarity research links to older adults’ preferences.',
+        /* Was a sentence naming the five colours, which the swatches above
+           now say better. The tagline is the thing worth pulling out. */
+        pull: 'Let your home grow with you.',
       },
       {
         kicker: 'Outcome',

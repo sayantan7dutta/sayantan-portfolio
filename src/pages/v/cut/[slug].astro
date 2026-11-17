@@ -55,6 +55,7 @@ import amPoster2 from '../../../assets/work/amble/poster-2.jpg';
 import amRodd from '../../../assets/work/amble/rodd.png';
 import amWsa from '../../../assets/work/amble/wsa.png';
 import amUos from '../../../assets/work/amble/uos.png';
+import amLogo from '../../../assets/work/amble/logo.png';
 /* The carousel's thumbnails are the home page's, deliberately: a visitor who
    saw a project on the home grid should meet the same picture here. */
 import thMiigenie from '../../../assets/work/miigenie/card-trio.png';
@@ -299,6 +300,36 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
       {/* An ordered list, because it is a progression and the order carries
           the meaning. The dates are the list content; the rail behind them is
           drawn and hidden from assistive tech. */}
+      {/* The brand, shown. The prose beside it names the wordmark and lists
+          the palette, which asks the reader to picture five colours they
+          cannot see; these are the colours. */}
+      {sec.brand && (
+        <div class="brand" data-reveal>
+          {sec.brand.logo && (
+            <figure class="brand-mark">
+              <div class="brand-plate">
+                <Image src={amLogo} alt="The Amble wordmark, lowercase, with a flower growing from the a and a leaf from the e" widths={[320, 640]} sizes="260px" loading="lazy" />
+              </div>
+              {sec.brand.logoCaption && <figcaption>{sec.brand.logoCaption}</figcaption>}
+            </figure>
+          )}
+          {sec.brand.swatches && (
+            <figure class="brand-pal">
+              <ul>
+                {sec.brand.swatches.map((c) => (
+                  <li>
+                    <span class="sw" style={`background:${c.hex}`} aria-hidden="true"></span>
+                    <span class="sw-n">{c.name}</span>
+                    <span class="sw-h">{c.hex}</span>
+                  </li>
+                ))}
+              </ul>
+              {sec.brand.swatchCaption && <figcaption>{sec.brand.swatchCaption}</figcaption>}
+            </figure>
+          )}
+        </div>
+      )}
+
       {sec.rail && (
         <ol class="rail" data-reveal>
           {sec.rail.map((n, i) => (
@@ -370,9 +401,10 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
           data-reveal
         >
           {sec.block.items.map((c, i) => (
-            <li>
+            <li class={c.kept ? 'card-kept' : ''}>
               <span class="card-n">{String(i + 1).padStart(2, '0')}</span>
               <h3>{c.t}</h3>
+              {c.tag && <span class="card-tag">{c.tag}</span>}
               <p>{c.b}</p>
             </li>
           ))}
@@ -914,6 +946,34 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .cards li { background: var(--paper); box-shadow: 0 0 0 1px var(--line); padding: clamp(1.2rem, 2.6vw, 1.7rem); transition: background var(--quick) var(--ease); }
   .cards li:hover { background: #fff; }
   .card-n { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); }
+  /* The one that survived, marked. Colour alone would not say it, so the
+     label carries the words. */
+  .card-tag {
+    display: inline-block; margin: .1rem 0 .5rem; padding: .22rem .5rem;
+    font-size: var(--micro); font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--paper); background: var(--accent); border-radius: 3px;
+  }
+  .card-kept { box-shadow: 0 0 0 1px var(--accent); }
+
+  /* ── the brand, shown ── */
+  .brand { display: grid; gap: clamp(1.6rem, 4vw, 2.4rem); margin-top: clamp(2rem, 5vw, 2.6rem); }
+  @media (min-width: 900px) { .brand { grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); align-items: start; } }
+  .brand figure { margin: 0; }
+  .brand figcaption { margin-top: .7rem; font-size: .82rem; color: var(--faint); }
+  /* Coffee, the darkest colour in Amble's own palette. The wordmark is drawn
+     in parchment, so it is a light mark for a dark ground: on the parchment
+     plate this first had, it was invisible. */
+  .brand-plate {
+    display: grid; place-items: center; padding: clamp(1.8rem, 5vw, 3rem);
+    background: #654937; border-radius: 8px;
+  }
+  .brand-plate img { width: 100%; max-width: 230px; height: auto; display: block; }
+  .brand-pal ul { display: flex; flex-wrap: wrap; gap: clamp(.7rem, 2vw, 1.1rem); }
+  .brand-pal li { display: grid; gap: .35rem; min-width: 5.4rem; }
+  .sw { display: block; height: 56px; border-radius: 5px; border: 1px solid rgba(20,19,15,.12); }
+  .sw-n { font-size: .82rem; font-weight: 700; }
+  /* Tabular figures so five hex codes line up rather than jitter. */
+  .sw-h { font-size: .74rem; color: var(--faint); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
   .cards h3 { font-size: 1.02rem; font-weight: 700; margin: .5rem 0 .5rem; letter-spacing: -.015em; }
   .cards p { font-family: var(--read); font-size: .92rem; color: var(--ink-2); }
 
