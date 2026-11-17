@@ -55,6 +55,13 @@ import amPoster2 from '../../../assets/work/amble/poster-2.jpg';
 import amRodd from '../../../assets/work/amble/rodd.png';
 import amWsa from '../../../assets/work/amble/wsa.png';
 import amUos from '../../../assets/work/amble/uos.png';
+/* The carousel's thumbnails are the home page's, deliberately: a visitor who
+   saw a project on the home grid should meet the same picture here. */
+import thMiigenie from '../../../assets/work/miigenie/home.png';
+import thKinvault from '../../../assets/work/kinvault/dashboard.jpg';
+import thHazop from '../../../assets/work/hazop/analytics-dashboard.jpg';
+import thEricsson from '../../../assets/work/api-lifecycle/hero.png';
+import thAmble from '../../../assets/work/amble/hero.jpg';
 
 /** Per-case image slots, keyed by the `shot` names used in cut-cases.ts. */
 const shots: Record<string, Record<string, any>> = {
@@ -151,6 +158,17 @@ const data = cutCases.find((c) => c.slug === slug)!;
 const project = projects.find((p) => p.slug === slug)!;
 const img = shots[slug] ?? {};
 const art = heroArt[slug];
+
+/** One picture per case for the carousel. Sherwin has no UI to show, so it
+    keeps the stats panel it is given on the home page. */
+const thumbs: Record<string, { img?: any; alt?: string; tall?: boolean }> = {
+  miigenie: { img: thMiigenie, alt: 'The miiGenie home screen', tall: true },
+  kinvault: { img: thKinvault, alt: 'The KinVault dashboard', tall: true },
+  hazop: { img: thHazop, alt: 'The HAZOP Edge analytics dashboard' },
+  'api-lifecycle': { img: thEricsson, alt: 'The Ericsson API Console' },
+  amble: { img: thAmble, alt: 'Amble, a plant system growing through a 2065 home' },
+  'sherwin-williams': {},
+};
 
 /* Every other case, not the first three. Slicing to three left two of the
    six reachable only by going back to the home page, which is a dead end at
@@ -472,24 +490,118 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
 
   <!-- ═══ NEXT ══════════════════════════════════════════════════════ -->
   <section class="band">
-    <div class="band-head" data-reveal>
-      <p class="sec-k">Next</p>
-      <h2>The rest of the work</h2>
+    <div class="band-head car-head" data-reveal>
+      <div>
+        <p class="sec-k">Next</p>
+        <h2>The rest of the work</h2>
+      </div>
+      <!-- The arrows ship hidden and JS reveals them, because JS is also what
+           makes them do anything. Without it the strip is still a native
+           horizontal scroller and every card is still a Tab stop, so nothing
+           here is reachable only by clicking an arrow. -->
+      <p class="car-nav">
+        <button type="button" class="car-btn" data-car="prev" aria-label="Scroll to previous case studies" hidden>
+          <span aria-hidden="true">←</span>
+        </button>
+        <button type="button" class="car-btn" data-car="next" aria-label="Scroll to more case studies" hidden>
+          <span aria-hidden="true">→</span>
+        </button>
+      </p>
     </div>
-    <ul class="next" data-reveal>
-      {others.map((o, i) => (
-        <li style={`--d:${i * 70}ms`}>
-          <a href={`/v/cut/${o.slug}`} data-ab={`next:${o.slug}`}>
-            <span class="nx-t">{o.short}</span>
-            <span class="nx-m">{o.field} · {o.period}</span>
-            <span class="nx-go" aria-hidden="true">→</span>
-          </a>
-        </li>
-      ))}
-    </ul>
+
+    <div class="car" tabindex="0" role="region" aria-label="More case studies, a horizontally scrolling list">
+      <ul class="car-track">
+        {others.map((o, i) => {
+          const th = thumbs[o.slug] ?? {};
+          return (
+            <li class="car-card" style={`--d:${i * 70}ms`}>
+              <a href={`/v/cut/${o.slug}`} data-ab={`next:${o.slug}`}>
+                <span class={`car-vis ${th.tall ? 'is-tall' : ''} ${th.img ? '' : 'is-ops'}`}>
+                  {th.img ? (
+                    <Image src={th.img} alt={th.alt ?? ''} widths={[420, 840]} sizes="330px" loading="lazy" />
+                  ) : (
+                    <span class="car-ops">
+                      <span class="car-ops-band">Design Operations · Sherwin-Williams</span>
+                      <span class="car-ops-stats">
+                        <span><b>30 to 40%</b> less rework</span>
+                        <span><b>20+</b> people supported</span>
+                        <span><b>6</b> digital products</span>
+                      </span>
+                    </span>
+                  )}
+                </span>
+                <span class="car-meta">{o.kind} · {o.field} · {o.period}</span>
+                <span class="car-t">{o.title}</span>
+                <span class="car-go">View case study <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   </section>
 </article>
 </main>
+
+<script>
+  /**
+   * The carousel arrows. Progressive enhancement: they are rendered `hidden`
+   * and only revealed here, because without this script they would do
+   * nothing. The strip itself needs no JS at all, so a failure here costs
+   * the arrows and nothing else.
+   */
+  const car = document.querySelector<HTMLElement>('.car');
+  const prev = document.querySelector<HTMLButtonElement>('[data-car="prev"]');
+  const next = document.querySelector<HTMLButtonElement>('[data-car="next"]');
+
+  if (car && prev && next) {
+    const scrollable = () => car.scrollWidth - car.clientWidth > 4;
+
+    const sync = () => {
+      // Nothing to scroll means nothing to offer: a control that cannot do
+      // anything is worse than no control.
+      const on = scrollable();
+      prev.hidden = next.hidden = !on;
+      if (!on) return;
+      prev.disabled = car.scrollLeft <= 2;
+      next.disabled = car.scrollLeft >= car.scrollWidth - car.clientWidth - 2;
+    };
+
+    // Someone who asked for less motion still gets the move, just not the glide.
+    const motion = () => (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth');
+
+    /**
+     * Scroll to a card's own left edge rather than by a measured step.
+     * `scroll-snap-type: x mandatory` re-snaps while a smooth `scrollBy` is
+     * still running and drags it back to where it started: the first arrow
+     * press moved 353px and the next two moved one pixel between them.
+     * Landing exactly on a snap point leaves nothing for the snap to undo.
+     */
+    const go = (dir: number) => {
+      // Measured against the scroller, not via `offsetLeft`. `.car` is not a
+      // positioned element, so `offsetLeft` reports each card's distance from
+      // some ancestor instead: 51, 403, 756 where the scroller's own scale
+      // starts at 0. Scrolling to 51 moved nothing and the snap took it back.
+      const base = car.getBoundingClientRect().left;
+      const here = car.scrollLeft;
+      const edges = [...car.querySelectorAll<HTMLElement>('.car-card')].map((c) =>
+        Math.round(c.getBoundingClientRect().left - base + here),
+      );
+      const target = dir > 0 ? edges.find((x) => x > here + 2) : [...edges].reverse().find((x) => x < here - 2);
+      car.scrollTo({
+        left: target ?? (dir > 0 ? car.scrollWidth : 0),
+        behavior: motion() as ScrollBehavior,
+      });
+    };
+
+    prev.addEventListener('click', () => go(-1));
+    next.addEventListener('click', () => go(1));
+    car.addEventListener('scroll', sync, { passive: true });
+    addEventListener('resize', sync);
+    sync();
+  }
+</script>
+
 
 <style>
   /* ── the opening ───────────────────────────────────────────────────
@@ -888,23 +1000,82 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .cmp-before li { color: var(--faint); }
 
   /* ── next: three tiles across the band rather than three stacked rows ── */
-  /* Five tiles in three columns leaves a sixth cell empty, and the hairlines
-     used to be a line-coloured background showing through 1px gaps, so that
-     cell painted itself a solid block and read as a tile that failed to load.
-     Drawn per tile instead, the leftover cell is just the page. */
-  .next { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; }
-  @media (max-width: 1000px) { .next { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 620px) { .next { grid-template-columns: 1fr; } }
-  .next li { background: var(--paper); box-shadow: 0 0 0 1px var(--line); transition: background var(--quick) var(--ease); }
-  .next li:hover { background: #fff; }
-  .next a {
-    display: flex; flex-direction: column; gap: .35rem; min-height: 9.5rem;
-    padding: clamp(1.1rem, 2.6vw, 1.6rem);
+  /* ── the carousel ──
+     A native horizontal scroller with snap points. The arrows drive it, but
+     they are not the only way through: the strip scrolls by wheel, trackpad
+     and touch, and tabbing a card brings it into view on its own, so a
+     keyboard reaches every case whether or not the arrows exist. */
+  .car-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; }
+  .car-nav { display: flex; gap: .5rem; flex-shrink: 0; }
+  .car-btn {
+    width: 44px; height: 44px; display: grid; place-items: center;
+    border: 1.5px solid var(--edge); border-radius: 50%; background: transparent;
+    color: var(--ink); font-size: 1rem; cursor: pointer;
+    transition: background var(--quick) var(--ease), border-color var(--quick) var(--ease), opacity var(--quick) var(--ease);
   }
-  .nx-t { font-weight: 700; font-size: clamp(1.05rem, 2.4vw, 1.3rem); letter-spacing: -.02em; transition: color var(--quick) var(--ease); }
-  .next a:hover .nx-t { color: var(--accent); }
-  .nx-m { font-size: .8rem; color: var(--faint); }
-  .nx-go { margin-top: auto; padding-top: .8rem; font-size: 1.1rem; color: var(--accent); }
+  .car-btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  /* Disabled rather than removed, so the row does not reflow at the ends. */
+  .car-btn:disabled { opacity: .3; cursor: default; }
+
+  .car {
+    margin-top: clamp(2rem, 5vw, 2.6rem);
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: thin; -webkit-overflow-scrolling: touch;
+    /* room for the lift on hover and for the focus ring, which `overflow`
+       would otherwise shave off the top and bottom of a card */
+    padding: 6px 0 14px;
+  }
+  .car-track { display: flex; gap: clamp(1rem, 2.4vw, 1.6rem); list-style: none; margin: 0; padding: 0; }
+  .car-card { flex: 0 0 clamp(248px, 72vw, 340px); scroll-snap-align: start; }
+  @media (min-width: 760px) { .car-card { flex-basis: clamp(280px, 32vw, 340px); } }
+
+  .car-card > a {
+    display: flex; flex-direction: column; height: 100%;
+    border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    background: var(--paper); text-decoration: none; color: inherit;
+    transition: transform var(--slow) var(--ease), box-shadow var(--slow) var(--ease);
+  }
+  .car-card > a:hover { transform: translateY(-4px); box-shadow: 0 26px 46px -30px rgba(0,0,0,.5); }
+
+  .car-vis { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--paper-2); }
+  .car-vis img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  /* A phone screen in a landscape window would be cropped to a sliver, so a
+     tall source is shown whole, standing in the middle of the card. */
+  .car-vis.is-tall { position: relative; padding: .9rem 0; background: #14130f; }
+  /* `height: 100%` cannot resolve against a grid area with no definite
+     height, so the phone rendered 735px tall inside a 204px window and was
+     simply clipped. An absolute box gives `max-height` something real to
+     measure against, and the auto margins centre what is left. */
+  .car-vis.is-tall img {
+    position: absolute; inset: .9rem 0; margin: auto;
+    width: auto; height: auto; max-width: 100%; max-height: 100%;
+    object-fit: contain; border-radius: 6px;
+  }
+
+  .car-vis.is-ops { background: #0e0c0b; display: flex; flex-direction: column; }
+  .car-ops { display: flex; flex-direction: column; height: 100%; color: #f0ead6; }
+  .car-ops-band {
+    background: #DA291C; color: #fff; padding: .5rem .8rem;
+    font-size: var(--micro); font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .car-ops-stats { display: flex; flex-direction: column; justify-content: center; gap: .5rem; flex: 1; padding: .9rem; }
+  .car-ops-stats span { font-size: .84rem; color: #cfc7b4; }
+  .car-ops-stats b { color: #fff; font-weight: 700; }
+
+  .car-meta {
+    display: block; padding: 1rem 1.1rem 0; font-size: var(--micro); font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+  }
+  .car-t { display: block; padding: .5rem 1.1rem 0; font-size: 1.04rem; font-weight: 700; letter-spacing: -.015em; }
+  .car-go {
+    display: block; margin-top: auto; padding: .9rem 1.1rem 1.1rem;
+    font-size: .84rem; font-weight: 600; color: var(--accent);
+  }
+  .car-card > a:hover .car-go { text-decoration: underline; }
+
+  @media (max-width: 560px) {
+    .car-head { flex-direction: column; align-items: flex-start; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .plate:hover, .personas li:hover { transform: none; }
