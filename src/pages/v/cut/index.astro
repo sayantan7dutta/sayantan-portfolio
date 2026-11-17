@@ -399,12 +399,11 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
      Each device takes its height from the image rather than imposing a ratio
      on it, so nothing is cropped. The outer edge of every plate, phone or
      laptop or photograph, lands on the band's right edge. */
-  .phone, .trioplate, .laptop, .flat, .ops {
+  .phone, .laptop, .flat, .ops {
     box-shadow: 0 24px 44px -30px rgba(0,0,0,.45);
     transition: box-shadow var(--slow) var(--ease), transform var(--slow) var(--ease);
   }
   .work li:hover .phone, .work li:focus-within .phone,
-  .work li:hover .trioplate, .work li:focus-within .trioplate,
   .work li:hover .laptop, .work li:focus-within .laptop,
   .work li:hover .flat, .work li:focus-within .flat,
   .work li:hover .ops, .work li:focus-within .ops {
@@ -447,10 +446,12 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   /* Photography keeps the plain rectangle it already had. */
   .flat { overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
 
-  /* The trio artwork brings its own dark ground, so the plate matches it at
-     #0d0d0d rather than sitting the picture on white inside a hairline. The
-     image keeps its own ratio, so no phone is cut off the end. */
-  .trioplate { overflow: hidden; border-radius: 8px; background: #0d0d0d; }
+  /* The trio artwork had a flat dark ground baked into the file, which read
+     as a black box on a cream page. The ground is transparent now, so the
+     phones stand on the paper directly: no plate colour, no border, and no
+     box-shadow, which would otherwise draw a rectangle around art that no
+     longer fills one. The shadow the phones need is in the artwork. */
+  .trioplate { background: none; }
   .trioplate .shot { display: block; width: 100%; height: auto; }
 
   /* Design ops has no UI to screenshot, so it gets the stats panel instead,

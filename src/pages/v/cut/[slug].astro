@@ -1049,7 +1049,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   .car-vis img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
   /* A phone screen in a landscape window would be cropped to a sliver, so a
      tall source is shown whole, standing in the middle of the card. */
-  .car-vis.is-fit { position: relative; padding: 0; background: #0d0d0d; }
+  .car-vis.is-fit { position: relative; padding: .6rem 0; background: var(--paper); }
   /* `height: 100%` cannot resolve against a grid area with no definite
      height, so the phone rendered 735px tall inside a 204px window and was
      simply clipped. An absolute box gives `max-height` something real to
