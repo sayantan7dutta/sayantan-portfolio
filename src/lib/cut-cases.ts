@@ -114,8 +114,13 @@ export interface CutCase {
     sub: string;
     facts: { k: string; v: string }[];
   };
-  /** Closing reflection — the "what I learned" the old pages all end on. */
-  reflection: { heading: string; body: string[] };
+  /**
+   * Closing reflection — the "what I learned" the old pages all end on.
+   * A paragraph may carry its own heading: Ericsson's three takeaways were
+   * labelled on the main site and arrived here as three unlabelled
+   * paragraphs, which turns three findings into one block of prose.
+   */
+  reflection: { heading: string; body: (string | { h: string; p: string })[] };
 }
 
 export const cutCases: CutCase[] = [
@@ -458,6 +463,29 @@ export const cutCases: CutCase[] = [
         pull: 'Each section earns its place by answering one question. The Knowledge Centre in particular was a deliberate addition: buyers in process safety read before they buy, and giving them somewhere to read built credibility before any sales conversation.',
       },
       {
+        /* The information architecture, which the prose summarised as "six
+           top-level sections". Six sections is a number; the questions are
+           the argument, and they are what shows the rebuild was reasoned
+           from how a buyer evaluates rather than from a tidier menu. */
+        kicker: 'The information architecture',
+        heading: 'Six sections, six questions a buyer actually arrives with',
+        body: [
+          'I rebuilt the information architecture around six top-level sections, each answering a specific question a process-safety buyer brings to the site, and organised the Products page by the four personas who touch a study.',
+          'I delivered it inside Wix, hand-building every page, the navigation and the responsive behaviour, so the team was left with a site they could update themselves. Zero developers needed for a content change.',
+        ],
+        block: {
+          kind: 'steps',
+          items: [
+            { t: 'Home', b: 'What does this company do?' },
+            { t: 'About', b: 'Who is behind this, and can I trust them?' },
+            { t: 'Products', b: 'What does HAZOP Edge do, and is it for me?' },
+            { t: 'Knowledge Centre', b: 'How do these people think about safety?' },
+            { t: 'FAQs', b: 'What is the catch, what does it cost, how does it deploy?' },
+            { t: 'Contact', b: 'I am in. How do I talk to a human?' },
+          ],
+        },
+      },
+      {
         kicker: 'The product page',
         heading: 'A page that speaks to four people at once',
         body: [
@@ -671,11 +699,17 @@ export const cutCases: CutCase[] = [
     ],
     reflection: {
       heading: 'What I’d do differently, and what this made me realise',
+      /* Three separate findings, labelled as they were on the main site.
+         Unlabelled they read as one continuous reflection, and the third is
+         the one that explains the move into design operations. */
       body: [
-        'I built a lot of the system myself before sharing it. In hindsight, getting designers to co-create components from the start would have created faster adoption and stronger ownership. The system was good; the rollout could have been more collaborative.',
-        'The moments that mattered most were not the screens I designed. They were the conversations I facilitated. Getting a product owner and a tech lead to a shared view of what was possible in a release mattered more than any individual design decision.',
-        'By the time I left this engagement I was spending more time on systems, processes and cross-functional alignment than on hands-on design. That transition felt natural, and it led directly to the Sherwin-Williams design operations engagement. I had already been doing the job before it had the title.',
-      ],
+        { h: 'Involve the team in the system earlier',
+          p: 'I built a lot of the system myself before sharing it. In hindsight, getting designers to co-create components from the start would have created faster adoption and stronger ownership. The system was good; the rollout could have been more collaborative.' },
+        { h: 'Where design actually creates value',
+          p: 'The moments that mattered most were not the screens I designed. They were the conversations I facilitated. Getting a product owner and a tech lead to a shared view of what was possible in a release mattered more than any individual design decision.' },
+        { h: 'This is what moved me towards design operations',
+          p: 'By the time I left this engagement I was spending more time on systems, processes and cross-functional alignment than on hands-on design. That transition felt natural, and it led directly to the Sherwin-Williams design operations engagement. I had already been doing the work.' },
+      ]
     },
   },
 
@@ -987,6 +1021,25 @@ export const cutCases: CutCase[] = [
           'The review screen: sending £500 to Mom at 106.50 rupees to the pound, zero fee, and ₹53,250 shown as what the recipient gets, above a confirm and send button.',
           'The transfer status screen: initiated, arriving in about two hours, with three steps showing funds secured, conversion in progress and deposit pending, plus a reference and a share receipt button.',
           'The pay a bill abroad screen: categories for electricity, mobile, healthcare and tuition, popular providers, and ₹12,500 shown as £116.82 with no fee and instant arrival.',
+        ],
+      },
+      {
+        /* The prototype journey. The main site walks these four screens in
+           order under one sentence of framing; the condensed version kept
+           the sentence and dropped the walk. */
+        kicker: 'The prototype',
+        heading: 'The core send-money journey, end to end',
+        body: [
+          'The high-fidelity prototype covers the journey that matters: from the family dashboard through to a transfer both ends can watch.',
+          'The design principle underneath every screen is the same. Each feature reduces a specific anxiety in the transfer relationship, whether uncertainty, opacity or mistiming, rather than adding functionality for its own sake.',
+        ],
+        shot: 'flow',
+        caps: ['Family dashboard', 'Smart transfer', 'Review and rate lock', 'Transfer status'],
+        alts: [
+          'The KinVault family dashboard, showing shared vaults and recent activity.',
+          'The smart transfer screen, allocating funds across categories.',
+          'The review screen, showing the exchange rate locked before sending.',
+          'The transfer status screen, tracking the money end to end.',
         ],
       },
       {

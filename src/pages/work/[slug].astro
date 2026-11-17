@@ -79,7 +79,13 @@ const shots: Record<string, Record<string, any>> = {
   },
   hazop: { wide: hzScenario, scenes: [hzRisk, hzSites, hzAnalytics], web: [soHero, soProducts, soKnowledge] },
   'api-lifecycle': { wide: apDashboard, pair: [apDetails, apCollab] },
-  kinvault: { wide: kvVault, wide2: kvTransfer, trio: [kvReview, kvStatus, kvBillPay] },
+  kinvault: {
+    wide: kvVault, wide2: kvTransfer, trio: [kvReview, kvStatus, kvBillPay],
+    /* The prototype journey, in the order it is walked. The main site shows
+       these four as a flow; the condensed version described it in a sentence
+       and showed three unrelated screens. */
+    flow: [kvDashboard, kvTransfer, kvReview, kvStatus],
+  },
   amble: {
     wide: amFamily, wide2: amRoutines,
     scenes: [amFuture, amBedroom, amLaundry, amAirFilter],
@@ -433,7 +439,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
 
       {/* One, two or three phones, each with its own caption. The caption is
           the accessible description, so the image steps out of the way. */}
-      {['trio', 'pair', 'solo', 'web', 'scenes', 'posters'].includes(sec.shot ?? '') && img[sec.shot!] && (
+      {['trio', 'pair', 'solo', 'flow', 'web', 'scenes', 'posters'].includes(sec.shot ?? '') && img[sec.shot!] && (
         <div
           class={`trio ${
             ['web', 'scenes', 'posters'].includes(sec.shot!)
@@ -448,7 +454,7 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
           {img[sec.shot!].map((t: any, i: number) => (
             <figure style={`--d:${i * 80}ms`}>
               <div class="plate" style={`--ar:${t.width} / ${t.height}`}>
-                <Image src={t} alt={sec.alts?.[i] ?? `A screen from ${project.short}`} widths={sec.shot === 'trio' || sec.shot === 'pair' || sec.shot === 'solo' ? [320, 640] : [420, 840]} sizes={sec.shot === 'web' ? '330px' : sec.shot === 'posters' ? '500px' : '260px'} loading="lazy" />
+                <Image src={t} alt={sec.alts?.[i] ?? `A screen from ${project.short}`} widths={['trio', 'pair', 'solo', 'flow'].includes(sec.shot!) ? [320, 640] : [420, 840]} sizes={sec.shot === 'web' ? '330px' : sec.shot === 'posters' ? '500px' : '260px'} loading="lazy" />
               </div>
               {sec.caps?.[i] && <figcaption>{sec.caps[i]}</figcaption>}
             </figure>
@@ -596,7 +602,11 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
         <h2>{data.reflection.heading}</h2>
       </div>
       <div class="cs-body">
-        {data.reflection.body.map((p) => <p class="case-p">{p}</p>)}
+        {data.reflection.body.map((p) =>
+          typeof p === 'string'
+            ? <p class="case-p">{p}</p>
+            : <><h3 class="refl-h">{p.h}</h3><p class="case-p">{p.p}</p></>
+        )}
       </div>
     </div>
   </section>
@@ -871,6 +881,10 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
   @media (max-width: 900px) { .cs-head { margin-bottom: 1.2rem; } }
   .case-p { font-family: var(--read); font-size: clamp(1rem, 2vw, 1.08rem); color: var(--ink-2); max-width: 64ch; }
   .case-p + .case-p { margin-top: 1rem; }
+  /* A labelled takeaway inside the reflection. */
+  .refl-h { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; margin-top: 1.6rem; margin-bottom: .5rem; }
+  .refl-h:first-child { margin-top: 0; }
+
   .case-pull {
     font-family: var(--read); margin-top: 1.4rem; padding-left: 1.2rem;
     border-left: 2.5px solid var(--accent); max-width: 56ch;
