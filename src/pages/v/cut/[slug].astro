@@ -327,6 +327,29 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
       {/* An ordered list, because it is a progression and the order carries
           the meaning. The dates are the list content; the rail behind them is
           drawn and hidden from assistive tech. */}
+      {/* The mess, and the structure that replaced it. Sherwin has no UI to
+          screenshot, so this is the one artefact on the page. */}
+      {sec.block?.kind === 'filetree' && (
+        <div class="ftree" data-reveal>
+          <div class="ftree-col">
+            <p class="ftree-h is-before">Before</p>
+            <ul>
+              {sec.block.before.map((n) => <li class="ft-f"><span aria-hidden="true">▸</span> {n}</li>)}
+            </ul>
+          </div>
+          <div class="ftree-col is-after">
+            <p class="ftree-h is-after">After</p>
+            <ul>
+              {sec.block.after.map((l) => (
+                l.folder
+                  ? <li class="ft-f"><span aria-hidden="true">▸</span> {l.folder}{l.tag && <span class="ft-tag">[{l.tag}]</span>}</li>
+                  : <li class="ft-c"><span aria-hidden="true">└</span> {l.file}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
       {/* Participants in their own words, each with its source. */}
       {sec.quotes && (
         <ul class="qts" data-reveal style={`--n:${sec.quotes.length}`}>
@@ -446,7 +469,8 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
               <span class="card-n">{String(i + 1).padStart(2, '0')}</span>
               <h3>{c.t}</h3>
               {c.tag && <span class="card-tag">{c.tag}</span>}
-              <p>{c.b}</p>
+              {c.b && <p>{c.b}</p>}
+              {c.list && <ul class="card-list">{c.list.map((x) => <li>{x}</li>)}</ul>}
             </li>
           ))}
         </ol>
@@ -984,8 +1008,10 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
     .cards-c4 { grid-template-columns: repeat(4, 1fr); }
   }
   @media (max-width: 520px) { .cards-m1, .cards-m2 { grid-template-columns: 1fr; } }
-  .cards li { background: var(--paper); box-shadow: 0 0 0 1px var(--line); padding: clamp(1.2rem, 2.6vw, 1.7rem); transition: background var(--quick) var(--ease); }
-  .cards li:hover { background: #fff; }
+  /* Direct children only. As `.cards li` this also hit the bullets of a
+     list inside a card, giving every one of them its own hairline box. */
+  .cards > li { background: var(--paper); box-shadow: 0 0 0 1px var(--line); padding: clamp(1.2rem, 2.6vw, 1.7rem); transition: background var(--quick) var(--ease); }
+  .cards > li:hover { background: #fff; }
   .card-n { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); }
   /* The one that survived, marked. Colour alone would not say it, so the
      label carries the words. */
@@ -995,6 +1021,37 @@ const midColsFor = (n: number) => (n % 2 === 1 && n <= 5 ? 1 : 2);
     text-transform: uppercase; color: var(--paper); background: var(--accent); border-radius: 3px;
   }
   .card-kept { box-shadow: 0 0 0 1px var(--accent); }
+
+  .card-list { margin-top: .6rem; display: grid; gap: .4rem; }
+  .card-list li {
+    position: relative; padding-left: .95rem;
+    font-family: var(--read); font-size: .9rem; color: var(--ink-2);
+  }
+  .card-list li::before { content: ''; position: absolute; left: 0; top: .55em; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+
+  /* ── the file tree ──
+     Monospaced, because the point is that these are filenames: the before
+     column is the real mess, the after column the structure that replaced
+     it. The arrows and corners are decoration and hidden from a screen
+     reader, which reads two labelled lists instead. */
+  .ftree { display: grid; gap: 1px; margin-top: clamp(2rem, 5vw, 2.6rem); }
+  @media (min-width: 820px) { .ftree { grid-template-columns: 1fr 1fr; } }
+  .ftree-col { background: var(--paper); box-shadow: 0 0 0 1px var(--line); padding: clamp(1.1rem, 2.6vw, 1.5rem); }
+  .ftree-col.is-after { background: var(--paper-2); }
+  .ftree-h {
+    font-size: var(--micro); font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: .9rem;
+  }
+  .ftree-h.is-before { color: var(--faint); }
+  .ftree-h.is-after { color: var(--accent); }
+  .ftree ul { display: grid; gap: .3rem; }
+  .ftree li {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .8rem; line-height: 1.5; color: var(--ink-2);
+    overflow-wrap: anywhere;
+  }
+  .ftree .ft-c { padding-left: 1.1rem; color: var(--faint); }
+  .ft-tag { margin-left: .5rem; color: var(--accent); }
 
   /* ── what people said ──
      Three cards, not one paragraph. Each quote keeps its own box and its own

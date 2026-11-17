@@ -9,7 +9,14 @@
 /** Structured blocks, so a section can be more than paragraphs. */
 export type Block =
   /** Numbered principle cards: 01 / title / body. */
-  | { kind: 'cards'; items: { t: string; b: string; tag?: string; kept?: boolean }[] }
+  | { kind: 'cards'; items: { t: string; b: string; tag?: string; kept?: boolean; list?: string[] }[] }
+  /**
+   * The file architecture, as a before and after tree. Sherwin has no UI to
+   * screenshot, so this is the only artefact on the page: the actual mess,
+   * and the actual structure that replaced it. A paragraph saying "numbered
+   * folders and consistent naming" asks the reader to take it on trust.
+   */
+  | { kind: 'filetree'; before: string[]; after: { folder?: string; file?: string; tag?: string }[] }
   /** A stage-by-stage table: what hurt, and what the design did about it. */
   | { kind: 'journey'; cols: [string, string, string]; rows: [string, string, string][] }
   /** Research personas, grouped by role. */
@@ -734,6 +741,35 @@ export const cutCases: CutCase[] = [
         body: [
           'The first fix was the one everything else depended on: a single, navigable file architecture in Teams and OneDrive. Numbered folders, consistent naming, a read-only archive for legacy work, and cross-linked documents so a file could be found from more than one direction.',
         ],
+        block: {
+          kind: 'filetree',
+          before: [
+            'Sarah_Research_FINAL',
+            'Sarah_Research_FINAL_v2',
+            'James_Insights_March',
+            'Team Files (old)',
+            'Team Files BACKUP',
+            'ColorSnap_designs',
+            'ColorSnap_designs_NEW',
+            'Misc',
+            'Deck (no date, no owner)',
+            'Interview Guide copy',
+            'Interview Guide REVISED',
+          ],
+          after: [
+            { folder: '00_Templates', tag: 'linked' },
+            { file: 'Interview Guide v1.0' },
+            { file: 'Insight Deck Template' },
+            { folder: '01_Research', tag: 'by product' },
+            { file: 'ColorSnap / PRO+ / Portals' },
+            { folder: '02_Synthesis', tag: 'by quarter' },
+            { file: 'Q1 2024 Findings' },
+            { folder: '03_Stakeholder Decks' },
+            { file: 'YYYY-MM_Product_Topic' },
+            { folder: '04_Archive', tag: 'read-only' },
+            { file: 'Pre-2024 files preserved' },
+          ],
+        },
       },
       {
         kicker: 'The templates',
@@ -744,9 +780,31 @@ export const cutCases: CutCase[] = [
         block: {
           kind: 'cards',
           items: [
-            { t: 'Interview guide', b: 'A standardised opening and consent framing, modular question blocks by research goal, probe suggestions for each section, consistent time per block, and debrief and follow-up prompts.' },
-            { t: 'Insight deck', b: 'A branded template with the executive summary on slide one, one evidence-backed insight per slide, severity and frequency scoring, and recommended next actions at the close.' },
-            { t: 'Stakeholder presentation', b: 'Three slides maximum for leadership reviews. Business impact framing first, data visualised rather than listed, a clear ask or decision required, and an appendix for anyone who wants the detail.' },
+            /* What a template contains is a checklist, and these had been
+               folded into one sentence each. A sentence listing five things
+               is read once; five lines are scanned, which is what someone
+               deciding whether to adopt a template actually does. */
+            { t: 'Interview guide', b: '', list: [
+              'Standardised opening and consent framing',
+              'Modular question blocks by research goal',
+              'Probe suggestions for each section',
+              'Consistent time allocation per block',
+              'Debrief and follow-up prompts',
+            ] },
+            { t: 'Insight deck', b: '', list: [
+              'Branded slide template',
+              'Executive summary on slide one',
+              'One insight per slide, evidence-backed',
+              'Severity and frequency scoring',
+              'Recommended next actions at the close',
+            ] },
+            { t: 'Stakeholder presentation', b: '', list: [
+              'Three slides maximum for leadership reviews',
+              'Business impact framing first',
+              'Data visualised, not listed',
+              'A clear ask or decision required',
+              'Appendix for anyone wanting detail',
+            ] },
           ],
         },
       },
