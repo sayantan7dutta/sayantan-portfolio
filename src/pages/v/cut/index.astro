@@ -497,17 +497,30 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
   .marquee:hover :global(html.anim) .mq-track { animation-play-state: paused; }
   :global(html.anim) .marquee:hover .mq-track { animation-play-state: paused; }
 
-  .mq-head { display: flex; justify-content: flex-end; margin-bottom: .7rem; min-height: 44px; }
+  .mq-head { display: flex; justify-content: flex-end; margin-bottom: .5rem; min-height: 44px; }
+  /* Quiet by default. It has to exist, because hovering is the only other way
+     to stop the drift and a keyboard cannot hover, but it is a utility and
+     should not read as a call to action sitting above the logos. */
   .mq-toggle {
-    display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: .4rem .7rem;
+    display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: .4rem .6rem;
     font-size: var(--micro); font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--ink-2); border: 1px solid var(--line); border-radius: 2px; background: var(--paper);
-    transition: border-color var(--quick) var(--ease), color var(--quick) var(--ease);
+    color: var(--faint); border: 0; border-radius: 2px; background: none; cursor: pointer;
+    transition: color var(--quick) var(--ease);
   }
-  .mq-toggle:hover { border-color: var(--accent); color: var(--ink); }
-  .mq-ico { width: 9px; height: 11px; background: currentColor;
-    clip-path: polygon(0 0, 33% 0, 33% 100%, 0 100%, 0 0, 67% 0, 100% 0, 100% 100%, 67% 100%); }
-  .mq-toggle[aria-pressed='true'] .mq-ico { clip-path: polygon(0 0, 100% 50%, 0 100%); }
+  .mq-toggle:hover { color: var(--accent); }
+  /* Two bars, drawn as two backgrounds. The single `clip-path` polygon this
+     replaces tried to cut both bars from one outline, which a polygon cannot
+     do: the path ran back through itself and filled as a lopsided flag. */
+  .mq-ico {
+    width: 9px; height: 11px;
+    background:
+      linear-gradient(currentColor 0 0) 0 0 / 3px 100% no-repeat,
+      linear-gradient(currentColor 0 0) 100% 0 / 3px 100% no-repeat;
+  }
+  /* A triangle is one convex outline, so clip-path suits it. */
+  .mq-toggle[aria-pressed='true'] .mq-ico {
+    background: currentColor; clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
   /* Height comes from the inline style, which outranks the reset's
      `img { height: auto }`; the width/height attributes give the browser the
      ratio, so a logo that is still loading already occupies its final width
