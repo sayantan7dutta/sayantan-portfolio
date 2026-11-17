@@ -20,8 +20,8 @@ import { projects, log, contact, clients } from '../../../lib/variants';
 import { interview } from '../../../lib/interview';
 
 import portrait from '../../../assets/sayantan-studio.jpg';
-import miigenieImg from '../../../assets/work/miigenie/home.png';
-import kinvaultImg from '../../../assets/work/kinvault/dashboard.jpg';
+import miigenieImg from '../../../assets/work/miigenie/card-trio.png';
+import kinvaultImg from '../../../assets/work/kinvault/card-trio.png';
 import hazopImg from '../../../assets/work/hazop/analytics-dashboard.jpg';
 import ericssonImg from '../../../assets/work/api-lifecycle/hero.png';
 import ambleImg from '../../../assets/work/amble/hero.jpg';
@@ -34,10 +34,13 @@ import ambleImg from '../../../assets/work/amble/hero.jpg';
  * Sherwin has no UI to screenshot, so it gets the same stats panel the main
  * site gives it.
  */
-type Plate = { img?: any; device: 'phone' | 'laptop' | 'flat' | 'ops'; label?: string; alt?: string };
+type Plate = { img?: any; device: 'phone' | 'trio' | 'laptop' | 'flat' | 'ops'; label?: string; alt?: string };
 const shots: Record<string, Plate> = {
-  miigenie:           { img: miigenieImg, device: 'phone',  label: 'miiGenie', alt: 'The miiGenie home screen on a phone' },
-  kinvault:           { img: kinvaultImg, device: 'phone',  label: 'KinVault', alt: 'The KinVault dashboard on a phone' },
+  /* Three screens rather than one. A single phone showed the home screen and
+     nothing of the range; the set says more about the product in the same
+     space, and both pieces of artwork are already composed as a trio. */
+  miigenie:           { img: miigenieImg, device: 'trio', alt: 'Three miiGenie screens: onboarding, the home screen, and the carer view' },
+  kinvault:           { img: kinvaultImg, device: 'trio', alt: 'Three KinVault screens: transfer review, a shared vault, and the dashboard' },
   hazop:              { img: hazopImg,    device: 'laptop', label: 'HAZOP Edge', alt: 'The HAZOP Edge analytics dashboard' },
   'api-lifecycle':    { img: ericssonImg, device: 'laptop', label: 'API Console', alt: 'The Ericsson API Console' },
   'sherwin-williams': { device: 'ops' },
@@ -124,6 +127,12 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
                 <div class="phone-screen">
                   <Image class="shot" src={w.img} alt={w.alt} widths={[320, 640]} sizes="212px" loading="lazy" />
                 </div>
+              </div>
+            )}
+
+            {w.device === 'trio' && (
+              <div class="trioplate">
+                <Image class="shot" src={w.img} alt={w.alt} widths={[560, 1120]} sizes="(max-width: 900px) 72vw, 460px" loading="lazy" />
               </div>
             )}
 
@@ -390,11 +399,12 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
      Each device takes its height from the image rather than imposing a ratio
      on it, so nothing is cropped. The outer edge of every plate, phone or
      laptop or photograph, lands on the band's right edge. */
-  .phone, .laptop, .flat, .ops {
+  .phone, .trioplate, .laptop, .flat, .ops {
     box-shadow: 0 24px 44px -30px rgba(0,0,0,.45);
     transition: box-shadow var(--slow) var(--ease), transform var(--slow) var(--ease);
   }
   .work li:hover .phone, .work li:focus-within .phone,
+  .work li:hover .trioplate, .work li:focus-within .trioplate,
   .work li:hover .laptop, .work li:focus-within .laptop,
   .work li:hover .flat, .work li:focus-within .flat,
   .work li:hover .ops, .work li:focus-within .ops {
@@ -436,6 +446,12 @@ const answered = interview.filter((qa) => qa.a.trim().length > 0);
 
   /* Photography keeps the plain rectangle it already had. */
   .flat { overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+
+  /* The trio artwork brings its own dark ground, so the plate matches it at
+     #0d0d0d rather than sitting the picture on white inside a hairline. The
+     image keeps its own ratio, so no phone is cut off the end. */
+  .trioplate { overflow: hidden; border-radius: 8px; background: #0d0d0d; }
+  .trioplate .shot { display: block; width: 100%; height: auto; }
 
   /* Design ops has no UI to screenshot, so it gets the stats panel instead,
      in the same brand red the main site uses for it. */
