@@ -2,7 +2,7 @@
 /**
  * Shared chrome and design system for the Director's Cut site.
  *
- * Every page in /v/cut/ uses this: one nav, one footer, one set of tokens.
+ * Every page on the site uses this: one nav, one footer, one set of tokens.
  * The styles are global on purpose so case studies can use the same classes
  * as the home page without each file restating the system.
  *
@@ -56,10 +56,10 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500
   </script>
 
   <header class={`nav nav-${navTone}`} id="nav">
-    <a class="nav-name" href="/v/cut" data-ab="nav:home">Sayantan&nbsp;Dutta</a>
+    <a class="nav-name" href="/" data-ab="nav:home">Sayantan&nbsp;Dutta</a>
     <nav class="nav-links" aria-label="Main">
-      <a href="/v/cut#work" aria-current={active === 'work' ? 'page' : undefined} data-ab="nav:work">Work</a>
-      <a href="/v/cut/about" aria-current={active === 'about' ? 'page' : undefined} data-ab="nav:about">About</a>
+      <a href="/#work" aria-current={active === 'work' ? 'page' : undefined} data-ab="nav:work">Work</a>
+      <a href="/about" aria-current={active === 'about' ? 'page' : undefined} data-ab="nav:about">About</a>
       <a class="nav-cta" href={`mailto:${contact.email}`} data-ab="nav:email">Get in touch</a>
     </nav>
   </header>

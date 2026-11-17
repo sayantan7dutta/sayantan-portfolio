@@ -8,7 +8,7 @@ def norm(t):
 
 def old_blocks(slug):
     """Every substantive string in the old page: markup text AND frontmatter data."""
-    s = io.open('src/pages/work/%s.astro'%slug, encoding='utf-8').read()
+    s = io.open('src/_archive/work/%s.astro'%slug, encoding='utf-8').read()
     s = re.sub(r'(?s)<style.*?</style>','',s)
     s = re.sub(r'(?s)<!--.*?-->','',s)
     fm_end = s.index('---',3)
@@ -27,7 +27,7 @@ def old_blocks(slug):
     return out
 
 def cut_text(slug):
-    h = io.open('dist/v/cut/%s/index.html'%slug, encoding='utf-8').read()
+    h = io.open('dist/work/%s/index.html'%slug, encoding='utf-8').read()
     h = re.sub(r'(?s)<(script|style)\b.*?</\1>',' ', h)
     # include alt text, it carries real content now
     alts = ' '.join(re.findall(r'alt="([^"]*)"', h))

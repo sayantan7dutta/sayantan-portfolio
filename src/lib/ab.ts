@@ -21,10 +21,16 @@ export interface Variant {
 
 export const VARIANTS: Variant[] = [
   {
+    /**
+     * The Director's Cut won and is now the site itself, so the control is
+     * the Cut rather than the Editorial version it replaced. Editorial is
+     * kept in git history and in src/_archive, not as a route: leaving it
+     * live would have put two different portfolios on one domain.
+     */
     id: 'control',
-    name: 'Editorial',
+    name: 'Director’s Cut',
     path: '/',
-    thesis: 'Serif headline, portrait, card grid. Reads as a well-made designer portfolio. Safe, legible, familiar.',
+    thesis: 'The three parts that worked, assembled: Reel’s cinematic opening, the Annual Report’s review of the work, and the Interview as a section. Black hero gives way to paper for the substance.',
     enabled: true,
   },
   {
@@ -32,13 +38,6 @@ export const VARIANTS: Variant[] = [
     name: 'Drawing Set',
     path: '/v/drawing-set',
     thesis: 'An issued drawing set with the markup left on. Betting that visible rigour plus a hand in the margins reads as a person, not a template.',
-    enabled: true,
-  },
-  {
-    id: 'cut',
-    name: 'Director’s Cut',
-    path: '/v/cut',
-    thesis: 'The three parts that worked, assembled: Reel’s cinematic opening, the Annual Report’s review of the work, and the Interview as a section. Black hero gives way to paper for the substance.',
     enabled: true,
   },
   {

@@ -1,0 +1,687 @@
+---
+import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import KvPhoneTrio from '../components/KvPhoneTrio.astro';
+import MgPhoneTrio from '../components/MgPhoneTrio.astro';
+import SWOpsHero from '../components/SWOpsHero.astro';
+import portrait from '../assets/sayantan.jpg';
+import ericssonThumb from '../assets/work/api-lifecycle/hero.png';
+import hazopThumb from '../assets/work/hazop/analytics-dashboard.jpg';
+import ambleThumb from '../assets/work/amble/hero.jpg';
+---
+
+<Base
+  title="Sayantan Dutta · Product Designer"
+  description="Product Designer working across enterprise software and AI, from industrial safety platforms and API infrastructure to a voice-first AI companion app."
+  activeNav="work"
+>
+
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Text column -->
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="t-label">Product Designer · Enterprise &amp; AI</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-line hero-line-1">Turning complex</span>
+          <span class="hero-line hero-line-2"><em>enterprise systems</em></span>
+          <span class="hero-line hero-line-3">into interfaces</span>
+          <span class="hero-line hero-line-4">that build trust.</span>
+        </h1>
+
+        <p class="t-lead hero-lead">
+          Five years across industrial safety, enterprise SaaS, and design operations. I work on the high-stakes workflows, the ones where getting it wrong isn't an option.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#work" class="btn btn-primary">View work <span class="arrow">→</span></a>
+          <a href="/about" class="btn">About me</a>
+        </div>
+
+        <div class="hero-scroll">
+          <span class="hero-scroll-line" aria-hidden="true"></span>
+          Scroll to explore
+        </div>
+      </div>
+
+      <!-- Photo column -->
+      <div class="hero-photo-wrap">
+        <div class="hero-photo">
+          <Image src={portrait} alt="Sayantan Dutta" class="hero-photo-img" loading="eager" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ WORK ════════════════════════════════ -->
+<section class="work-section" id="work">
+  <div class="container">
+
+    <div class="work-hdr reveal">
+      <span class="t-label">Featured work</span>
+      <span class="t-label">2020-2026</span>
+    </div>
+
+    <!-- 01 miiGenie, current engagement -->
+    <article class="project-item reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <MgPhoneTrio />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">01</span>
+            <span class="t-tag t-tag-current">Current · AI Companion · 2026</span>
+          </div>
+          <h2 class="p-title">Designing a Voice-First AI Companion for Older Adults</h2>
+          <p class="p-desc">Founding and sole designer for miiGenie, a voice-first companion that helps older adults live independently while giving family carers confidence. Three-person product, engineering and design team reporting to the founders. Took a working Flutter build with no design identity and gave it a system, a voice, and an accessibility baseline. MVP entering production.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">dAIs Genie · Founding Product Designer · Ongoing</span>
+          <a href="/work/miigenie" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 KinVault -->
+    <article class="project-item project-item-alt reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <KvPhoneTrio />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">02</span>
+            <span class="t-tag t-tag-speculative">Concept · Premium Fintech · 2025</span>
+          </div>
+          <h2 class="p-title">KinVault Heritage, a Digital Vault-Atelier</h2>
+          <p class="p-desc">A self-initiated concept for a premium cross-border finance app that bridges heritage banking and modern remittance, with shared family vaults, AI-timed transfers, and direct bill payment.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">Self-initiated · Product Design</span>
+          <a href="/work/kinvault" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 HAZOP -->
+    <article class="project-item reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <Image src={hazopThumb} alt="HAZOP Edge platform" class="p-img-actual" loading="lazy" />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">03</span>
+            <span class="t-tag">B2B SaaS · UK · 2025</span>
+          </div>
+          <h2 class="p-title">UX Strategy for a B2B SaaS Platform in Industrial Safety</h2>
+          <p class="p-desc">Sole designer for HAZOP Edge, a platform that simplifies hazard and operability studies for safety professionals. From first domain research through to MVP delivery, alongside a parallel rebuild of the company website.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">Soter Safety Consulting · Founding Product Designer</span>
+          <a href="/work/hazop" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 Ericsson, Designer to Design Leader -->
+    <article class="project-item project-item-alt reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <!-- Real Ericsson API Console screenshot.
+               To blur it again, add the `nda-blur` class to the <Image> below. -->
+          <Image src={ericssonThumb} alt="Ericsson API Console" class="p-img-actual" loading="lazy" />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">04</span>
+            <span class="t-tag">B2B SaaS · IT · 2020-2023</span>
+          </div>
+          <h2 class="p-title">Designing a B2B SaaS API Console for Ericsson</h2>
+          <p class="p-desc">Led product design and the design system across Ericsson's three-product API vertical, a B2B SaaS suite centred on the API Console, growing from product designer to design lead across a three-year engagement.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">TCS · Ericsson · Product Designer → Lead</span>
+          <a href="/work/api-lifecycle" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 Sherwin-Williams, Design Operations -->
+    <article class="project-item reveal">
+      <div class="p-img-col">
+        <!-- a11y: p-img-free releases the fixed 16:10 box on narrow
+             viewports. This card is the one whose text does not survive
+             the crop there (WCAG 1.4.10 Reflow). -->
+        <div class="p-img p-img-free">
+          <SWOpsHero />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">05</span>
+            <span class="t-tag">Design Ops · Sherwin-Williams · 2024</span>
+          </div>
+          <h2 class="p-title">Building Design Operations at Scale</h2>
+          <p class="p-desc">Rebuilt the shared infrastructure for a research and design team of more than 20, across six digital products: the file architecture, the research templates, and a proper research-to-design handoff.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">TCS · Sherwin-Williams · Design Ops Lead</span>
+          <a href="/work/sherwin-williams" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 Amble, Ageing 2065 -->
+    <article class="project-item project-item-alt reveal">
+      <div class="p-img-col">
+        <div class="p-img">
+          <Image src={ambleThumb} alt="Amble concept for an ageing society in 2065" class="p-img-actual" loading="lazy" />
+        </div>
+      </div>
+      <div class="p-info">
+        <div class="p-info-top">
+          <div class="p-meta">
+            <span class="p-num">06</span>
+            <span class="t-tag t-tag-speculative">Speculative · Foresight Design · 2025</span>
+          </div>
+          <h2 class="p-title">Designing Care for an Ageing Society in 2065</h2>
+          <p class="p-desc">Amble, a speculative bioengineered plant system for the 2065 home. Seven months of foresight research and design for Rodd Design Studio, exhibited at the London Design Festival.</p>
+        </div>
+        <div class="p-footer">
+          <span class="p-context">Rodd Design × WSA · Project Lead</span>
+          <a href="/work/amble" class="p-link">View case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ CLIENTS ═══════════════════════════════ -->
+<section class="clients-section">
+  <div class="container">
+    <span class="clients-title">Selected clients</span>
+    <p class="clients-sub">Organisations I've designed for, across enterprise software, industrial safety, manufacturing technology, and financial inclusion.</p>
+    <!-- a11y: aria-label on a bare div is ignored by most screen readers
+         (axe: aria-prohibited-attr). role="group" makes the label valid. -->
+    <div class="clients-marquee" role="group" aria-label="Selected client logos">
+      <div class="clients-track">
+        <!-- Set A -->
+        <img src="/images/clients/ericsson.png" alt="Ericsson" style="height:40px;" />
+        <img src="/images/clients/mcafee.png" alt="McAfee" style="height:27px;" />
+        <img src="/images/clients/sherwin-williams.png" alt="Sherwin-Williams" style="height:33px;" />
+        <img src="/images/clients/itc.png" alt="ITC" style="height:48px;" />
+        <img src="/images/clients/soter-safety.png" alt="Soter Safety Consulting" class="clients-soter" />
+        <img src="/images/clients/pensaar.png" alt="Pensaar Design" class="clients-pensaar" />
+        <img src="/images/clients/cgap.png" alt="CGAP" style="height:29px;" />
+        <!-- Set B (duplicate, aria-hidden — purely for seamless loop) -->
+        <img src="/images/clients/ericsson.png" alt="" aria-hidden="true" style="height:40px;" />
+        <img src="/images/clients/mcafee.png" alt="" aria-hidden="true" style="height:27px;" />
+        <img src="/images/clients/sherwin-williams.png" alt="" aria-hidden="true" style="height:33px;" />
+        <img src="/images/clients/itc.png" alt="" aria-hidden="true" style="height:48px;" />
+        <img src="/images/clients/soter-safety.png" alt="" aria-hidden="true" class="clients-soter" />
+        <img src="/images/clients/pensaar.png" alt="" aria-hidden="true" class="clients-pensaar" />
+        <img src="/images/clients/cgap.png" alt="" aria-hidden="true" style="height:29px;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ CONTACT ════════════════════════════ -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="reveal">
+        <span class="t-label" style="display:block;margin-bottom:1rem;">Get in touch</span>
+        <a href="mailto:sayantan7dutta@gmail.com" class="contact-email">sayantan7dutta@gmail.com</a>
+      </div>
+      <div class="reveal" style="transition-delay:.1s;">
+        <a href="https://www.linkedin.com/in/sayantandutta7/" target="_blank" rel="noopener" class="btn">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Base>
+
+<style>
+/* ─── Hero ─── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+  padding-top: calc(var(--nav-h) + 2rem);
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: end;
+}
+
+/* Hero text stagger */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1.5rem;
+  animation: fadeUp .6s var(--ease-out) .1s both;
+}
+.hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  max-width: 56px;
+  height: 1px;
+  background: var(--text-3);
+  transform-origin: left;
+  animation: drawLine .5s var(--ease-out) .4s both;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.01em;
+  display: flex;
+  flex-direction: column;
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-line { display: block; }
+.hero-line-1 { animation: fadeUp .6s var(--ease-out) .2s both; }
+.hero-line-2 { animation: fadeUp .6s var(--ease-out) .32s both; }
+.hero-line-3 { animation: fadeUp .6s var(--ease-out) .44s both; }
+.hero-line-4 { animation: fadeUp .6s var(--ease-out) .56s both; }
+
+.hero-lead {
+  margin-top: 1.5rem;
+  animation: fadeUp .6s var(--ease-out) .65s both;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  align-items: center;
+  animation: fadeUp .6s var(--ease-out) .75s both;
+}
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-top: 1.5rem;
+  animation: fadeUp .6s var(--ease-out) .85s both;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 24px;
+  background: var(--text-3);
+  display: block;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+/* Hero photo */
+.hero-photo-wrap {
+  animation: fadeUp .6s var(--ease-out) .3s both;
+}
+.hero-photo {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: relative;
+  transition: border-color .3s;
+}
+.hero-photo:hover { border-color: var(--text-3); }
+.hero-photo-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter .4s, transform .6s var(--ease);
+}
+.hero-photo:hover .hero-photo-img { filter: grayscale(0%); transform: scale(1.02); }
+.hero-photo-ph {
+  width: 100%; height: 100%;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-photo-ph span {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  padding: 2rem;
+  line-height: 1.8;
+}
+/* ─── Clients ─── */
+.clients-section {
+  background: #ece7da;
+  padding: clamp(3rem, 7vw, 4.75rem) 0;
+  /* a11y: this band stays cream in BOTH themes, so it has to carry the
+     light palette regardless of [data-theme]. Inheriting the dark tokens
+     here put pale grey text on a cream ground at 2.19:1. Redefining the
+     tokens on the section means anything nested inside it is correct by
+     default rather than needing its own override. */
+  --text-1: #1A1714;
+  --text-2: #4F4942;
+  --text-3: #615B55;
+  --accent: #7A5619;
+}
+.clients-title {
+  display: block;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  /* a11y: was hardcoded #6a5f48, 3.19:1. Now the section's own light
+     palette, so it is AA whichever theme is active. */
+  color: var(--text-2);
+  font-weight: 500;
+}
+.clients-sub {
+  text-align: center;
+  font-size: .82rem;
+  line-height: 1.65;
+  /* a11y: was hardcoded #5b5240, 2.60:1. */
+  color: var(--text-2);
+  max-width: 52ch;
+  margin: .85rem auto 0;
+}
+.clients-marquee {
+  margin-top: 2.5rem;
+  overflow: hidden;
+  position: relative;
+  /* Edge fades use pseudo-elements rather than CSS mask, because mask-image
+     creates an isolation context that breaks mix-blend-mode on child logos. */
+}
+.clients-marquee::before,
+.clients-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: clamp(2.5rem, 7vw, 5rem);
+  pointer-events: none;
+  z-index: 2;
+}
+.clients-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, #ece7da 0%, rgba(236, 231, 218, 0) 100%);
+}
+.clients-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, #ece7da 0%, rgba(236, 231, 218, 0) 100%);
+}
+.clients-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: clamp(2.5rem, 5.5vw, 4.5rem);
+  padding-right: clamp(2.5rem, 5.5vw, 4.5rem); /* keeps loop spacing consistent */
+  animation: clients-scroll 45s linear infinite;
+}
+.clients-marquee:hover .clients-track { animation-play-state: paused; }
+.clients-track img {
+  width: auto;
+  opacity: .9;
+  transition: opacity .2s, transform .2s;
+  flex-shrink: 0;
+}
+.clients-track img:hover { opacity: 1; transform: translateY(-2px); }
+.clients-soter   { height: 38px; }
+.clients-pensaar { height: 50px; }
+@keyframes clients-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clients-track { animation: none; }
+}
+
+/* ─── Work section ─── */
+.work-section { padding: clamp(4rem, 10vw, 7rem) 0; }
+.work-hdr {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Project item */
+.project-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background .25s;
+}
+.project-item:hover { background: var(--surface); }
+/* a11y (WCAG 1.4.10 Reflow): grid children default to min-width:auto, so
+   these columns refused to shrink below the min-content width of the
+   branded hero cards inside them. At 320px that pushed the whole document
+   to 444px and forced horizontal scrolling. */
+.p-img-col,
+.p-info { min-width: 0; }
+.project-item-alt .p-img-col { order: 2; }
+.project-item-alt .p-info { order: 1; }
+
+.p-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--surface-2);
+  position: relative;
+}
+.p-img-actual {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .6s var(--ease);
+}
+.project-item:hover .p-img-actual { transform: scale(1.04); }
+.p-img-ph {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+.p-img-ph span {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  padding: 0 2rem;
+  line-height: 1.7;
+}
+/* Sherwin-Williams card — headline-impact cover (no UI to screenshot) */
+.sw-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.sw-cover-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7vw, 4.6rem);
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+}
+.sw-cover-lbl {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin-top: 1rem;
+  max-width: 30ch;
+  line-height: 1.65;
+}
+.p-info {
+  padding: clamp(2rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.p-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Same trap as .p-footer: space-between with no gap closes to 0. */
+  flex-wrap: wrap;
+  gap: .4rem .75rem;
+}
+.p-num {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-3);
+  letter-spacing: .1em;
+}
+.p-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-1);
+  margin-top: 1rem;
+}
+.p-desc {
+  font-size: .85rem;
+  color: var(--text-2);
+  line-height: 1.75;
+  max-width: 44ch;
+  margin-top: 1rem;
+}
+.p-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* a11y: space-between with no gap let the context label and the CTA
+     shrink until they touched, then both wrapped into each other, so
+     "...Design Ops Lead" and "View case study" ran together as one line
+     of text. A gap keeps them apart and flex-wrap drops the CTA onto its
+     own row rather than squeezing it. */
+  flex-wrap: wrap;
+  gap: .5rem 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.p-context { flex: 1 1 auto; }
+.p-context {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+/* Matches the .btn pattern used by the hero CTAs. It was previously bare
+   text, which read as a label rather than something you could click: the
+   only affordance was the arrow. Bordering it also takes the target from
+   18px to ~35px tall, clearing WCAG 2.2 2.5.8 on its own rather than
+   relying on the spacing exception.
+   It stays an <a> because it navigates; only the look is a button. */
+.p-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .6rem 1.15rem;
+  /* --border is 1.43:1 on the dark ground, too faint to read as an edge.
+     --text-3 is 5.04:1 dark and 4.98:1 light, so the boundary clears the
+     3:1 that WCAG 1.4.11 asks of a control's visual affordance. */
+  border: 1px solid var(--text-3);
+  border-radius: 2px;
+  color: var(--text-2);
+  /* Keep the call to action on one line; wrapping it mid-phrase was what
+     made the earlier collision unreadable. */
+  flex: 0 0 auto;
+  white-space: nowrap;
+  transition: border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);
+}
+.p-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+.p-link span { transition: transform .2s var(--ease); }
+.p-link:hover span { transform: translateX(4px); }
+
+/* ─── Contact ─── */
+.contact-section {
+  padding: clamp(4rem, 10vw, 7rem) 0;
+  border-top: 1px solid var(--border);
+}
+.contact-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.contact-email {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 4vw, 2.8rem);
+  font-weight: 500;
+  color: var(--text-1);
+  transition: color .2s;
+}
+.contact-email:hover { color: var(--accent); }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-photo-wrap { order: -1; }
+  .hero-photo { max-width: 280px; }
+  .project-item,
+  .project-item-alt { grid-template-columns: 1fr; }
+  /* a11y (WCAG 1.4.10): a fixed 16:10 box clipped this card's text once
+     the column was allowed to shrink. Photo thumbnails keep their ratio. */
+  .p-img-free { aspect-ratio: auto; }
+  .project-item-alt .p-img-col,
+  .project-item-alt .p-info { order: unset; }
+  .contact-inner { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .hero-eyebrow::after, .hero-line,
+  .hero-lead, .hero-cta, .hero-scroll, .hero-photo-wrap {
+    animation: none !important;
+  }
+  .hero-scroll-line { animation: none !important; }
+}
+</style>
